@@ -107,10 +107,14 @@
 
 	<h:form id="form">
 		Base tree:
-		<it:tree id="tree" nodeType="#{node.parent == null ? 'rootNode': 'childNode'}" var="node" value="#{treeBean.rootNodes}" 
+		<it:tree id="tree" nodeType="#{node.parent == null ? 'rootNode': 'childNode'}" var="node" value="#{treeBean.rootNodes}"
 			selectionType="#{treeBean.selectionType}" toggleType="#{treeBean.toggleType}" selection="#{treeBean.selection}">
-			<it:treeNode type="rootNode">
-				<h:panelGroup id="rootNodeGroup">
+
+            <it:treeToggleListener listener="#{treeBean.toggleActionListenerImpl.processToggleAction}" />
+            <it:treeSelectionChangeListener binding="#{treeBean.selectionChangeActionListener}" type="org.richfaces.demo.SelectionChangeActionListenerImpl" />
+
+            <it:treeNode type="rootNode">
+                <h:panelGroup id="rootNodeGroup">
 					Root node: #{node.data} - 
 					<h:commandLink value="link" action="#{treeBean.clickNode}">
 						<f:ajax render=":messages" />						

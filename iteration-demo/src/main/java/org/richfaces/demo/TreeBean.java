@@ -21,22 +21,6 @@
  */
 package org.richfaces.demo;
 
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.FacesEvent;
-import javax.swing.tree.TreeNode;
 
 import org.richfaces.component.AbstractTree;
 import org.richfaces.component.AbstractTreeNode;
@@ -47,6 +31,22 @@ import org.richfaces.event.TreeToggleEvent;
 import org.richfaces.event.TreeToggleListener;
 import org.richfaces.log.LogFactory;
 import org.richfaces.log.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.FacesEvent;
+import javax.swing.tree.TreeNode;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Nick Belaevski
@@ -114,7 +114,10 @@ public class TreeBean implements Serializable {
     private String toggleNodeEvent = "";
     
     private String executeTestText;
-    
+
+    private ToggleActionListenerImpl toggleActionListenerImpl = new ToggleActionListenerImpl();
+    private SelectionChangeActionListenerImpl selectionChangeActionListener;
+
     private static Object staticGetNodeData() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         return facesContext.getApplication().evaluateExpressionGet(facesContext, "#{node}", Object.class);
@@ -244,5 +247,21 @@ public class TreeBean implements Serializable {
 
     public String getCurrentTimeAsString() {
         return DateFormat.getTimeInstance().format(new Date());
+    }
+
+    public ToggleActionListenerImpl getToggleActionListenerImpl() {
+        return toggleActionListenerImpl;
+    }
+
+    public void setToggleActionListenerImpl(ToggleActionListenerImpl toggleActionListenerImpl) {
+        this.toggleActionListenerImpl = toggleActionListenerImpl;
+    }
+
+    public SelectionChangeActionListenerImpl getSelectionChangeActionListener() {
+        return selectionChangeActionListener;
+    }
+
+    public void setSelectionChangeActionListener(SelectionChangeActionListenerImpl selectionChangeActionListener) {
+        this.selectionChangeActionListener = selectionChangeActionListener;
     }
 }
