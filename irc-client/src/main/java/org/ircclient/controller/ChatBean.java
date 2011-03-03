@@ -37,7 +37,7 @@ public class ChatBean extends PircBot implements Serializable {
     private String message;
     private transient TopicsContext topicsContext;
 
-    public void connect() {
+    public String connect() {
         try {
             this.connect(SERVER_URL, SERVER_PORT);
             this.joinChannel(CHANNEL_PREFIX + DEFAULT_CHANNEL);
@@ -59,10 +59,12 @@ public class ChatBean extends PircBot implements Serializable {
                     "Sorry, we encountered IRC services problems. Try again later.",
                     "Sorry, we encountered IRC services problems. Try again later."));
         }
+        return "chat";
     }
 
-    public void leave() {
+    public String leave() {
         this.disconnect();
+        return "welcome";
     }
 
     private TopicsContext getTopicsContext() {
