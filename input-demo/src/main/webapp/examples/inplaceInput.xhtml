@@ -13,7 +13,11 @@
 
 <h:body>
     <h:form id="form">
-        <in:inplaceInput defaultLabel="#{null}">
+        <in:inplaceInput showControls="true" value="New York" defaultLabel="#{null}">
+        </in:inplaceInput>
+        <h:commandButton value="submit"/>
+        <in:inplaceInput showControls="true" defaultLabel="click to enter your name" saveOnBlur="true"
+                         onblur="RichFaces.$('form:ii').cancel()" id="ii">
         </in:inplaceInput>
     </h:form>
 </h:body>
