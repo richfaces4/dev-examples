@@ -22,31 +22,38 @@
 package org.richfaces.demo;
 
 
-import org.richfaces.component.AbstractTree;
-import org.richfaces.component.AbstractTreeNode;
-import org.richfaces.component.SwitchType;
-import org.richfaces.event.TreeSelectionChangeEvent;
-import org.richfaces.event.TreeSelectionChangeListener;
-import org.richfaces.event.TreeToggleEvent;
-import org.richfaces.event.TreeToggleListener;
-import org.richfaces.log.LogFactory;
-import org.richfaces.log.Logger;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.FacesEvent;
-import javax.swing.tree.TreeNode;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.IntegerConverter;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.FacesEvent;
+import javax.swing.tree.TreeNode;
+
+import org.richfaces.component.AbstractTree;
+import org.richfaces.component.AbstractTreeNode;
+import org.richfaces.component.SwitchType;
+import org.richfaces.convert.SequenceRowKeyConverter;
+import org.richfaces.demo.model.tree.DataHolderTreeNodeImpl;
+import org.richfaces.event.TreeSelectionChangeEvent;
+import org.richfaces.event.TreeSelectionChangeListener;
+import org.richfaces.event.TreeToggleEvent;
+import org.richfaces.event.TreeToggleListener;
+import org.richfaces.log.LogFactory;
+import org.richfaces.log.Logger;
+import org.richfaces.model.SwingTreeNodeImpl;
+import org.richfaces.model.TreeNodeImpl;
 
 /**
  * @author Nick Belaevski
@@ -99,6 +106,8 @@ public class TreeBean implements Serializable {
 
     private static final Logger LOGGER = LogFactory.getLogger(TreeBean.class);
     
+    private static final Converter INTEGER_SEQUENCE_KEY_CONVERTER = new SequenceRowKeyConverter<Integer>(Integer.class, new IntegerConverter());
+    
     private List<TreeNode> rootNodes;
     
     private List<TreeNode> lazyRootNodes;
@@ -117,6 +126,8 @@ public class TreeBean implements Serializable {
 
     private ToggleActionListenerImpl toggleActionListenerImpl = new ToggleActionListenerImpl();
     private SelectionChangeActionListenerImpl selectionChangeActionListener;
+
+    private org.richfaces.model.TreeNode classicTreeNode;
 
     private static Object staticGetNodeData() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -146,6 +157,28 @@ public class TreeBean implements Serializable {
         return result;
     }
     
+    private org.richfaces.model.TreeNode createClassicNode(TreeNode node) {
+        TreeNodeImpl result = new DataHolderTreeNodeImpl(node.isLeaf(), ((SwingTreeNodeImpl<?>) node).getData());
+
+        for (int i = 0; i < node.getChildCount(); i++) {
+            result.addChild(i, createClassicNode(node.getChildAt(i)));
+        }
+        
+        return result;
+    }
+    
+    private org.richfaces.model.TreeNode createRootClassicNode(List<TreeNode> nodes) {
+        TreeNodeImpl rootNode = new TreeNodeImpl();
+
+        int key = 0;
+        
+        for (TreeNode node : nodes) {
+            rootNode.addChild(key++, createClassicNode(node));
+        }
+        
+        return rootNode;
+    }
+    
     @PostConstruct
     public void init() {
         try {
@@ -153,6 +186,7 @@ public class TreeBean implements Serializable {
             parser.parse(TreeBean.class.getResource("plants.xml"));
             rootNodes = parser.getRootNodes();
             lazyRootNodes = createLazyNodes(rootNodes);
+            classicTreeNode = createRootClassicNode(rootNodes);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
@@ -164,6 +198,10 @@ public class TreeBean implements Serializable {
 
     public List<TreeNode> getLazyRootNodes() {
         return lazyRootNodes;
+    }
+    
+    public org.richfaces.model.TreeNode getClassicTreeNode() {
+        return classicTreeNode;
     }
     
     public SwitchType[] getTypes() {
@@ -264,4 +302,9 @@ public class TreeBean implements Serializable {
     public void setSelectionChangeActionListener(SelectionChangeActionListenerImpl selectionChangeActionListener) {
         this.selectionChangeActionListener = selectionChangeActionListener;
     }
+    
+    public Converter getIntegerSequenceKeyConveter() {
+        return INTEGER_SEQUENCE_KEY_CONVERTER;
+    }
+    
 }

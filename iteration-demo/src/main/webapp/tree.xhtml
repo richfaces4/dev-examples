@@ -131,6 +131,18 @@
 			</it:treeNode>
 		</it:tree>
 
+		org.richfaces.model.TreeNode support:
+		<it:tree value="#{treeBean.classicTreeNode}" var="node" 
+		selectionType="#{treeBean.selectionType}" toggleType="#{treeBean.toggleType}"
+		rowKeyConverter="#{treeBean.integerSequenceKeyConveter}">
+			<it:treeNode>
+				#{node.data} - 
+				<h:commandLink value="link" action="#{treeBean.clickNode}">
+					<f:ajax render=":messages" />						
+				</h:commandLink>
+			</it:treeNode>
+		</it:tree>
+		
 		<h:commandLink value="Re-render">
 			<f:ajax render=":form:tree" execute="@all" />
 		</h:commandLink>
