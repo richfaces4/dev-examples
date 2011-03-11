@@ -8,26 +8,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/templates/template.xhtml">
 	<ui:define name="body">
-		<style>
-.chatOutput {
-	overflow: auto;
-	width: 80%;
-	height: 200px;
-	float: left;
-}
-
-.chatList {
-	float: right;
-	width: 19%;
-	height: 200px;
-	overflow: auto;
-}
-</style>
 		<rich:panel header="Connect to IRC">
 			<h:form>
-				<a4j:outputPanel ajaxRendered="true">
-					<h:messages style="color:red" />
-				</a4j:outputPanel>
+				<rich:messages style="color:red" />
 				<h:panelGrid columns="2">
 					<h:outputText value="Your nickname:" />
 					<h:inputText required="true" id="name" value="#{chatBean.userName}" />
