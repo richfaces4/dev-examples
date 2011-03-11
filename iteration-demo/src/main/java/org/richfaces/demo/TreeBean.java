@@ -52,7 +52,9 @@ import org.richfaces.event.TreeToggleEvent;
 import org.richfaces.event.TreeToggleListener;
 import org.richfaces.log.LogFactory;
 import org.richfaces.log.Logger;
+import org.richfaces.model.SwingTreeNodeDataModelImpl;
 import org.richfaces.model.SwingTreeNodeImpl;
+import org.richfaces.model.TreeDataModel;
 import org.richfaces.model.TreeNodeImpl;
 
 /**
@@ -111,6 +113,8 @@ public class TreeBean implements Serializable {
     private List<TreeNode> rootNodes;
     
     private List<TreeNode> lazyRootNodes;
+    
+    private TreeDataModel<?> treeDataModel;
     
     private SwitchType toggleType = SwitchType.DEFAULT;
     
@@ -187,6 +191,8 @@ public class TreeBean implements Serializable {
             rootNodes = parser.getRootNodes();
             lazyRootNodes = createLazyNodes(rootNodes);
             classicTreeNode = createRootClassicNode(rootNodes);
+            treeDataModel = new SwingTreeNodeDataModelImpl();
+            treeDataModel.setWrappedData(rootNodes);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
@@ -307,4 +313,8 @@ public class TreeBean implements Serializable {
         return INTEGER_SEQUENCE_KEY_CONVERTER;
     }
     
+    public TreeDataModel<?> getTreeDataModel() {
+        return treeDataModel;
+    }
+
 }
