@@ -11,7 +11,7 @@ import javax.faces.event.AbortProcessingException;
  */
 public class SelectionChangeActionListenerImpl implements TreeSelectionChangeListener {
 
-    public void processSelectionChange(TreeSelectionChangeEvent event) throws AbortProcessingException {
+    public void processTreeSelectionChange(TreeSelectionChangeEvent event) throws AbortProcessingException {
         System.out.println("Inside Selection Change Action");
     }
 }

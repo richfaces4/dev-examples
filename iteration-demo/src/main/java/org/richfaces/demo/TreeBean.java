@@ -77,7 +77,7 @@ public class TreeBean implements Serializable {
             this.fromExpression = fromExpression;
         }
 
-        public void processSelectionChange(TreeSelectionChangeEvent event) throws AbortProcessingException {
+        public void processTreeSelectionChange(TreeSelectionChangeEvent event) throws AbortProcessingException {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             
             facesContext.addMessage(getTree(event).getClientId(facesContext), createEventMessage(event, fromExpression));
@@ -97,7 +97,7 @@ public class TreeBean implements Serializable {
             this.fromExpression = fromExpression;
         }
 
-        public void processToggle(TreeToggleEvent event) throws AbortProcessingException {
+        public void processTreeToggle(TreeToggleEvent event) throws AbortProcessingException {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(getTree(event).getClientId(facesContext), createEventMessage(event, fromExpression));
         }
@@ -266,11 +266,11 @@ public class TreeBean implements Serializable {
     }
     
     public void processSelectionChange(TreeSelectionChangeEvent event) {
-        new SelectionChangeHandler(true).processSelectionChange(event);
+        new SelectionChangeHandler(true).processTreeSelectionChange(event);
     }
     
     public void processToggle(TreeToggleEvent event) {
-        new ToggleHandler(true).processToggle(event);
+        new ToggleHandler(true).processTreeToggle(event);
     }
 
     public String getToggleNodeEvent() {
