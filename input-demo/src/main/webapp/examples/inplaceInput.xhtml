@@ -17,7 +17,13 @@
         </in:inplaceInput>
         <h:commandButton value="submit"/>
         <in:inplaceInput showControls="true" defaultLabel="click to enter your name" saveOnBlur="true"
-                         onblur="RichFaces.$('form:ii').cancel()" id="ii">
+                         onblur="RichFaces.$('form:ii').cancel()" id="ii"
+                         activeClass="activeClass"
+                         disabledClass="disabledClass"
+                         editClass="editClass"
+                         changedClass="changedClass"
+                         styleClass="styleClass"
+                         >
         </in:inplaceInput>
     </h:form>
 </h:body>
