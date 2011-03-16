@@ -23,12 +23,12 @@ JMS Configuration should be done prior to running application.
 
  * Start Admin console going to http://localhost:8080/admin-console
 
- * Setup new Messages Topic with the folowing properties:
+ * Setup new JMS Topic with the folowing properties:
    Name: chat
    JNDI name: /topic/chat
    All the others: by default.
 
- * Add roles for that topic
+ * Add role to that topic
    Name: guest
    Send: yes
    Consume: yes
@@ -38,4 +38,4 @@ JMS Configuration should be done prior to running application.
    delete durable subscriber: yes
 
 Running application
- * Enjoy playing with the client at http://localhost:8080/irc-samples 
+ * Enjoy playing with the client at http://localhost:8080/irc-client 
