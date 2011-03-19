@@ -24,14 +24,14 @@
     <parent>
         <groupId>org.richfaces.examples</groupId>
         <artifactId>richfaces-example-parent</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.0.Final</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.richfaces.examples</groupId>
     <artifactId>push-demo</artifactId>
     <packaging>war</packaging>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0.Final</version>
     <name>RichFaces Examples: Push</name>
 
     <properties>
@@ -196,8 +196,8 @@
 	</profiles>
 
     <scm>
-        <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/branches/4.0.X/examples/push-demo</connection>
-        <developerConnection>scm:svn:https://svn.jboss.org/repos/richfaces/branches/4.0.X/examples/push-demo</developerConnection>
-        <url>http://fisheye.jboss.org/browse/richfaces/branches/4.0.X/examples/push-demo</url>
+        <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/tags/4.0.0.20110319-Final/examples/push-demo</connection>
+        <developerConnection>scm:svn:https://svn.jboss.org/repos/richfaces/tags/4.0.0.20110319-Final/examples/push-demo</developerConnection>
+        <url>http://fisheye.jboss.org/browse/richfaces/tags/4.0.0.20110319-Final/examples/push-demo</url>
     </scm>
 </project>
