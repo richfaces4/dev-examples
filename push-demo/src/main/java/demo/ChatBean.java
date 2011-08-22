@@ -25,7 +25,6 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -38,73 +37,78 @@ import org.richfaces.log.Logger;
 
 /**
  * @author Nick Belaevski
- * 
+ *
  */
 @ManagedBean
 @SessionScoped
 public class ChatBean implements Serializable {
-
     private static final long serialVersionUID = -6377543444437645751L;
-
     private static final Logger LOGGER = LogFactory.getLogger(ChatBean.class);
-    
     private String userName;
-    
     private String message;
-    
     private boolean chatJoined;
-    
-    private transient TopicsContext topicsContext;
-    
     private String subchannel;
-    
     @ManagedProperty("#{channelsBean}")
     private ChannelsBean channelsBean;
-    
-    @PostConstruct
-    public void init() {
-        topicsContext = TopicsContext.lookup();
+    @ManagedProperty("#{jmsBean}")
+    private JMSBean jmsBean;
+
+    private TopicsContext lookupTopicsContext() {
+        return TopicsContext.lookup();
     }
-    
+
     public String getMessage() {
         return message;
     }
-    
+
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public String getUserName() {
         return userName;
     }
-    
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
-    private void publishStateChangeMessage(String name, String action) {
+
+    private void sendJMSMessage(TopicKey key, String text) {
+        jmsBean.publish(key, text);
+    }
+
+    private void sendMessage(TopicKey key, String text) {
+        sendJMSMessage(key, text);
+        // sendSimpleMessage(key, text);
+    }
+
+    private void sendSimpleMessage(TopicKey key, String text) {
         try {
-            topicsContext.publish(new TopicKey("chat", name), MessageFormat.format("*** {0} {1} chat in {2,time,medium}", 
-                userName, action, new Date()));
+            lookupTopicsContext().publish(key, text);
         } catch (MessageException e) {
             LOGGER.error(e.getMessage(), e);
         }
     }
-    
+
+    private void publishStateChangeMessage(String name, String action) {
+        sendMessage(new TopicKey("chat", name),
+                MessageFormat.format("*** {0} {1} chat in {2,time,medium}", userName, action, new Date()));
+    }
+
     public void joinChat() {
         if (!chatJoined) {
             if (userName == null) {
                 throw new NullPointerException("username");
             }
-            
+
             chatJoined = true;
-            
+
             for (Channel subchannel : channelsBean.getChannels()) {
                 publishStateChangeMessage(subchannel.getName(), "joined");
             }
         }
     }
-    
+
     public void handleStateChange(Channel channel) {
         String action;
         if (channel.isRendered()) {
@@ -117,25 +121,17 @@ public class ChatBean implements Serializable {
     }
 
     public void say() {
-        try {
-            topicsContext.publish(new TopicKey("chat", subchannel), MessageFormat.format("{0,time,medium} {1}: {2}", new Date(), 
-                userName, message));
-        } catch (MessageException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        sendMessage(new TopicKey("chat", subchannel),
+                MessageFormat.format("{0,time,medium} {1}: {2}", new Date(), userName, message));
     }
-    
-    public void setTopicsContext(TopicsContext topicsContext) {
-        this.topicsContext = topicsContext;
-    }
-    
+
     /**
      * @return the subchannel
      */
     public String getSubchannel() {
         return subchannel;
     }
-    
+
     /**
      * @param subchannel the subchannel to set
      */
@@ -150,4 +146,10 @@ public class ChatBean implements Serializable {
         this.channelsBean = channelsBean;
     }
 
+    /**
+     * @param jmsBean the jmsBean to set
+     */
+    public void setJmsBean(JMSBean jmsBean) {
+        this.jmsBean = jmsBean;
+    }
 }
