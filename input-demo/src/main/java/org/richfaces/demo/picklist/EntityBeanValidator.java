@@ -21,23 +21,31 @@
  **/
 package org.richfaces.demo.picklist;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import javax.faces.validator.FacesValidator;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 /**
  * @author <a href="http://community.jboss.org/people/bleathem">Brian Leathem</a>
  */
-@FacesConverter("EntityBeanConverter")
-public class EntityBeanConverter implements Converter {
-    public Object getAsObject(FacesContext facesContext, UIComponent component, String s) {
-        Integer value = Integer.parseInt(s);
-        return new EntityBean(String.format("Option %d", value), value.toString());
-    }
-
-    public String getAsString(FacesContext facesContext, UIComponent component, Object o) {
-        if (o == null) return null;
-        return ((EntityBean) o).getValue();
+@FacesValidator("EntityBeanValidator")
+public class EntityBeanValidator implements Validator {
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+        if (value == null) {
+            return;
+        }
+        List<EntityBean> beans = (List) value;
+        for (EntityBean bean : beans) {
+            Integer integer = Integer.parseInt(bean.getValue());
+            if (integer % 2 != 0) {
+                FacesMessage msg = new FacesMessage("Only even values allowed");
+                throw new ValidatorException(msg);
+            }
+        }
     }
 }
