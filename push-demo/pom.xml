@@ -25,15 +25,13 @@
     <parent>
         <groupId>org.richfaces.examples</groupId>
         <artifactId>richfaces-example-parent</artifactId>
-        <version>4.1.0.20111014-M3</version>
+        <version>4.1.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.richfaces.examples</groupId>
     <artifactId>push-demo</artifactId>
     <packaging>war</packaging>
-    <version>4.1.0.20111014-M3</version>
-    <name>RichFaces Examples: Push</name>
+    <name>RichFaces Examples Push</name>
 
     <properties>
         <hornetq.version>2.1.2.Final</hornetq.version>
@@ -60,11 +58,6 @@
             <artifactId>hornetq-logging</artifactId>
             <version>${hornetq.version}</version>
         </dependency>
-        <!-- dependency>
-            <groupId>org.hornetq</groupId>
-            <artifactId>hornetq-transports</artifactId>
-            <version>2.1.0.r9031</version>
-        </dependency -->
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
@@ -73,13 +66,11 @@
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>jms</artifactId>
-            <version>1.1</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -87,18 +78,9 @@
             <artifactId>atmosphere-runtime</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.richfaces.core</groupId>
             <artifactId>richfaces-core-impl</artifactId>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -147,39 +129,6 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>jee6</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                            <webappDirectory>${project.build.directory}/${project.build.finalName}-jee6</webappDirectory>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-
-            <dependencies>
-                <!-- TODO these should be switchable in example specific parent -->
-                <dependency>
-                    <groupId>com.sun.faces</groupId>
-                    <artifactId>jsf-api</artifactId>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.sun.faces</groupId>
-                    <artifactId>jsf-impl</artifactId>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>javax.transaction</groupId>
-                    <artifactId>jta</artifactId>
-                    <version>1.1</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
         <profile>
             <id>jetty</id>
             <dependencies>

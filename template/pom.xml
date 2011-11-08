@@ -4,20 +4,17 @@
     <parent>
         <groupId>org.richfaces.examples</groupId>
         <artifactId>richfaces-example-parent</artifactId>
-        <version>4.1.0.20111014-M3</version>
+        <version>4.1.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.richfaces.examples</groupId>
     <artifactId>template</artifactId>
     <packaging>war</packaging>
-    <version>4.1.0.20111014-M3</version>
-    <name>examples template</name>
+    <name>RichFaces Examples Template</name>
     <dependencies>
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
         </dependency>
     </dependencies>
     <build>
