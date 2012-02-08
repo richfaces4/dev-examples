@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.richfaces.examples</groupId>
         <artifactId>richfaces-example-parent</artifactId>
-        <version>4.1.0.Final</version>
+        <version>4.2.0.CR1</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -82,18 +82,11 @@
             <groupId>org.atmosphere</groupId>
             <artifactId>atmosphere-runtime</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>pircbot</groupId>
             <artifactId>pircbot</artifactId>
             <version>1.4.2</version>
-        </dependency>
-        <!-- Tests -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>5.10</version>
-            <classifier>jdk15</classifier>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
