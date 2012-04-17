@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
         <groupId>org.richfaces.examples</groupId>
@@ -7,22 +8,30 @@
         <version>4.2.1.Final</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>template</artifactId>
+
+    <artifactId>resource-mapping-demo</artifactId>
+    <name>RichFaces Examples Resource Mapping</name>
     <packaging>war</packaging>
-    <name>RichFaces Examples Template</name>
-    <dependencies>
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-        </dependency>
-    </dependencies>
+
+    <properties>
+    </properties>
+
     <build>
-        <finalName>template</finalName>
+        <finalName>validator-demo</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.richfaces.examples</groupId>
+            <artifactId>template</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
 </project>
