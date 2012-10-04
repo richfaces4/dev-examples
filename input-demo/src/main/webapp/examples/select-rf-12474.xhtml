@@ -36,6 +36,25 @@
             <br/>
             <csv:messages for="select2" />
         </a4j:outputPanel>
+        
+        
+        
+        
+        
+        <h:form>
+            <in:select id="select3" enableManualInput="true" value="#{selectBean.value}">
+                <f:selectItems value="#{selectBean.values}" />
+                <csv:validator />
+                <f:validateRequired />
+            </in:select>
+            <br />
+            <a4j:commandButton value="Send" render="output3" />
+        </h:form>
+        <a4j:outputPanel id="output3">
+            Output: <h:outputText value="#{selectBean.value}" />
+            <br/>
+            <csv:messages for="select3" />
+        </a4j:outputPanel>
     </ui:define>
 </ui:composition>
 </html>
