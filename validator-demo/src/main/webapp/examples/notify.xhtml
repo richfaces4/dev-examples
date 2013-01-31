@@ -14,8 +14,8 @@
                 <csv:notify stayTime="5000" summary="Default stack" detail="Details of the message"
                     nonblockingOpacity="0" />
 
-                <csv:notify summary="Before stack definition" detail="This message is defined in code before stack" 
-                    stack="bottomLeftStack"/>
+                <csv:notify summary="#{notifyBean.greeting}" detail="This message is defined in code before stack" 
+                    stack="bottomLeftStack" escape="false" />
                 <csv:notify summary="Left bottom stack 2" detail="This message alos should be displayed in the left bottom corner"
                     showCloseButton="true" stack="bottomLeftStack" />
                 <csv:notifyStack id="bottomLeftStack" position="bottomLeft">
@@ -25,7 +25,7 @@
                         showCloseButton="true" />
                     <csv:notify summary="Nonblocking" nonblocking="true" />
                 </csv:notifyStack>
-                <csv:notifyMessages interval="1000" stack="bottomRightStack" ajaxRendered="true" />
+                <csv:notifyMessages interval="1000" stack="bottomRightStack" ajaxRendered="true" showSummary="true" showDetail="true" escape="true" />
                 <csv:notifyStack id="bottomRightStack" position="bottomRight" direction="horizontal" />
                 
                 Leave this blank for error:
@@ -36,7 +36,7 @@
                 <h:message for="greeting" />
                 <br />
                 <h:outputLabel for="number" value="Number" />
-                <h:inputText id="number" required="true">
+                <h:inputText id="number" required="true" value="5">
                     <f:validateLongRange minimum="5" maximum="10" />
                 </h:inputText>
                 *

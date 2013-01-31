@@ -29,13 +29,13 @@
     <parent>
         <groupId>org.richfaces</groupId>
         <artifactId>richfaces-parent</artifactId>
-        <version>12</version>
+        <version>13</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.richfaces.examples</groupId>
     <artifactId>examples-aggregator</artifactId>
-    <version>4.2.2.Final</version>
+    <version>4.3.0.Final</version>
     <packaging>pom</packaging>
     <name>RichFaces Examples Aggregator</name>
 
@@ -46,12 +46,12 @@
         <module>misc-demo</module>
         <module>output-demo</module>
         <module>input-demo</module>
-        <module>repeater-demo</module>
         <module>iteration-demo</module>
         <module>push-demo</module>
         <module>validator-demo</module>
         <module>dnd-demo</module>
         <module>irc-client</module>
+        <module>photoalbum</module>
     </modules>
 
     <scm>

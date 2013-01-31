@@ -21,6 +21,10 @@
  */
 package org.richfaces.demo;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -29,10 +33,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Konstantin Mishin
@@ -49,6 +49,7 @@ public class FileUploadBean {
     private String clearedFile;
     private String ontyperejected = "alert('typerejected')";
     private Integer maxFilesQuantity = 2;
+    private boolean immediateUpload = false;
 
     public UploadedFile getFile() {
         return file;
@@ -125,6 +126,14 @@ public class FileUploadBean {
 
     public void setMaxFilesQuantity(Integer maxFilesQuantity) {
         this.maxFilesQuantity = maxFilesQuantity;
+    }
+
+    public boolean isImmediateUpload() {
+        return immediateUpload;
+    }
+
+    public void setImmediateUpload(boolean immediateUpload) {
+        this.immediateUpload = immediateUpload;
     }
 
     public void updateAttribute(AjaxBehaviorEvent event) throws AbortProcessingException {

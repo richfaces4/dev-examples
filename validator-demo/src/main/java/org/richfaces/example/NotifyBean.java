@@ -22,17 +22,20 @@
 
 package org.richfaces.example;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.io.Serializable;
 
 @ViewScoped
 @ManagedBean
 public class NotifyBean implements Serializable {
 
-    private String greeting;
+    private static final long serialVersionUID = 1L;
+
+    private String greeting = "<b>test</b>";
     private boolean nonblocking;
     private boolean showDetail;
     private boolean showSummary = true;
@@ -59,7 +62,7 @@ public class NotifyBean implements Serializable {
     public void sayHello() {
         for (int i = 0; i < getMessagesCount(); i++) {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, i + ". Hello", greeting));
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, greeting, greeting));
         }
     }
 
