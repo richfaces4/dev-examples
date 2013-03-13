@@ -18,6 +18,7 @@
     <properties>
         <version.richfaces>${project.version}</version.richfaces>
         <javax.faces.PROJECT_STAGE>Development</javax.faces.PROJECT_STAGE>
+        <agorava.version>0.5.0-SNAPSHOT</agorava.version>
     </properties>
 
     <dependencyManagement>
@@ -98,6 +99,25 @@
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.1.2.GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.agorava</groupId>
+            <artifactId>agorava-core-impl-cdi</artifactId>
+            <version>${agorava.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.agorava</groupId>
+            <artifactId>agorava-facebook-cdi</artifactId>
+            <version>${agorava.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
