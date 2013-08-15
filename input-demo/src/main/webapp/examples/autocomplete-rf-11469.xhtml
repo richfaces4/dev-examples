@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:input="http://richfaces.org/input"
+      xmlns:output="http://richfaces.org/output" xmlns:rich="http://richfaces.org/iteration"
+      xmlns:misc="http://richfaces.org/misc" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition template="/layout/template.xhtml">
+<ui:param name="title" value="Autocomplete - RF-11469" />
+
+<!-- content -->
+<ui:define name="content">
+
+<h:form>
+    <ui:include src="autocomplete-rf-11469-included.xhtml">
+        <ui:param name="bean" value="#{autoCompleteBean}" />
+    </ui:include>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+</html>

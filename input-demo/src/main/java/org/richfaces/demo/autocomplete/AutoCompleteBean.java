@@ -22,83 +22,25 @@
 package org.richfaces.demo.autocomplete;
 
 import java.io.Serializable;
-import java.util.Locale;
+import java.util.Arrays;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.RequestScoped;
 
-import org.richfaces.component.AutocompleteMode;
-import org.richfaces.demo.CountriesBean;
 import org.richfaces.demo.Country;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  * @author Nick Belaevski
  *
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class AutoCompleteBean implements Serializable {
     private static final long serialVersionUID = 3072125097847582809L;
 
-    private class CountryNamePredicate implements Predicate<Country> {
-        private String countryNamePrefix;
-
-        public CountryNamePredicate(String countryNamePrefix) {
-            super();
-            this.countryNamePrefix = countryNamePrefix;
-        }
-
-        public boolean apply(Country input) {
-            if (countryNamePrefix == null || countryNamePrefix.length() == 0) {
-                return true;
-            }
-
-            return input.getName().toLowerCase(Locale.US).startsWith(countryNamePrefix);
-        }
-    }
-
-    private Object value;
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    private AutocompleteMode mode = AutocompleteMode.lazyClient;
-
-    public AutocompleteMode getMode() {
-        return mode;
-    }
-
-    public void setMode(AutocompleteMode mode) {
-        this.mode = mode;
-    }
-
-    @ManagedProperty(value = "#{countriesBean}")
-    private CountriesBean countriesBean;
-
-    public void setCountriesBean(CountriesBean countriesBean) {
-        this.countriesBean = countriesBean;
-    }
-
-    public Object autocomplete(FacesContext facesContext, UIComponent component, String value) {
-        AutocompleteMode mode = (AutocompleteMode) component.getAttributes().get("mode");
-        boolean isClient = mode == AutocompleteMode.client || mode == AutocompleteMode.lazyClient;
-        String v = isClient || value == null ? "" : value;
-
-        return Collections2.filter(countriesBean.getCountries(), new CountryNamePredicate(v.toLowerCase(Locale.US)));
-    }
-
-    public Object getModes() {
-        return AutocompleteMode.values();
+    public Object suggest(String prefix) {
+        Country c = new Country();
+        c.setName("Alabama");
+        return Arrays.asList(c);
     }
 }

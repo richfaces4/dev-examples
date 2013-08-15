@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:input="http://richfaces.org/input"
+      xmlns:output="http://richfaces.org/output" xmlns:rich="http://richfaces.org/iteration"
+      xmlns:misc="http://richfaces.org/misc" xmlns:a4j="http://richfaces.org/a4j">
+
+<ui:composition>
+
+<input:autocomplete mode="ajax" id="autocomplete" autocompleteMethod="#{bean.suggest}" var="p" fetchValue="#{p.name}">
+    #{p.name}
+</input:autocomplete>
+
+</ui:composition>
+
+</html>
