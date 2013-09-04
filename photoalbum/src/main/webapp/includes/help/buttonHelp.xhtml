@@ -1,6 +1,28 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich">
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:r="http://richfaces.org">
     <div class="section" lang="en-US">
         <div class="titlepage">
             <div>
@@ -20,13 +42,13 @@
         &lt;ui:composition xmlns=&quot;http://www.w3.org/1999/xhtml&quot; … &gt;
 
             &lt;richx:actionMapper&gt;
-                &lt;a4j:outputPanel layout=&quot;block&quot; style=&quot;#{'#{'}style}&quot; styleClass=&quot;photoalbumButton #{'#{'}styleClass}&quot; lang=&quot;#{'#{'}lang}&quot; dir=&quot;#{'#{'}dir}&quot;
+                &lt;r:outputPanel layout=&quot;block&quot; style=&quot;#{'#{'}style}&quot; styleClass=&quot;photoalbumButton #{'#{'}styleClass}&quot; lang=&quot;#{'#{'}lang}&quot; dir=&quot;#{'#{'}dir}&quot;
                     title=&quot;#{'#{'}title}&quot; rendered=&quot;#{'#{'}empty rendered or rendered}&quot; onmousedown=&quot;$(this).css('background-position', '0 28px');&quot;
                     onmouseup=&quot;$(this).css('background-position', '0 0');&quot; onmouseout=&quot;$(this).css('background-position', '0 0');&quot;&gt;
 
                 &lt;div&gt;#{'#{'}value}&lt;/div&gt;
 
-                &lt;a4j:commandButton accesskey=&quot;#{'#{'}accesskey}&quot; alt=&quot;#{'#{'}alt}&quot; type=&quot;image&quot; image=&quot;/img/shell/spacer.gif&quot;
+                &lt;r:commandButton accesskey=&quot;#{'#{'}accesskey}&quot; alt=&quot;#{'#{'}alt}&quot; type=&quot;image&quot; image=&quot;/img/shell/spacer.gif&quot;
                     actionListener=&quot;#{'#{'}mappedActionListener}&quot; action=&quot;#{'#{'}mappedAction}&quot; bypassUpdates=&quot;#{'#{'}bypassUpdates}&quot;
                     data=&quot;#{'#{'}data}&quot; disabled=&quot;#{'#{'}disabled}&quot; eventsQueue=&quot;#{'#{'}eventsQueue}&quot; focus=&quot;#{'#{'}focus}&quot; immediate=&quot;#{'#{'}immediate}&quot;
                     limitRender=&quot;#{'#{'}limitRender}&quot; onbeforedomupdate=&quot;#{'#{'}onbeforedomupdate}&quot; tabindex=&quot;#{'#{'}tabindex}&quot; render=&quot;#{'#{'}render}&quot;
@@ -35,7 +57,7 @@
                     onkeyup=&quot;#{'#{'}onkeyup}&quot; onmousedown=&quot;#{'#{'}onmousedown}&quot; onmousemove=&quot;#{'#{'}onmousemove}&quot; onmouseout=&quot;#{'#{'}onmouseout}&quot;
                     onmouseover=&quot;#{'#{'}onmouseover}&quot; onmouseup=&quot;#{'#{'}onmouseup}&quot; /&gt;
 
-                &lt;/a4j:outputPanel&gt;
+                &lt;/r:outputPanel&gt;
             &lt;/richx:actionMapper&gt;
         &lt;/ui:composition&gt;
         </pre>
@@ -55,14 +77,14 @@
                 </li>
                 <li>
                     <p>
-                        <span class="bold"><strong><span class="property">&lt;a4j:commandButton&gt;</span></strong></span> that
+                        <span class="bold"><strong><span class="property">&lt;r:commandButton&gt;</span></strong></span> that
                         sends Ajax request to the server
                     </p>
                 </li>
             </ul>
         </div>
         <p>
-            These elements are wrapped by <span class="bold"><strong><span class="property">&lt;a4j:outputPanel&gt;</span></strong></span>
+            These elements are wrapped by <span class="bold"><strong><span class="property">&lt;r:outputPanel&gt;</span></strong></span>
             to adjust the look-and-feel.
         </p>
         <p>In the application the button is used for example like this:</p>
@@ -70,7 +92,7 @@
         …
         &lt;richx:commandButton value=&quot;#{'#{'}messages['login.register']}&quot; immediate=&quot;true&quot;
                         actionListener=&quot;#{'#{'}authenticator.goToRegister()}&quot; render=&quot;mainArea&quot;
-                        oncomplete=&quot;#{'#{'}rich:component('loginPanel')}.hide();&quot; execute=&quot;@this&quot; /&gt;
+                        oncomplete=&quot;#{'#{'}r:component('loginPanel')}.hide();&quot; execute=&quot;@this&quot; /&gt;
         …
         </pre>
         <p>
@@ -86,7 +108,7 @@
             &lt;facelet-taglib xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
                 xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibary_2_0.xsd&quot;
                 version=&quot;2.0&quot;&gt;
-                &lt;namespace&gt;http://richfaces.org/richx&lt;/namespace&gt;
+                &lt;namespace&gt;http://richfaces.orgx&lt;/namespace&gt;
                 &lt;tag&gt;
                     &lt;tag-name&gt;commandButton&lt;/tag-name&gt;
                     &lt;source&gt;templates/button.xhtml&lt;/source&gt;
@@ -104,7 +126,7 @@
         <pre class="brush: xml, gutter: false, auto-links: false, highlight: 3">
         &lt;ui:composition xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
                 … 
-            xmlns:richx=&quot;http://richfaces.org/richx&quot;&gt;
+            xmlns:richx=&quot;http://richfaces.orgx&quot;&gt;
                 …
         </pre>
         <p>

@@ -1,3 +1,25 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+ */
+
 /**
  *
  */
@@ -13,8 +35,7 @@ import javax.faces.context.FacesContext;
 public class ContentBean {
     private static final String PRELUDE = "<html xmlns=\"http://www.w3.org/1999/xhtml\"\n"
             + " xmlns:f=\"http://java.sun.com/jsf/core\"\n" + " xmlns:h=\"http://java.sun.com/jsf/html\"\n"
-            + " xmlns:a4j=\"http://richfaces.org/a4j\"\n" + " xmlns:rich=\"http://richfaces.org/rich\"\n"
-            + " xmlns:c=\"http://java.sun.com/jsp/jstl/core\">\n";
+            + " xmlns:r=\"http://richfaces.org\"\n" + " xmlns:c=\"http://java.sun.com/jsp/jstl/core\">\n";
     private static final String TAIL = "\n</html>";
     private String xpath = "//*[local-name()='define'][@name='content']/*";
 

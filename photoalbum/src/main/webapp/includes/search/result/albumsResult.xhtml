@@ -1,23 +1,45 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich">
-    <a4j:repeat rendered="#{fn:length(result) > 0}" id="albumsList" value="#{result}" var="album">
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+    xmlns:r="http://richfaces.org">
+    <r:repeat rendered="#{fn:length(result) > 0}" id="albumsList" value="#{result}" var="album">
         <h:panelGroup layout="block" styleClass="preview_box_album_120">
             <h:graphicImage styleClass="pr_album_bg" value="/img/shell/frame_album_200.png" />
             <h:panelGrid cellpadding="0">
                 <h:panelGroup>
-                    <a4j:commandLink actionListener="#{controller.showAlbum(album)}" render="mainArea, treePanel">
-                        <a4j:mediaOutput rendered="#{!album.isEmpty()}" id="img" element="img"
+                    <r:commandLink actionListener="#{controller.showAlbum(album)}" render="mainArea, treePanel">
+                        <r:mediaOutput rendered="#{!album.isEmpty()}" id="img" element="img"
                             createContent="#{imageLoader.paintImage}" styleClass="album-cover-image"
                             value="#{fileManager.transformPath(album.coveringImage.fullPath, '_small120')}"
                             mimeType="image/jpeg" />
                         <h:graphicImage rendered="#{album.isEmpty()}" style="width:80px; height:80px;"
                             value="img/shell/frame_album_200.png" styleClass="album-cover-image" />
-                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                        <r:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
                             <span style="white-space: nowrap"> #{album.name} </span>
-                        </rich:tooltip>
-                    </a4j:commandLink>
+                        </r:tooltip>
+                    </r:commandLink>
                     <br />
                 </h:panelGroup>
             </h:panelGrid>
@@ -28,10 +50,10 @@
                 </h:outputText>
             </h:panelGroup>
             <h:panelGroup layout="block" styleClass="album_data">
-                <a4j:commandLink render="mainArea" actionListener="#{controller.showUser(album.owner)}"
+                <r:commandLink render="mainArea" actionListener="#{controller.showUser(album.owner)}"
                     value="#{album.owner.firstName} #{album.owner.secondName}" />
             </h:panelGroup>
         </h:panelGroup>
-    </a4j:repeat>
+    </r:repeat>
     <h:outputText rendered="#{fn:length(result) == 0}" value="#{messages['no_results_found']}" />
 </ui:composition>

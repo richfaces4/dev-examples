@@ -1,6 +1,28 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich">
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:r="http://richfaces.org">
 
     <div class="section" lang="en-US">
         <div class="titlepage">
@@ -13,7 +35,7 @@
         <p>In the previous chapter we have discussed how to create Navigation Trees that represent "Shelves - Albums"
             hierarchy. Now it is time to upload images.</p>
         <p>
-            The <span class="bold"><strong><span class="property">&lt;rich:fileUpload&gt;</span></strong></span> component in
+            The <span class="bold"><strong><span class="property">&lt;r:fileUpload&gt;</span></strong></span> component in
             the Photo Album application uses the embedded Flash module that adds extra functionality to the component:
         </p>
         <div class="itemizedlist">
@@ -30,20 +52,20 @@
             </ul>
         </div>
         <p>
-            The code for the <span class="bold"><strong><span class="property">&lt;rich:fileUpload&gt;</span></strong></span> is
+            The code for the <span class="bold"><strong><span class="property">&lt;r:fileUpload&gt;</span></strong></span> is
             contained in the "/includes/fileUpload/fileUploader.xhtml" page:
         </p>
         <pre class="brush: xml, gutter: false, highlight: [3,6]">
                     …
-                &lt;rich:fileUpload maxFilesQuantity=&quot;100&quot;
+                &lt;r:fileUpload maxFilesQuantity=&quot;100&quot;
                     fileUploadListener=&quot;#{'#{'}fileUploadManager.listener}&quot;
                     id=&quot;fileUpload&quot;
                     disabled=&quot;#{'#{'}model.selectedAlbum == null}&quot;
                     acceptedTypes=&quot;jpg,jpeg&quot;
                     execute=&quot;uploadAlbum&quot;&gt;
-                    &lt;a4j:ajax event=&quot;uploadcomplete&quot; render=&quot;treePanel, filesPanel&quot; listener=&quot;#{'#{'}fileWrapper.setComplete(true)}&quot;
+                    &lt;r:ajax event=&quot;uploadcomplete&quot; render=&quot;treePanel, filesPanel&quot; listener=&quot;#{'#{'}fileWrapper.setComplete(true)}&quot;
                         limitRender=&quot;true&quot; /&gt;
-                &lt;/rich:fileUpload&gt;
+                &lt;/r:fileUpload&gt;
                     …
         </pre>
         <p>
@@ -126,7 +148,7 @@
                     <p>
                         <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink"
                             href="http://showcase.richfaces.org/richfaces/component-sample.jsf?demo=fileUpload">FileUpload</a>
-                        page for the <span class="bold"><strong><span class="property">&lt;rich:fileUpload&gt;</span></strong></span>
+                        page for the <span class="bold"><strong><span class="property">&lt;r:fileUpload&gt;</span></strong></span>
                         component;
                     </p>
                 </li>
@@ -134,7 +156,7 @@
                     <p>
                         <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink"
                             href="http://showcase.richfaces.org/richfaces/component-sample.jsf?demo=ajax">Ajax</a> for
-                        the <span class="bold"><strong><span class="property">&lt;a4j:ajax&gt;</span></strong></span>
+                        the <span class="bold"><strong><span class="property">&lt;r:ajax&gt;</span></strong></span>
                         component.
                     </p>
                 </li>

@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.domain;
 
@@ -42,6 +43,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
@@ -57,27 +61,31 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Andrey Markhel
  */
 @Entity
+@JsonAutoDetect(fieldVisibility=Visibility.NONE, getterVisibility=Visibility.NONE, isGetterVisibility=Visibility.NONE)
 public class Album implements Serializable {
 
     private static final long serialVersionUID = -7042878411608396483L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
     private Long id = null;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonProperty
     private List<Image> images = new ArrayList<Image>();
 
     @NotNull
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Shelf shelf;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JsonProperty
     private Image coveringImage;
 
     @Transient
@@ -90,9 +98,11 @@ public class Album implements Serializable {
     @NotNull
     @NotEmpty
     @Length(min = 3, max = 50)
+    @JsonProperty
     private String name;
 
     @Column(length = 1024)
+    @JsonProperty
     private String description;
 
     // ********************** Accessor Methods ********************** //
@@ -271,8 +281,13 @@ public class Album implements Serializable {
      *
      */
     public String getPath() {
-        if (getShelf().getPath() == null) {
-            return null;
+        if (getShelf() != null) {
+            if (getShelf().getPath() == null) {
+                return null;
+            }
+        }
+        else {
+            return File.separator + "event" + File.separator + this.getId() + File.separator;
         }
         return getShelf().getPath() + this.getId() + File.separator;
     }

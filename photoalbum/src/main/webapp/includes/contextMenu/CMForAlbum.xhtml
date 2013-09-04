@@ -1,13 +1,35 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
-    <rich:contextMenu style="text-align:left;" rendered="#{controller.isUserAlbum(album)}" mode="ajax" target="#{target}">
-        <rich:menuItem label="#{messages['album.delete']}" limitRender="true"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:r="http://richfaces.org" xmlns:richx="http://richfaces.orgx">
+    <r:contextMenu style="text-align:left;" rendered="#{controller.isUserAlbum(album)}" mode="ajax" target="#{target}">
+        <r:menuItem label="#{messages['album.delete']}" limitRender="true"
             actionListener="#{confirmationPopupHelper.initAlbumData(confirmationPopupHelper.deleteAlbum,messages['album.delete.confirm'],album)}"
-            oncomplete="#{rich:component('confirmation')}.show()" render="confirmation" />
-        <rich:menuItem label="#{messages['album.edit']}" limitRender="true" actionListener="#{controller.startEditAlbum(album)}"
+            oncomplete="#{r:component('confirmation')}.show()" render="confirmation" />
+        <r:menuItem label="#{messages['album.edit']}" limitRender="true" actionListener="#{controller.startEditAlbum(album)}"
             render="mainArea" />
-        <rich:menuItem label="#{messages['album.addImages']}" limitRender="true"
+        <r:menuItem label="#{messages['album.addImages']}" limitRender="true"
             actionListener="#{controller.showFileUpload(album)}" render="mainArea" />
-    </rich:contextMenu>
+    </r:contextMenu>
 </ui:composition>

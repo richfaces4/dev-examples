@@ -1,15 +1,37 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:richx="http://richfaces.org/richx" xmlns:rich="http://richfaces.org/rich">
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:richx="http://richfaces.orgx" xmlns:r="http://richfaces.org">
     <div style="margin: 10px 0px 30px 30px; width: 504px; background: #f1f1f1">
-        <rich:graphValidator>
+        <r:graphValidator>
             <table style="border-collapse: collapse; border: 0; padding: 5px;">
                 <tr>
                     <td style="vertical-align: top; white-space: nowrap;" class="album-edit-field">#{messages['album_name']}</td>
                     <td style="vertical-align: top;" colspan="2">
                         <h:inputText id="album_name" value="#{model.selectedAlbum.name}" styleClass="album-edit-input"
                             required="true">
-                            <rich:validator event="blur" />
+                            <r:validator event="blur" />
                         </h:inputText>
                     </td>
                 </tr>
@@ -17,25 +39,25 @@
                 <tr>
                     <td style="padding: 0; margin: 0;" />
                     <td style="padding: 0; margin: 0;" class="errors">
-                        <rich:message for="album_name" />
+                        <r:message for="album_name" />
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top; white-space: nowrap;" class="album-edit-field">#{messages['creation_date']}</td>
                     <td style="vertical-align: top;">
-                        <a4j:outputPanel id="calendar" layout="block">
-                            <rich:calendar styleClass="album-edit-calendar" enableManualInput="true"
+                        <r:outputPanel id="calendar" layout="block">
+                            <r:calendar styleClass="album-edit-calendar" enableManualInput="true"
                                 value="#{model.selectedAlbum.created}" id="album_date" disabled="true">
-                                <rich:validator event="inputblur" />
-                            </rich:calendar>
-                        </a4j:outputPanel>
-                        <rich:message for="calendar" />
+                                <r:validator event="inputblur" />
+                            </r:calendar>
+                        </r:outputPanel>
+                        <r:message for="calendar" />
                     </td>
                 </tr>
                 <tr>
                     <td style="padding: 0; margin: 0;" />
                     <td style="padding: 0; margin: 0;" class="errors">
-                        <rich:message for="album_date" />
+                        <r:message for="album_date" />
                     </td>
                 </tr>
                 <tr>
@@ -48,7 +70,7 @@
                 <tr>
                     <td style="padding: 0; margin: 0;" />
                     <td style="padding: 0; margin: 0;">
-                        <rich:message for="album_description" />
+                        <r:message for="album_description" />
                     </td>
                 </tr>
                 <tr>
@@ -56,12 +78,12 @@
                     <td colspan="2" style="padding: 10px; vertical-align: top; text-align: right;">
                         <richx:commandButton id="saveButton" value="#{messages['save']}" style="float: left"
                             actionListener="#{albumManager.editAlbum(model.selectedAlbum, false)}" render="treePanel, mainArea" />
-                        <richx:commandButton id="cancelButton" value="#{messages['cancel']}" immediate="true"
+                        <richx:commandButton id="cancelButton" value="#{messages['cancel']}" style="float:left" immediate="true"
                             actionListener="#{controller.cancelEditAlbum()}" render="mainArea" />
                     </td>
                 </tr>
             </table>
-        </rich:graphValidator>
+        </r:graphValidator>
     </div>
     <ui:include src="/includes/image/imageList.xhtml" />
 </ui:composition>

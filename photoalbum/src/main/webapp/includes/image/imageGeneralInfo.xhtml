@@ -1,7 +1,29 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich" xmlns:richx="http://richfaces.org/richx">
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:r="http://richfaces.org"
+    xmlns:richx="http://richfaces.orgx">
 
     <ui:include src="/includes/image/imageScroller.xhtml" />
 
@@ -11,31 +33,29 @@
             <tr>
                 <td class="mainImage-table-col1" rowspan="2">
                     <h:panelGroup layout="block" styleClass="slideshow-outerdiv">
-                        <a4j:commandLink rendered="#{fn:length(model.images) > 0}"
+                        <r:commandLink rendered="#{fn:length(model.images) > 0}"
                             actionListener="#{slideshow.startSlideshow(model.selectedImage)}" styleClass="slideshow-link"
                             render="mainArea, slideShowModalPanel" execute="@this, slideShowModalPanel">
                             <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
-                        </a4j:commandLink>
-                        <a4j:commandLink rendered="#{help.isShowHelp()}"
+                        </r:commandLink>
+                        <r:commandLink rendered="#{help.isShowHelp()}"
                             actionListener="#{help.navigateTo('/includes/help/slideshow.xhtml')}"
-                            oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel">
+                            oncomplete="#{r:component('helpPanel')}.show()" render="helpPanel">
                             <h:panelGroup
                                 style="cursor: hand; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
                                 <h:graphicImage style="border:none;" styleClass="ie6transparency" height="34" width="34"
                                     value="img/icons/help_sign.png" />
                             </h:panelGroup>
-                        </a4j:commandLink>
+                        </r:commandLink>
                     </h:panelGroup>
-                    <a4j:mediaOutput id="img" element="img" styleClass="main-image" createContent="#{imageLoader.paintImage}"
+                    <r:mediaOutput id="img" element="img" styleClass="main-image" createContent="#{imageLoader.paintImage}"
                         style="border : 3px solid #808080;"
                         value="#{fileManager.transformPath(model.selectedImage.fullPath, '_medium')}" mimeType="image/jpeg">
-                        <rich:dragSource rendered="#{controller.isUserImage(model.selectedImage)}" render="mainArea, treePanel"
+                        <r:dragSource rendered="#{controller.isUserImage(model.selectedImage)}" render="mainArea, treePanel"
                             id="dragSource" dragIndicator="dragIndicator" type="image" dragValue="#{model.selectedImage}" />
-                        <!-- <rich:dndParam id="dragParam" name="label" value="#{model.selectedImage.name}" /> -->
-                        <!-- not supported in RF 4 -->
-                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip"
+                        <r:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip"
                             rendered="#{model.selectedImage.showMetaInfo}">
                             <span style="white-space: nowrap; display: block; text-align: left;"> <h:outputText
                                     value="#{messages['image.size']} #{model.selectedImage.size}" /> <br /> <h:outputText
@@ -43,30 +63,29 @@
                                 <h:outputText value="#{messages['image.captured']}: #{model.selectedImage.created}" /><br /> <h:outputText
                                     value="#{messages['camera']}: #{model.selectedImage.cameraModel}" />
                             </span>
-                        </rich:tooltip>
-                    </a4j:mediaOutput>
+                        </r:tooltip>
+                    </r:mediaOutput>
                 </td>
                 <td style="vertical-align: top;">
                     <h:panelGroup layout="block" styleClass="buttons-body" style="margin : 26px 0px 0px 0px;">
                         <h:link outcome="/includes/directImage.xhtml" value="#{messages['original_size']}" target="_blank"
                             styleClass="buttons-body-text-div">
-                            <!-- <s:link value="#{messages['original_size']}" styleClass="buttons-body-text-div"
-                            view="/includes/directImage.xhtml" propagation="join" style="color : #ffffff; text-decoration:none;"
-                            target="_blank"> -->
                             <f:param name="imageId" value="#{model.selectedImage.id}" />
-                            <!-- </s:link> -->
                         </h:link>
                     </h:panelGroup>
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align: bottom;" class="mainImage-table-col3">
-                    <richx:commandButton value="#{messages['image.edit']}" rendered="#{controller.isUserImage(model.selectedImage)}"
+                    <richx:commandButton value="#{messages['image.edit']}"
+                        rendered="#{controller.isUserImage(model.selectedImage)}"
                         actionListener="#{controller.startEditImage(model.selectedImage)}" render="mainArea" execute="@this" />
                     <richx:commandButton value="#{messages['image.delete']}"
                         actionListener="#{confirmationPopupHelper.initImagePopup(confirmationPopupHelper.deleteImage,messages['image.delete.confirm'],model.selectedImage)}"
                         render="confirmation" rendered="#{controller.isUserImage(model.selectedImage)}"
-                        oncomplete="#{rich:component('confirmation')}.show()" execute="@this" />
+                        oncomplete="#{r:component('confirmation')}.show()" execute="@this" />
+                    <richx:commandButton value="Share" rendered="#{controller.isUserImage(model.selectedImage)}" execute="@this"
+                        styleClass="fb-comm-button" render="albumsPopupPanel" />
                 </td>
             </tr>
         </table>
@@ -81,8 +100,9 @@
     <h:outputText value="#{model.selectedImage.uploaded}" />
     <br />
     <h:outputText styleClass="additional-info-text" value="#{messages['image.author']} " />
-    <a4j:commandLink actionListener="#{controller.showUser(model.selectedImage.album.owner)}" render="mainArea"
+    <r:commandLink actionListener="#{controller.showUser(model.selectedImage.album.owner)}" render="mainArea"
         value="#{model.selectedImage.album.owner.login}" />
     <br />
     <br />
+    <ui:include src="/includes/image/albumPanel.xhtml" />
 </ui:composition>

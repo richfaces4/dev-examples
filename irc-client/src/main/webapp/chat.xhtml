@@ -1,7 +1,29 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich" xmlns:c="http://java.sun.com/jsp/jstl/core" template="/templates/template.xhtml">
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+    xmlns:r="http://richfaces.org" xmlns:c="http://java.sun.com/jsp/jstl/core" template="/templates/template.xhtml">
     <ui:define name="body">
         <style>
 .chatOutput {
@@ -23,32 +45,32 @@
                 return data.author + " - " + data.timestamp + ": " + data.text;
             }
         </script>
-        <rich:panel header="Welcome to #{chatBean.channelName} channel at #{chatBean.serverName}" id="chatpanel">
-            <rich:panel styleClass="chatOutput" bodyClass="#{chatBean.channelName}Output" />
-            <rich:panel styleClass="chatList">
-                <rich:list value="#{chatBean.users}" var="user" id="users" type="unordered">
+        <r:panel header="Welcome to #{chatBean.channelName} channel at #{chatBean.serverName}" id="chatpanel">
+            <r:panel styleClass="chatOutput" bodyClass="#{chatBean.channelName}Output" />
+            <r:panel styleClass="chatList">
+                <r:list value="#{chatBean.users}" var="user" id="users" type="unordered">
                     #{user.nick}
-                </rich:list>
-            </rich:panel>
+                </r:list>
+            </r:panel>
             <br clear="all" />
             <hr />
             <h:form>
-                <a4j:push address="#{chatBean.listSubtopic}@chat" onerror="alert(event.rf.data)">
-                    <a4j:ajax event="dataavailable" render="users" execute="@none" />
-                </a4j:push>
-                <a4j:push address="#{chatBean.messagesSubtopic}@chat" onerror="alert(event.rf.data)"
+                <r:push address="#{chatBean.listSubtopic}@chat" onerror="alert(event.rf.data)">
+                    <r:ajax event="dataavailable" render="users" execute="@none" />
+                </r:push>
+                <r:push address="#{chatBean.messagesSubtopic}@chat" onerror="alert(event.rf.data)"
                     ondataavailable="jQuery('&lt;div /&gt;').prependTo('.#{chatBean.channelName}Output').text(getMessageString(event.rf.data))" />
                 <h:inputTextarea value="#{chatBean.message}" rows="3" style="width:80%" id="nm" />
-                <a4j:commandButton value="Send" action="#{chatBean.send}" render="@none" execute="@form" />
+                <r:commandButton value="Send" action="#{chatBean.send}" render="@none" execute="@form" />
             </h:form>
             <hr />
             <h:form>
-                <rich:panel header="Change nickname:">
+                <r:panel header="Change nickname:">
                     <h:inputText valueChangeListener="#{chatBean.changeNick}" id="cn" />
-                    <a4j:commandButton value="Change" execute="@form" render="@none" />
-                </rich:panel>
+                    <r:commandButton value="Change" execute="@form" render="@none" />
+                </r:panel>
                 <h:commandButton value="Disconnect" action="#{chatBean.leave}" />
             </h:form>
-        </rich:panel>
+        </r:panel>
     </ui:define>
 </ui:composition>

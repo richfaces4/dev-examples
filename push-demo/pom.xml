@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    JBoss, Home of Professional Open Source Copyright 2010, Red Hat,
-    Inc. and individual contributors by the @authors tag. See the
-    copyright.txt in the distribution for a full listing of
-    individual contributors. This is free software; you can
-    redistribute it and/or modify it under the terms of the GNU
-    Lesser General Public License as published by the Free Software
-    Foundation; either version 2.1 of the License, or (at your
-    option) any later version. This software is distributed in the
-    hope that it will be useful, but WITHOUT ANY WARRANTY; without
-    even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-    PARTICULAR PURPOSE. See the GNU Lesser General Public License
-    for more details. You should have received a copy of the GNU
-    Lesser General Public License along with this software; if not,
-    write to the Free Software Foundation, Inc., 51 Franklin St,
-    Fifth Floor, Boston, MA 02110-1301 USA, or see the FSF site:
-    http://www.fsf.org.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.richfaces.examples</groupId>
-        <artifactId>richfaces-example-parent</artifactId>
-        <version>4.3.3-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <groupId>org.richfaces</groupId>
+        <artifactId>richfaces-parent</artifactId>
+        <version>5.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
+    <groupId>org.richfaces.examples</groupId>
     <artifactId>push-demo</artifactId>
-    <name>RichFaces Examples Push</name>
+    <name>RichFaces Example: Push Demo</name>
     <packaging>war</packaging>
-    
+
+    <properties>
+        <version.richfaces>5.0.0-SNAPSHOT</version.richfaces>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- RichFaces BOM Import -->
             <dependency>
                 <groupId>org.richfaces</groupId>
-                <artifactId>richfaces-bom</artifactId>
+                <artifactId>richfaces-build</artifactId>
                 <version>${version.richfaces}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -62,22 +69,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.richfaces.core</groupId>
-            <artifactId>richfaces-core-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.richfaces.ui.core</groupId>
-            <artifactId>richfaces-ui-core-ui</artifactId>
+            <groupId>org.richfaces</groupId>
+            <artifactId>richfaces</artifactId>
+            <version>${version.richfaces}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
+            <groupId>org.richfaces</groupId>
+            <artifactId>richfaces-push-depchain</artifactId>
+            <type>pom</type>
         </dependency>
 
     </dependencies>

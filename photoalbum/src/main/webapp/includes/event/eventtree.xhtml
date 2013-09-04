@@ -1,0 +1,61 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:r="http://richfaces.org"
+    xmlns:richx="http://richfaces.orgx">
+    <r:tree id="eventTree" var="treeNode" toggleType="client">
+        <r:treeModelAdaptor nodes="#{eventManager.eventCategories}">
+            <r:treeNode style="cursor:pointer" selectedClass="tree-selected-node" iconCollapsed="img/shell/tree_icon_shelf.png"
+                iconExpanded="img/shell/tree_icon_shelf.png">
+                <r:outputPanel layout="block" style="cursor:pointer;width:200px; overflow-x:hidden;">
+                    <h:outputText value="#{treeNode.description}" />
+                    <r:tooltip direction="topRight" showDelay="1000">
+                        <span style="white-space: nowrap">#{treeNode.description}</span>
+                    </r:tooltip>
+                </r:outputPanel>
+            </r:treeNode>
+
+            <r:treeModelAdaptor nodes="#{eventManager.getEventsByCategory(treeNode)}">
+                <r:treeNode style="cursor:pointer" selectedClass="tree-selected-node" iconLeaf="img/shell/tree_icon_album.png">
+                    <r:outputPanel layout="block" style="cursor:pointer;width:200px; overflow-x:hidden;">
+                        <h:outputText value="#{treeNode.name}" />
+                        <r:ajax event="click" listener="#{controller.showEvent(treeNode)}" render="mainArea" />
+                        <r:dropTarget acceptedTypes="album" dropValue="#{treeNode}" dropListener="#{dndManager.addAlbumToEvent}"
+                            render="treePanel, mainArea" />
+                        <r:dropTarget acceptedTypes="fbAlbum" data="#{fbDndManager.albumAlreadyShared}" dropValue="#{treeNode}" dropListener="#{fbDndManager.processDrop}"
+                            oncomplete="if(!event.data)#{r:component('fbAlbumModalPanel')}.show();" render="fbAlbumModalPanel" />
+                        <r:dropTarget acceptedTypes="gAlbum" data="#{gplusDndManager.albumAlreadyShared}" dropValue="#{treeNode}" dropListener="#{gDndManager.processDrop}"
+                            oncomplete="if(!event.data)#{r:component('gAlbumModalPanel')}.show();" render="gAlbumModalPanel" />
+                        <r:tooltip direction="topRight" showDelay="1000">
+                            <span style="white-space: nowrap">#{treeNode.name}</span>
+                        </r:tooltip>
+                    </r:outputPanel>
+                </r:treeNode>
+
+            </r:treeModelAdaptor>
+        </r:treeModelAdaptor>
+    </r:tree>
+    <br />
+
+</ui:composition>
