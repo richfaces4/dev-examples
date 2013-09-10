@@ -26,7 +26,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich">
     <ui:param name="title" value="Filtering &amp; Sorting" />
     
     <!-- content -->
@@ -44,18 +44,18 @@
             <h:selectBooleanCheckbox value="#{iterationBean.state}">
                 <f:ajax render="dataTable" />
             </h:selectBooleanCheckbox>
-            <r:dataTable id="dataTable" value="#{iterationBean.state ? iterationBean.employeeList : null}" var="record" rowKeyVar="rkv"
+            <rich:dataTable id="dataTable" value="#{iterationBean.state ? iterationBean.employeeList : null}" var="record" rowKeyVar="rkv"
                 filterVar="fv">
                 <f:facet name="noData">
                     <h:outputText value="There isn't data." style="border: solid black 1px;" />
                 </f:facet>
-                <r:column>
+                <rich:column>
                     <f:facet name="header">
                         <h:outputText value="rkv" />
                     </f:facet>
                     <h:outputText value="#{rkv}" />
-                </r:column>
-                <r:column id="column_name" filterValue="#{filteringAndSortingBean.nameFilterValue}"
+                </rich:column>
+                <rich:column id="column_name" filterValue="#{filteringAndSortingBean.nameFilterValue}"
                     filterExpression="#{fv == null || fv == '' ||fv == record.name}"
                     comparator="#{filteringAndSortingBean.comparator}" sortOrder="#{filteringAndSortingBean.nameSortOrder}">
                     <f:facet name="header">
@@ -75,9 +75,9 @@
                     <f:facet name="footer">
                         <h:outputText id="columnFooter1" value="Column Footer Facet" />
                     </f:facet>
-                </r:column>
+                </rich:column>
     
-                <r:column id="column_title" width="200px" filter="#{filteringAndSortingBean.filter}">
+                <rich:column id="column_title" width="200px" filter="#{filteringAndSortingBean.filter}">
                     <f:facet name="header">
                         <h:outputText value="Title" />
                         <h:inputText value="#{filteringAndSortingBean.titleFilterValue}">
@@ -88,9 +88,9 @@
                     <f:facet name="footer">
                         <h:outputText id="columnFooter2" value="Column Footer Facet2" />
                     </f:facet>
-                </r:column>
+                </rich:column>
     
-                <r:column id="column_email" width="300px" sortBy="#{record.EMail}"
+                <rich:column id="column_email" width="300px" sortBy="#{record.EMail}"
                     sortOrder="#{filteringAndSortingBean.emailSortOrder}">
                     <f:facet name="header">
                         <h:outputText value="E-mail" />
@@ -102,8 +102,8 @@
                         </h:selectOneMenu>
                     </f:facet>
                     <h:outputText value="#{record.EMail}" />
-                </r:column>
-            </r:dataTable>
+                </rich:column>
+            </rich:dataTable>
             <input type="submit" />
         </h:form>
         

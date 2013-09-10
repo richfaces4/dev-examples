@@ -26,7 +26,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
 
     <ui:param name="title" value="Progress Bar"/>
     <!-- content -->
@@ -88,7 +89,7 @@
 
         <h:form id="clientPBForm">
 
-            <r:progressBar mode="client" id="progressBar" value="#{progressBarBean.value}"
+            <rich:progressBar mode="client" id="progressBar" value="#{progressBarBean.value}"
                            maxValue="#{progressBarBean.maxValue}" minValue="#{progressBarBean.minValue}"
                            label="#{progressBarBean.label}">
 
@@ -106,7 +107,7 @@
                     </h:panelGroup>
                 </f:facet>
 
-            </r:progressBar>
+            </rich:progressBar>
 
             Set value via CS-API:
             <h:inputText size="3" onchange="RichFaces.component('clientPBForm:progressBar').setValue(this.value)"/>
@@ -115,7 +116,7 @@
 
         <h:form id="ajaxPBForm">
             Ajax mode:
-            <r:progressBar id="progressBar" mode="ajax" interval="2000" value="#{progressBarBean.value}"
+            <rich:progressBar id="progressBar" mode="ajax" interval="2000" value="#{progressBarBean.value}"
                            maxValue="#{progressBarBean.maxValue}" minValue="#{progressBarBean.minValue}"
                            label="#{progressBarBean.value} % ~ #{progressBarBean.currentTimeAsString}"
                            reRenderAfterComplete="progressPanel"
@@ -134,25 +135,25 @@
                         <h:outputText value="finish ~ #{progressBarBean.currentTimeAsString}"/>
                     </h:panelGroup>
                 </f:facet>
-            </r:progressBar>
+            </rich:progressBar>
 
             Current value:
             <h:panelGroup id="currentValue">#{progressBarBean.value}</h:panelGroup>
             <br/>
-            <r:commandLink value="-5" action="#{progressBarBean.decreaseValueByFive}" render="currentValue"/>
+            <a4j:commandLink value="-5" action="#{progressBarBean.decreaseValueByFive}" render="currentValue"/>
 
             <h:outputText value=" / "/>
 
-            <r:commandLink value="+5" action="#{progressBarBean.increaseValueByFive}" render="currentValue"/>
+            <a4j:commandLink value="+5" action="#{progressBarBean.increaseValueByFive}" render="currentValue"/>
 
             <h:outputText value=" / "/>
 
-            <r:commandLink value="re-render progress bar" render="progressBar"/>
+            <a4j:commandLink value="re-render progress bar" render="progressBar"/>
         </h:form>
 
         <h:form id="ajaxExtResourcePBForm">
             Ajax mode with GET requests:
-            <r:progressBar id="progressBar" mode="ajax" interval="2000"
+            <rich:progressBar id="progressBar" mode="ajax" interval="2000"
                            resource="#{resource['org.richfaces.ProgressBarResource']}"
                            maxValue="#{progressBarBean.maxValue}"
                            minValue="#{progressBarBean.minValue}" enabled="#{progressBarBean.enabled}">
@@ -168,7 +169,7 @@
                         <h:outputText value="finish"/>
                     </h:panelGroup>
                 </f:facet>
-            </r:progressBar>
+            </rich:progressBar>
         </h:form>
     </ui:define>
 </ui:composition>

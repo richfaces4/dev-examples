@@ -33,6 +33,7 @@ import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+import org.richfaces.component.SortOrder;
 import org.richfaces.model.Arrangeable;
 import org.richfaces.model.ArrangeableState;
 import org.richfaces.model.DataVisitor;
@@ -44,7 +45,6 @@ import org.richfaces.model.SortField;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import org.richfaces.ui.iteration.SortOrder;
 
 public abstract class JPADataModel<T> extends ExtendedDataModel<T> implements Arrangeable {
     private EntityManager entityManager;

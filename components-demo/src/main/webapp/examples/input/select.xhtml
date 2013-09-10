@@ -26,7 +26,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich">
     <ui:param name="title" value="Select" />
 
 
@@ -47,7 +47,7 @@
             <h:form>
                 <legend>Select Test App| enableManualInput="true"</legend>
                 <div style="width: 400px; height: 100px; overflow: auto;">
-                    <r:select id="select1" openOnEdit="true" enableManualInput="true" defaultLabel="Select Value ..."
+                    <rich:select id="select1" openOnEdit="true" enableManualInput="true" defaultLabel="Select Value ..."
                                value="#{inputBean.value}" style="font-size: 2em;" styleClass="my-select-class"
                                title="Title">
                         <f:selectItem itemLabel="Label#1" itemValue="Value#1"/>
@@ -65,7 +65,7 @@
                         <f:selectItem itemLabel="Label#13" itemValue="Value#13"/>
                         <f:selectItem itemLabel="Label#14" itemValue="Value#14"/>
                         <f:ajax event="change" execute="@form" render="out1"/>
-                    </r:select>
+                    </rich:select>
                     <h:commandButton value="submit">
                         <f:ajax execute="@form" render="select1 out1"/>
                     </h:commandButton>
@@ -73,9 +73,9 @@
 
                 <ul>
                     <li><h:commandButton value="ShowPopup"
-                                         onclick="#{r:component('select')}.showPopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.showPopup(); return false;"/></li>
                     <li><h:commandButton value="HidePopup"
-                                         onclick="#{r:component('select')}.hidePopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.hidePopup(); return false;"/></li>
                 </ul>
                 <h:panelGroup id="out1">
                     <h:outputText value="Selected Value: #{inputBean.value}"/>
@@ -86,7 +86,7 @@
             <h:form>
                 <legend>Select Test App| enableManualInput="true" | clientFilterFunction</legend>
                 <div style="width: 400px; height: 100px; overflow: auto;">
-                    <r:select id="select1b" openOnEdit="true" enableManualInput="true" defaultLabel="Select Value ..."
+                    <rich:select id="select1b" openOnEdit="true" enableManualInput="true" defaultLabel="Select Value ..."
                                value="#{inputBean.value}" style="font-size: 2em;" styleClass="my-select-class"
                                title="Title" clientFilterFunction="myFilter">
                         <f:selectItem itemLabel="Label#1" itemValue="Value#1"/>
@@ -104,7 +104,7 @@
                         <f:selectItem itemLabel="Label#13" itemValue="Value#13"/>
                         <f:selectItem itemLabel="Label#14" itemValue="Value#14"/>
                         <f:ajax event="change" execute="@form" render="out1b"/>
-                    </r:select>
+                    </rich:select>
                     <h:commandButton value="submit">
                         <f:ajax execute="@form" render="select1b out1b"/>
                     </h:commandButton>
@@ -112,9 +112,9 @@
 
                 <ul>
                     <li><h:commandButton value="ShowPopup"
-                                         onclick="#{r:component('select')}.showPopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.showPopup(); return false;"/></li>
                     <li><h:commandButton value="HidePopup"
-                                         onclick="#{r:component('select')}.hidePopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.hidePopup(); return false;"/></li>
                 </ul>
                 <h:panelGroup id="out1b">
                     <h:outputText value="Selected Value: #{inputBean.value}"/>
@@ -125,7 +125,7 @@
             <h:form>
                 <legend>Select Test App | enableManualInput="false"</legend>
                 <div style="width: 400px; height: 100px; overflow: auto;">
-                    <r:select id="select2" openOnEdit="true" enableManualInput="false" defaultLabel="Select Value ..."
+                    <rich:select id="select2" openOnEdit="true" enableManualInput="false" defaultLabel="Select Value ..."
                                value="#{inputBean.value}" style="font-size: 2em;" styleClass="my-select-class"
                                title="Title">
                         <f:selectItem itemLabel="Label#1" itemValue="Value#1"/>
@@ -143,7 +143,7 @@
                         <f:selectItem itemLabel="Label#13" itemValue="Value#13"/>
                         <f:selectItem itemLabel="Label#14" itemValue="Value#14"/>
                         <f:ajax event="change" execute="@form" render="out2"/>
-                    </r:select>
+                    </rich:select>
                     <h:commandButton value="submit">
                         <f:ajax execute="@form" render="select2 out2"/>
                     </h:commandButton>
@@ -151,9 +151,9 @@
 
                 <ul>
                     <li><h:commandButton value="ShowPopup"
-                                         onclick="#{r:component('select')}.showPopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.showPopup(); return false;"/></li>
                     <li><h:commandButton value="HidePopup"
-                                         onclick="#{r:component('select')}.hidePopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.hidePopup(); return false;"/></li>
                 </ul>
                 <h:panelGroup id="out2">
                     <h:outputText value="Selected Value: #{inputBean.value}"/>
@@ -164,7 +164,7 @@
             <h:form id='form3'>
                 <legend>Select Test App | selectItem Listner</legend>
                 <div style="width: 400px; height: 100px; overflow: auto;">
-                    <r:select id="select3" openOnEdit="true" enableManualInput="false" defaultLabel="Select Value ..."
+                    <rich:select id="select3" openOnEdit="true" enableManualInput="false" defaultLabel="Select Value ..."
                                onselectitem="$('#events').append('Item Selected ')"
                                onchange="$('#events').append('Item Changed ')"
                                value="#{inputBean.value}" style="font-size: 2em;" styleClass="my-select-class"
@@ -184,7 +184,7 @@
                         <f:selectItem itemLabel="Label#13" itemValue="Value#13"/>
                         <f:selectItem itemLabel="Label#14" itemValue="Value#14"/>
                         <f:ajax event="change" execute="@form" render="out3"/>
-                    </r:select>
+                    </rich:select>
                     <h:commandButton value="submit">
                         <f:ajax execute="@form" render="select3 out3"/>
                     </h:commandButton>
@@ -192,9 +192,9 @@
 
                 <ul>
                     <li><h:commandButton value="ShowPopup"
-                                         onclick="#{r:component('select')}.showPopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.showPopup(); return false;"/></li>
                     <li><h:commandButton value="HidePopup"
-                                         onclick="#{r:component('select')}.hidePopup(); return false;"/></li>
+                                         onclick="#{rich:component('select')}.hidePopup(); return false;"/></li>
                 </ul>
                 <h:panelGroup id="out3">
                     <h:outputText value="Selected Value: #{inputBean.value}"/>

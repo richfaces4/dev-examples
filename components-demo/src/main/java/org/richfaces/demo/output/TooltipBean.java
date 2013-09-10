@@ -26,13 +26,14 @@
  */
 package org.richfaces.demo.output;
 
-import org.richfaces.ui.common.Positioning;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.richfaces.component.Positioning;
 
 
 @ManagedBean

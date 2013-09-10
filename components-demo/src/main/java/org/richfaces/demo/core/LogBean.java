@@ -21,10 +21,10 @@
  */
 package org.richfaces.demo.core;
 
-import org.richfaces.ui.ajax.log.LogMode;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.richfaces.component.LogMode;
 
 /**
  * @author Nick Belaevski

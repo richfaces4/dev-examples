@@ -26,7 +26,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
 
 <ui:param name="title" value="Notify Example 1" />
         <ui:define name="head">
@@ -50,7 +51,7 @@
     <ui:define name="content">
                 <h:form>
                     
-                    <r:notify stack="customStack" summary="#{notifyBean.title}"
+                    <rich:notify stack="customStack" summary="#{notifyBean.title}"
                             nonblocking="#{notifyBean.nonblocking}" showShadow="#{notifyBean.showShadow}"
                             showHistory="#{notifyBean.showHistory}" showCloseButton="#{notifyBean.showCloseButton}"
                             sticky="#{notifyBean.sticky}" stayTime="#{notifyBean.stayTime}"
@@ -62,25 +63,25 @@
                                     <hr />
                                     <h:outputText value="#{notifyBean.text}" />
                                 </f:facet>
-                            </r:notify>
+                            </rich:notify>
                     
-                    <r:outputPanel ajaxRendered="true">
-                        <r:notifyStack id="customStack" direction="#{notifyBean.direction}" position="#{notifyBean.position}"
+                    <a4j:outputPanel ajaxRendered="true">
+                        <rich:notifyStack id="customStack" direction="#{notifyBean.direction}" position="#{notifyBean.position}"
                             method="#{notifyBean.method}" styleClass="#{notifyBean.stackStyleClass}" />
-                        <r:notifyMessages  stack="customStack" interval="#{notifyBean.interval}" nonblocking="#{notifyBean.nonblocking}"
+                        <rich:notifyMessages  stack="customStack" interval="#{notifyBean.interval}" nonblocking="#{notifyBean.nonblocking}"
                         showShadow="#{notifyBean.showShadow}" showHistory="#{notifyBean.showHistory}"
                         showCloseButton="#{notifyBean.showCloseButton}" sticky="#{notifyBean.sticky}"
                         stayTime="#{notifyBean.stayTime}" appearAnimation="#{notifyBean.appearAnimation}"
                         hideAnimation="#{notifyBean.hideAnimation}" animationSpeed="#{notifyBean.animationSpeed}"
                         nonblockingOpacity="#{notifyBean.nonblockingOpacity}" styleClass="#{notifyBean.styleClass}" />
                         
-                    </r:outputPanel>
+                    </a4j:outputPanel>
                     
                     
-                    <r:commandButton value="Say Hello" action="#{notifyBean.sayHello}" execute="@form" />
-                    <r:commandButton value="Warn me" action="#{notifyBean.warnMe}" execute="@form" />
-                    <r:commandButton value="Say error" action="#{notifyBean.sayError}" execute="@form" />
-                    <r:commandButton value="Say fatal" action="#{notifyBean.sayFatal}" execute="@form" />
+                    <a4j:commandButton value="Say Hello" action="#{notifyBean.sayHello}" execute="@form" />
+                    <a4j:commandButton value="Warn me" action="#{notifyBean.warnMe}" execute="@form" />
+                    <a4j:commandButton value="Say error" action="#{notifyBean.sayError}" execute="@form" />
+                    <a4j:commandButton value="Say fatal" action="#{notifyBean.sayFatal}" execute="@form" />
                     <h:panelGrid columns="2">
                         <h:panelGroup>
                             <f:facet name="header">Common</f:facet>
@@ -183,8 +184,8 @@
                     <h:commandButton value="Apply" />
                 </h:form>
                 <!--
-    TODO uncomment this once r:insert is implemented
-    <r:insert src="/notify_1.xhtml" highlight="xhtml" rendered="#{showSource!=false}"/>
+    TODO uncomment this once rich:insert is implemented
+    <rich:insert src="/notify_1.xhtml" highlight="xhtml" rendered="#{showSource!=false}"/>
     -->
         </ui:define>
     </ui:composition>

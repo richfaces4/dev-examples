@@ -26,7 +26,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich">
 
 <f:metadata>
         <f:event type="preRenderView" listener="#{messageBean.generateMessages}" />
@@ -36,14 +36,14 @@
     <ui:define name="content">
         <h:form id="form">
             <h:inputText id="unescaped" value=""/> <br/>
-            Esacped message: <r:message for="escaped"/> <br/>
+            Esacped message: <rich:message for="escaped"/> <br/>
             <hr />
             <h:inputText id="escaped" value=""/> <br/>
-            Un-escaped message: <r:message escape="false" for="unescaped"/> <br/>
+            Un-escaped message: <rich:message escape="false" for="unescaped"/> <br/>
             <hr />
-            Global esacped: <r:messages globalOnly="true"/> <br/>
+            Global esacped: <rich:messages globalOnly="true"/> <br/>
             <hr />
-            Global un-esacped: <r:messages globalOnly="true" escape="false"/>
+            Global un-esacped: <rich:messages globalOnly="true" escape="false"/>
         </h:form>
     </ui:define>
 </ui:composition>

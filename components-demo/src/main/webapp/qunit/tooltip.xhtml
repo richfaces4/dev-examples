@@ -24,7 +24,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:r="http://richfaces.org">
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich">
 
 <body>
     <ui:composition template="/templates/template.xhtml">
@@ -46,9 +46,9 @@
                 <div id="myRectangle" style="border: 2px solid red; background-color: #adff2f; width: 300px; height: 300px">
                     Tooltip apeared under green rectangle.
 
-                    <r:tooltip id="tooltip" target="myRectangle" mode="client" showDelay="500">
+                    <rich:tooltip id="tooltip" target="myRectangle" mode="client" showDelay="500">
                     New Tooltip Yo!!!
-                </r:tooltip>
+                </rich:tooltip>
                 </div>
 
             </h:form>

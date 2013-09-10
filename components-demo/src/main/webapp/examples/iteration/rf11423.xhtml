@@ -26,29 +26,30 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="title" value="Data Table - RF-11423" />
     
     <!-- content -->
     <ui:define name="content">
     
         <h:form>
-            <r:commandLink value="Re-render self" render="jLT"/>
+            <a4j:commandLink value="Re-render self" render="jLT"/>
             |
-            <r:commandLink value="Re-render table" render="jLT"/>
+            <a4j:commandLink value="Re-render table" render="jLT"/>
             |
             <h:commandLink value="Regular submit"/>
 
             <!--jLT=jobLineTable-->
-            <r:dataTable id="jLT" value="#{rf11423.titles}" var="title" rowClasses="even,odd">
+            <rich:dataTable id="jLT" value="#{rf11423.titles}" var="title" rowClasses="even,odd">
 
-                <r:column>
+                <rich:column>
                     <f:facet name="header">Hero</f:facet>
                     <h:outputText value="#{title}" />
                     
-                </r:column>
+                </rich:column>
 
-            </r:dataTable>
+            </rich:dataTable>
         </h:form>
     
     </ui:define>

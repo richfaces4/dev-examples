@@ -26,18 +26,19 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="title" value="Poll" />
     <!-- content -->
     <ui:define name="content">
         <h:form id="form">
             <h:panelGroup id="poll">
-                <r:poll enabled="#{commandBean.pollEnabled}" interval="5000" ontimer="return confirm('execute action?')">
-                    <r:ajax event="timer" render="time" />
-                </r:poll>
+                <a4j:poll enabled="#{commandBean.pollEnabled}" interval="5000" ontimer="return confirm('execute action?')">
+                    <a4j:ajax event="timer" render="time" />
+                </a4j:poll>
             </h:panelGroup>
-            <r:commandButton actionListener="#{commandBean.enablePoll}" value="Start polling" render="poll" />
-            <r:commandButton actionListener="#{commandBean.disablePoll}" value="Stop polling" render="poll" />
+            <a4j:commandButton actionListener="#{commandBean.enablePoll}" value="Start polling" render="poll" />
+            <a4j:commandButton actionListener="#{commandBean.disablePoll}" value="Stop polling" render="poll" />
         </h:form>
         <h:panelGroup id="time">
             <h:outputText value="#{commandBean.date}" />

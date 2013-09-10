@@ -26,7 +26,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
 <ui:param name="title" value="Autocomplete" />
 
 <ui:define name="content">
@@ -36,27 +37,27 @@
     Following sample shows usage of autocomplete in AJAX mode with custom suggestion formatting and fetched value:
     
     <h:form id="custom-formatting">
-    	<r:autocomplete id="autocomplete" autocompleteMethod="#{autocompleteBean.suggest}" mode="ajax" layout="list" var="p" fetchValue="#{p.name}"
+    	<rich:autocomplete id="autocomplete" autocompleteMethod="#{autocompleteBean.suggest}" mode="ajax" layout="list" var="p" fetchValue="#{p.name}"
             onblur="console.log('blur')">
             #{p.name} - #{p.age}
-        </r:autocomplete>
+        </rich:autocomplete>
         
-        <r:commandButton render="autocomplete" value="Re-render" />
+        <a4j:commandButton render="autocomplete" value="Re-render" />
     </h:form>
     
     <h3>Autocomplete with suggestion in table layout</h3>
     
     <h:form id="table-layout">
-        <r:autocomplete id="autocomplete" autocompleteMethod="#{autocompleteBean.suggest}" mode="ajax" layout="table" var="p" fetchValue="#{p.name}">
-            <r:column>
+        <rich:autocomplete id="autocomplete" autocompleteMethod="#{autocompleteBean.suggest}" mode="ajax" layout="table" var="p" fetchValue="#{p.name}">
+            <rich:column>
                 #{p.name}
-            </r:column>
-            <r:column>
+            </rich:column>
+            <rich:column>
                 #{p.age}
-            </r:column>
-        </r:autocomplete>
+            </rich:column>
+        </rich:autocomplete>
         
-        <r:commandButton render="autocomplete" value="Re-render" />
+        <a4j:commandButton render="autocomplete" value="Re-render" />
     </h:form>
 
 </ui:define>

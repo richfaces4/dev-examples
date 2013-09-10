@@ -26,7 +26,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
 
         <ui:define name="title">Tab Panel Example</ui:define>
         <ui:define name="body_head">Tab Panel Example</ui:define>
@@ -35,36 +36,36 @@
 
             <h:form>
                 <h:selectBooleanCheckbox value="#{sessionScope.showCustomer}">
-                    <r:ajax render="panel" />
+                    <a4j:ajax render="panel" />
                 </h:selectBooleanCheckbox>
             </h:form>
 
-            <r:outputPanel id="panel">
+            <a4j:outputPanel id="panel">
                 <h:outputText value="#{sessionScope.showCustomer}" />
 
                 <h:panelGroup rendered="#{sessionScope.showCustomer}" layout="block">
 
                     <h:form>
-                        <r:tabPanel id="customerTabPanel" switchType="ajax" headerPosition="top" headerLocation="center">
+                        <rich:tabPanel id="customerTabPanel" switchType="ajax" headerPosition="top" headerLocation="center">
 
-                            <r:tab id="customerList" header="&rsaquo; Search">
-                            </r:tab>
+                            <rich:tab id="customerList" header="&rsaquo; Search">
+                            </rich:tab>
 
-                            <r:tab id="customerDetail" header="&rsaquo; Customer">
-                            </r:tab>
+                            <rich:tab id="customerDetail" header="&rsaquo; Customer">
+                            </rich:tab>
 
-                            <r:tab id="vehicleDetail" header="&rsaquo; Vehicle">
-                            </r:tab>
+                            <rich:tab id="vehicleDetail" header="&rsaquo; Vehicle">
+                            </rich:tab>
 
-                            <r:tab id="subscriptionDetail" header="&rsaquo; Subscription">
-                            </r:tab>
+                            <rich:tab id="subscriptionDetail" header="&rsaquo; Subscription">
+                            </rich:tab>
 
-                            <r:tab id="history" header="&rsaquo; History">
-                            </r:tab>
-                        </r:tabPanel>
+                            <rich:tab id="history" header="&rsaquo; History">
+                            </rich:tab>
+                        </rich:tabPanel>
                     </h:form>
                 </h:panelGroup>
-            </r:outputPanel>
+            </a4j:outputPanel>
 
 
         </ui:define>

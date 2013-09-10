@@ -21,10 +21,10 @@
  */
 package org.richfaces.demo.iteration;
 
-import org.richfaces.ui.iteration.list.ListType;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.richfaces.component.ListType;
 
 /**
  * @author Nick Belaevski

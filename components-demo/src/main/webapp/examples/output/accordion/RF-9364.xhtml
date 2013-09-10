@@ -26,7 +26,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich">
     <ui:define name="title">Accordion Example</ui:define>
     <ui:define name="body_head">Accordion Example</ui:define>
 
@@ -40,8 +40,8 @@
                         <h:outputText value="JSF Data Table"/>
                     </f:facet>
                     <h:panelGroup columns="1" rendered="#{item == 'row 1'}">
-                        <r:accordion width="500px" height="300px" switchType="server">
-                            <r:accordionItem
+                        <rich:accordion width="500px" height="300px" switchType="server">
+                            <rich:accordionItem
                                     header="label 1">Content will be here. Content will be here. Content will be here. Content will
                                 be here. Content will be here. Content will be here. Content will be here. Content will be here.
                                 Content will be here. Content will be here. Content will be here. Content will be here. Content
@@ -50,10 +50,10 @@
                                 Content will be here. Content will be here. Content will be here. Content will be here. Content
                                 will be here. Content will be here. Content will be here. Content will be here. Content will be
                                 here. Content will be here. Content will be here. Content will be here. Content will be here.
-                            </r:accordionItem>
-                            <r:accordionItem header="label 2">content 2</r:accordionItem>
-                            <r:accordionItem header="label 3">content 3</r:accordionItem>
-                        </r:accordion>
+                            </rich:accordionItem>
+                            <rich:accordionItem header="label 2">content 2</rich:accordionItem>
+                            <rich:accordionItem header="label 3">content 3</rich:accordionItem>
+                        </rich:accordion>
                     </h:panelGroup>
                     <h:outputText value="#{item}" rendered="#{item != 'row 1'}"/>
                 </h:column>

@@ -26,16 +26,17 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="title" value="Focus" />
     <!-- content -->
     <ui:define name="content">
 
         <h:form>
-            <r:focus id="focus" delayed="true" />
+            <rich:focus id="focus" delayed="true" />
             
             <h:commandButton value="Apply Focus">
-                <r:componentControl target="focus" operation="applyFocus" />
+                <rich:componentControl target="focus" operation="applyFocus" />
             </h:commandButton>
             <br />
             
@@ -43,15 +44,15 @@
             
             <br />
             <h:inputText id="input2" tabindex="3" /><br />
-            <r:calendar id="calendar" enableManualInput="true" tabindex="1" /><br />
+            <rich:calendar id="calendar" enableManualInput="true" tabindex="1" /><br />
             
             <h:commandButton value="submit" /><br />
-            <r:commandButton value="ajax" render="@form" /><br />
+            <a4j:commandButton value="ajax" render="@form" /><br />
             
             Current focus: #{facesContext.attributes['org.richfaces.FocusManager.submittedFocus'].clientId}
         </h:form>
 
-        <r:log level="debug" mode="console" />
+        <a4j:log level="debug" mode="console" />
 
     </ui:define>
 </ui:composition>

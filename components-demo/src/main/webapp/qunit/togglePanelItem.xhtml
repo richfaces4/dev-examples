@@ -22,7 +22,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:r="http://richfaces.org">
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich">
 
 <body>
     <ui:composition template="/templates/template.xhtml">
@@ -41,22 +41,22 @@
             <p>Page</p>
 
             <h:form id="f" style="border:blue solid thin;">
-                <r:togglePanel id="panel" activeItem="name1" switchType="client" lang="en">
-                    <r:togglePanelItem id="name1" name="name1">hello name1</r:togglePanelItem>
-                    <r:togglePanelItem id="name2" name="name2">hello name2</r:togglePanelItem>
-                    <r:togglePanelItem id="name3" name="name3">hello name3</r:togglePanelItem>
-                </r:togglePanel>
+                <rich:togglePanel id="panel" activeItem="name1" switchType="client" lang="en">
+                    <rich:togglePanelItem id="name1" name="name1">hello name1</rich:togglePanelItem>
+                    <rich:togglePanelItem id="name2" name="name2">hello name2</rich:togglePanelItem>
+                    <rich:togglePanelItem id="name3" name="name3">hello name3</rich:togglePanelItem>
+                </rich:togglePanel>
 
                 <h:outputLink>
-                    <r:toggleControl targetPanel="panel" targetItem="name1" event="click" />
+                    <rich:toggleControl targetPanel="panel" targetItem="name1" event="click" />
                 name1
             </h:outputLink>
                 <h:outputLink>
-                    <r:toggleControl targetPanel="panel" targetItem="name2" event="click" />
+                    <rich:toggleControl targetPanel="panel" targetItem="name2" event="click" />
                 name2
             </h:outputLink>
                 <h:outputLink>
-                    <r:toggleControl targetPanel="panel" targetItem="name3" event="click" />
+                    <rich:toggleControl targetPanel="panel" targetItem="name3" event="click" />
                 name3
             </h:outputLink>
             </h:form>

@@ -26,17 +26,18 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:r="http://richfaces.org">
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="title" value="Param" />
     <!-- content -->
     <ui:define name="content">
         <h:form id="form">
-            <r:commandButton value="Set param value to Alex" render="param">
-                <r:param name="username" value="Alex" assignTo="#{commandBean.name}" />
-            </r:commandButton>
-            <r:commandButton value="Get screen width" render="param2">
-                <r:param name="username" value="screen.width" assignTo="#{commandBean.name}" noEscape="true" />
-            </r:commandButton>
+            <a4j:commandButton value="Set param value to Alex" render="param">
+                <a4j:param name="username" value="Alex" assignTo="#{commandBean.name}" />
+            </a4j:commandButton>
+            <a4j:commandButton value="Get screen width" render="param2">
+                <a4j:param name="username" value="screen.width" assignTo="#{commandBean.name}" noEscape="true" />
+            </a4j:commandButton>
         </h:form>
         <h:panelGroup id="param">
             <h:outputText value="Name is: #{commandBean.name}" />
