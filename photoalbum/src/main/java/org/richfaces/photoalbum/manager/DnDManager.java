@@ -69,7 +69,7 @@ public class DnDManager implements DropListener {
     Event<ImageEvent> imageEvent;
 
     /**
-     * Listenet, that invoked during drag'n'drop process. Only registered users can drag images.
+     * Listener, that is invoked during drag'n'drop process. Only registered users can drag images.
      *
      * @param event - event, indicated that drag'n'drop started
      */
