@@ -2,7 +2,7 @@ package org.richfaces.photoalbum.bean;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,14 +17,10 @@ import org.richfaces.photoalbum.util.Preferred;
  *
  * @author mpetrov
  */
-
 @Named
-@ApplicationScoped
+@SessionScoped
 public class UserBean implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @Inject
@@ -33,6 +29,7 @@ public class UserBean implements Serializable {
     private User user;
 
     private String username;
+
     public String getUsername() {
         return username;
     }
@@ -57,7 +54,6 @@ public class UserBean implements Serializable {
         user = (User) em.createNamedQuery(Constants.USER_LOGIN_QUERY).setParameter(Constants.USERNAME_PARAMETER, username)
             .setParameter(Constants.PASSWORD_PARAMETER, passwordHash).getSingleResult();
         logged = user != null;
-
         return user;
     }
 
@@ -91,5 +87,10 @@ public class UserBean implements Serializable {
     public void reset() {
         username = "";
         password = "";
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" + "user=" + user + ", logged=" + logged + '}';
     }
 }

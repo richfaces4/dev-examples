@@ -55,16 +55,17 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author Andrey Markhel
  */
-
 @NamedQueries({
-        @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
-        @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
-        @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
-        @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
-        @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login") })
+    @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
+    @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
+    @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
+    @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
+    @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login") })
 @Entity
 @SessionScoped
-@Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = "login"), @UniqueConstraint(columnNames = "email") })
+@Table(name = "User", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "login"),
+    @UniqueConstraint(columnNames = "email") })
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -220,7 +221,6 @@ public class User implements Serializable {
     }
 
     // ---------------------------Business methods
-
     /**
      * This method add shelf to collection of shelves, belongs to user
      *
@@ -392,5 +392,10 @@ public class User implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "firstName=" + firstName + ", secondName=" + secondName + ", email=" + email + ", login=" + login + ", sex=" + sex + ", hasAvatar=" + hasAvatar + '}';
     }
 }
