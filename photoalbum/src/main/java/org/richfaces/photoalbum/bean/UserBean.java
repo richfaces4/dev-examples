@@ -25,6 +25,7 @@ package org.richfaces.photoalbum.bean;
 import static org.richfaces.photoalbum.event.Events.ADD_ERROR_EVENT;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;

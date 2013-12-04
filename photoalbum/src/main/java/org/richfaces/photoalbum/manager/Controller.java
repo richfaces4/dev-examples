@@ -141,7 +141,7 @@ public class Controller implements Serializable {
             return;
         }
         if (!canViewShelf(shelf)) {
-            showError(Constants.HAVENT_ACCESS);
+            showError("", Constants.HAVENT_ACCESS);
             return;
         }
         model.resetModel(NavigationEnum.SHELF_EDIT, shelf.getOwner(), shelf, null, null, null);
@@ -163,7 +163,7 @@ public class Controller implements Serializable {
      */
     public void showAlbum(Album album) {
         if (!canViewAlbum(album)) {
-            showError(Constants.HAVENT_ACCESS);
+            showError("", Constants.HAVENT_ACCESS);
             return;
         }
         // FileManager fileManager = (FileManager) Contexts.getApplicationContext().get(Constants.FILE_MANAGER_COMPONENT);
@@ -221,7 +221,7 @@ public class Controller implements Serializable {
         // Clear not-saved comment in editor
         pushEvent(Events.CLEAR_EDITOR_EVENT);
         if (!canViewImage(image)) {
-            showError(Constants.HAVENT_ACCESS);
+            showError("", Constants.HAVENT_ACCESS);
             return;
         }
         // Check, that image was not deleted recently
@@ -292,7 +292,7 @@ public class Controller implements Serializable {
      */
     public void showShelf(Shelf shelf) {
         if (!fileManager.isDirectoryPresent(shelf.getPath())) {
-            showError(Constants.SHELF_RECENTLY_DELETED_ERROR);
+            showError("", Constants.SHELF_RECENTLY_DELETED_ERROR);
             model.resetModel(NavigationEnum.ANONYM, shelf.getOwner(), null, null, null, null);
             return;
         }
@@ -314,7 +314,7 @@ public class Controller implements Serializable {
             return;
         }
         if (!album.isOwner(getLoggedUser())) {
-            showError(Constants.HAVENT_ACCESS);
+            showError("", Constants.HAVENT_ACCESS);
             return;
         }
         model.resetModel(NavigationEnum.ALBUM_EDIT, album.getOwner(), album.getShelf(), album, null, album.getImages());
@@ -622,7 +622,7 @@ public class Controller implements Serializable {
     }
 
     private boolean canViewShelf(Shelf shelf) {
-        return shelf != null && shelf.isOwner(getLoggedUser() || shelf.isShared());
+        return shelf != null && shelf.isOwner(getLoggedUser()) || shelf.isShared();
     }
 
     private boolean canViewAlbum(Album album) {

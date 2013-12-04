@@ -37,7 +37,7 @@
             <h:panelGroup styleClass="content_box" layout="block">
                 <ui:include src="#{model.mainArea.template}" />
             </h:panelGroup>
-            <ui:include src="includes/misc/errorPanel.xhtml" />
+<!--             <ui:include src="includes/misc/errorPanel.xhtml" /> -->
         </h:panelGroup>
         <a4j:jsFunction name="sho" render="helpPanel" oncomplete="#{rich:component('helpPanel')}.show();">
             <a4j:param name="param1" assignTo="#{help.page}" />

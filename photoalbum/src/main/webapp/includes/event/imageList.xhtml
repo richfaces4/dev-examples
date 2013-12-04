@@ -43,10 +43,10 @@
         <rich:dataGrid value="#{eventAlbumsHelper.images}" var="image" columns="5">
             <a4j:outputPanel rendered="#{image.localImage}">
                 <a4j:commandLink actionListener="#{controller.showImage(image.image)}" render="mainArea, treePanel">
-                    <rich:mediaOutput id="locImg" element="img" createContent="#{imageLoader.paintImage}"
+                    <a4j:mediaOutput id="locImg" element="img" createContent="#{imageLoader.paintImage}"
                         style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"
                         value="#{fileManager.transformPath(image.thumbUrl, '_small200')}">
-                    </rich:mediaOutput>
+                    </a4j:mediaOutput>
                 </a4j:commandLink>
             </a4j:outputPanel>
 

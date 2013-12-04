@@ -21,18 +21,18 @@
   -->
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:rich="http://richfaces.org/rich"
-                xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <a4j:region>
         <rich:toolbar height="37" styleClass="main-menu-toolbar" id="menu">
             <rich:toolbarGroup styleClass="main-menu-toolbar-content">
                 <a4j:outputPanel ajaxRendered="true" rendered="#{userBean.loggedIn}">
                     <h:panelGroup>
-                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11"
-                                        height="15" alt="" styleClass="main-menu-separator-img" />
-                        <h:panelGroup id="my_album_div_id" layout="block"
-                                      styleClass="main-menu-icons-outer-div" style="cursor:default;">
+                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11" height="15" alt=""
+                            styleClass="main-menu-separator-img" />
+                        <h:panelGroup id="my_album_div_id" layout="block" styleClass="main-menu-icons-outer-div"
+                            style="cursor:default;">
                             <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
                                 <h:graphicImage value="/img/shell/informer_photo.png" width="31" height="23" alt="" border="0" />
                             </h:panelGroup>
@@ -41,32 +41,12 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                                styleClass="main-menu-icons-backgroung-img" />
+                                    styleClass="main-menu-icons-backgroung-img" />
                             </h:panelGroup>
                         </h:panelGroup>
 
-                    <a4j:outputPanel ajaxRendered="true" layout="block" rendered="#{userBean.loggedIn}"
-                        styleClass="main-menu-icons-outer-div">
-                        <a4j:ajax listener="#{controller.selectShelves()}" event="click" render="mainArea, treePanel" />
-                        <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
-                            <h:graphicImage value="/img/shell/informer_shelf.png" width="31" height="23" alt="" border="0" />
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
-                            <h:outputText value="#{fn:length(userBean.user.shelves)}" />
-                        </h:panelGroup>
-                        <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
-                            <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                styleClass="main-menu-icons-backgroung-img" />
-                        </h:panelGroup>
-                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                            <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
-                                    value="#{messages['my_album_shelves']}" />
-                            </span>
-                        </rich:tooltip>
-                    </a4j:outputPanel>
-
-                        <a4j:outputPanel ajaxRendered="true" layout="block"
-                                         styleClass="main-menu-icons-outer-div">
+                        <a4j:outputPanel ajaxRendered="true" layout="block" rendered="#{userBean.loggedIn}"
+                            styleClass="main-menu-icons-outer-div">
                             <a4j:ajax listener="#{controller.selectShelves()}" event="click" render="mainArea, treePanel" />
                             <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
                                 <h:graphicImage value="/img/shell/informer_shelf.png" width="31" height="23" alt="" border="0" />
@@ -76,7 +56,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                                styleClass="main-menu-icons-backgroung-img" />
+                                    styleClass="main-menu-icons-backgroung-img" />
                             </h:panelGroup>
                             <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
                                 <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
@@ -85,8 +65,26 @@
                             </rich:tooltip>
                         </a4j:outputPanel>
 
-                        <a4j:outputPanel ajaxRendered="true" layout="block"
-                                         styleClass="main-menu-icons-outer-div">
+                        <a4j:outputPanel ajaxRendered="true" layout="block" styleClass="main-menu-icons-outer-div">
+                            <a4j:ajax listener="#{controller.selectShelves()}" event="click" render="mainArea, treePanel" />
+                            <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
+                                <h:graphicImage value="/img/shell/informer_shelf.png" width="31" height="23" alt="" border="0" />
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
+                                <h:outputText value="#{fn:length(userBean.user.shelves)}" />
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
+                                <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
+                                    styleClass="main-menu-icons-backgroung-img" />
+                            </h:panelGroup>
+                            <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
+                                        value="#{messages['my_album_shelves']}" />
+                                </span>
+                            </rich:tooltip>
+                        </a4j:outputPanel>
+
+                        <a4j:outputPanel ajaxRendered="true" layout="block" styleClass="main-menu-icons-outer-div">
                             <a4j:ajax listener="#{controller.selectAlbums()}" event="click" render="mainArea, treePanel" />
                             <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
                                 <h:graphicImage value="/img/shell/informer_album.png" width="31" height="23" alt="" border="0" />
@@ -96,7 +94,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                                styleClass="main-menu-icons-backgroung-img" />
+                                    styleClass="main-menu-icons-backgroung-img" />
                             </h:panelGroup>
                             <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
                                 <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
@@ -105,8 +103,7 @@
                             </rich:tooltip>
                         </a4j:outputPanel>
 
-                        <a4j:outputPanel ajaxRendered="true" layout="block"
-                                         styleClass="main-menu-icons-outer-div">
+                        <a4j:outputPanel ajaxRendered="true" layout="block" styleClass="main-menu-icons-outer-div">
                             <a4j:ajax listener="#{controller.selectImages()}" event="click" render="mainArea, treePanel" />
                             <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
                                 <h:graphicImage value="/img/shell/informer_photo.png" width="31" height="23" alt="" border="0" />
@@ -116,7 +113,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                                styleClass="main-menu-icons-backgroung-img" />
+                                    styleClass="main-menu-icons-backgroung-img" />
                             </h:panelGroup>
                             <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
                                 <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
@@ -125,53 +122,53 @@
                             </rich:tooltip>
                         </a4j:outputPanel>
 
-                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11"
-                                        height="15" alt="" styleClass="main-menu-separator-img" />
+                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11" height="15" alt=""
+                            styleClass="main-menu-separator-img" />
 
                         <h:panelGroup id="add_icons_div_id" layout="block" style="float: left;">
-                            <a4j:commandLink actionListener="#{shelfManager.createShelf()}"
-                                             render="shelfModalPanel" oncomplete="#{rich:component('shelfModalPanel')}.show()" execute="@this">
+                            <a4j:commandLink actionListener="#{shelfManager.createShelf()}" render="shelfModalPanel"
+                                oncomplete="#{rich:component('shelfModalPanel')}.show()" execute="@this">
                                 <h:graphicImage value="/img/shell/icon_add_shelf.png" width="37" height="23" alt=""
-                                                styleClass="main-menu-add-icons-img" />
+                                    styleClass="main-menu-add-icons-img" />
                                 <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
-                                            value="#{messages['add_shelf']}" />
+                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400">
+                                        <h:outputText value="#{messages['add_shelf']}" />
                                     </span>
                                 </rich:tooltip>
                             </a4j:commandLink>
-                            <a4j:commandLink disabled="#{!controller.isUserHaveShelves()}"
-                                             data="#{albumManager.errorInCreate}"
-                                             actionListener="#{albumManager.createAlbum(model.selectedShelf, true)}"
-                                             oncomplete="if(!event.data)#{rich:component('albumModalPanel')}.show()"
-                                             render="albumModalPanel"
-                                             execute="@this">
-                                <h:graphicImage rendered="#{controller.isUserHaveShelves()}" value="/img/shell/icon_add_album.png"
-                                                width="37" height="23" alt="" styleClass="main-menu-add-icons-img" />
+                            <a4j:commandLink disabled="#{!controller.isUserHaveShelves()}" data="#{albumManager.errorInCreate}"
+                                actionListener="#{albumManager.createAlbum(model.selectedShelf, true)}"
+                                oncomplete="if(!event.data)#{rich:component('albumModalPanel')}.show()" render="albumModalPanel"
+                                execute="@this">
+                                <h:graphicImage rendered="#{controller.isUserHaveShelves()}"
+                                    value="/img/shell/icon_add_album.png" width="37" height="23" alt=""
+                                    styleClass="main-menu-add-icons-img" />
                                 <h:graphicImage rendered="#{!controller.isUserHaveShelves()}"
-                                                value="/img/shell/icon_add_album_disabled.jpg" style="cursor:default;" width="37" height="23"
-                                                alt="" styleClass="main-menu-add-icons-img" />
+                                    value="/img/shell/icon_add_album_disabled.jpg" style="cursor:default;" width="37"
+                                    height="23" alt="" styleClass="main-menu-add-icons-img" />
                                 <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
-                                            value="#{messages['add_album']}" />
+                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400">
+                                        <h:outputText value="#{messages['add_album']}" />
                                     </span>
                                 </rich:tooltip>
                             </a4j:commandLink>
                             <a4j:commandLink disabled="#{!controller.isUserHaveAlbums()}"
-                                             actionListener="#{controller.showFileUpload()}" render="mainArea" execute="@this">
-                                <h:graphicImage rendered="#{controller.isUserHaveAlbums()}" value="/img/shell/icon_add_photo.png"
-                                                width="37" height="23" alt="" styleClass="main-menu-add-icons-img" />
+                                actionListener="#{controller.showFileUpload()}" render="mainArea" execute="@this">
+                                <h:graphicImage rendered="#{controller.isUserHaveAlbums()}"
+                                    value="/img/shell/icon_add_photo.png" width="37" height="23" alt=""
+                                    styleClass="main-menu-add-icons-img" />
                                 <h:graphicImage rendered="#{!controller.isUserHaveAlbums()}"
-                                                value="/img/shell/icon_add_photo_disabled.jpg" style="cursor:default;" width="37" height="23"
-                                                alt="" styleClass="main-menu-add-icons-img" />
+                                    value="/img/shell/icon_add_photo_disabled.jpg" style="cursor:default;" width="37"
+                                    height="23" alt="" styleClass="main-menu-add-icons-img" />
                                 <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
-                                            value="#{messages['album_addImage']}" />
+                                    <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400">
+                                        <h:outputText value="#{messages['album_addImage']}" />
                                     </span>
                                 </rich:tooltip>
                             </a4j:commandLink>
                         </h:panelGroup>
-                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11"
-                                        height="15" alt="" styleClass="main-menu-separator-img" />
+                        <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11" height="15" alt=""
+                            styleClass="main-menu-separator-img" />
                     </h:panelGroup>
                     <h:graphicImage rendered="#{userBean.loggedIn}" value="/img/shell/general_panelbar_bullet.gif" width="11"
                         height="15" alt="" styleClass="main-menu-separator-img" />
@@ -196,7 +193,8 @@
                             <a4j:param assignTo="#{facebookBean.albumIds}" name="albumIds" />
                         </a4j:jsFunction>
 
-                        <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}" render="@form" />
+                        <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}"
+                            render="@form" />
 
                         <a4j:jsFunction name="gGetUserInfo">
                             <a4j:param assignTo="#{googlePlusBean.userInfoJSON}" name="response" />
@@ -206,9 +204,10 @@
                             <a4j:param assignTo="#{googlePlusBean.userAlbumsJSON}" name="albums" />
                         </a4j:jsFunction>
 
-                        <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}" render="@form" />
+                        <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}"
+                            render="@form" />
                     </h:panelGroup>
-                </h:panelGroup>
+                </a4j:outputPanel>
             </rich:toolbarGroup>
         </rich:toolbar>
     </a4j:region>
