@@ -764,10 +764,7 @@ h1 {
     cursor: pointer;
 }
 
-.image-scroller { /*	position: relative;
-	top: 0;
-	left: 0; 
-	width: 100% !important;*/
+.image-scroller {
     clear: both;
 }
 
@@ -778,16 +775,22 @@ h1 {
 
 .image-scroller-left-arrow {
     position: absolute;
-    top: 80px;
-    left: -35px;
+    top: 40px;
+    left: -60px;
     z-index: 2;
 }
 
 .image-scroller-right-arrow {
     position: absolute;
-    top: 80px;
-    right: -33px;
+    top: 40px;
+    right: -60px;
     z-index: 2;
+}
+
+span.image-scroller {
+    top: -20px;
+    display: block;
+    position: absolute;
 }
 
 .search-div {
@@ -1452,4 +1455,12 @@ h1 {
 #calendar .rf-cal-c {
     width: 24px;
     height: 22px;
+}
+
+.inplaceInput .rf-ii-lbl, .inplaceInput .rf-ii-fld{
+    font-size: 175% !important;
+}
+
+.searchFor {
+    white-space: nowrap;
 }

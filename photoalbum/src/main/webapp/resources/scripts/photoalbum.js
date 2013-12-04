@@ -51,18 +51,35 @@ function applyModalPanelEffect(panelId, /* effectFunc, */params) {
 }
 
 /*
- * // fix IE6 footer position function kickLayout(selector) {
- *
- * if(Richfaces && Richfaces.browser.isIE6) { var element = jQuery(selector);
- * if(element) { element.css('zoom','normal').css('zoom','100%'); } } }
- */
+ // fix IE6 footer position
+ function kickLayout(selector) {
 
-function show(id) {
-    document.getElementById(id).style.display = 'inherit';
+ if(Richfaces && Richfaces.browser.isIE6) {
+ var element = jQuery(selector);
+ if(element) {
+ element.css('zoom','normal').css('zoom','100%');
+ }
+ }
+
+ } */
+
+function toJQObject(idEndsOrJQObject) {
+    if ((typeof idEndsOrJQObject) == "object") {
+        return idEndsOrJQObject;
+    }
+    return $("[id$='" + idEndsOrJQObject + "']");
 }
 
-function hide(id) {
-    document.getElementById(id).style.display = 'none';
+function show(idEndsOrJQObject) {
+    toJQObject(idEndsOrJQObject).fadeIn();
+}
+
+function hide(idEndsOrJQObject) {
+    toJQObject(idEndsOrJQObject).fadeOut();
+}
+
+function select(idEndsOrJQObject) {
+    toJQObject(idEndsOrJQObject).fadeTo('slow', 0.50);
 }
 
 /*

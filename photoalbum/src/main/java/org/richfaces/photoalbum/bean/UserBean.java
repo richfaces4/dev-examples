@@ -25,9 +25,8 @@ package org.richfaces.photoalbum.bean;
 import static org.richfaces.photoalbum.event.Events.ADD_ERROR_EVENT;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -47,12 +46,9 @@ import org.richfaces.photoalbum.util.Preferred;
  */
 
 @Named
-@ApplicationScoped
+@SessionScoped
 public class UserBean implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @Inject
@@ -182,5 +178,10 @@ public class UserBean implements Serializable {
 
     public void setFbPhotoUrl(String fbPhotoUrl) {
         this.fbPhotoUrl = fbPhotoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" + "user=" + user + ", logged=" + logged + '}';
     }
 }

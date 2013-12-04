@@ -21,17 +21,17 @@
   -->
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
 
-    <rich:popupPanel id="loginPanel" domElementAttachment="parent" rendered="#{not userBean.loggedIn}"
-        onshow="applyModalPanelEffect('loginPanel', {delay: 0.5, afterFinish: function(){$('loginPanelForm:username').focus();}})"
-        styleClass="login-panel" show="#{authenticator.loginFailed}" autosized="true">
+    <rich:popupPanel id="loginPanel" domElementAttachment="parent"
+                     onshow="$('input[id$=username]').delay(600).focus();"
+                     styleClass="login-panel" show="#{authenticator.loginFailed}" width="400" height="150" autosized="true">
         <f:facet name="header">#{messages['login.login']}</f:facet>
         <f:facet name="controls">
             <h:panelGroup id="loginPanelHideControl">
                 <h:graphicImage value="/img/modal/close.png" style="cursor:pointer" id="loginPanelhidelink"
-                    onclick="#{rich:component('loginPanel')}.hide();" />
+                                onclick="#{rich:component('loginPanel')}.hide();" />
             </h:panelGroup>
         </f:facet>
 

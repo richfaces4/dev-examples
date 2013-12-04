@@ -21,8 +21,8 @@
   -->
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
 
     <rich:popupPanel id="albumModalPanel" width="450" height="140" domElementAttachment="parent">
         <f:facet name="header">
@@ -46,10 +46,10 @@
                             </h:panelGroup>
 
                             <rich:inplaceSelect minSelectWidth="370" listWidth="400" required="true" id="shelf"
-                                value="#{albumManager.album.shelf}" openOnEdit="true" viewClass="inplace"
-                                changedClass="inplace" changedHoverClass="hover" viewHoverClass="hover" converter="shelfConverter">
+                                                value="#{albumManager.album.shelf}" openOnEdit="true" viewClass="inplace"
+                                                changedClass="inplace" changedHoverClass="hover" viewHoverClass="hover" converter="shelfConverter">
                                 <f:selectItems value="#{userBean.user.shelves}" var="shelf" itemLabel="#{shelf.name}"
-                                    itemValue="#{shelf}" itemDescription="#{shelf.description}" />
+                                               itemValue="#{shelf}" itemDescription="#{shelf.description}" />
                             </rich:inplaceSelect>
                             <rich:messages for="shelf" />
                             <h:panelGroup style="text-align:right;" layout="block">
@@ -57,7 +57,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block">
                                 <h:inputText id="albumName" value="#{albumManager.album.name}"
-                                    onkeydown="if (event.keyCode == 13) { jQuery(&quot; .album input[type='image']&quot;).click(); return false; }" />
+                                    onkeydown="if (event.keyCode == 13) {$('.album input[type=image]').click(); return false; }" />
                                 <rich:message styleClass="required" for="albumName" />
                             </h:panelGroup>
                         </h:panelGrid>
@@ -68,14 +68,15 @@
                     <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto">
                         <h:panelGroup id="albumFirstButton" layout="block">
                             <richx:commandButton data="#{albumManager.validationSuccess}" value="#{messages['album.store']}"
-                                actionListener="#{albumManager.addAlbum(albumManager.album)}" id="storebutton"
-                                render="treePanel, mainArea, menu" execute="form2" oncomplete="if(event.data)#{rich:component('albumModalPanel')}.hide()"
-                                styleClass="album" />
+                                                 actionListener="#{albumManager.addAlbum(albumManager.album)}" id="storebutton"
+                                                 render="treePanel, mainArea, menu" execute="form2" oncomplete="if(event.data)#{rich:component('albumModalPanel')}.hide()"
+                                                 styleClass="album" />
                         </h:panelGroup>
                         <h:panelGroup id="albumSecondButton" layout="block">
                             <richx:commandButton type="button" id="cancelbutton"
-                                onclick="#{rich:component('albumModalPanel')}.hide(); return false;"
-                                value="#{messages['album.cancel']}" execute="@none"/>
+                                                 onclick="#{rich:component('albumModalPanel')}.hide();
+                                                     return false;"
+                                                 value="#{messages['album.cancel']}" execute="@none"/>
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:panelGroup>

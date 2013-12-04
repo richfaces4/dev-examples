@@ -50,17 +50,17 @@
                 …
             &lt;rich:graphValidator&gt;
                     …
-                &lt;h:inputText id=&quot;userLoginName&quot; value=&quot;#{'#{'}authenticator.user.login}&quot; styleClass=&quot;reg-table-input&quot; /&gt;                  
+                &lt;h:inputText id=&quot;userLoginName&quot; value=&quot;#{'#{'}authenticator.user.login}&quot; styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userLoginName&quot; styleClass=&quot;required&quot; /&gt;
-                        
+
                 &lt;h:inputSecret required=&quot;true&quot; id=&quot;userPassword&quot; value=&quot;#{'#{'}authenticator.user.password}&quot;
                     styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userPassword&quot; styleClass=&quot;required&quot; /&gt;
-            
+
                 &lt;h:inputSecret required=&quot;true&quot; id=&quot;userConfirmPassword&quot;
-                    value=&quot;#{'#{'}authenticator.user.confirmPassword}&quot; styleClass=&quot;reg-table-input&quot; /&gt;           
+                    value=&quot;#{'#{'}authenticator.user.confirmPassword}&quot; styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userConfirmPassword&quot; styleClass=&quot;required&quot; /&gt;
-                    …                                             
+                    …
                 &lt;a4j:outputPanel id=&quot;userCalendar&quot; layout=&quot;block&quot;&gt;
                     &lt;rich:calendar id=&quot;userBirthDate&quot; enableManualInput=&quot;true&quot; value=&quot;#{'#{'}authenticator.user.birthDate}&quot;
                         cellWidth=&quot;24px&quot; cellHeight=&quot;22px&quot; inputClass=&quot;reg-table-input&quot;&gt;
@@ -70,9 +70,9 @@
                 &lt;rich:messages for=&quot;userBirthDate&quot; styleClass=&quot;required&quot; /&gt;
                     …
             &lt;/rich:graphValidator&gt;
-            
+
             &lt;richx:commandButton actionListener=&quot;#{'#{'}authenticator.register(authenticator.user)}&quot;
-                render=&quot;mainArea,treePanel,searchForm, headerPanel&quot; value=&quot;#{'#{'}messages['user.register']}&quot; /&gt;        
+                render=&quot;mainArea,treePanel,searchPanel,headerPanel&quot; value=&quot;#{'#{'}messages['user.register']}&quot; /&gt;
             &lt;richx:commandButton actionListener=&quot;#{'#{'}controller.cancelRegistration()}&quot; render=&quot;mainArea&quot; immediate=&quot;true&quot;
                 value=&quot;#{'#{'}messages['user.cancel']}&quot; /&gt;
         </pre>

@@ -58,16 +58,18 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @NamedQueries({
-        @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
-        @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
-        @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
-        @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
-        @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login"),
-        @NamedQuery(name = "user-fb-login", query = "select u from User u where u.fbId = :fbId"),
-        @NamedQuery(name = "user-gplus-login", query = "select u from User u where u.gPlusId = :gPlusId") })
+    @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
+    @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
+    @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
+    @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
+    @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login"),
+    @NamedQuery(name = "user-fb-login", query = "select u from User u where u.fbId = :fbId"),
+    @NamedQuery(name = "user-gplus-login", query = "select u from User u where u.gPlusId = :gPlusId") })
 @Entity
 @SessionScoped
-@Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = "login"), @UniqueConstraint(columnNames = "email") })
+@Table(name = "User", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "login"),
+    @UniqueConstraint(columnNames = "email") })
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -430,5 +432,10 @@ public class User implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "firstName=" + firstName + ", secondName=" + secondName + ", email=" + email + ", login=" + login + ", sex=" + sex + ", hasAvatar=" + hasAvatar + '}';
     }
 }
