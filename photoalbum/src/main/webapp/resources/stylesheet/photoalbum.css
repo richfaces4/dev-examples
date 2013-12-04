@@ -1036,7 +1036,7 @@ span.image-scroller {
     position: relative;
     width: 103px !important;
     height: 28px !important;
-    background-image: url('/richfaces-photoalbum/img/shell/button.png');
+    background-image: url('../img/shell/button.png');
 }
 
 .buttons-body-image {
@@ -1246,7 +1246,7 @@ span.image-scroller {
     width: 103px !important;
     height: 28px !important;
     cursor: pointer;
-    background-image: url('/richfaces-photoalbum/img/shell/button.png');
+    background-image: url('../img/shell/button.png');
     background-position: 0 0;
 }
 
@@ -1434,11 +1434,11 @@ span.image-scroller {
 }
 
 .rf-trn-hnd-colps {
-    background: url(/richfaces-photoalbum/img/shell/tree_icon_plus.png) no-repeat center !important;
+    background: url(../img/shell/tree_icon_plus.png) no-repeat center !important;
 }
 
 .rf-trn-hnd-exp {
-    background: url(/richfaces-photoalbum/img/shell/tree_icon_minus.png) no-repeat center !important;
+    background: url(../img/shell/tree_icon_minus.png) no-repeat center !important;
 }
 
 .rf-trn-lbl:hover {
