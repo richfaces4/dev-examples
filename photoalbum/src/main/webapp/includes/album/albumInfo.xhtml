@@ -1,3 +1,25 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
     xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:a4j="http://richfaces.org/a4j"
@@ -8,8 +30,6 @@
                 <h:outputText value="#{album.name}" rendered="#{!controller.isUserAlbum(album)}" />
                 <rich:inplaceInput selectOnEdit="false" value="#{album.name}" rendered="#{controller.isUserAlbum(album)}"
                     inputWidth="570" />
-                    <!-- <a4j:ajax event="viewactivated" render="mainArea, treePanel"
-					action="#{albumManager.editAlbum(album, true)}" /> -->
             </h1>
             <h:panelGroup layout="block" style="margin-bottom:15px;" styleClass="additional-info-text">
                 <h:outputText value="#{messages['created.album']}" />
@@ -32,7 +52,8 @@
         <h:panelGroup>
             <a4j:commandLink rendered="#{album.owner.id == userBean.user.id}" value="#{messages['album.edit']} "
                 actionListener="#{controller.startEditAlbum(album)}" render="mainArea" execute="@this" />
-            <a4j:commandLink rendered="#{album.owner.id == userBean.user.id}" value="#{messages['album.delete']} "
+            <h:outputText value=" #{messages['delimiter']} " rendered="#{album.owner.id == userBean.user.id}" />
+            <a4j:commandLink rendered="#{album.owner.id == userBean.user.id}" value="#{messages['album.delete']}"
                 actionListener="#{confirmationPopupHelper.initAlbumData(confirmationPopupHelper.deleteAlbum,messages['album.delete.confirm'],album)}"
                 oncomplete="#{rich:component('confirmation')}.show()" render="confirmation" execute="@this" />
         </h:panelGroup>

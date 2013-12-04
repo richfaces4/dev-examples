@@ -1,10 +1,10 @@
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (1,  'Andrey', 'Markhel', 'amarkhel@exadel.com',  'amarkhel',       '8cb2237d0679ca88db6464eac60da96345513964',  '1985-01-08', 0, false, true);
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (2,  'Nick',   'Curtis',  'nkurtis@iba.com',      'Viking',         '8cb2237d0679ca88db6464eac60da96345513964',  '1978-01-08', 1, false, true);
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (3,  'John',   'Smith',   'jsmith@jboss.com',     'Noname',         '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, true);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (1,  '1', '1', 'Andrey', 'Markhel', 'amarkhel@exadel.com',  'amarkhel',       '8cb2237d0679ca88db6464eac60da96345513964',  '1985-01-08', 0, false, true);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (2,  '1', '1', 'Nick',   'Curtis',  'nkurtis@iba.com',      'Viking',         '8cb2237d0679ca88db6464eac60da96345513964',  '1978-01-08', 1, false, true);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (3,  '1', '1', 'John',   'Smith',   'jsmith@jboss.com',     'Noname',         '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, true);
 
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (10, 'John',   'Smith',   'jsmith_10@jboss.com',     'user_for_add',   '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (11, 'John',   'Smith',   'jsmith_11@jboss.com',     'user_for_del',   '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
-INSERT INTO User(id, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (12, 'John',   'Smith',   'jsmith_12@jboss.com',     'user_for_dnd',  '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (10, '1', '1', 'John',   'Smith',   'jsmith_10@jboss.com',     'user_for_add',   '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (11, '1', '1', 'John',   'Smith',   'jsmith_11@jboss.com',     'user_for_del',   '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
+INSERT INTO User(id, fbId, gplusId, firstname, secondname, email, login, passwordHash, birthdate, sex, hasAvatar, preDefined) VALUES (12, '1', '1', 'John',   'Smith',   'jsmith_12@jboss.com',     'user_for_dnd',  '8cb2237d0679ca88db6464eac60da96345513964',  '1970-01-08', 1, false, false);
 
 INSERT INTO Shelf(id, name, description, owner_id, created, shared) VALUES (1, 'Nature',       'Nature pictures',        1, '2009-12-18', true);
 INSERT INTO Shelf(id, name, description, owner_id, created, shared) VALUES (2, 'Sport & Cars', 'Sport & Cars pictures',  1, '2009-12-18', true);
@@ -393,4 +393,18 @@ INSERT INTO Image(id, name, path, description, created, album_id, cameraModel, w
   INSERT INTO Image_MetaTag(IMAGETAGS_ID, IMAGES_ID) VALUES(12306, 123029);
 UPDATE Album set coveringImage_id=123027 where id = 1230;
 
+-------------------------------
+-- Event Categories and Events
+-------------------------------
 
+INSERT INTO EventCategory(description) VALUES('Concerts');
+INSERT INTO EventCategory(description) VALUES('Meetings');
+
+INSERT INTO Event(id, name, description, CATEGORY_ID) VALUES (1, 'Rock concert of the decade', 'Get ready to rock your night away with this megaconcert extravaganza from 10 of the biggest rock stars of the 80''s', 1);
+INSERT INTO Event(id, name, description, CATEGORY_ID) VALUES (2, 'Shane''s Sock Puppets', 'This critically acclaimed masterpiece will take you on an emotional rollercoaster the likes of which you''ve never experienced.', 1);
+
+INSERT INTO Shelf(id, name, description, owner_id, event_id, created, shared) VALUES (10, 'Rock concert of the decade', 'event shelf', 1, 1, '2009-12-18', true);
+INSERT INTO Shelf(id, name, description, owner_id, event_id, created, shared) VALUES (11, 'Shane''s Sock Puppets', 'event shelf', 1, 2, '2009-12-18', true);
+
+UPDATE Event set shelf_id = 10 where id = 1;
+UPDATE Event set shelf_id = 11 where id = 2;

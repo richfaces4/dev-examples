@@ -1,3 +1,25 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
     xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:a4j="http://richfaces.org/a4j"
@@ -33,8 +55,6 @@
                         value="#{fileManager.transformPath(model.selectedImage.fullPath, '_medium')}" mimeType="image/jpeg">
                         <rich:dragSource rendered="#{controller.isUserImage(model.selectedImage)}" render="mainArea, treePanel"
                             id="dragSource" dragIndicator="dragIndicator" type="image" dragValue="#{model.selectedImage}" />
-                        <!-- <rich:dndParam id="dragParam" name="label" value="#{model.selectedImage.name}" /> -->
-                        <!-- not supported in RF 4 -->
                         <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip"
                             rendered="#{model.selectedImage.showMetaInfo}">
                             <span style="white-space: nowrap; display: block; text-align: left;"> <h:outputText
@@ -50,11 +70,7 @@
                     <h:panelGroup layout="block" styleClass="buttons-body" style="margin : 26px 0px 0px 0px;">
                         <h:link outcome="/includes/directImage.xhtml" value="#{messages['original_size']}" target="_blank"
                             styleClass="buttons-body-text-div">
-                            <!-- <s:link value="#{messages['original_size']}" styleClass="buttons-body-text-div"
-                            view="/includes/directImage.xhtml" propagation="join" style="color : #ffffff; text-decoration:none;"
-                            target="_blank"> -->
                             <f:param name="imageId" value="#{model.selectedImage.id}" />
-                            <!-- </s:link> -->
                         </h:link>
                     </h:panelGroup>
                 </td>
@@ -67,6 +83,8 @@
                         actionListener="#{confirmationPopupHelper.initImagePopup(confirmationPopupHelper.deleteImage,messages['image.delete.confirm'],model.selectedImage)}"
                         render="confirmation" rendered="#{controller.isUserImage(model.selectedImage)}"
                         oncomplete="#{rich:component('confirmation')}.show()" execute="@this" />
+                    <richx:commandButton value="Share" rendered="#{controller.isUserImage(model.selectedImage)}" execute="@this"
+                        styleClass="fb-comm-button" render="albumsPopupPanel" />
                 </td>
             </tr>
         </table>
@@ -85,4 +103,5 @@
         value="#{model.selectedImage.album.owner.login}" />
     <br />
     <br />
+    <ui:include src="/includes/image/albumPanel.xhtml" />
 </ui:composition>

@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- * Rich Faces - Natural Ajax for Java Server Faces (JSF)
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007 Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.manager;
 
@@ -24,13 +25,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.photoalbum.domain.Album;
+import org.richfaces.photoalbum.domain.Event;
 import org.richfaces.photoalbum.domain.Image;
 import org.richfaces.photoalbum.domain.MetaTag;
 import org.richfaces.photoalbum.domain.Shelf;
@@ -44,7 +45,7 @@ import org.richfaces.photoalbum.event.SimpleEvent;
 /**
  * This class represent 'M' in MVC pattern. It is storage to application flow related data such as selectedAlbum, image,
  * mainArea to preview etc..
- *
+ * 
  * @author Andrey Markhel
  */
 
@@ -64,19 +65,21 @@ public class Model implements Serializable {
 
     private MetaTag selectedTag;
 
+    private Event selectedEvent;
+
     private NavigationEnum mainArea = NavigationEnum.ANONYM;
 
     private List<Image> images;
 
     @Inject
     @Any
-    Event<SimpleEvent> event;
+    javax.enterprise.event.Event<SimpleEvent> event;
     @Inject
     MetaTag metatag;
 
     /**
      * This method invoked after the almost user actions, to prepare properly data to show in the UI.
-     *
+     * 
      * @param mainArea - next Area to show(determined in controller)
      * @param selectedUser - user, that was selected(determined in controller)
      * @param selectedShelf - shelf, that was selected(determined in controller)
@@ -95,12 +98,19 @@ public class Model implements Serializable {
         this.images = images;
     }
 
+    public void resetModel(NavigationEnum mainArea, User selectedUser, Shelf selectedShelf, Album selectedAlbum,
+        Image selectedImage, List<Image> images, Event selectedEvent) {
+
+        resetModel(mainArea, selectedUser, selectedShelf, selectedAlbum, selectedImage, images);
+        this.selectedEvent = selectedEvent;
+    }
+
     /**
      * This method observes <code> Constants.UPDATE_MAIN_AREA_EVENT </code>event and invoked after the user actions, that not
      * change model, but change area to preview
-     *
+     * 
      * @param mainArea - next Area to show
-     *
+     * 
      */
     public void setMainArea(@Observes @EventType(Events.UPDATE_MAIN_AREA_EVENT) NavEvent ne) {
         if (this.mainArea != null && this.mainArea.equals(NavigationEnum.FILE_UPLOAD)) {
@@ -112,15 +122,14 @@ public class Model implements Serializable {
     /**
      * This method observes <code> Constants.UPDATE_SELECTED_TAG_EVENT </code>event and invoked after the user click on any
      * metatag.
-     *
+     * 
      * @param selectedTag - clicked tag
-     *
+     * 
      */
     public void setSelectedTag(MetaTag tag) {
         this.selectedTag = tag;
     }
 
-    // Might not work properly due to injection
     public void observeSelectedTag(@Observes @EventType(Events.UPDATE_SELECTED_TAG_EVENT) SimpleEvent se) {
         this.selectedTag = metatag;
     }
@@ -171,5 +180,13 @@ public class Model implements Serializable {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public Event getSelectedEvent() {
+        return selectedEvent;
+    }
+
+    public void setSelectedEvent(Event selectedEvent) {
+        this.selectedEvent = selectedEvent;
     }
 }

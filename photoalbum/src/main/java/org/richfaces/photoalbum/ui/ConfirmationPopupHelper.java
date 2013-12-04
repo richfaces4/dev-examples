@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.ui;
 
@@ -61,16 +62,10 @@ public class ConfirmationPopupHelper implements Serializable {
 
     private Actions action;
 
-    // @In @Out
-    //@Inject
     private Image image;
 
-    // @In @Out
-    //@Inject
     private Shelf shelf;
 
-    // @In @Out
-    //@Inject
     private Album album;
 
     @Inject
@@ -107,7 +102,7 @@ public class ConfirmationPopupHelper implements Serializable {
     private void deleteImage() {
         imageManager.deleteImage(this.image);
     }
-    
+
     private void deleteShelf() {
         shelfManager.deleteShelf(this.shelf);
     }
@@ -129,7 +124,7 @@ public class ConfirmationPopupHelper implements Serializable {
     }
 
     public void doAction() {
-        switch(action) {
+        switch (action) {
             case DELETE_SHELF:
                 deleteShelf();
                 break;

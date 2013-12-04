@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 /*
  * Image.java
@@ -46,6 +47,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
@@ -58,7 +62,7 @@ import org.richfaces.photoalbum.service.ActionTools;
 @NamedQueries({
         @NamedQuery(name = "tag-byName", query = "select m from MetaTag m where m.tag =:tag"),
         @NamedQuery(name = "tag-popular", query = "select new org.richfaces.photoalbum.domain.MetaTag(m.id, m.tag) from MetaTag m join m.images img group by m.id, m.tag order by count(img) desc"),
-        @NamedQuery(name = "user-shelves", query = "select distinct s from Shelf s where (s.shared = true and s.owner.preDefined = true) order by s.name"),
+        @NamedQuery(name = "user-shelves", query = "select distinct s from Shelf s where (s.shared = true and s.owner.preDefined = true and s.event = null) order by s.name"),
         @NamedQuery(name = "image-exist", query = "select i from Image i where i.path = :path and i.album = :album"),
         @NamedQuery(name = "image-countIdenticalImages", query = "select count(i) from Image i where i.path like :path and i.album = :album"),
         @NamedQuery(name = "tag-suggest", query = "select m from MetaTag m where lower(m.tag) like :tag") }) // cannot use "... like lower(:tag)"
@@ -69,16 +73,19 @@ import org.richfaces.photoalbum.service.ActionTools;
  * @author Andrey Markhel
  */
 @Entity
+@JsonAutoDetect(fieldVisibility=Visibility.NONE, getterVisibility=Visibility.NONE, isGetterVisibility=Visibility.NONE)
 public class Image implements Serializable {
 
     private static final long serialVersionUID = -7042878411608396483L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
     private Long id;
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonProperty
     private List<MetaTag> imageTags = new ArrayList<MetaTag>();
 
     @OrderBy(clause = "date asc")
@@ -96,6 +103,7 @@ public class Image implements Serializable {
     @NotEmpty
     @Length(min = 3, max = 200)
     @Column(length = 255, nullable = false)
+    @JsonProperty
     private String name;
 
     @Transient
@@ -108,6 +116,7 @@ public class Image implements Serializable {
     private String path;
 
     @Column(length = 255)
+    @JsonProperty
     private String cameraModel;
 
     private int height;
@@ -123,6 +132,7 @@ public class Image implements Serializable {
     @NotEmpty
     @Length(min = 3)
     @Column(length = 1024)
+    @JsonProperty
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)

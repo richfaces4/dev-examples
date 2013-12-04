@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.service;
 
@@ -70,6 +71,8 @@ public class Constants {
     public static final String FILE_PROCESSING_ERROR = "Error processing occurred during the upload";
     public static final String FILE_SAVE_ERROR = "Error occurred during saving the image to the disk";
     public static final String SEARCH_NO_WHERE_OPTIONS_ERROR = "You must specify where to execute the search ";
+    public static final String EVENT_SAVING_ERROR = " An error occurred while saving the event to the database";
+    public static final String EVENT_DELETING_ERROR = " An error occurred while deleting the event to the database";
     // Outcomes
     public static final String LOGOUT_OUTCOME = "logout";
     public static final String REGISTER_OUTCOME = "register";
@@ -99,8 +102,6 @@ public class Constants {
     public static final int DEFAULT_IMAGE_SIZEVALUE = 120;
     public static final String SLASH = "/";
     public static final String DOT = ".";
-    public static final String JPEG = "jpeg";
-    public static final String JPG = "JPG";
     public static final String UPLOAD_ROOT_COMPONENT_NAME = "uploadRoot";
     public static final String UPLOAD_ROOT_PATH_COMPONENT_NAME = "uploadRootPath";
     public static final int INITIAL_DELAY = 4000;
@@ -119,6 +120,8 @@ public class Constants {
     // Service -constants
     public static final String USER_EXIST_QUERY = "user-exist";
     public static final String USER_LOGIN_QUERY = "user-login";
+    public static final String USER_FB_LOGIN_QUERY = "user-fb-login";
+    public static final String USER_GPLUS_LOGIN_QUERY = "user-gplus-login";
     public static final String LOGIN_PARAMETER = "login";
     public static final String PASSWORD_PARAMETER = "password";
     public static final String USERNAME_PARAMETER = "username";

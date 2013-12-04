@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.manager;
 
@@ -32,25 +33,29 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.annotation.PostConstruct;
+import javax.activation.MimetypesFileTypeMap;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.richfaces.model.UploadedFile;
 import org.richfaces.photoalbum.domain.Album;
 import org.richfaces.photoalbum.domain.Image;
 import org.richfaces.photoalbum.domain.User;
 import org.richfaces.photoalbum.event.AlbumEvent;
+import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
 import org.richfaces.photoalbum.event.Events;
 import org.richfaces.photoalbum.event.ImageEvent;
 import org.richfaces.photoalbum.event.ShelfEvent;
 import org.richfaces.photoalbum.event.SimpleEvent;
 import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.util.FileHandler;
 import org.richfaces.photoalbum.util.FileUtils;
 import org.richfaces.photoalbum.util.ImageDimension;
+
+import com.google.common.io.Files;
 
 @Named
 @ApplicationScoped
@@ -65,15 +70,17 @@ public class FileManager {
     @Inject
     User user;
 
+    @Inject
+    @EventType(Events.ADD_ERROR_EVENT)
+    Event<ErrorEvent> error;
+
     /**
      * Method, that invoked at startup application. Used to determine where application will be write new images. This method
      * set uploadRoot field - it is reference to the file where images will be copied.
      */
-    @PostConstruct
-    public void create() {
-        // uploadRoot = (File) Component.getInstance(Constants.UPLOAD_ROOT_COMPONENT_NAME, Scope.APPLICATION);
-        // uploadRootPath = (String) Component.getInstance(Constants.UPLOAD_ROOT_PATH_COMPONENT_NAME, ScopeType.APPLICATION);
-    }
+    // @PostConstruct
+    // public void create() {
+    // }
 
     /**
      * This method used to get reference to the file with the specified relative path to the uploadRoot field
@@ -91,6 +98,7 @@ public class FileManager {
                 }
                 return result;
             } catch (IOException e) {
+                error.fire(new ErrorEvent("no file found"));
                 result = null;
             }
             return result;
@@ -106,9 +114,10 @@ public class FileManager {
      * @param path - relative path of the album directory
      *
      */
-    //@AdminRestricted
     public void onAlbumDeleted(@Observes @EventType(Events.ALBUM_DELETED_EVENT) AlbumEvent ae) {
-        if (user == null) return;
+        if (user == null) {
+            return;
+        }
         deleteDirectory(ae.getPath());
     }
 
@@ -119,9 +128,10 @@ public class FileManager {
      * @param shelf - deleted shelf
      * @param path - relative path of the shelf directory
      */
-    //@AdminRestricted
     public void onShelfDeleted(@Observes @EventType(Events.SHELF_DELETED_EVENT) ShelfEvent se) {
-        if (user == null) return;
+        if (user == null) {
+            return;
+        }
         deleteDirectory(se.getPath());
     }
 
@@ -132,7 +142,6 @@ public class FileManager {
      * @param user - deleted user
      * @param path - relative path of the user directory
      */
-    // Might not work properly due to injection
     public void onUserDeleted(@Observes @EventType(Events.USER_DELETED_EVENT) SimpleEvent se) {
         deleteDirectory(user.getPath());
     }
@@ -172,6 +181,7 @@ public class FileManager {
             InputStream is = new FileInputStream(avatarData);
             return writeFile(avatarPath, is, "", Constants.AVATAR_SIZE, true);
         } catch (IOException ioe) {
+            error.fire(new ErrorEvent("error saving avatar"));
             return false;
         }
     }
@@ -183,9 +193,10 @@ public class FileManager {
      * @param image - deleted image
      * @param path - relative path of the image file
      */
-    //@AdminRestricted
     public void deleteImage(@Observes @EventType(Events.IMAGE_DELETED_EVENT) ImageEvent ie) {
-        if (user == null) return;
+        if (user == null) {
+            return;
+        }
         for (ImageDimension d : ImageDimension.values()) {
             FileUtils.deleteFile(getFileByPath(transformPath(ie.getPath(), d.getFilePostfix())));
         }
@@ -198,15 +209,24 @@ public class FileManager {
      * @param tempFilePath - absolute path to uploaded image
      * @throws IOException
      */
-    //@AdminRestricted
-    public boolean addImage(String fileName, UploadedFile file) throws IOException {
-        if (user == null) return false;
+    public boolean addImage(String fileName, FileHandler fileHandler) throws IOException {
+        if (user == null) {
+            return false;
+        }
         createDirectoryIfNotExist(fileName);
         for (ImageDimension d : ImageDimension.values()) {
-            if (!writeFile(fileName, file.getInputStream(), d.getFilePostfix(), d.getX(), true)) {
+            try {
+                InputStream in = fileHandler.getInputStream();
+                if (!writeFile(fileName, in, d.getFilePostfix(), d.getX(), true)) {
+                    return false;
+                }
+                in.close();
+            } catch (IOException ioe) {
+                error.fire(new ErrorEvent("Error", "error saving image: " + ioe.getMessage()));
                 return false;
             }
         }
+
         return true;
     }
 
@@ -277,6 +297,13 @@ public class FileManager {
                 FileUtils.deleteFile(file2);
             }
         }
+
+        try {
+            Files.createParentDirs(file2);
+        } catch (IOException ioe) {
+            error.fire(new ErrorEvent("Error moving file", ioe.getMessage()));
+        }
+
         file.renameTo(file2);
     }
 
@@ -309,10 +336,12 @@ public class FileManager {
 
     private boolean writeFile(String newFileName, InputStream inputStream, String pattern, int size, boolean includeUploadRoot) {
         BufferedImage bsrc = null;
+        String format = MimetypesFileTypeMap.getDefaultFileTypeMap().getContentType(newFileName).split("/")[1];
         try {
             // Read file form disk
-            bsrc = FileUtils.bitmapToImage(inputStream, Constants.JPG);
+            bsrc = FileUtils.bitmapToImage(inputStream, format);
         } catch (IOException e1) {
+            error.fire(new ErrorEvent("Error", "error reading file<br/>" + e1.getMessage()));
             return false;
         }
         int resizedParam = bsrc.getWidth() > bsrc.getHeight() ? bsrc.getWidth() : bsrc.getHeight();
@@ -334,8 +363,9 @@ public class FileManager {
             newFileName, pattern);
         try {
             // save to disk
-            FileUtils.imageToBitmap(bdest, dest, Constants.JPG);
+            FileUtils.imageToBitmap(bdest, dest, format);
         } catch (IOException ex) {
+            error.fire(new ErrorEvent("Error", "error saving image to disc: " + ex.getMessage()));
             return false;
         }
         return true;
