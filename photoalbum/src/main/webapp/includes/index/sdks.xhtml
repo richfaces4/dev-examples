@@ -55,4 +55,17 @@
     <!-- Google+ -->
     <script src="https://apis.google.com/js/client.js"></script>
 
+    <script>
+        socialLogout = function() {
+            // Facebook
+            FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                FB.logout(function() {});
+              } 
+             });
+                
+            // Google+
+            gapi.auth.signOut();
+        }
+    </script>
 </ui:composition>

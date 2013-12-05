@@ -56,7 +56,7 @@
                                              actionListener="#{userBean.reset()}"
                                              oncomplete="#{rich:component('loginPanel')}.show();" />
                             <a4j:commandLink rendered="#{userBean.loggedIn}" action="#{authenticator.logout()}"
-                                value="#{messages['menu.logout']}" execute="@this" render="@form" />
+                                value="#{messages['menu.logout']}" execute="@this" render="@form" oncomplete="socialLogout();"/>
                         </a4j:region>
                     </h:panelGroup>
 
