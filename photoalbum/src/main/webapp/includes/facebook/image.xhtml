@@ -23,7 +23,7 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <ui:param name="image" value="#{facebookAlbumCache.currentImage}" />
     <ui:param name="album" value="#{facebookAlbumCache.currentAlbum}" />
     <!-- imageHeaderInfo -->
@@ -71,7 +71,7 @@
             </a4j:repeat>
         </h:panelGrid>
 
-        <h:panelGrid columns="3">
+        <h:panelGrid columns="3" rendered="#{fn:length(facebookAlbumCache.currentImages) > 5}">
             <h:panelGroup styleClass="image-scroller-left-arrow"
                 style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');">
                 <h:graphicImage styleClass="ie6transparency" value="img/shell/arr_left.png"
