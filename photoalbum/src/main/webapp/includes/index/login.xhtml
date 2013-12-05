@@ -26,7 +26,7 @@
 
     <rich:popupPanel id="loginPanel" domElementAttachment="parent"
                      onshow="$('input[id$=username]').delay(600).focus();"
-                     styleClass="login-panel" show="#{authenticator.loginFailed}" width="400" height="150" autosized="true">
+                     styleClass="login-panel" show="#{authenticator.loginFailed}" autosized="true">
         <f:facet name="header">#{messages['login.login']}</f:facet>
         <f:facet name="controls">
             <h:panelGroup id="loginPanelHideControl">

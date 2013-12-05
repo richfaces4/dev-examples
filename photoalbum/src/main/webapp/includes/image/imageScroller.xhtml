@@ -57,38 +57,8 @@
                 <h:graphicImage id="scrollToPrevious" styleClass="ie6transparency" value="img/shell/arr_left.png"
                                 onclick="select('scrollToPrevious');#{rich:component('scroller')}.previous()" />
             </h:panelGroup>
-            <rich:dataScroller page="#{controller.page}" styleClass="image-scroller" for="repeat"
+            <rich:dataScroller styleClass="image-scroller" for="repeat"
                                render="repeat, imagesTable" boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
-                <!--
-                <f:facet name="pages">
-                    <h:outputText />
-                </f:facet>
-                <f:facet name="fastforward">
-                    <h:panelGroup styleClass="image-scroller-right-arrow"
-                        style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');">
-                        <h:graphicImage value="img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56"
-                            border="0" />
-                    </h:panelGroup>
-                </f:facet>
-                <f:facet name="fastforward_disabled">
-                    <h:panelGroup styleClass="image-scroller-right-arrow"
-                        style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right_dis.png',sizingMethod='scale');">
-                        <h:graphicImage styleClass="ie6transparency" value="img/shell/arr_right_dis.png" />
-                    </h:panelGroup>
-                </f:facet>
-                <f:facet name="fastrewind">
-                    <h:panelGroup styleClass="image-scroller-left-arrow"
-                        style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');">
-                        <h:graphicImage styleClass="ie6transparency" value="img/shell/arr_left.png" />
-                    </h:panelGroup>
-                </f:facet>
-                <f:facet name="fastrewind_disabled">
-                    <h:panelGroup styleClass="image-scroller-left-arrow"
-                        style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left_dis.png',sizingMethod='scale');">
-                        <h:graphicImage styleClass="ie6transparency" value="img/shell/arr_left_dis.png" />
-                    </h:panelGroup>
-                </f:facet>
-                -->
             </rich:dataScroller>
             <a4j:commandLink rendered="#{help.isShowHelp()}" style="position: absolute; right: -65px; top: 80px;"
                              actionListener="#{help.navigateTo('/includes/help/imageScrollerHelp.xhtml')}"

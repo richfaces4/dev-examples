@@ -64,13 +64,9 @@ public class Controller implements Serializable {
 
     private static final long serialVersionUID = 5656562187249324512L;
 
-    // @In @Out
     @Inject
     Model model;
 
-    // @In(scope = ScopeType.SESSION)
-    // @Inject
-    // User user;
     @Inject
     @Preferred
     private User loggedUser;
@@ -179,29 +175,29 @@ public class Controller implements Serializable {
 
     public void showFBAlbum(String albumId) {
         fac.setCurrentAlbumId(albumId);
-        model.resetModel(NavigationEnum.FB_ALBUM_PREVIEW, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.FB_ALBUM_PREVIEW, getLoggedUser(), null, null, null, null);
     }
 
     public void showFbImage(String imageId) {
         fac.setCurrentImageId(imageId);
-        model.resetModel(NavigationEnum.FB_IMAGE_PREVIEW, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.FB_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
 
     public void showFbShelf() {
-        model.resetModel(NavigationEnum.FB_SHELF, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.FB_SHELF, getLoggedUser(), null, null, null, null);
     }
 
     public void showGPlusShelf() {
-        model.resetModel(NavigationEnum.GPLUS_SHELF, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.GPLUS_SHELF, getLoggedUser(), null, null, null, null);
     }
     
     public void showGPlusAlbum() {
-        model.resetModel(NavigationEnum.GPLUS_ALBUM_PREVIEW, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.GPLUS_ALBUM_PREVIEW, getLoggedUser(), null, null, null, null);
     }
     
     public void showGPlusImage(String imageId) {
         gpac.setCurrentImageId(imageId);
-        model.resetModel(NavigationEnum.GPLUS_IMAGE_PREVIEW, loggedUser, null, null, null, null);
+        model.resetModel(NavigationEnum.GPLUS_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
     
     /**
@@ -300,7 +296,7 @@ public class Controller implements Serializable {
     }
 
     public void showEvent(Event event) {
-        model.resetModel(NavigationEnum.EVENT_PREVIEW, loggedUser, null, null, null, null, event);
+        model.resetModel(NavigationEnum.EVENT_PREVIEW, getLoggedUser(), null, null, null, null, event);
         pushEvent(Events.EVENT_DISPLAYED_EVENT);
     }
 
@@ -393,16 +389,16 @@ public class Controller implements Serializable {
     }
 
     public void onEventDeleted(@Observes @EventType(Events.EVENT_DELETED_EVENT) ShelfEvent se) {
-        model.resetModel(NavigationEnum.ANONYM, loggedUser, null, null, null, null, null);
+        model.resetModel(NavigationEnum.ANONYM, getLoggedUser(), null, null, null, null, null);
     }
 
     public void onEventAdded(@Observes @EventType(Events.EVENT_ADDED_EVENT) ShelfEvent se) {
-        model.resetModel(NavigationEnum.EVENT_PREVIEW, loggedUser, null, null, null, null, se.getEvent());
+        model.resetModel(NavigationEnum.EVENT_PREVIEW, getLoggedUser(), null, null, null, null, se.getEvent());
         pushEvent(Events.EVENT_DISPLAYED_EVENT);
     }
 
     public void onEventEdited(@Observes @EventType(Events.EVENT_EDITED_EVENT) ShelfEvent se) {
-        model.resetModel(NavigationEnum.EVENT_PREVIEW, loggedUser, null, null, null, null, se.getEvent());
+        model.resetModel(NavigationEnum.EVENT_PREVIEW, getLoggedUser(), null, null, null, null, se.getEvent());
         pushEvent(Events.EVENT_DISPLAYED_EVENT);
     }
 

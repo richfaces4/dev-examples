@@ -35,7 +35,8 @@
                     <h:panelGroup layout="block" styleClass="slideshow-outerdiv">
                         <a4j:commandLink rendered="#{fn:length(model.images) > 0}"
                                          actionListener="#{slideshow.startSlideshow(model.selectedImage)}" styleClass="slideshow-link"
-                                         render="mainArea, slideShowModalPanel" execute="@this, slideShowModalPanel">
+                                         render="mainArea, slideShowModalPanel" execute="@this, slideShowModalPanel" 
+                                         oncomplete="#{rich:component('slideShowModalPanel')}.show()">
                             <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                             style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
@@ -84,7 +85,7 @@
                         render="confirmation" rendered="#{controller.isUserImage(model.selectedImage)}"
                         oncomplete="#{rich:component('confirmation')}.show()" execute="@this" />
                     <richx:commandButton value="Share" rendered="#{controller.isUserImage(model.selectedImage)}" execute="@this"
-                        styleClass="fb-comm-button" render="albumsPopupPanel" />
+                        styleClass="fb-comm-button" render="albumsPopupPanel" oncomplete="#{rich:component('albumsPopupPanel')}.show()"/>
                 </td>
             </tr>
         </table>

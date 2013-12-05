@@ -25,7 +25,7 @@
     font-size: 11px;
 }
 
-html,body {
+html, body {
     height: 100% !important;
     margin: 0px !important;
     padding: 0px !important;
@@ -61,7 +61,7 @@ html,body {
 }
 
 .user-info-div table tr {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .top-right-menu {
@@ -140,11 +140,11 @@ html,body {
     border: 1px solid #888888 !important;
 }
 
-.avatarUpload .rich-fileupload-ico { /* no direct alternative in RF 4 */
+.avatarUpload .rich-fileupload-ico {/* no direct alternative in RF 4 */
     padding-left: 7px !important;
 }
 
-.avatarUpload .rich-fileupload-toolbar-decor { /* no alt. */
+.avatarUpload .rich-fileupload-toolbar-decor {/* no alt. */
     width: 100% !important;
     background-color: #D7D7D7 !important;
     border-bottom: 0px !important;
@@ -153,7 +153,7 @@ html,body {
     padding: 0px !important;
 }
 
-.avatarUpload .rich-fileupload-ico-add { /* no alt. */
+.avatarUpload .rich-fileupload-ico-add {/* no alt. */
     background-image: none !important;
 }
 
@@ -162,7 +162,7 @@ html,body {
     margin: 0px !important;
 }
 
-.avatarUpload .rich-fileupload-list-decor { /* no alt. */
+.avatarUpload .rich-fileupload-list-decor {/* no alt. */
     width: 100% !important;
     background-color: D7D7D7 !important;
     border-bottom: 0px !important;
@@ -179,7 +179,7 @@ html,body {
 }
 
 /*.avatarUpload .rich-fileupload-button*/
-.avatarUpload .rf-fu-btn-add,.avatarUpload .rf-fu-btn-upl,.avatarUpload .rf-fu-btn-clr {
+.avatarUpload .rf-fu-btn-add, .avatarUpload .rf-fu-btn-upl, .avatarUpload .rf-fu-btn-clr {
     padding: 0px !important;
     background: #B34801 !important;
     border: 1px solid #888888 !important;
@@ -259,7 +259,7 @@ html,body {
     width: 400px !important;
 }
 
-input[type='submit'],input[type='button'],button {
+input[type='submit'], input[type='button'], button {
     background: #414141 !important;
     color: white !important;
     margin: 5px !important;
@@ -286,7 +286,7 @@ input[type='submit'],input[type='button'],button {
 
 .slider-image {
     opacity: 0.1;
-    filter: opacity=10;
+    filter: opacity =10;
 }
 
 .all-images {
@@ -768,7 +768,7 @@ h1 {
     clear: both;
 }
 
-.image-scroller,.image-scroller * {
+.image-scroller, .image-scroller * {
     border-style: none !important;
     background-color: transparent !important;
 }
@@ -1223,8 +1223,8 @@ span.image-scroller {
 }
 
 .top-right-bottom-menu-item > *, .top-right-bottom-menu-item-link > * {
-	display: inline-block;
-	vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .top-right-bottom-menu-item-link a {
@@ -1250,7 +1250,7 @@ span.image-scroller {
     background-position: 0 0;
 }
 
-.photoalbumButton input,.photoalbumButton img {
+.photoalbumButton input, .photoalbumButton img {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -1370,7 +1370,7 @@ span.image-scroller {
     font-weight: bold;
 }
 
-.slideshow-table { /* images have max dimension 600 + 25 reserved for borders etc */
+.slideshow-table {/* images have max dimension 600 + 25 reserved for borders etc */
     width: 625px !important;
     height: 625px !important;
 }
@@ -1392,7 +1392,7 @@ span.image-scroller {
 }
 
 .ie6transparency {
-    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0 );
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
 }
 
 /* dragIndicator */
@@ -1413,7 +1413,7 @@ span.image-scroller {
 }
 
 /* tree */
-.rf-trn,.rf-tr-nd {
+.rf-trn, .rf-tr-nd {
     background: none !important;
     /* don't show connecting lines in the tree */
 }
@@ -1451,16 +1451,82 @@ span.image-scroller {
 }
 
 /* calendar */
-
 #calendar .rf-cal-c {
     width: 24px;
     height: 22px;
 }
 
-.inplaceInput .rf-ii-lbl, .inplaceInput .rf-ii-fld{
+.inplaceInput .rf-ii-lbl, .inplaceInput .rf-ii-fld {
     font-size: 175% !important;
 }
 
 .searchFor {
     white-space: nowrap;
+}
+
+/*  messages */
+
+/* container  */
+.photoalbum-message {
+    padding: 10px;
+}
+
+.photoalbum-message.rf-ntf-err .rf-ntf-ico {
+    background-image: url(../img/modal/ico_warning.png) !important;
+    background-size: 18px 29px;
+}
+
+/* summary heading */
+.photoalbum-message .rf-ntf-sum {
+    font-size: 14px !important;
+}
+
+/* detail */
+.photoalbum-message .rf-ntf-det {
+    font-size: 12px !important;
+}
+
+/* FB button */
+input[type='submit'].fb-button {
+    border-color: #3b5998 !important;
+    background-color: #8b9dc3 !important;
+    color: #f7f7f7 !important;
+    font-weight: bold;
+}
+
+.fb-comm-button {
+    background-image: url(../img/shell/buttonfb.png);
+    font-weight: bold;
+}
+
+.fb-pb > .rf-pb-rmng {
+    max-width: 100px;
+}
+
+/* small buttons */
+.FB-btn-small, .G-btn-small {
+    display: block;
+    height: 32px;
+    width: 32px;
+    float: left;
+    margin: 0px 4px;
+}
+
+.FB-btn-small {
+    background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/j_i0CTUUUEe.png);
+    background-position: -6px -4px;
+}
+
+.G-btn-small {
+    background-image: url(http://ssl.gstatic.com/images/icons/gplus-32.png);
+}
+
+/* disabled buttons */
+span.FB-btn-small, span.G-btn-small {
+    -moz-filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
 }

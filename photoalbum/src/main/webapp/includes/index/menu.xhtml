@@ -45,26 +45,6 @@
                             </h:panelGroup>
                         </h:panelGroup>
 
-                        <a4j:outputPanel ajaxRendered="true" layout="block" rendered="#{userBean.loggedIn}"
-                            styleClass="main-menu-icons-outer-div">
-                            <a4j:ajax listener="#{controller.selectShelves()}" event="click" render="mainArea, treePanel" />
-                            <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
-                                <h:graphicImage value="/img/shell/informer_shelf.png" width="31" height="23" alt="" border="0" />
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
-                                <h:outputText value="#{fn:length(userBean.user.shelves)}" />
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
-                                <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
-                                    styleClass="main-menu-icons-backgroung-img" />
-                            </h:panelGroup>
-                            <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                <span style="white-space: nowrap; display: block; text-align: left; color: #DF6400"> <h:outputText
-                                        value="#{messages['my_album_shelves']}" />
-                                </span>
-                            </rich:tooltip>
-                        </a4j:outputPanel>
-
                         <a4j:outputPanel ajaxRendered="true" layout="block" styleClass="main-menu-icons-outer-div">
                             <a4j:ajax listener="#{controller.selectShelves()}" event="click" render="mainArea, treePanel" />
                             <h:panelGroup layout="block" styleClass="main-menu-icons-left-div">
@@ -170,10 +150,8 @@
                         <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11" height="15" alt=""
                             styleClass="main-menu-separator-img" />
                     </h:panelGroup>
-                    <h:graphicImage rendered="#{userBean.loggedIn}" value="/img/shell/general_panelbar_bullet.gif" width="11"
-                        height="15" alt="" styleClass="main-menu-separator-img" />
 
-                    <h:panelGroup layout="block" rendered="#{userBean.loggedIn}" style="float: left;">
+                    <h:panelGroup layout="block" style="float: left;">
                         <a4j:commandLink disabled="#{userBean.loggedInFB}" styleClass="FB-btn-small"
                             onclick="F.login(fetchUserInfo, fetchFBAlbumIds, showError);" execute="@this">
                             <rich:tooltip rendered="#{not userBean.loggedInFB}">Sign in Facebook</rich:tooltip>
