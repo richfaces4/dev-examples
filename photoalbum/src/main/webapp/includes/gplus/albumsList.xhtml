@@ -34,7 +34,7 @@
 
     <a4j:outputPanel id="googlePlusAlbums" rendered="#{userBean.loggedInGPlus}">
         <br style="clear: both" />
-        <a4j:repeat value="#{albumIds}" var="albumId" rendered="#{userBean.loggedInGPlus}" rowKeyVar="rk">
+        <a4j:repeat value="#{albumIds}" var="albumId" rowKeyVar="rk">
             <h:panelGroup layout="block" styleClass="preview_box_album_120">
 
                 <a4j:outputPanel>

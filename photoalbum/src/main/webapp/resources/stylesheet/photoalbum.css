@@ -1530,3 +1530,11 @@ span.FB-btn-small, span.G-btn-small {
     -o-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+
+*.rf-ds-dis {
+    color: #f7d7d7 !important;
+}
+
+a.rf-ds-btn {
+    color: darkslategray !important;
+}

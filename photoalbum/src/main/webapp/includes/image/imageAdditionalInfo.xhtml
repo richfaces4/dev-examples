@@ -71,8 +71,7 @@
                     </h:panelGroup>
                 </h:panelGroup>
                 <h:panelGroup style="width:600px;overflow-x:auto;" layout="block" styleClass="comment-text">
-                    <!-- this won't be formatted -->
-                    <h:outputText value="#{comment.message}" />
+                    <h:outputText escape="false" value="#{comment.message}" />
                 </h:panelGroup>
             </h:panelGroup>
         </a4j:repeat>
