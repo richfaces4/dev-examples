@@ -86,11 +86,11 @@ public class Controller implements Serializable {
 
     @Inject
     FacebookAlbumCache fac;
-    
+
     @Inject
     GooglePlusAlbumCache gpac;
 
-	private int currentPage = 0;
+    private int currentPage = 0;
 
     /**
      * Hack to prevent of returning 'null' user from @Produces method in UserBean.
@@ -190,16 +190,16 @@ public class Controller implements Serializable {
     public void showGPlusShelf() {
         model.resetModel(NavigationEnum.GPLUS_SHELF, getLoggedUser(), null, null, null, null);
     }
-    
+
     public void showGPlusAlbum() {
         model.resetModel(NavigationEnum.GPLUS_ALBUM_PREVIEW, getLoggedUser(), null, null, null, null);
     }
-    
+
     public void showGPlusImage(String imageId) {
         gpac.setCurrentImageId(imageId);
         model.resetModel(NavigationEnum.GPLUS_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
-    
+
     /**
      * This method invoked in cases, when it is need to clear fileUpload component
      *
@@ -579,7 +579,7 @@ public class Controller implements Serializable {
      *
      */
     public boolean isUserHaveShelves() {
-        return getLoggedUser().getShelves().size() > 0; //loggedUser might be null right after successful login
+        return getLoggedUser().getShelves().size() > 0; // loggedUser might be null right after successful login
     }
 
     /**
@@ -626,8 +626,10 @@ public class Controller implements Serializable {
     }
 
     private boolean canViewImage(Image image) {
-        return image != null && image.getAlbum() != null
-            && (image.getAlbum().getShelf() != null && (image.getAlbum().getShelf().isShared() || image.isOwner(getLoggedUser())));
+        return image != null
+            && image.getAlbum() != null
+            && (image.getAlbum().getShelf() != null && (image.getAlbum().getShelf().isShared() || image
+                .isOwner(getLoggedUser())));
     }
 
     /**
@@ -660,5 +662,16 @@ public class Controller implements Serializable {
             }
         }
         return alb;
+    }
+
+    /*
+     * Checks if selected album belong to selected event
+     */
+    public boolean isEventFacebookAlbum(String id) {
+        return model.getSelectedEvent() != null && model.getSelectedEvent().getFacebookAlbumIds().contains(id);
+    }
+
+    public boolean isEventGoogleAlbum(String id) {
+        return model.getSelectedEvent() != null && model.getSelectedEvent().getGooglePlusAlbumIds().contains(id);
     }
 }

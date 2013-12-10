@@ -40,9 +40,10 @@
         </h:panelGroup>
         <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showEvent(model.selectedEvent)}"
             render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}"
-            rendered="#{model.selectedEvent.facebookAlbumIds.contains(album.getString('id'))}" />
-        <h:outputText value="Facebook" styleClass="additional-info-text"
-            rendered="#{not model.selectedEvent.facebookAlbumIds.contains(album.getString('id'))}" />
+            rendered="#{controller.isEventFacebookAlbum(album.getString('id'))}" />
+        <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showFbShelf()}"
+            render="mainArea, treePanel" value="Facebook" 
+            rendered="#{not controller.isEventGoogleAlbum(album.getString('fullId'))}" />
     </h:panelGrid>
 
     <!-- imageList -->

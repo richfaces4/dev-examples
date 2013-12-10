@@ -40,9 +40,10 @@
         </h:panelGroup>
         <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showEvent(model.selectedEvent)}"
             render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}"
-            rendered="#{model.selectedEvent.googlePlusAlbumIds.contains(album.getString('fullId'))}" />
-        <h:outputText value="Google+" styleClass="additional-info-text"
-            rendered="#{not model.selectedEvent.googlePlusAlbumIds.contains(album.getString('fullId'))}" />
+            rendered="#{controller.isEventGoogleAlbum(album.getString('fullId'))}" />
+        <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showGPlusShelf()}"
+            render="mainArea, treePanel" value="Google+" 
+            rendered="#{not controller.isEventGoogleAlbum(album.getString('fullId'))}" />
     </h:panelGrid>
 
     <!-- imageList -->
