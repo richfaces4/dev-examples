@@ -35,7 +35,7 @@
     <a4j:outputPanel id="fbAlbums" rendered="#{userBean.loggedInFB}">
         <h:outputText value="Albums are loading" rendered="#{not facebookAlbumCache.areAlbumsLoaded(albumIds)}" />
         <br style="clear: both" />
-        <a4j:repeat value="#{albumIds}" var="albumId" rendered="#{userBean.loggedInFB}">
+        <a4j:repeat value="#{albumIds}" var="albumId" rowKeyVar="rk">
             <h:panelGroup layout="block" styleClass="preview_box_album_120">
 
                 <a4j:outputPanel rendered="#{facebookAlbumCache.getImageMap(albumId) != null}">
@@ -44,7 +44,7 @@
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup style="margin-bottom:7px;" layout="block">
                             <a4j:commandLink execute="@this" actionListener="#{controller.showFBAlbum(albumId)}"
-                                render="mainArea">
+                                onclick="select('#{rk}:img')" render="mainArea">
                                 <a4j:param assignTo="#{facebookAlbumCache.currentAlbumId}" value="#{albumId}" />
                                 <h:graphicImage id="img" url="#{facebookAlbumCache.getAlbum(albumId).getString('coverUrl')}"
                                     style="max-width: 120px; max-height: 120px" styleClass="album-cover-image" />

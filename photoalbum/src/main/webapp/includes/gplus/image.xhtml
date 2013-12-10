@@ -53,7 +53,7 @@
                         <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
                             <h:panelGroup layout="block">
-                                <h:graphicImage url="#{img.getString('thumbUrl')}" style="max-width: 80px; max-height: 80px" />
+                                <h:graphicImage id="img" url="#{img.getString('thumbUrl')}" style="max-width: 80px; max-height: 80px" />
                                 <br />
                             </h:panelGroup>
                         </h:panelGrid>
@@ -64,7 +64,7 @@
                             <h:outputText value="#{rk + 1}" />
                         </h:panelGroup>
                     </h:panelGroup>
-                    <a4j:ajax event="click" render="mainImage, imageinfo, imagesTable"
+                    <a4j:ajax event="click" render="mainImage, imageinfo, imagesTable" onbegin="select('#{rk}:img')"
                         listener="#{controller.showGPlusImage(img.getString('id'))}" execute="@this" />
                 </a4j:outputPanel>
             </a4j:repeat>

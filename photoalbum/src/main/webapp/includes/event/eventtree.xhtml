@@ -28,7 +28,7 @@
         <rich:treeModelAdaptor nodes="#{eventManager.eventCategories}">
             <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
                 iconCollapsed="img/shell/tree_icon_shelf.png" iconExpanded="img/shell/tree_icon_shelf.png">
-                <a4j:outputPanel layout="block" style="cursor:pointer;width:200px; overflow-x:hidden;">
+                <a4j:outputPanel layout="block" style="cursor:pointer;width:150px; overflow-x:hidden; text-overflow: ellipsis;">
                     <h:outputText value="#{treeNode.description}" />
                     <rich:tooltip direction="topRight" showDelay="1000">
                         <span style="white-space: nowrap">#{treeNode.description}</span>
@@ -39,7 +39,7 @@
             <rich:treeModelAdaptor nodes="#{eventManager.getEventsByCategory(treeNode)}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
                     iconLeaf="img/shell/tree_icon_album.png">
-                    <a4j:outputPanel layout="block" style="cursor:pointer;width:200px; overflow-x:hidden;">
+                    <a4j:outputPanel layout="block" style="cursor:pointer;width:150px; overflow-x:hidden; text-overflow: ellipsis;">
                         <h:outputText value="#{treeNode.name}" />
                         <a4j:ajax event="click" listener="#{controller.showEvent(treeNode)}" render="mainArea" />
                         <rich:dropTarget acceptedTypes="album" dropValue="#{treeNode}"
