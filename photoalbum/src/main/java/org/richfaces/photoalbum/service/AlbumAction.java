@@ -62,16 +62,18 @@ public class AlbumAction implements IAlbumAction {
      * @throws PhotoAlbumException
      */
     public void deleteAlbum(Album album) throws PhotoAlbumException {
-        Shelf parentShelf = album.getShelf();
+        Shelf parentShelf = em.find(Shelf.class, album.getShelf().getId());
         try {
             if (parentShelf == null) {
                 return;
             }
-            album.setCoveringImage(null);
-            // Remove from previous shelf
-            parentShelf.removeAlbum(album);
+
             em.remove(em.merge(album));
+            parentShelf.removeAlbum(album);
+            em.merge(parentShelf);
             em.flush();
+
+            album.setShelf(parentShelf);
         } catch (Exception e) {
             parentShelf.addAlbum(album);
             throw new PhotoAlbumException(e.getMessage());

@@ -37,6 +37,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -90,13 +91,12 @@ public class Image implements Serializable {
 
     @OrderBy(clause = "date asc")
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "image")
-    // @Fetch(FetchMode.SUBSELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Comment> comments = new ArrayList<Comment>();
 
     @NotNull
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn
     private Album album;
 
     @NotNull

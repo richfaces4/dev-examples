@@ -54,13 +54,14 @@ public class ImageAction implements IImageAction {
      * @throws PhotoAlbumException
      */
     public void deleteImage(Image image) throws PhotoAlbumException {
-        Album parentAlbum = image.getAlbum();
+        Album parentAlbum = em.find(Album.class, image.getAlbum().getId());
         try {
             parentAlbum.removeImage(image);
-            image.setImageTags(null);
-
-            em.remove(em.merge(image));
+            em.merge(parentAlbum);
             em.flush();
+
+            // the image will be sent in an event
+            image.setAlbum(parentAlbum);
         } catch (Exception e) {
             parentAlbum.addImage(image);
             throw new PhotoAlbumException(e.getMessage());

@@ -130,7 +130,7 @@ public class User implements Serializable {
     private Boolean hasAvatar;
 
     @OrderBy(clause = "NAME asc")
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     // @LazyCollection(LazyCollectionOption.EXTRA)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Shelf> shelves = new ArrayList<Shelf>();
@@ -286,7 +286,6 @@ public class User implements Serializable {
             throw new IllegalArgumentException("Null shelf");
         }
         if (shelf.getOwner().getLogin().equals(this.getLogin())) {
-            shelf.setOwner(null);
             shelves.remove(shelf);
         } else {
             throw new IllegalArgumentException("Shelf not belongs to this user!");

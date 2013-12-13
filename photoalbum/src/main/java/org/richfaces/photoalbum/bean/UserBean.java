@@ -37,6 +37,7 @@ import javax.persistence.EntityManager;
 import org.richfaces.photoalbum.domain.User;
 import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
+import org.richfaces.photoalbum.manager.UserManager;
 import org.richfaces.photoalbum.service.Constants;
 import org.richfaces.photoalbum.util.Preferred;
 
@@ -54,6 +55,9 @@ public class UserBean implements Serializable {
 
     @Inject
     EntityManager em;
+
+    @Inject
+    UserManager um;
 
     private User user;
 
@@ -141,9 +145,7 @@ public class UserBean implements Serializable {
 
     public void refreshUser() {
         if (logged) {
-            user = (User) em.createNamedQuery(Constants.USER_LOGIN_QUERY)
-                .setParameter(Constants.USERNAME_PARAMETER, user.getLogin())
-                .setParameter(Constants.PASSWORD_PARAMETER, user.getPasswordHash()).getSingleResult();
+            user = em.find(User.class, user.getId());
             logged = user != null;
         }
     }

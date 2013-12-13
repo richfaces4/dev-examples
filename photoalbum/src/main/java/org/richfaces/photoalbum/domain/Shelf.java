@@ -68,6 +68,7 @@ public class Shelf implements Serializable {
     private String description;
 
     @ManyToOne
+    @JoinColumn
     private User owner;
     
     @OneToOne
@@ -75,7 +76,7 @@ public class Shelf implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Event event;
 
-    @OneToMany(mappedBy = "shelf", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "shelf", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy(clause = "NAME asc")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Album> albums = new ArrayList<Album>();
@@ -219,7 +220,6 @@ public class Shelf implements Serializable {
             throw new IllegalArgumentException("This Shelf not contain this album!");
         }
 
-        // album.setShelf(null);
         albums.remove(album);
     }
 

@@ -355,7 +355,8 @@ public class Controller implements Serializable {
      * @param path - relative path of the album directory
      */
     public void onAlbumDeleted(@Observes @EventType(Events.ALBUM_DELETED_EVENT) AlbumEvent ae) {
-        model.resetModel(NavigationEnum.ALL_ALBUMS, model.getSelectedUser(), model.getSelectedShelf(), null, null, null);
+        loggedUserBean.refreshUser();
+        model.resetModel(NavigationEnum.ALL_ALBUMS, getLoggedUser(), ae.getAlbum().getShelf(), null, null, null);
     }
 
     /**
@@ -365,7 +366,8 @@ public class Controller implements Serializable {
      * @param path - relative path of the shelf directory
      */
     public void onShelfDeleted(@Observes @EventType(Events.SHELF_DELETED_EVENT) ShelfEvent se) {
-        model.resetModel(NavigationEnum.ALL_SHELFS, model.getSelectedUser(), null, null, null, null);
+        loggedUserBean.refreshUser();
+        model.resetModel(NavigationEnum.ALL_SHELFS, getLoggedUser(), null, null, null, null);
     }
 
     /**
@@ -409,8 +411,10 @@ public class Controller implements Serializable {
      * @param path - relative path of the image file
      */
     public void onImageDeleted(@Observes @EventType(Events.IMAGE_DELETED_EVENT) ImageEvent ie) {
-        model.resetModel(NavigationEnum.ALBUM_PREVIEW, model.getSelectedUser(), model.getSelectedShelf(),
-            model.getSelectedAlbum(), null, model.getSelectedAlbum().getImages());
+        loggedUserBean.refreshUser();
+        Album album = ie.getImage().getAlbum();
+        model.resetModel(NavigationEnum.ALBUM_PREVIEW, getLoggedUser(), album.getShelf(),
+            album, null, album.getImages());
     }
 
     /**

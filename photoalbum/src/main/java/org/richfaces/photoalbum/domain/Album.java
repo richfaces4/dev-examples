@@ -71,17 +71,15 @@ public class Album implements Serializable {
     @JsonProperty
     private Long id = null;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album", orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonProperty
     private List<Image> images = new ArrayList<Image>();
 
     @NotNull
     @ManyToOne
     @JoinColumn
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Shelf shelf;
 
     @OneToOne(fetch = FetchType.EAGER)
