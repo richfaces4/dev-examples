@@ -1,0 +1,47 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j">
+    <ui:insert name="header">
+        <h:panelGrid styleClass="shelf-header-table" cellpadding="0">
+            <h:outputText value="#{header}" styleClass="h1-style" />
+        </h:panelGrid>
+    </ui:insert>
+    <a4j:commandLink rendered="#{userBean.loggedIn}" actionListener="#{eventManager.createEvent()}" render="eventModalPanel"
+        oncomplete="#{rich:component('eventModalPanel')}.show()" execute="@this">
+        <h:graphicImage value="/img/shell/icon_add_shelf.png" width="37" height="23" alt="" styleClass="main-menu-add-icons-img" />
+        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+            <h:outputText value="#{messages['add_shelf']}"
+                style="white-space: nowrap; display: block; text-align: left; color: #DF6400" />
+        </rich:tooltip>
+    </a4j:commandLink>
+    <a4j:repeat id="events" value="#{events}" var="event">
+        <h:panelGroup layout="block" style="width:100%; clear:both;" id="eventInfo">
+            <ui:include src="/includes/event/eventInfo.xhtml">
+                <ui:param name="event" value="#{event}" />
+                <ui:param name="showAlbums" value="false" />
+            </ui:include>
+        </h:panelGroup>
+    </a4j:repeat>
+</ui:composition>

@@ -1,0 +1,109 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+
+    <ui:param name="albumsSize"
+        value="#{fn:length(model.selectedEvent.remoteAlbumIds) + fn:length(model.selectedEvent.shelf.albums)}" />
+
+    <h:outputText value="No photos available." rendered="#{albumsSize == 0}" />
+
+    <a4j:outputPanel rendered="#{not userBean.loggedInGPlus and fn:length(model.selectedEvent.googlePlusAlbumIds) > 0 }">
+        <h:outputText
+            value="This event has #{fn:length(model.selectedEvent.googlePlusAlbumIds)} albums on Google+, log in to see them." />
+    </a4j:outputPanel>
+
+    <a4j:outputPanel rendered="#{not userBean.loggedInFB and fn:length(model.selectedEvent.facebookAlbumIds) > 0 }">
+        <h:outputText
+            value="This event has #{fn:length(model.selectedEvent.facebookAlbumIds)} albums on Facebook, log in to see them." />
+    </a4j:outputPanel>
+
+    <a4j:outputPanel id="photoPanel" rendered="#{albumsSize > 0}">
+        <rich:dataGrid value="#{eventAlbumsHelper.images}" var="image" columns="5">
+            <a4j:outputPanel rendered="#{image.localImage}">
+                <a4j:commandLink actionListener="#{controller.showImage(image.image)}" render="mainArea, treePanel">
+                    <a4j:mediaOutput id="locImg" element="img" createContent="#{imageLoader.paintImage}"
+                        style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"
+                        value="#{fileManager.transformPath(image.thumbUrl, '_small200')}">
+                    </a4j:mediaOutput>
+                </a4j:commandLink>
+            </a4j:outputPanel>
+
+            <a4j:outputPanel rendered="#{image.googleImage}">
+                <a4j:commandLink execute="@this" actionListener="#{controller.showGPlusImage(image.id)}" render="mainArea">
+                    <h:graphicImage id="gImg" url="#{image.thumbUrl}" style="max-width: 180px; max-height: 180px"
+                        styleClass="album-cover-image" />
+                    <a4j:param assignTo="#{googlePlusAlbumCache.currentAlbumId}" value="#{image.albumId}" />
+                </a4j:commandLink>
+            </a4j:outputPanel>
+
+            <a4j:outputPanel rendered="#{image.facebookImage}">
+                <a4j:commandLink execute="@this" actionListener="#{controller.showFbImage(image.id)}" render="mainArea">
+                    <h:graphicImage id="fImg" url="#{image.thumbUrl}" style="max-width: 180px; max-height: 180px"
+                        styleClass="album-cover-image" />
+                    <a4j:param assignTo="#{facebookAlbumCache.currentAlbumId}" value="#{image.albumId}" />
+                </a4j:commandLink>
+            </a4j:outputPanel>
+        </rich:dataGrid>
+    </a4j:outputPanel>
+
+    <a4j:jsFunction name="triggerPoll" execute="@this" render="gImagePoll" />
+
+    <a4j:jsFunction name="reloadAlbums" execute="@this" render="photoPanel" />
+
+    <!-- **Album fetching** -->
+    <!-- save the Facebook albums and images into the cache bean, then reload the image list -->
+    <a4j:jsFunction name="setFBimages" execute="@this" oncomplete="loadFBAlbums()">
+        <a4j:param assignTo="#{facebookAlbumCache.all}" name="response" />
+    </a4j:jsFunction>
+
+    <a4j:jsFunction name="loadFBAlbums" action="#{eventAlbumsHelper.loadFBImages}" execute="@this" oncomplete="reloadAlbums()" />
+
+    <!-- if albums aren't loaded, get the albums from Facebook then trigger the poll for G+ albums -->
+    <h:outputScript id="facebookCheck">    
+        $(document).ready(function() {
+            if (#{eventAlbumsHelper.facebookNeedsUpdate}) {
+                F.getAlbumsById( "#{eventAlbumsHelper.fbAlbumIds}", setFBimages, showError);
+            }
+            triggerPoll();
+        });
+    </h:outputScript>
+
+    <!-- Google+ albums -->
+    <!-- load one album, save it into cache and load the next one -->
+    <a4j:jsFunction name="setAlbum" execute="@this" oncomplete="loadNextAlbum();">
+        <a4j:param assignTo="#{googlePlusAlbumCache.albumAndImages}" name="response" />
+    </a4j:jsFunction>
+
+    <a4j:jsFunction name="loadNextAlbum" actionListener="#{eventAlbumsHelper.loadNext}" execute="@this"
+        render="photoPanel, gImagePoll" />
+
+    <a4j:poll interval="500" id="gImagePoll" enabled="#{eventAlbumsHelper.pollEnabled}"
+        ontimer="if(#{eventAlbumsHelper.nextId != '0'}){G.getAlbumAndImages('#{eventAlbumsHelper.nextId}', setAlbum); enablePoll(false);}"
+        execute="@this" render="@this, photoPanel" />
+
+    <a4j:jsFunction name="enablePoll" execute="@this">
+        <a4j:param name="enabled" assignTo="#{eventAlbumsHelper.pollEnabled}" />
+    </a4j:jsFunction>
+</ui:composition>

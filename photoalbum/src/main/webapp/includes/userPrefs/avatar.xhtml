@@ -1,19 +1,41 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <a4j:outputPanel id="avatar">
-        <h:panelGroup rendered="#{userBean.user.hasAvatar and avatarData == null}">
+        <h:panelGroup rendered="#{user.hasAvatar and avatarData == null}">
             <a4j:mediaOutput element="img" createContent="#{imageLoader.paintAvatarImage}" styleClass="additional-info-avatar"
-                value="/#{userBean.user.login}/avatar.jpg" mimeType="image/jpeg" />
+                value="/#{user.login}/avatar.jpg" mimeType="image/jpeg" />
         </h:panelGroup>
         <h:panelGroup rendered="#{avatarData != null}">
             <a4j:mediaOutput styleClass="additional-info-avatar" element="img" createContent="#{imageLoader.paintAvatarImage}"
                 value="#{avatarData.path}" mimeType="image/jpeg" />
         </h:panelGroup>
         <h:panelGroup rendered="#{!user.hasAvatar and avatarData == null}">
-            <h:graphicImage rendered="#{userBean.user.sex.key == null or user.sex.key =='1'}" value="/img/shell/avatar_default.png"
+            <h:graphicImage rendered="#{user.sex.key == null or user.sex.key =='1'}" value="/img/shell/avatar_default.png"
                 width="80" height="80" alt="" style="border:none" />
-            <h:graphicImage rendered="#{userBean.user.sex.key =='0' }" value="/img/shell/avatar_w_default.png" width="80" height="80"
+            <h:graphicImage rendered="#{user.sex.key =='0' }" value="/img/shell/avatar_w_default.png" width="80" height="80"
                 alt="" style="border:none" />
         </h:panelGroup>
     </a4j:outputPanel>

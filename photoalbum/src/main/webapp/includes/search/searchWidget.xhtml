@@ -1,54 +1,101 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
-    <a4j:region>
-        <div class="search-div">
-            <span
-                style="width: 339px; height: 65px; display: inline-block; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/search/search_bg.png', sizingMethod='scale' );">
-                <img style="filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0 ); width: 339px; height: 65px; border: 0"
-                src="img/search/search_bg.png" class="search-img-bg" />
-            </span>
-            <div class="search-label">#{messages['search']}</div>
-            <a4j:commandLink styleClass="search-find-button" id="findLink" value="#{messages['find']}"
-                onclick="hide('searchOptions'); show('openSeach');" render="mainArea"
-                actionListener="#{imageSearchHelper.search}" execute="@region"
-                oncomplete="#{rich:element('searchQuery')}.value=''" />
-            <h:inputText id="searchQuery" required="true" value="#{imageSearchHelper.searchQuery}"
-                onkeydown="if (event.keyCode == 13) { #{rich:element('findLink')}.onclick(); return false; }"
-                styleClass="search-input" />
-            <div id="openSeach" class="search-option-div">
-                <a class="search-option-link" href="#" onclick="show('searchOptions'); hide('openSeach');">#{messages['options']}
-                    <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_down.gif" />
-                </a>
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <a4j:outputPanel id="searchWidget">
+        <a4j:region>
+            <div class="search-div">
+                <span
+                    style="width: 339px; height: 65px; display: inline-block; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/search/search_bg.png', sizingMethod='scale' );">
+                    <img style="filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0 ); width: 339px; height: 65px; border: 0"
+                         src="img/search/search_bg.png" class="search-img-bg" />
+                </span>
+                <div class="search-label">#{messages['search']}</div>
+                <a4j:commandLink id="findLink"
+                                 styleClass="search-find-button"
+                                 value="#{messages['find']}"
+                                 onclick="hide('searchOptions');
+                                         show('openSeach');"
+                                 render="mainArea"
+                                 actionListener="#{imageSearchHelper.search}"
+                                 execute="@region"
+                                 oncomplete="$('[id$=searchQuery]').val('');" />
+                <h:inputText id="searchQuery"
+                             required="true"
+                             value="#{imageSearchHelper.searchQuery}"
+                             onkeydown="if (event.keyCode == 13) {
+                                         $('[id$=findLink]').click();
+                                         return false;
+                                     }"
+                             styleClass="search-input" />
+                <div id="openSeach" class="search-option-div">
+                    <a class="search-option-link"
+                       href="#"
+                       onclick="show('searchOptions');
+                               $('[id$=searchQuery].search-input').focus();
+                               hide('openSeach');">
+                        #{messages['options']}
+                        <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_down.gif" />
+                    </a>
+                </div>
             </div>
-        </div>
-        <div id="searchOptions" class="search-options" style="display: none;">
-            <img height="153" border="0" width="327" class="search-option-img" src="img/search/search_option_bg.png" />
-            <div class="search-options-div1">
-                #{messages['in']}
-                <h:selectBooleanCheckbox rendered="#{userBean.loggedIn}" value="#{imageSearchHelper.seachInMyAlbums}" />
-                <h:outputText value=" #{messages['in_my_albums']}" rendered="#{userBean.loggedIn}" />
-                <h:selectBooleanCheckbox value="#{imageSearchHelper.searchInShared}" />
-                #{messages['in_shared_albums']}
-            </div>
-            <div class="search-options-div2">
-                <div style="float: left; height: 30px">for</div>
-                <div>
+            <div id="searchOptions" class="search-options" style="display: none;">
+                <img height="153" border="0" width="327" class="search-option-img" src="img/search/search_option_bg.png" />
+                <div class="search-options-div1">
+                    #{messages['in']}
+                    <c:if test="#{userBean.loggedIn}">
+                        <span class="searchInMyAlbums">
+                            <h:selectBooleanCheckbox value="#{imageSearchHelper.seachInMyAlbums}"/>
+                            <h:outputText value="#{messages['in_my_albums']}"/>
+                        </span>
+                    </c:if>
+                    <span class="searchInShared">
+                        <h:selectBooleanCheckbox value="#{imageSearchHelper.searchInShared}" />
+                        <h:outputText value="#{messages['in_shared_albums']}"/>
+                    </span>
+                </div>
+                <div class="search-options-div2">
+                    #{messages['for']}
                     <a4j:repeat value="#{imageSearchHelper.options}" var="option">
-                        <span style="white-space: nowrap"> <h:selectBooleanCheckbox value="#{option.selected}" /> <h:outputText
-                                value="#{option.name}  " />
+                        <span class="searchFor">
+                            <h:selectBooleanCheckbox value="#{option.selected}"/>
+                            <h:outputText value="#{option.name}" />
                         </span>
                     </a4j:repeat>
                 </div>
+                <div class="search-hide-options-div">
+                   <a class="search-hide-options-link "
+                      href="#"
+                      onclick="hide('searchOptions');
+                              $('.search-input').focus();
+                              show('openSeach');">
+                        #{messages['hide_options']}
+                       <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_up.gif" />
+                     </a>
+                </div>
             </div>
-            <div class="search-hide-options-div">
-                <a class="search-hide-options-link " href="#" onclick="hide('searchOptions'); show('openSeach');">#{messages['hide_options']}
-                    <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_up.gif" />
-                </a>
-            </div>
-        </div>
-        <!-- <rich:effect name="showSearch" for="searchOptions" type="Appear" params="duration: 0.5"></rich:effect> -->
-        <!-- <rich:effect name="hideSearch" for="searchOptions" type="Fade" params="duration: 0.5"></rich:effect> -->
-        <!-- not implemented in RF 4 -->
-    </a4j:region>
+        </a4j:region>
+    </a4j:outputPanel>
 </ui:composition>

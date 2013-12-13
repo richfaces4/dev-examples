@@ -1,3 +1,25 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j"
     xmlns:rich="http://richfaces.org/rich">
@@ -28,17 +50,17 @@
                 …
             &lt;rich:graphValidator&gt;
                     …
-                &lt;h:inputText id=&quot;userLoginName&quot; value=&quot;#{'#{'}authenticator.user.login}&quot; styleClass=&quot;reg-table-input&quot; /&gt;                  
+                &lt;h:inputText id=&quot;userLoginName&quot; value=&quot;#{'#{'}authenticator.user.login}&quot; styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userLoginName&quot; styleClass=&quot;required&quot; /&gt;
-                        
+
                 &lt;h:inputSecret required=&quot;true&quot; id=&quot;userPassword&quot; value=&quot;#{'#{'}authenticator.user.password}&quot;
                     styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userPassword&quot; styleClass=&quot;required&quot; /&gt;
-            
+
                 &lt;h:inputSecret required=&quot;true&quot; id=&quot;userConfirmPassword&quot;
-                    value=&quot;#{'#{'}authenticator.user.confirmPassword}&quot; styleClass=&quot;reg-table-input&quot; /&gt;           
+                    value=&quot;#{'#{'}authenticator.user.confirmPassword}&quot; styleClass=&quot;reg-table-input&quot; /&gt;
                 &lt;rich:messages for=&quot;userConfirmPassword&quot; styleClass=&quot;required&quot; /&gt;
-                    …                                             
+                    …
                 &lt;a4j:outputPanel id=&quot;userCalendar&quot; layout=&quot;block&quot;&gt;
                     &lt;rich:calendar id=&quot;userBirthDate&quot; enableManualInput=&quot;true&quot; value=&quot;#{'#{'}authenticator.user.birthDate}&quot;
                         cellWidth=&quot;24px&quot; cellHeight=&quot;22px&quot; inputClass=&quot;reg-table-input&quot;&gt;
@@ -48,9 +70,9 @@
                 &lt;rich:messages for=&quot;userBirthDate&quot; styleClass=&quot;required&quot; /&gt;
                     …
             &lt;/rich:graphValidator&gt;
-            
+
             &lt;richx:commandButton actionListener=&quot;#{'#{'}authenticator.register(authenticator.user)}&quot;
-                render=&quot;mainArea,treePanel,searchForm, headerPanel&quot; value=&quot;#{'#{'}messages['user.register']}&quot; /&gt;        
+                render=&quot;mainArea,treePanel,searchPanel,headerPanel&quot; value=&quot;#{'#{'}messages['user.register']}&quot; /&gt;
             &lt;richx:commandButton actionListener=&quot;#{'#{'}controller.cancelRegistration()}&quot; render=&quot;mainArea&quot; immediate=&quot;true&quot;
                 value=&quot;#{'#{'}messages['user.cancel']}&quot; /&gt;
         </pre>

@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- * Rich Faces - Natural Ajax for Java Server Faces (JSF)
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007 Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.util;
 
@@ -39,7 +40,7 @@ import javax.imageio.stream.ImageInputStream;
 
 /**
  * Utility class for operations with file-system
- *
+ * 
  */
 
 public class FileUtils {
@@ -52,7 +53,7 @@ public class FileUtils {
 
     /**
      * Utility method for copying file
-     *
+     * 
      * @param srcFile - source file
      * @param destFile - destination file
      */
@@ -93,7 +94,7 @@ public class FileUtils {
 
     /**
      * Utility method for copying directory
-     *
+     * 
      * @param srcDir - source directory
      * @param dstDir - destination directory
      */
@@ -118,7 +119,7 @@ public class FileUtils {
 
     /**
      * Utility method for delete directory
-     *
+     * 
      * @param dir - directory to delete
      * @param isInitialDelete - determine if the deleting process running at startup or on destroy of application
      * @return true if directory succesfully deleted
@@ -141,8 +142,8 @@ public class FileUtils {
 
         } else {
             if (dir.exists()) {
-                final boolean isFileDeleted = dir.delete();
-                //System.out.println((isFileDeleted ? "OK     " : "ERROR ") + "Delete file '" + dir.getPath() + '\'');
+                // final boolean isFileDeleted = dir.delete();
+                // System.out.println((isFileDeleted ? "OK     " : "ERROR ") + "Delete file '" + dir.getPath() + '\'');
             }
         }
         dir.delete();
@@ -151,7 +152,7 @@ public class FileUtils {
 
     /**
      * Utility method for concatenation names of collection of files
-     *
+     * 
      * @param files - array of strings to concatenate
      * @return concatenated string
      */
@@ -166,7 +167,7 @@ public class FileUtils {
 
     /**
      * Utility method for delete file
-     *
+     * 
      * @param file - file to delete
      */
     public static void deleteFile(File file) {
@@ -177,11 +178,11 @@ public class FileUtils {
 
     /**
      * Utility method to read image from disk and transform image to BufferedImage object
-     *
+     * 
      * @param data - relative path to the image
      * @param format - file prefix of the image
      * @return BufferedImage representation of the image
-     *
+     * 
      */
     public static BufferedImage bitmapToImage(InputStream is, String format) throws IOException {
         final ImageReader rdr = ImageIO.getImageReadersByFormatName(format).next();
@@ -194,12 +195,12 @@ public class FileUtils {
 
     /**
      * Utility method to write BufferedImage object to disk
-     *
+     * 
      * @param image - BufferedImage object to save.
      * @param data - relative path to the image
      * @param format - file prefix of the image
      * @return BufferedImage representation of the image
-     *
+     * 
      */
     public static void imageToBitmap(BufferedImage image, String data, String format) throws IOException {
         final OutputStream inb = new FileOutputStream(data);
@@ -212,7 +213,7 @@ public class FileUtils {
 
     /**
      * Convenience method that returns a scaled instance of the provided {@code BufferedImage}.
-     *
+     * 
      * @param img the original image to be scaled
      * @param targetWidth the desired width of the scaled instance, in pixels
      * @param targetHeight the desired height of the scaled instance, in pixels
@@ -273,9 +274,9 @@ public class FileUtils {
 
     /**
      * Utility method for creation of directory
-     *
+     * 
      * @param directory - directory to create
-     *
+     * 
      */
     public static void addDirectory(File directory) {
         if (directory.exists()) {

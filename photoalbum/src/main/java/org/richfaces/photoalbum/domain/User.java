@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.domain;
 
@@ -57,14 +58,18 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @NamedQueries({
-        @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
-        @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
-        @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
-        @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
-        @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login") })
+    @NamedQuery(name = "user-login", query = "select u from User u where u.login = :username and u.passwordHash = :password"),
+    @NamedQuery(name = "user-comments", query = "select c from Comment c where c.author = :author"),
+    @NamedQuery(name = "user-exist", query = "select u from User u where u.login = :login"),
+    @NamedQuery(name = "email-exist", query = "select u from User u where u.email = :email"),
+    @NamedQuery(name = "user-user", query = "select u from User u where u.login = :login"),
+    @NamedQuery(name = "user-fb-login", query = "select u from User u where u.fbId = :fbId"),
+    @NamedQuery(name = "user-gplus-login", query = "select u from User u where u.gPlusId = :gPlusId") })
 @Entity
 @SessionScoped
-@Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = "login"), @UniqueConstraint(columnNames = "email") })
+@Table(name = "User", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "login"),
+    @UniqueConstraint(columnNames = "email") })
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,6 +77,16 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @NotEmpty
+    @Column(length = 30)
+    private String fbId;
+    
+    @NotNull
+    @NotEmpty
+    @Column(length = 30)
+    private String gPlusId;
 
     @NotNull
     private String passwordHash;
@@ -115,8 +130,8 @@ public class User implements Serializable {
     private Boolean hasAvatar;
 
     @OrderBy(clause = "NAME asc")
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    //@LazyCollection(LazyCollectionOption.EXTRA)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @LazyCollection(LazyCollectionOption.EXTRA)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Shelf> shelves = new ArrayList<Shelf>();
 
@@ -131,6 +146,22 @@ public class User implements Serializable {
     }
 
     // ----------------Getters, Setters
+    public String getFbId() {
+        return fbId;
+    }
+
+    public void setFbId(String fbId) {
+        this.fbId = fbId;
+    }
+
+    public String getgPlusId() {
+        return gPlusId;
+    }
+
+    public void setgPlusId(String gPlusId) {
+        this.gPlusId = gPlusId;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -200,7 +231,16 @@ public class User implements Serializable {
     }
 
     public List<Shelf> getShelves() {
-        return shelves;
+        // return only shelves that aren't bound to events
+        List<Shelf> shelvesWithoutEvents = new ArrayList<Shelf>();
+
+        for (Shelf shelf : shelves) {
+            if (shelf.getEvent() == null) {
+                shelvesWithoutEvents.add(shelf);
+            }
+        }
+
+        return shelvesWithoutEvents;
     }
 
     public Sex getSex() {
@@ -246,7 +286,6 @@ public class User implements Serializable {
             throw new IllegalArgumentException("Null shelf");
         }
         if (shelf.getOwner().getLogin().equals(this.getLogin())) {
-            shelf.setOwner(null);
             shelves.remove(shelf);
         } else {
             throw new IllegalArgumentException("Shelf not belongs to this user!");
@@ -392,5 +431,10 @@ public class User implements Serializable {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (login != null ? login.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "firstName=" + firstName + ", secondName=" + secondName + ", email=" + email + ", login=" + login + ", sex=" + sex + ", hasAvatar=" + hasAvatar + '}';
     }
 }

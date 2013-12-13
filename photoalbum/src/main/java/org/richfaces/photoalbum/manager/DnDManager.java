@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.manager;
 
@@ -25,23 +26,25 @@ package org.richfaces.photoalbum.manager;
  *
  * @author Andrey Markhel
  */
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.event.DropEvent;
 import org.richfaces.event.DropListener;
 import org.richfaces.photoalbum.domain.Album;
+import org.richfaces.photoalbum.domain.Event;
 import org.richfaces.photoalbum.domain.Image;
 import org.richfaces.photoalbum.domain.Shelf;
 import org.richfaces.photoalbum.domain.User;
 import org.richfaces.photoalbum.event.AlbumEvent;
+import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
 import org.richfaces.photoalbum.event.Events;
 import org.richfaces.photoalbum.event.ImageEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
 import org.richfaces.photoalbum.service.Constants;
 import org.richfaces.photoalbum.service.IAlbumAction;
+import org.richfaces.photoalbum.service.IEventAction;
+import org.richfaces.photoalbum.service.PhotoAlbumException;
 import org.richfaces.photoalbum.util.Preferred;
 import org.richfaces.photoalbum.util.Utils;
 
@@ -59,31 +62,34 @@ public class DnDManager implements DropListener {
     IAlbumAction albumAction;
 
     @Inject
+    IEventAction eventAction;
+
+    @Inject
     @EventType(Events.ADD_ERROR_EVENT)
-    Event<SimpleEvent> error;
+    javax.enterprise.event.Event<ErrorEvent> error;
     @Inject
     @EventType(Events.ALBUM_DRAGGED_EVENT)
-    Event<AlbumEvent> albumEvent;
+    javax.enterprise.event.Event<AlbumEvent> albumEvent;
     @Inject
     @EventType(Events.IMAGE_DRAGGED_EVENT)
-    Event<ImageEvent> imageEvent;
+    javax.enterprise.event.Event<ImageEvent> imageEvent;
 
     /**
-     * Listenet, that invoked during drag'n'drop process. Only registered users can drag images.
+     * Listener, that is invoked during drag'n'drop process. Only registered users can drag images.
      *
      * @param event - event, indicated that drag'n'drop started
      */
-    //@AdminRestricted
     public void processDrop(DropEvent dropEvent) {
-        if (user == null) return;
-        //Dropzone dropzone = (Dropzone) dropEvent.getComponent();
+        if (user == null) {
+            return;
+        }
         Object dragValue = dropEvent.getDragValue();
         Object dropValue = dropEvent.getDropValue();
         if (dragValue instanceof Image) {
             // If user drag image
             if (!((Album) dropValue).getOwner().getLogin().equals(user.getLogin())) {
                 // Drag in the album, that not belongs to user
-                error.fire(new SimpleEvent(Constants.DND_PHOTO_ERROR));
+                error.fire(new ErrorEvent("", Constants.DND_PHOTO_ERROR));
                 return;
             }
             handleImage((Image) dragValue, (Album) dropValue);
@@ -91,7 +97,7 @@ public class DnDManager implements DropListener {
             // If user drag album
             if (!((Shelf) dropValue).getOwner().getLogin().equals(user.getLogin())) {
                 // Drag in the shelf, that not belongs to user
-                error.fire(new SimpleEvent(Constants.DND_ALBUM_ERROR));
+                error.fire(new ErrorEvent("", Constants.DND_ALBUM_ERROR));
                 return;
             }
             handleAlbum((Album) dragValue, (Shelf) dropValue);
@@ -107,7 +113,7 @@ public class DnDManager implements DropListener {
         try {
             albumAction.editAlbum(dragValue);
         } catch (Exception e) {
-            error.fire(new SimpleEvent(Constants.ERROR_IN_DB));
+            error.fire(new ErrorEvent("Error:", Constants.ERROR_IN_DB + "<br/>" + e.getMessage()));
             return;
         }
         albumEvent.fire(new AlbumEvent(dragValue, pathOld));
@@ -123,11 +129,35 @@ public class DnDManager implements DropListener {
         try {
             albumAction.editAlbum(dropValue);
         } catch (Exception e) {
-            error.fire(new SimpleEvent(Constants.ERROR_IN_DB));
+            error.fire(new ErrorEvent("Error:", Constants.ERROR_IN_DB + "<br/>" + e.getMessage()));
             return;
         }
         imageEvent.fire(new ImageEvent(dragValue, pathOld));
         Utils.addToRerender(Constants.TREE_ID);
     }
 
+    public void addAlbumToEvent(DropEvent dropEvent) {
+        if (user == null) {
+            return;
+        }
+
+        Object dragValue = dropEvent.getDragValue();
+        Event event = (Event) dropEvent.getDropValue();
+
+        if (dragValue instanceof Album) {
+            Album album = (Album) dragValue;
+
+            String pathOld = album.getPath();
+
+            event.getShelf().addAlbum(album);
+
+            try {
+                albumAction.editAlbum(album);
+                eventAction.editEvent(event);
+            } catch (PhotoAlbumException e) {
+                error.fire(new ErrorEvent("Error:", Constants.ERROR_IN_DB + ": " + e.getMessage()));
+            }
+            albumEvent.fire(new AlbumEvent(album, pathOld));
+        }
+    }
 }

@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- * Rich Faces - Natural Ajax for Java Server Faces (JSF)
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007 Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.search;
 
@@ -32,10 +33,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.photoalbum.ejbsearch.ISearchAction;
+import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
 import org.richfaces.photoalbum.event.Events;
 import org.richfaces.photoalbum.event.NavEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
 import org.richfaces.photoalbum.manager.NavigationEnum;
 import org.richfaces.photoalbum.service.Constants;
 import org.richfaces.photoalbum.service.PhotoAlbumException;
@@ -75,7 +76,7 @@ public class ImageSearchHelper implements Serializable {
 
     @Inject
     @EventType(Events.ADD_ERROR_EVENT)
-    Event<SimpleEvent> error;
+    Event<ErrorEvent> error;
     @Inject
     @EventType(Events.UPDATE_MAIN_AREA_EVENT)
     Event<NavEvent> navEvent;
@@ -116,12 +117,12 @@ public class ImageSearchHelper implements Serializable {
         searchOptionsHolder = null;
         if (!isSearchOptionSelected()) {
             // If no options selected
-            error.fire(new SimpleEvent(Constants.SEARCH_NO_OPTIONS_ERROR));
+            error.fire(new ErrorEvent(Constants.SEARCH_NO_OPTIONS_ERROR));
             return;
         }
         if (!isWhereSearchOptionSelected()) {
             // If both search in My and search is shared unselected
-            error.fire(new SimpleEvent(Constants.SEARCH_NO_WHERE_OPTIONS_ERROR));
+            error.fire(new ErrorEvent(Constants.SEARCH_NO_WHERE_OPTIONS_ERROR));
             return;
         }
         keywords = new ArrayList<String>();
@@ -139,7 +140,7 @@ public class ImageSearchHelper implements Serializable {
                     option.search(searchAction, selectedKeyword, seachInMyAlbums, searchInShared);
                 }
             } catch (PhotoAlbumException e) {
-                error.fire(new SimpleEvent(option.getName() + ":" + e.getMessage()));
+                error.fire(new ErrorEvent("Error", option.getName() + ":" + e.getMessage()));
             }
         }
         searchOptionsHolder = new SearchInformationHolder(new ArrayList<ISearchOption>(options), seachInMyAlbums,
@@ -154,7 +155,7 @@ public class ImageSearchHelper implements Serializable {
      */
     public void searchKeyword(String keyword) {
         if (!isSearchOptionSelected()) {
-            error.fire(new SimpleEvent(Constants.SEARCH_NO_OPTIONS_ERROR));
+            error.fire(new ErrorEvent(Constants.SEARCH_NO_OPTIONS_ERROR));
             return;
         }
         Iterator<ISearchOption> it = searchOptionsHolder.getOptions().iterator();
@@ -167,7 +168,7 @@ public class ImageSearchHelper implements Serializable {
                         searchOptionsHolder.isSearchInShared());
                 }
             } catch (PhotoAlbumException e) {
-                error.fire(new SimpleEvent(option.getName() + ":" + e.getMessage()));
+                error.fire(new ErrorEvent(option.getName() + ":" + e.getMessage()));
             }
         }
     }

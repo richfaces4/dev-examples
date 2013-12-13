@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.manager;
 
@@ -27,6 +28,7 @@ package org.richfaces.photoalbum.manager;
  */
 import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -36,8 +38,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.richfaces.json.JSONObject;
 import org.richfaces.photoalbum.bean.UserBean;
+import org.richfaces.photoalbum.domain.Sex;
 import org.richfaces.photoalbum.domain.User;
+import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
 import org.richfaces.photoalbum.event.EventTypeQualifier;
 import org.richfaces.photoalbum.event.Events;
@@ -45,6 +50,9 @@ import org.richfaces.photoalbum.event.NavEvent;
 import org.richfaces.photoalbum.event.SimpleEvent;
 import org.richfaces.photoalbum.service.Constants;
 import org.richfaces.photoalbum.service.IUserAction;
+import org.richfaces.photoalbum.social.facebook.FacebookBean;
+import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
+import org.richfaces.photoalbum.ui.UserPrefsHelper;
 import org.richfaces.photoalbum.util.Environment;
 import org.richfaces.photoalbum.util.HashUtils;
 import org.richfaces.photoalbum.util.Utils;
@@ -78,6 +86,11 @@ public class Authenticator implements Serializable {
     @Inject
     @Any
     Event<SimpleEvent> event;
+
+    @Inject
+    @EventType(Events.ADD_ERROR_EVENT)
+    Event<ErrorEvent> error;
+
     @Inject
     @EventType(Events.UPDATE_MAIN_AREA_EVENT)
     Event<NavEvent> navEvent;
@@ -87,6 +100,15 @@ public class Authenticator implements Serializable {
 
     @Inject
     UserBean userBean;
+
+    @Inject
+    FacebookBean fBean;
+
+    @Inject
+    GooglePlusBean gBean;
+
+    @Inject
+    UserPrefsHelper uph;
 
     /**
      * Method, that invoked when user try to login to the application.
@@ -107,14 +129,10 @@ public class Authenticator implements Serializable {
                     user = new User();
                     return false;
                 }
-                // Remove previous session id from users store
-                userTracker.removeUserId(user.getId());
-                // Mark current user as actual
-                userTracker.addUserId(user.getId(), Utils.getSession().getId());
-                // identity.addRole(Constants.ADMIN_ROLE, "Users", "GROUP");
+                addToTracker(user.getId());
                 // Raise event to controller to update Model
                 event.select(new EventTypeQualifier(Events.AUTHENTICATED_EVENT)).fire(new SimpleEvent());
-                // Login was succesfull
+                // Login was successful
                 setLoginFailed(false);
                 return true;
             }
@@ -123,6 +141,126 @@ public class Authenticator implements Serializable {
             return false;
         }
         return false;
+    }
+
+    private void addToTracker(Long userId) {
+        // Remove previous session id from users store
+        userTracker.removeUserId(userId);
+        // Mark current user as actual
+        userTracker.addUserId(userId, Utils.getSession().getId());
+    }
+
+    public boolean authenticateWithFacebook() {
+        JSONObject userInfo = fBean.getUserInfo();
+
+        try {
+            String pictureUrl = userInfo.getJSONObject("picture").getJSONObject("data").getString("url");
+            userBean.setFbPhotoUrl(pictureUrl);
+
+            String facebookId = userInfo.getString("id");
+
+            if (!userBean.isLoggedIn()) {
+                user = userBean.logIn(facebookId);
+            } else {
+                user = userBean.getUser();
+                user.setFbId(facebookId);
+                userAction.updateUser();
+                userBean.logIn(facebookId);
+            }
+
+            if (user == null) { // user does not exist
+                User newUser = new User();
+
+                newUser.setFbId(facebookId);
+                newUser.setgPlusId("1");
+                newUser.setFirstName(userInfo.getString("first_name"));
+                newUser.setSecondName(userInfo.getString("last_name"));
+                newUser.setEmail(userInfo.getString("email"));
+
+                String username = userInfo.has("username") ? userInfo.getString("username") : userInfo.getString("first_name");
+                newUser.setLogin(username);
+
+                String sex = userInfo.getString("gender");
+                newUser.setSex(sex.equals("male") ? Sex.MALE : Sex.FEMALE);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                newUser.setBirthDate(sdf.parse(userInfo.getString("birthday")));
+
+                // random password, the user will not be using this to log in
+                newUser.setPasswordHash(HashUtils.hash("facebook" + System.currentTimeMillis()));
+
+                userAction.register(newUser);
+
+                userBean.logIn(facebookId);
+            } else {
+                addToTracker(user.getId());
+            }
+
+            return true;
+        } catch (Exception nre) {
+            loginFailed();
+            error.fire(new ErrorEvent(nre.getMessage()));
+            return false;
+        }
+    }
+
+    public boolean authenticateWithGPlus() {
+        JSONObject userInfo = gBean.getUserInfo();
+
+        try {
+            // String pictureUrl = userInfo.getJSONObject("picture").getJSONObject("data").getString("url");
+            // userBean.setFbPhotoUrl(pictureUrl);
+
+            String gPlusId = userInfo.getString("id");
+
+            if (!userBean.isLoggedIn()) {
+                user = userBean.gPlusLogIn(gPlusId);
+            } else {
+                user = userBean.getUser();
+                user.setgPlusId(gPlusId);
+                userAction.updateUser();
+                userBean.gPlusLogIn(gPlusId);
+            }
+
+            if (user == null) { // user does not exist
+                User newUser = new User();
+
+                newUser.setFbId("1");
+                newUser.setgPlusId(gPlusId);
+                newUser.setFirstName(userInfo.getJSONObject("name").getString("givenName"));
+                newUser.setSecondName(userInfo.getJSONObject("name").getString("familyName"));
+                newUser.setEmail(userInfo.optString("email", "mail@mail.com"));
+
+                String username = userInfo.optString("nickname", newUser.getFirstName());
+                newUser.setLogin(username);
+
+                String sex = userInfo.getString("gender");
+                newUser.setSex(sex.equals("male") ? Sex.MALE : Sex.FEMALE);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String birthday = userInfo.optString("birthday", "1900-01-01");
+                // if (birthday.substring(0, 3).equals("0000")) {
+                // // G+ allows hiding of the year of birth, change to 1900
+                // birthday = "19" + birthday.substring(2);
+                // }
+                newUser.setBirthDate(sdf.parse(birthday));
+
+                // random password, the user will not be using this to log in
+                newUser.setPasswordHash(HashUtils.hash("gPlus" + System.currentTimeMillis()));
+
+                userAction.register(newUser);
+
+                userBean.gPlusLogIn(gPlusId);
+            } else {
+                addToTracker(user.getId());
+            }
+
+            return true;
+        } catch (Exception nre) {
+            error.fire(new ErrorEvent("Error", nre.getMessage()));
+            loginFailed();
+            return false;
+        }
     }
 
     /**
@@ -138,8 +276,6 @@ public class Authenticator implements Serializable {
         // Remove user from users store
         userTracker.removeUserId(id);
         setConversationStarted(false);
-        //return Constants.LOGOUT_OUTCOME;
-        //return "index.seam";
         startConversation();
     }
 
@@ -160,30 +296,26 @@ public class Authenticator implements Serializable {
         // This check is actual only on livedemo server to prevent hacks.
         // Only admins can mark user as pre-defined
         user.setPreDefined(false);
+        user.setFbId("1");
         if (!handleAvatar(user)) {
             return;
-
         }
         try {
             userAction.register(user);
         } catch (Exception e) {
-            event.select(new EventTypeQualifier(Events.ADD_ERROR_EVENT)).fire(new SimpleEvent(Constants.REGISTRATION_ERROR));
+            error.fire(new ErrorEvent(Constants.REGISTRATION_ERROR));
             return;
         }
-        // Registration was successfull, so we can login this user.
+        // Registration was successful, so we can login this user.
         try {
             this.user = userBean.logIn(user.getLogin(), HashUtils.hash(user.getPassword()));
         } catch (Exception e) {
-            event.select(new EventTypeQualifier(Events.ADD_ERROR_EVENT)).fire(
-                new SimpleEvent(Constants.LOGIN_ERROR + "\n" + e.getMessage()));
+            error.fire(new ErrorEvent(Constants.LOGIN_ERROR + "\n" + e.getMessage()));
             return;
         }
         if (this.user == null) {
-            event.select(new EventTypeQualifier(Events.ADD_ERROR_EVENT)).fire(new SimpleEvent(Constants.LOGIN_ERROR));
+            error.fire(new ErrorEvent(Constants.LOGIN_ERROR));
         }
-
-        //navEvent.fire(new NavEvent(NavigationEnum.ANONYM)); //point to main page?
-
     }
 
     /**
@@ -193,8 +325,6 @@ public class Authenticator implements Serializable {
     public void goToRegister() {
         // create new User object
         user = new User();
-        // Clear avatarData component in conversation scope
-        // Contexts.getConversationContext().set(Constants.AVATAR_DATA_COMPONENT, null);
         setLoginFailed(false);
         // raise event to controller to prepare Model.
         event.select(new EventTypeQualifier(Events.START_REGISTER_EVENT)).fire(new SimpleEvent());
@@ -213,16 +343,12 @@ public class Authenticator implements Serializable {
         return "";
     }
 
-    @SuppressWarnings("unused")
     private boolean handleAvatar(User user) {
-        // File avatarData = (File) Contexts.getConversationContext().get(Constants.AVATAR_DATA_COMPONENT);
-        File avatarData = null; // temporary hack
+        File avatarData = uph.getAvatarData();
         if (avatarData != null) {
             user.setHasAvatar(true);
-            // FileManager fileManager = (FileManager) Contexts.getApplicationContext().get(Constants.FILE_MANAGER_COMPONENT);
             if (fileManager == null || !fileManager.saveAvatar(avatarData, user)) {
-                event.select(new EventTypeQualifier(Events.ADD_ERROR_EVENT)).fire(
-                    new SimpleEvent(Constants.AVATAR_SAVING_ERROR));
+                error.fire(new ErrorEvent(Constants.AVATAR_SAVING_ERROR));
                 return false;
             }
         }
@@ -231,7 +357,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkUserExist(User user) {
         if (userAction.isUserExist(user.getLogin())) {
-            Utils.addFacesMessage(Constants.REGISTER_LOGIN_NAME_ID, Constants.USER_WITH_THIS_LOGIN_ALREADY_EXIST);
+            Utils.addFacesMessage(Constants.REGISTER_LOGIN_NAME_ID, Constants.USER_WITH_THIS_LOGIN_ALREADY_EXIST, "");
             return true;
         }
         return false;
@@ -239,7 +365,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkEmailExist(String email) {
         if (userAction.isEmailExist(email)) {
-            Utils.addFacesMessage(Constants.REGISTER_EMAIL_ID, Constants.USER_WITH_THIS_EMAIL_ALREADY_EXIST);
+            Utils.addFacesMessage(Constants.REGISTER_EMAIL_ID, Constants.USER_WITH_THIS_EMAIL_ALREADY_EXIST, "");
             return true;
         }
         return false;
@@ -247,7 +373,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkPassword(User user) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            Utils.addFacesMessage(Constants.REGISTER_CONFIRM_PASSWORD_ID, Constants.CONFIRM_PASSWORD_NOT_EQUALS_PASSWORD);
+            Utils.addFacesMessage(Constants.REGISTER_CONFIRM_PASSWORD_ID, Constants.CONFIRM_PASSWORD_NOT_EQUALS_PASSWORD, "");
             return true;
         }
         return false;
@@ -255,10 +381,7 @@ public class Authenticator implements Serializable {
 
     private void loginFailed() {
         setLoginFailed(true);
-        // facesMessages.clear();
-        // facesMessages.add(Constants.INVALID_LOGIN_OR_PASSWORD);
-        //FacesContext.getCurrentInstance().addMessage("loginPanelForm", new FacesMessage(Constants.INVALID_LOGIN_OR_PASSWORD));
-        Utils.addFacesMessage("overForm:loginPanel", Constants.INVALID_LOGIN_OR_PASSWORD);
+        Utils.addFacesMessage("overForm:loginPanel", Constants.INVALID_LOGIN_OR_PASSWORD, "");
         FacesContext.getCurrentInstance().renderResponse();
     }
 

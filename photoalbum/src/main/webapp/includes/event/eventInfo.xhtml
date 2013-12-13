@@ -1,0 +1,72 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:rich="http://richfaces.org/rich">
+    <ui:param name="event" value="#{model.selectedEvent}" />
+    <h:panelGrid styleClass="shelf-header-table" cellpadding="0" columns="2" columnClasses="xxx, shelf-header-table-col2">
+        <h:panelGroup>
+            <h1>
+                <h:outputText value="#{event.name}" />
+                <!-- <rich:inplaceInput selectOnEdit="false" id="shelfDNDId" value="#{shelf.name}" inputWidth="570"
+                    rendered="#{controller.isUserShelf(shelf)}" /> -->
+            </h1>
+
+            <h:panelGroup styleClass="additional-info-text">
+                <!--<h:outputText value="#{messages['created.shelf']}" />
+                <h:outputText styleClass="bold" value=" #{shelf.created}, " /> -->
+                <h:outputText value="#{messages['contain']}" />
+                <!-- <h:outputText styleClass="bold" value=" #{fn:length(shelf.images)} " />
+                <h:outputText value="#{messages['pics_into']}" /> -->
+                <h:outputText styleClass="bold" value=" #{fn:length(event.shelf.albums) + fn:length(event.remoteAlbumIds)} " />
+                <h:outputText value="#{messages['shelf.albums']}" />
+
+            </h:panelGroup>
+        </h:panelGroup>
+        <!-- 
+        <h:panelGroup>
+            <a4j:commandLink value="#{messages['shelf.edit']}" render="mainArea" disabled="true" />
+            <h:outputText value=" #{messages['delimiter']} " />
+            <a4j:commandLink value="#{messages['shelf.delete']}" oncomplete="#{rich:component('confirmation')}.show()"
+                render="confirmation" execute="@this" disabled="true" />
+             actionListener="#{confirmationPopupHelper.initShelfData(confirmationPopupHelper.deleteShelf,'Are You sure? All nested albums and images will also dropped! ',shelf)}"
+            <h:outputText value=" #{messages['delimiter']} " />
+            <a4j:commandLink value="#{messages['shelf.view']}" render="mainArea" rendered="#{!mode.equals('show')}"
+                disabled="true" />
+             actionListener="#{controller.showShelf(shelf)}" 
+        </h:panelGroup>
+        -->
+    </h:panelGrid>
+
+    <p>
+        <h:outputText value="#{event.description}" />
+    </p>
+    <br />
+    <br />
+
+    <ui:include src="/includes/event/imageList.xhtml">
+        <ui:param name="event" value="#{event}" />
+    </ui:include>
+
+    <br />
+</ui:composition>

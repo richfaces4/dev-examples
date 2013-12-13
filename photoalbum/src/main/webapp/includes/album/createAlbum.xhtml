@@ -1,9 +1,30 @@
+<!--
+  JBoss, Home of Professional Open Source
+  Copyright 2013, Red Hat, Inc. and individual contributors
+  by the @authors tag. See the copyright.txt in the distribution for a
+  full listing of individual contributors.
+
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
 
     <rich:popupPanel id="albumModalPanel" width="450" height="140" domElementAttachment="parent">
-        <!-- onshow="applyModalPanelEffect('albumModalPanel', {delay: 0.5, afterFinish: function(){$('form2:albumname').focus();}});"> -->
         <f:facet name="header">
             <h:outputText value="#{messages['album.add']}" />
         </f:facet>
@@ -15,9 +36,6 @@
             </h:panelGroup>
         </f:facet>
 
-        <!-- <rich:effect type="Appear" name="appearFunc" /> -->
-        <!-- not implemented in RF 4 -->
-
         <a4j:region id="form2">
             <h:panelGroup id="albumPanel" width="100%">
                 <a4j:region>
@@ -28,10 +46,10 @@
                             </h:panelGroup>
 
                             <rich:inplaceSelect minSelectWidth="370" listWidth="400" required="true" id="shelf"
-                                value="#{albumManager.album.shelf}" openOnEdit="true" viewClass="inplace"
-                                changedClass="inplace" changedHoverClass="hover" viewHoverClass="hover" converter="shelfConverter">
+                                                value="#{albumManager.album.shelf}" openOnEdit="true" viewClass="inplace"
+                                                changedClass="inplace" changedHoverClass="hover" viewHoverClass="hover" converter="shelfConverter">
                                 <f:selectItems value="#{userBean.user.shelves}" var="shelf" itemLabel="#{shelf.name}"
-                                    itemValue="#{shelf}" itemDescription="#{shelf.description}" />
+                                               itemValue="#{shelf}" itemDescription="#{shelf.description}" />
                             </rich:inplaceSelect>
                             <rich:messages for="shelf" />
                             <h:panelGroup style="text-align:right;" layout="block">
@@ -39,7 +57,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block">
                                 <h:inputText id="albumName" value="#{albumManager.album.name}"
-                                    onkeydown="if (event.keyCode == 13) { jQuery(&quot; .album input[type='image']&quot;).click(); return false; }" />
+                                    onkeydown="if (event.keyCode == 13) {$('.album input[type=image]').click(); return false; }" />
                                 <rich:message styleClass="required" for="albumName" />
                             </h:panelGroup>
                         </h:panelGrid>
@@ -50,14 +68,15 @@
                     <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto">
                         <h:panelGroup id="albumFirstButton" layout="block">
                             <richx:commandButton data="#{albumManager.validationSuccess}" value="#{messages['album.store']}"
-                                actionListener="#{albumManager.addAlbum(albumManager.album)}" id="storebutton"
-                                render="treePanel, mainArea, menu" execute="form2" oncomplete="if(event.data)#{rich:component('albumModalPanel')}.hide()"
-                                styleClass="album" />
+                                                 actionListener="#{albumManager.addAlbum(albumManager.album)}" id="storebutton"
+                                                 render="treePanel, mainArea, menu" execute="form2" oncomplete="if(event.data)#{rich:component('albumModalPanel')}.hide()"
+                                                 styleClass="album" />
                         </h:panelGroup>
                         <h:panelGroup id="albumSecondButton" layout="block">
                             <richx:commandButton type="button" id="cancelbutton"
-                                onclick="#{rich:component('albumModalPanel')}.hide(); return false;"
-                                value="#{messages['album.cancel']}" execute="@none"/>
+                                                 onclick="#{rich:component('albumModalPanel')}.hide();
+                                                     return false;"
+                                                 value="#{messages['album.cancel']}" execute="@none"/>
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:panelGroup>

@@ -1,22 +1,23 @@
-/**
- * License Agreement.
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc. and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
  *
- *  JBoss RichFaces - Ajax4jsf Component Library
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
  *
- * Copyright (C) 2007  Exadel, Inc.
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License version 2.1 as published by the Free Software Foundation.
- *
- * This library is distributed in the hope that it will be useful,
+ * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 package org.richfaces.photoalbum.service;
 
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.richfaces.photoalbum.domain.Shelf;
+import org.richfaces.photoalbum.domain.User;
 
 /**
  * Class for manipulating with shelf entity. Analogous to DAO pattern. EJB3 Bean
@@ -64,15 +66,16 @@ public class ShelfAction implements IShelfAction {
      * @throws PhotoAlbumException
      */
     public void deleteShelf(Shelf shelf) throws PhotoAlbumException {
+        User owner = em.find(User.class, shelf.getOwner().getId());
         try {
-            // Remove reference from user
-            // user.removeShelf(shelf);
-            shelf.getOwner().removeShelf(shelf);
-            em.remove(em.merge(shelf)); // need to attach the instance first
+            em.remove(em.merge(shelf));
+            owner.removeShelf(shelf);
+            em.merge(owner);
             em.flush();
+
+            //shelf.setOwner(owner);
         } catch (Exception e) {
-            // user.addShelf(shelf);
-            shelf.getOwner().addShelf(shelf);
+            owner.addShelf(shelf);
             throw new PhotoAlbumException(e.getMessage());
         }
     }
@@ -85,6 +88,7 @@ public class ShelfAction implements IShelfAction {
      */
     public void editShelf(Shelf shelf) throws PhotoAlbumException {
         try {
+            em.merge(shelf);
             em.flush();
         } catch (Exception e) {
             throw new PhotoAlbumException(e.getMessage());
