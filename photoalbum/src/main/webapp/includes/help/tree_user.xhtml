@@ -51,9 +51,8 @@
         <p>Let's explore how drag-and-drop works for albums.</p>
         <p>
             All albums, that are represented as TreeNodes, must be marked somehow for dragging. For this purpose we use
-            previously mentioned <span class="emphasis"><em><span class="property">&lt;rich:dragSource&gt;</span></em></span>
-            and specify albums with <span class="emphasis"><em><span class="property">"type"</span></em></span> attribute. Let's
-            have a look at the
+            previously mentioned <em><span class="property">&lt;rich:dragSource&gt;</span></em> and specify albums with <em><span
+                class="property">"type"</span></em> attribute. Let's have a look at the
             <code class="code">src/main/webapp/includes/index/tree.xhtml</code>
             file:
         </p>
@@ -70,10 +69,9 @@
         </pre>
         <p>
             To provide drop functionality for the marked albums, we should mark Shelves as drop zones in the application code
-            too. For this purpose we add the <span class="emphasis"><em><span class="property">&lt;rich:dropTarget&gt;</span></em></span>
-            with <span class="emphasis"><em><span class="property">"acceptedTypes"</span></em></span> attribute to the "Shelf"
-            node and in order to process drop on the server side we specify a listener with the <span class="emphasis"><em><span
-                    class="property">"dropListener"</span></em></span> attribute in the same
+            too. For this purpose we add the <em><span class="property">&lt;rich:dropTarget&gt;</span></em> with <em><span
+                class="property">"acceptedTypes"</span></em> attribute to the "Shelf" node and in order to process drop on the server
+            side we specify a listener with the <em><span class="property">"dropListener"</span></em> attribute in the same
             <code class="code">src/main/webapp/includes/index/tree.xhtml</code>
             file:
         </p>
@@ -89,14 +87,13 @@
             &lt;/rich:treeModelAdaptor&gt;
         </pre>
         <p>
-            The <span class="emphasis"><em><span class="property">"acceptedTypes"</span></em></span> attribute tells the "Shelf"
-            node what types of dragged zones (albums in this case) it can accept. We have specified "Album" node <span
-                class="emphasis"><em><span class="property">"dragType"</span></em></span> as "album", so the "Shelf" node can
-            accept it.
+            The <em><span class="property">"acceptedTypes"</span></em> attribute tells the "Shelf" node what types of dragged
+            zones (albums in this case) it can accept. We have specified "Album" node <em><span class="property">"dragType"</span></em>
+            as "album", so the "Shelf" node can accept it.
         </p>
 
         <p>
-            The code for the <span class="bold"><strong><span class="property">&lt;rich:dragIndicator&gt;</span></strong></span>
+            The code for the <strong><span class="property">&lt;rich:dragIndicator&gt;</span></strong>
             looks like the following:
         </p>
         <pre class="brush: xml, gutter: false">
@@ -226,8 +223,8 @@
                     <p>
                         <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink"
                             href="http://showcase.richfaces.org/richfaces/component-sample.jsf?demo=dragDrop">Drag and Drop</a>
-                        for the <span class="bold"><strong><span class="property">&lt;rich:dragSource&gt;</span></strong></span>
-                        and <span class="bold"><strong><span class="property">&lt;rich:dropTarget&gt;</span></strong></span>
+                        for the <strong><span class="property">&lt;rich:dragSource&gt;</span></strong>
+                        and <strong><span class="property">&lt;rich:dropTarget&gt;</span></strong>
                         components;
                     </p>
                 </li>

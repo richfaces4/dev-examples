@@ -33,7 +33,7 @@
             </div>
         </div>
         <p>
-            The <span class="bold"><strong><span class="property">&lt;rich:tree&gt;</span></strong></span> component takes one
+            The <strong><span class="property">&lt;rich:tree&gt;</span></strong> component takes one
             of the main places in the <span class="property">Photo Album</span> and is tightly bounded with the application
             logic. It helps to represent and implement inherently the "Shelves - Albums" hierarchy. Shelf is the highest
             possible level in the tree hierarchy, that is used to group thematic albums and may contain as many albums as
@@ -54,14 +54,14 @@
                         class="property">&lt;rich:tree&gt;</span></strong></span> component.
             </p>
             <p>
-                There are several ways to implement the <span class="bold"><strong><span class="property">&lt;rich:tree&gt;</span></strong></span>
-                on a page. In the current application the <span class="bold"><strong><span class="property">&lt;rich:tree&gt;</span></strong></span>
-                is designed using a model tag <span class="bold"><strong><span class="property">&lt;rich:treeNodesAdaptor&gt;</span></strong></span>.
+                There are several ways to implement the <strong><span class="property">&lt;rich:tree&gt;</span></strong>
+                on a page. In the current application the <strong><span class="property">&lt;rich:tree&gt;</span></strong>
+                is designed using a model tag <strong><span class="property">&lt;rich:treeNodesAdaptor&gt;</span></strong>.
             </p>
             <p>
-                The <span class="bold"><strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong></span>
-                component has a <span class="emphasis"><em><span class="property">"nodes"</span></em></span> attribute that
-                accepts a collection of elements, so <span class="bold"><strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong></span>
+                The <strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong>
+                component has a <em><span class="property">"nodes"</span></em> attribute that
+                accepts a collection of elements, so <strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong>
                 iterates over the collection and renders a hierarchical tree structure on a page.
             </p>
             <p>
@@ -82,11 +82,11 @@
                 }
             </pre>
             <p>
-                The second <span class="bold"><strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong></span>
-                component iterates over the Albums collection of the current Shelf which is available via <span class="emphasis"><em><span
-                        class="property">"var"</span></em></span> attribute of <span class="bold"><strong><span
-                        class="property">&lt;rich:tree&gt;</span></strong></span>. The <span class="emphasis"><em><span
-                        class="property">"var"</span></em></span> attribute is used to get access to the data object of the current
+                The second <strong><span class="property">&lt;rich:treeModelAdaptor&gt;</span></strong>
+                component iterates over the Albums collection of the current Shelf which is available via <em><span
+                        class="property">"var"</span></em> attribute of <span class="bold"><strong><span
+                        class="property">&lt;rich:tree&gt;</span></strong></span>. The <em><span
+                        class="property">"var"</span></em> attribute is used to get access to the data object of the current
                 collection element Shelf, so it is possible to output any necessary data. Let's see the
                 <code class="code">src/main/webapp/includes/index/tree.xhtml</code>
                 file:

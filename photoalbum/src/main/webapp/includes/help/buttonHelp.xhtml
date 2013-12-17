@@ -62,7 +62,7 @@
         &lt;/ui:composition&gt;
         </pre>
         <p>
-            The <span class="bold"><strong> <span class="property">&lt;richx:actionMapper&gt;</span></strong></span> tag is
+            The <strong><span class="property">&lt;richx:actionMapper&gt;</span></strong> tag is
             covered in more detail further in the text. In brief, it's a special tag developed deliberately to pass to the
             button a method expression of the action which must be performed when the button is clicked.
         </p>
@@ -77,14 +77,14 @@
                 </li>
                 <li>
                     <p>
-                        <span class="bold"><strong><span class="property">&lt;a4j:commandButton&gt;</span></strong></span> that
+                        <strong><span class="property">&lt;a4j:commandButton&gt;</span></strong> that
                         sends Ajax request to the server
                     </p>
                 </li>
             </ul>
         </div>
         <p>
-            These elements are wrapped by <span class="bold"><strong><span class="property">&lt;a4j:outputPanel&gt;</span></strong></span>
+            These elements are wrapped by <strong><span class="property">&lt;a4j:outputPanel&gt;</span></strong>
             to adjust the look-and-feel.
         </p>
         <p>In the application the button is used for example like this:</p>
@@ -96,11 +96,11 @@
         …
         </pre>
         <p>
-            We can pass to the <span class="bold"><strong><span class="property">&lt;richx:commandButton&gt;</span></strong></span>
+            We can pass to the <strong><span class="property">&lt;richx:commandButton&gt;</span></strong>
             all attributes or only some, in the example only actionListener, render, value, immediate, oncomplete and execute are passed.
         </p>
         <p>
-            <span class="bold"><strong><span class="property">&lt;richx:commandButton&gt;</span></strong></span> is a custom tag
+            <strong><span class="property">&lt;richx:commandButton&gt;</span></strong> is a custom tag
             that is declared in the photoalbum.taglib.xml tag library:
         </p>
         <pre class="brush:xml, gutter: false, auto-links: false">
@@ -120,7 +120,7 @@
             &lt;/facelet-taglib&gt;
         </pre>
         <p>
-            In order to use the <span class="bold"><strong><span class="property">&lt;richx:commandButton&gt;</span></strong></span>
+            In order to use the <strong><span class="property">&lt;richx:commandButton&gt;</span></strong>
             on the page the namespace of the taglib must be declared:
         </p>
         <pre class="brush: xml, gutter: false, auto-links: false, highlight: 3">
@@ -130,8 +130,8 @@
                 …
         </pre>
         <p>
-            A more complex part of the button implementation, as we said earlier, is <span class="bold"><strong><span
-                    class="property">&lt;richx:actionMapper&gt;</span></strong></span> which is also described in taglib. But it is not just a
+            A more complex part of the button implementation, as we said earlier, is <strong><span
+                    class="property">&lt;richx:actionMapper&gt;</span></strong> which is also described in taglib. But it is not just a
             simple tag-template since it has Facelets handler-class which specifies how it is handled when declared on the page.
             It is created because Facelets templates do not allow to make the MethodExpression a Facelets-template parameter.
             Please find below the code of the class(some irrelevant details are omitted):
