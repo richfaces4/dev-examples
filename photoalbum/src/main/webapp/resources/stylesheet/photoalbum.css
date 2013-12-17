@@ -1429,7 +1429,7 @@ span.image-scroller {
 .rf-trn-ico {
     width: auto !important;
     height: auto !important;
-    cursor: hand !important;
+    cursor: pointer !important;
     display: inline-block;
 }
 
