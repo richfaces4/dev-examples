@@ -207,14 +207,17 @@ public class FileUploadManager implements Serializable {
         try {
             in = fileHandler.getInputStream();
             Metadata metadata = JpegMetadataReader.readMetadata(in);
-            Directory exifDirectory = metadata.getDirectory(ExifIFD0Directory.class);
+            Directory exifIFD0Directory = metadata.getDirectory(ExifIFD0Directory.class);
+            Directory exifSubIFDDirectory = metadata.getDirectory(ExifSubIFDDirectory.class);
             Directory jpgDirectory = metadata.getDirectory(JpegDirectory.class);
-            if (exifDirectory != null) {
-                setupCameraModel(image, exifDirectory);
-                setupCreatedDate(image, exifDirectory);
-                if (jpgDirectory != null) {
-                    setupDimensions(image, exifDirectory, jpgDirectory);
-                }
+            if (exifIFD0Directory != null) {
+                setupCameraModel(image, exifIFD0Directory);
+            }
+            if (exifSubIFDDirectory != null) {
+                setupCreatedDate(image, exifSubIFDDirectory);
+            }
+            if (jpgDirectory != null) {
+                setupDimensions(image, exifSubIFDDirectory, jpgDirectory);
             }
         } catch (Exception e) {
             addError(fileHandler, image, Constants.IMAGE_SAVING_ERROR);
