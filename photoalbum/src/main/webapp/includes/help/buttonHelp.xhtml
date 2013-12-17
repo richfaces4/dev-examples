@@ -101,7 +101,7 @@
         </p>
         <p>
             <span class="bold"><strong><span class="property">&lt;richx:commandButton&gt;</span></strong></span> is a custom tag
-            that is declared in the photoalbum-taglib.xml tag library:
+            that is declared in the photoalbum.taglib.xml tag library:
         </p>
         <pre class="brush:xml, gutter: false, auto-links: false">
             &lt;?xml version=&quot;1.0&quot;?&gt;
@@ -131,7 +131,7 @@
         </pre>
         <p>
             A more complex part of the button implementation, as we said earlier, is <span class="bold"><strong><span
-                    class="property">&lt;richx:actionMapper&gt;</span></strong></span> which is also described in tablib. But it is not just a
+                    class="property">&lt;richx:actionMapper&gt;</span></strong></span> which is also described in taglib. But it is not just a
             simple tag-template since it has Facelets handler-class which specifies how it is handled when declared on the page.
             It is created because Facelets templates do not allow to make the MethodExpression a Facelets-template parameter.
             Please find below the code of the class(some irrelevant details are omitted):
@@ -204,8 +204,9 @@
             }
         }
         </pre>
-        <p>You can find more infromation about Facelets, custom tags, taglibs, Facelets tag handlers and Facelets templates
-            here.</p>
+        <p>You can find more information about Facelets, custom tags, taglibs, Facelets tag handlers and Facelets templates
+            <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink" 
+               href="http://docs.oracle.com/javaee/6/tutorial/doc/bnavg.html">here</a></p>
     </div>
 
 </ui:composition>

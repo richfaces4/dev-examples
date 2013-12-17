@@ -38,7 +38,7 @@
             <code class="code"> {model.selectedAlbum.images}</code>
             , which is a collection of images of the selected album and the <span class="bold"><strong><span
                     class="property">&lt;rich:dataScroller&gt;</span></strong></span> component tied to the <span class="bold"><strong><span
-                    class="property">&lt;a4j:repeat&gt;</span></strong></span> .
+                    class="property">&lt;a4j:repeat&gt;</span></strong></span>.
         </p>
         <p>
             The source code you can find in the includes/images/imageScroller.xhtml file. Now let's go deeper into the details.
@@ -65,7 +65,8 @@
                         &lt;/h:panelGroup&gt;
                     &lt;/h:panelGroup&gt;
 
-                    &lt;a4j:ajax event=&quot;click&quot; render=&quot;mainImage, treePanel, imagesTable&quot; listener=&quot;#{'#{'}controller.showImage(img)}&quot; /&gt;
+                    &lt;a4j:ajax event=&quot;click&quot; render=&quot;imageHeader, mainImage, …&quot; listener=&quot;#{'#{'}controller.showImage(img)}&quot;
+                              onbeforesubmit=&quot;select('#{'#{'}rk}:scrollerImage');&quot; execute=&quot;@this&quot; /&gt;
                 &lt;/a4j:outputPanel&gt;
             &lt;/a4j:repeat&gt;
         </pre>
@@ -161,7 +162,7 @@
             please visit <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink"
                 href="http://showcase.richfaces.org/richfaces/component-sample.jsf?demo=dataScroller">Showcase</a> web page and
             <a target="_blank" xmlns:xlink="http://www.w3.org/1999/xlink"
-                href="http://docs.jboss.org/richfaces/latest_4_2_X/Component_Reference/en-US/html/chap-Component_Reference-Tables_and_grids.html#sect-Component_Reference-Tables_and_grids-richdataScroller">RichFaces
+                href="http://docs.jboss.org/richfaces/latest_4_3_X/Component_Reference/en-US/html/chap-Component_Reference-Tables_and_grids.html#sect-Component_Reference-Tables_and_grids-richdataScroller">RichFaces
                 Developer Guide</a>
         </p>
     </div>
