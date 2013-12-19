@@ -126,9 +126,7 @@
             file and referred from the corresponding pages with the help of &lt;ui:include&gt; Facelets tag:
         </p>
         <pre class="brush: xml, gutter: false">
-            …
         &lt;ui:include src=&quot;/includes/image/slideshow.xhtml&quot; /&gt;
-            …
         </pre>
         <p>
             Have a look at
@@ -137,42 +135,42 @@
         </p>
         <pre class="brush: xml, gutter: false">
         &lt;ui:composition … &gt;
-            &lt;a4j:region&gt;
-                &lt;rich:popupPanel show=&quot;#{'#{'}slideshow.active}&quot;
-                    domElementAttachment=&quot;parent&quot;
-                    id=&quot;slideShowModalPanel&quot;
-                    autosized=&quot;true&quot;
-                    onshow=&quot;$(#{'#{'}rich:element('imgSlideShow')}).fadeIn(600);&quot;&gt;
-                    &lt;f:facet name=&quot;header&quot;&gt;Slideshow panel&lt;/f:facet&gt;
-                    &lt;f:facet name=&quot;controls&quot;&gt;
-                        &lt;h:panelGroup&gt;
-                            &lt;h:graphicImage value=&quot;/img/modal/close.png&quot; style=&quot;cursor:pointer&quot; id=&quot;hidelink&quot;&gt;
-                                &lt;a4j:ajax event=&quot;click&quot; listener=&quot;#{'#{'}slideshow.stopSlideshow()}&quot;
-                                    render=&quot;mainArea, treePanel, slideShowModalPanel&quot; execute=&quot;@region&quot; /&gt;
-                            &lt;/h:graphicImage&gt;
-                        &lt;/h:panelGroup&gt;
-                    &lt;/f:facet&gt;
-                    &lt;h:panelGrid styleClass=&quot;slideshow-table&quot; columnClasses=&quot;slideshow-table-col&quot; rowClasses=&quot;slideshow-table-row&quot;&gt;
-                        &lt;h:panelGroup id=&quot;slideshowImage&quot;&gt;
-                            &lt;a4j:mediaOutput id=&quot;imgSlideShow&quot; element=&quot;img&quot; styleClass=&quot;main-image&quot;
-                                createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
-                                value=&quot;#{'#{'}slideshow.selectedImage != null ? fileManager.transformPath(slideshow.selectedImage.fullPath, '_medium') : null}&quot;
-                                mimeType=&quot;image/png&quot; style=&quot;display:none&quot;&gt;
-                                &lt;rich:tooltip followMouse=&quot;true&quot; direction=&quot;topRight&quot; showDelay=&quot;500&quot; styleClass=&quot;tooltip&quot;&gt;
-                                    &lt;span style=&quot;white-space: nowrap&quot;&gt; #{'#{'}slideshow.selectedImage.description} &lt;/span&gt;
-                                &lt;/rich:tooltip&gt;
-                            &lt;/a4j:mediaOutput&gt;
-                        &lt;/h:panelGroup&gt;
-                    &lt;/h:panelGrid&gt;
-                    &lt;a4j:poll id=&quot;slideShowPoll&quot;
-                        data=&quot;#{'#{'}slideshow.errorDetected}&quot;
-                        render=&quot;slideshowImage&quot;
-                        interval=&quot;#{'#{'}slideshow.interval}&quot;
-                        enabled=&quot;#{'#{'}slideshow.active}&quot;
-                        oncomplete=&quot;if(event.data)#{'#{'}rich:component('slideShowModalPanel')}.hide(); $(#{'#{'}rich:element('imgSlideShow')}).fadeIn(600);&quot;
-                        actionListener=&quot;#{'#{'}slideshow.showNextImage()}&quot; /&gt;
-                &lt;/rich:popupPanel&gt;
-            &lt;/a4j:region&gt;
+          &lt;a4j:region&gt;
+            &lt;rich:popupPanel show=&quot;#{'#{'}slideshow.active}&quot;
+                domElementAttachment=&quot;parent&quot;
+                id=&quot;slideShowModalPanel&quot;
+                autosized=&quot;true&quot;
+                onshow=&quot;$(#{'#{'}rich:element('imgSlideShow')}).fadeIn(600);&quot;&gt;
+              &lt;f:facet name=&quot;header&quot;&gt;Slideshow panel&lt;/f:facet&gt;
+              &lt;f:facet name=&quot;controls&quot;&gt;
+                &lt;h:panelGroup&gt;
+                  &lt;h:graphicImage value=&quot;/img/modal/close.png&quot; style=&quot;cursor:pointer&quot; id=&quot;hidelink&quot;&gt;
+                     &lt;a4j:ajax event=&quot;click&quot; listener=&quot;#{'#{'}slideshow.stopSlideshow()}&quot;
+                         render=&quot;mainArea, treePanel, slideShowModalPanel&quot; execute=&quot;@region&quot; /&gt;
+                  &lt;/h:graphicImage&gt;
+                &lt;/h:panelGroup&gt;
+              &lt;/f:facet&gt;
+              &lt;h:panelGrid styleClass=&quot;slideshow-table&quot; columnClasses=&quot;slideshow-table-col&quot; rowClasses=&quot;slideshow-table-row&quot;&gt;
+                &lt;h:panelGroup id=&quot;slideshowImage&quot;&gt;
+                  &lt;a4j:mediaOutput id=&quot;imgSlideShow&quot; element=&quot;img&quot; styleClass=&quot;main-image&quot;
+                      createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
+                      value=&quot;#{'#{'}slideshow.selectedImage != null ? fileManager.transformPath(slideshow.selectedImage.fullPath, '_medium') : null}&quot;
+                      mimeType=&quot;image/png&quot; style=&quot;display:none&quot;&gt;
+                    &lt;rich:tooltip followMouse=&quot;true&quot; direction=&quot;topRight&quot; showDelay=&quot;500&quot; styleClass=&quot;tooltip&quot;&gt;
+                      &lt;span style=&quot;white-space: nowrap&quot;&gt; #{'#{'}slideshow.selectedImage.description} &lt;/span&gt;
+                    &lt;/rich:tooltip&gt;
+                  &lt;/a4j:mediaOutput&gt;
+                &lt;/h:panelGroup&gt;
+              &lt;/h:panelGrid&gt;
+              &lt;a4j:poll id=&quot;slideShowPoll&quot;
+                  data=&quot;#{'#{'}slideshow.errorDetected}&quot;
+                  render=&quot;slideshowImage&quot;
+                  interval=&quot;#{'#{'}slideshow.interval}&quot;
+                  enabled=&quot;#{'#{'}slideshow.active}&quot;
+                  oncomplete=&quot;if(event.data)#{'#{'}rich:component('slideShowModalPanel')}.hide(); $(#{'#{'}rich:element('imgSlideShow')}).fadeIn(600);&quot;
+                  actionListener=&quot;#{'#{'}slideshow.showNextImage()}&quot; /&gt;
+            &lt;/rich:popupPanel&gt;
+          &lt;/a4j:region&gt;
         &lt;/ui:composition&gt;
         </pre>
         

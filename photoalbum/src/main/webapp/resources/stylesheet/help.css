@@ -48,10 +48,9 @@ div.note {
     margin-top: .5em;
 }
 
-/*
 div.note {
-    background-image: url(../images/community/docbook/note.png);
-}*/
+    background-image: url(../img/help/note.png);
+}
 
 div.note .replaceable {
     color: #e3dcc0;

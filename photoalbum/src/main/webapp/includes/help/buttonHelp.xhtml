@@ -41,24 +41,24 @@
         <pre class="brush: xml, gutter: false, auto-links: false">
         &lt;ui:composition xmlns=&quot;http://www.w3.org/1999/xhtml&quot; … &gt;
 
-            &lt;richx:actionMapper&gt;
-                &lt;a4j:outputPanel layout=&quot;block&quot; style=&quot;#{'#{'}style}&quot; styleClass=&quot;photoalbumButton #{'#{'}styleClass}&quot; lang=&quot;#{'#{'}lang}&quot; dir=&quot;#{'#{'}dir}&quot;
-                    title=&quot;#{'#{'}title}&quot; rendered=&quot;#{'#{'}empty rendered or rendered}&quot; onmousedown=&quot;$(this).css('background-position', '0 28px');&quot;
-                    onmouseup=&quot;$(this).css('background-position', '0 0');&quot; onmouseout=&quot;$(this).css('background-position', '0 0');&quot;&gt;
+          &lt;richx:actionMapper&gt;
+            &lt;a4j:outputPanel layout=&quot;block&quot; style=&quot;#{'#{'}style}&quot; styleClass=&quot;photoalbumButton #{'#{'}styleClass}&quot; lang=&quot;#{'#{'}lang}&quot; dir=&quot;#{'#{'}dir}&quot;
+                title=&quot;#{'#{'}title}&quot; rendered=&quot;#{'#{'}empty rendered or rendered}&quot; onmousedown=&quot;$(this).css('background-position', '0 28px');&quot;
+                onmouseup=&quot;$(this).css('background-position', '0 0');&quot; onmouseout=&quot;$(this).css('background-position', '0 0');&quot;&gt;
 
-                &lt;div&gt;#{'#{'}value}&lt;/div&gt;
+              &lt;div&gt;#{'#{'}value}&lt;/div&gt;
 
-                &lt;a4j:commandButton accesskey=&quot;#{'#{'}accesskey}&quot; alt=&quot;#{'#{'}alt}&quot; type=&quot;image&quot; image=&quot;/img/shell/spacer.gif&quot;
-                    actionListener=&quot;#{'#{'}mappedActionListener}&quot; action=&quot;#{'#{'}mappedAction}&quot; bypassUpdates=&quot;#{'#{'}bypassUpdates}&quot;
-                    data=&quot;#{'#{'}data}&quot; disabled=&quot;#{'#{'}disabled}&quot; eventsQueue=&quot;#{'#{'}eventsQueue}&quot; focus=&quot;#{'#{'}focus}&quot; immediate=&quot;#{'#{'}immediate}&quot;
-                    limitRender=&quot;#{'#{'}limitRender}&quot; onbeforedomupdate=&quot;#{'#{'}onbeforedomupdate}&quot; tabindex=&quot;#{'#{'}tabindex}&quot; render=&quot;#{'#{'}render}&quot;
-                    execute=&quot;#{'#{'}execute}&quot; oncomplete=&quot;#{'#{'}oncomplete}&quot; onblur=&quot;#{'#{'}onblur}&quot; onclick=&quot;#{'#{'}onclick}&quot;
-                    ondblclick=&quot;#{'#{'}ondblclick}&quot; onfocus=&quot;#{'#{'}onfocus}&quot; onkeydown=&quot;#{'#{'}onkeydown}&quot; onkeypress=&quot;#{'#{'}onkeypress}&quot;
-                    onkeyup=&quot;#{'#{'}onkeyup}&quot; onmousedown=&quot;#{'#{'}onmousedown}&quot; onmousemove=&quot;#{'#{'}onmousemove}&quot; onmouseout=&quot;#{'#{'}onmouseout}&quot;
-                    onmouseover=&quot;#{'#{'}onmouseover}&quot; onmouseup=&quot;#{'#{'}onmouseup}&quot; /&gt;
+              &lt;a4j:commandButton accesskey=&quot;#{'#{'}accesskey}&quot; alt=&quot;#{'#{'}alt}&quot; type=&quot;image&quot; image=&quot;/img/shell/spacer.gif&quot;
+                  actionListener=&quot;#{'#{'}mappedActionListener}&quot; action=&quot;#{'#{'}mappedAction}&quot; bypassUpdates=&quot;#{'#{'}bypassUpdates}&quot;
+                  data=&quot;#{'#{'}data}&quot; disabled=&quot;#{'#{'}disabled}&quot; eventsQueue=&quot;#{'#{'}eventsQueue}&quot; focus=&quot;#{'#{'}focus}&quot; immediate=&quot;#{'#{'}immediate}&quot;
+                  limitRender=&quot;#{'#{'}limitRender}&quot; onbeforedomupdate=&quot;#{'#{'}onbeforedomupdate}&quot; tabindex=&quot;#{'#{'}tabindex}&quot; render=&quot;#{'#{'}render}&quot;
+                  execute=&quot;#{'#{'}execute}&quot; oncomplete=&quot;#{'#{'}oncomplete}&quot; onblur=&quot;#{'#{'}onblur}&quot; onclick=&quot;#{'#{'}onclick}&quot;
+                  ondblclick=&quot;#{'#{'}ondblclick}&quot; onfocus=&quot;#{'#{'}onfocus}&quot; onkeydown=&quot;#{'#{'}onkeydown}&quot; onkeypress=&quot;#{'#{'}onkeypress}&quot;
+                  onkeyup=&quot;#{'#{'}onkeyup}&quot; onmousedown=&quot;#{'#{'}onmousedown}&quot; onmousemove=&quot;#{'#{'}onmousemove}&quot; onmouseout=&quot;#{'#{'}onmouseout}&quot;
+                  onmouseover=&quot;#{'#{'}onmouseover}&quot; onmouseup=&quot;#{'#{'}onmouseup}&quot; /&gt;
 
-                &lt;/a4j:outputPanel&gt;
-            &lt;/richx:actionMapper&gt;
+            &lt;/a4j:outputPanel&gt;
+          &lt;/richx:actionMapper&gt;
         &lt;/ui:composition&gt;
         </pre>
         <p>
@@ -91,8 +91,8 @@
         <pre class="brush: xml, gutter: false">
         …
         &lt;richx:commandButton value=&quot;#{'#{'}messages['login.register']}&quot; immediate=&quot;true&quot;
-                        actionListener=&quot;#{'#{'}authenticator.goToRegister()}&quot; render=&quot;mainArea&quot;
-                        oncomplete=&quot;#{'#{'}rich:component('loginPanel')}.hide();&quot; execute=&quot;@this&quot; /&gt;
+            actionListener=&quot;#{'#{'}authenticator.goToRegister()}&quot; render=&quot;mainArea&quot;
+            oncomplete=&quot;#{'#{'}rich:component('loginPanel')}.hide();&quot; execute=&quot;@this&quot; /&gt;
         …
         </pre>
         <p>
@@ -127,7 +127,6 @@
         &lt;ui:composition xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
                 … 
             xmlns:richx=&quot;http://richfaces.org/richx&quot;&gt;
-                …
         </pre>
         <p>
             A more complex part of the button implementation, as we said earlier, is <strong><span

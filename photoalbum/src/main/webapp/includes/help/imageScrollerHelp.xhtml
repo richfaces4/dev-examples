@@ -46,28 +46,28 @@
         </p>
         <pre class="brush: xml, gutter: false, highlight: [2,3]">
             &lt;a4j:repeat value=&quot;#{'#{'}model.selectedAlbum.images}&quot; rows=&quot;5&quot; var=&quot;img&quot; id=&quot;repeat&quot; rowKeyVar=&quot;rk&quot;&gt;
-                &lt;a4j:outputPanel layout=&quot;block&quot;
-                    styleClass=&quot;preview_box_photo_nav #{'#{'}model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}&quot;&gt;
-                    &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;preview_box_photo_80&quot;&gt;
-                        &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; value=&quot;/img/shell/frame_photo_80.png&quot; /&gt;
-                        &lt;h:panelGrid cellpadding=&quot;0&quot; cellspacing=&quot;2&quot;&gt;
-                            &lt;h:panelGroup layout=&quot;block&quot;&gt;
-                                &lt;a4j:mediaOutput element=&quot;img&quot; createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
-                                    value=&quot;#{'#{'}fileManager.transformPath(img.fullPath, '_small80')}&quot; mimeType=&quot;image/jpeg&quot; /&gt;
-                                &lt;br /&gt;
-                            &lt;/h:panelGroup&gt;
-                        &lt;/h:panelGrid&gt;
-                        &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_name&quot;&gt;
-                            &lt;h:outputText value=&quot;#{'#{'}img.name}&quot; /&gt;
-                        &lt;/h:panelGroup&gt;
-                        &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_data&quot;&gt;
-                            &lt;h:outputText value=&quot;#{'#{'}rk + 1}&quot; /&gt;
-                        &lt;/h:panelGroup&gt;
+              &lt;a4j:outputPanel layout=&quot;block&quot;
+                  styleClass=&quot;preview_box_photo_nav #{'#{'}model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}&quot;&gt;
+                &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;preview_box_photo_80&quot;&gt;
+                  &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; value=&quot;/img/shell/frame_photo_80.png&quot; /&gt;
+                  &lt;h:panelGrid cellpadding=&quot;0&quot; cellspacing=&quot;2&quot;&gt;
+                    &lt;h:panelGroup layout=&quot;block&quot;&gt;
+                      &lt;a4j:mediaOutput element=&quot;img&quot; createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
+                         value=&quot;#{'#{'}fileManager.transformPath(img.fullPath, '_small80')}&quot; mimeType=&quot;image/jpeg&quot; /&gt;
+                      &lt;br /&gt;
                     &lt;/h:panelGroup&gt;
+                  &lt;/h:panelGrid&gt;
+                  &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_name&quot;&gt;
+                    &lt;h:outputText value=&quot;#{'#{'}img.name}&quot; /&gt;
+                  &lt;/h:panelGroup&gt;
+                  &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_data&quot;&gt;
+                    &lt;h:outputText value=&quot;#{'#{'}rk + 1}&quot; /&gt;
+                  &lt;/h:panelGroup&gt;
+                &lt;/h:panelGroup&gt;
 
-                    &lt;a4j:ajax event=&quot;click&quot; render=&quot;imageHeader, mainImage, …&quot; listener=&quot;#{'#{'}controller.showImage(img)}&quot;
-                              onbeforesubmit=&quot;select('#{'#{'}rk}:scrollerImage');&quot; execute=&quot;@this&quot; /&gt;
-                &lt;/a4j:outputPanel&gt;
+                &lt;a4j:ajax event=&quot;click&quot; render=&quot;imageHeader, mainImage, …&quot; listener=&quot;#{'#{'}controller.showImage(img)}&quot;
+                   onbeforesubmit=&quot;select('#{'#{'}rk}:scrollerImage');&quot; execute=&quot;@this&quot; /&gt;
+              &lt;/a4j:outputPanel&gt;
             &lt;/a4j:repeat&gt;
         </pre>
         <p>
@@ -108,23 +108,23 @@
         </p>
         <pre class="brush: xml, gutter: false, highlight: [6, 17]">
         &lt;h:panelGrid columns=&quot;3&quot;&gt;
-            &lt;h:panelGroup styleClass=&quot;image-scroller-left-arrow&quot;
-                style=&quot;width: 56px; height:34px; display: inline-block; 
-                    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');&quot;&gt;
-                &lt;h:graphicImage styleClass=&quot;ie6transparency&quot; value=&quot;img/shell/arr_left.png&quot;
-                    onclick=&quot;#{'#{'}rich:component('scroller')}.fastRewind()&quot; /&gt;
-            &lt;/h:panelGroup&gt;
+          &lt;h:panelGroup styleClass=&quot;image-scroller-left-arrow&quot;
+              style=&quot;width: 56px; height:34px; display: inline-block; 
+              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');&quot;&gt;
+            &lt;h:graphicImage styleClass=&quot;ie6transparency&quot; value=&quot;img/shell/arr_left.png&quot;
+                onclick=&quot;#{'#{'}rich:component('scroller')}.fastRewind()&quot; /&gt;
+          &lt;/h:panelGroup&gt;
             
-            &lt;rich:dataScroller page=&quot;#{'#{'}controller.page}&quot; styleClass=&quot;image-scroller&quot; lastPageMode=&quot;full&quot; for=&quot;repeat&quot;
-                render=&quot;imagesTable&quot; boundaryControls=&quot;hide&quot; stepControls=&quot;hide&quot; id=&quot;scroller&quot; fastControls=&quot;hide&quot;&gt;
-            &lt;/rich:dataScroller&gt;
+          &lt;rich:dataScroller page=&quot;#{'#{'}controller.page}&quot; styleClass=&quot;image-scroller&quot; lastPageMode=&quot;full&quot; for=&quot;repeat&quot;
+              render=&quot;imagesTable&quot; boundaryControls=&quot;hide&quot; stepControls=&quot;hide&quot; id=&quot;scroller&quot; fastControls=&quot;hide&quot;&gt;
+          &lt;/rich:dataScroller&gt;
             
-            &lt;h:panelGroup styleClass=&quot;image-scroller-right-arrow&quot;
-                style=&quot;width: 56px; height:34px; display: inline-block; 
-                    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');&quot;&gt;
-                &lt;h:graphicImage value=&quot;img/shell/arr_right.png&quot; styleClass=&quot;ie6transparency&quot; height=&quot;34&quot; width=&quot;56&quot; border=&quot;0&quot;
-                    onclick=&quot;#{'#{'}rich:component('scroller')}.fastForward()&quot; /&gt;
-            &lt;/h:panelGroup&gt;
+          &lt;h:panelGroup styleClass=&quot;image-scroller-right-arrow&quot;
+              style=&quot;width: 56px; height:34px; display: inline-block; 
+              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');&quot;&gt;
+            &lt;h:graphicImage value=&quot;img/shell/arr_right.png&quot; styleClass=&quot;ie6transparency&quot; height=&quot;34&quot; width=&quot;56&quot; border=&quot;0&quot;
+                onclick=&quot;#{'#{'}rich:component('scroller')}.fastForward()&quot; /&gt;
+          &lt;/h:panelGroup&gt;
         &lt;/h:panelGrid&gt;
         </pre>
         <p>

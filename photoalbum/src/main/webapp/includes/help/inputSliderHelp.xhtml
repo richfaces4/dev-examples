@@ -40,8 +40,8 @@
         </p>
         <pre class="brush: xml, gutter: false">
             &lt;ui:include src=&quot;/includes/image/inputNumberSlider.xhtml&quot;&gt;
-                &lt;ui:param name=&quot;size&quot; value=&quot;#{'#{'}fn:length(model.images)}&quot; /&gt;
-                &lt;ui:param name=&quot;renderArea&quot; value=&quot;userAlbumImages&quot; /&gt;
+              &lt;ui:param name=&quot;size&quot; value=&quot;#{'#{'}fn:length(model.images)}&quot; /&gt;
+              &lt;ui:param name=&quot;renderArea&quot; value=&quot;userAlbumImages&quot; /&gt;
             &lt;/ui:include&gt;
         </pre>
         <p>
@@ -51,21 +51,21 @@
         </p>
         <pre class="brush: xml, gutter: false">
         &lt;ui:composition … &gt;
-            &lt;div&gt;
+          &lt;div&gt;
                 …
-                &lt;rich:inputNumberSlider enableManualInput=&quot;false&quot;
-                    value=&quot;#{'#{'}imageSizeHelper.value}&quot;
-                    minValue=&quot;80&quot;
-                    maxValue=&quot;200&quot;
-                    showArrows=&quot;false&quot;
-                    showBoundaryValues=&quot;true&quot;
-                    showInput=&quot;false&quot;
-                    step=&quot;40&quot;
-                    width=&quot;100&quot;&gt;
-                    &lt;a4j:ajax event=&quot;change&quot; render=&quot;#{'#{'}renderArea}&quot; /&gt;
-                &lt;/rich:inputNumberSlider&gt;
+            &lt;rich:inputNumberSlider enableManualInput=&quot;false&quot;
+                value=&quot;#{'#{'}imageSizeHelper.value}&quot;
+                minValue=&quot;80&quot;
+                maxValue=&quot;200&quot;
+                showArrows=&quot;false&quot;
+                showBoundaryValues=&quot;true&quot;
+                showInput=&quot;false&quot;
+                step=&quot;40&quot;
+                width=&quot;100&quot;&gt;
+              &lt;a4j:ajax event=&quot;change&quot; render=&quot;#{'#{'}renderArea}&quot; /&gt;
+            &lt;/rich:inputNumberSlider&gt;
                 …
-            &lt;/div&gt;
+          &lt;/div&gt;
         &lt;/ui:composition&gt;
         </pre>
         <p>
@@ -132,34 +132,34 @@
         <pre class="brush: xml, gutter: false">
         …
         &lt;h:panelGroup id=&quot;userAlbumImages&quot;&gt;
-            &lt;a4j:repeat id=&quot;imageList&quot; value=&quot;#{'#{'}model.images}&quot; var=&quot;image&quot; rows=&quot;20&quot;&gt;
-                &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;#{'#{'}imageSizeHelper.currentDimension.cssClass}&quot;&gt;
-                    &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; style=&quot;#{'#{'}imageSizeHelper.currentDimension.imageBgStyle}&quot;
-                        value=&quot;#{'#{'}imageSizeHelper.currentDimension.imageBg}&quot; /&gt;
+          &lt;a4j:repeat id=&quot;imageList&quot; value=&quot;#{'#{'}model.images}&quot; var=&quot;image&quot; rows=&quot;20&quot;&gt;
+            &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;#{'#{'}imageSizeHelper.currentDimension.cssClass}&quot;&gt;
+              &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; style=&quot;#{'#{'}imageSizeHelper.currentDimension.imageBgStyle}&quot;
+                   value=&quot;#{'#{'}imageSizeHelper.currentDimension.imageBg}&quot; /&gt;
                         
-                    &lt;h:panelGrid cellpadding=&quot;0&quot;&gt;
-                        &lt;h:panelGroup&gt;
-                            &lt;a4j:commandLink actionListener=&quot;#{'#{'}controller.showImage(image)}&quot; render=&quot;mainArea, treePanel&quot;&gt;
-                                &lt;a4j:mediaOutput id=&quot;img&quot; element=&quot;img&quot; createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
-                                    style=&quot;border : 1px solid #FFFFFF;&quot; mimeType=&quot;image/jpeg&quot;
-                                    value=&quot;#{'#{'}fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}&quot;&gt;
-                                    &lt;f:param value=&quot;#{'#{'}imageSizeHelper.currentDimension.x}&quot; name=&quot;x&quot; /&gt;
-                                    &lt;rich:dragSource rendered=&quot;#{'#{'}controller.isUserImage(image)}&quot; render=&quot;mainArea, treePanel&quot;
-                                        id=&quot;dragSource&quot; dragIndicator=&quot;iDragIndicator&quot; type=&quot;image&quot; dragValue=&quot;#{'#{'}image}&quot; /&gt;
-                                &lt;/a4j:mediaOutput&gt;
-                            &lt;/a4j:commandLink&gt;
-                            &lt;br /&gt;
-                        &lt;/h:panelGroup&gt;
-                    &lt;/h:panelGrid&gt;
-                    
-                    &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_name&quot;&gt;#{'#{'}image.name}&lt;/h:panelGroup&gt;
-                    
-                    &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_data&quot;&gt;
-                        &lt;h:outputText value=&quot;#{'#{'}image.created}&quot;&gt;
-                            &lt;f:convertDateTime /&gt;
-                        &lt;/h:outputText&gt;
-                    &lt;/h:panelGroup&gt;
+              &lt;h:panelGrid cellpadding=&quot;0&quot;&gt;
+                &lt;h:panelGroup&gt;
+                  &lt;a4j:commandLink actionListener=&quot;#{'#{'}controller.showImage(image)}&quot; render=&quot;mainArea, treePanel&quot;&gt;
+                    &lt;a4j:mediaOutput id=&quot;img&quot; element=&quot;img&quot; createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
+                        style=&quot;border : 1px solid #FFFFFF;&quot; mimeType=&quot;image/jpeg&quot;
+                        value=&quot;#{'#{'}fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}&quot;&gt;
+                      &lt;f:param value=&quot;#{'#{'}imageSizeHelper.currentDimension.x}&quot; name=&quot;x&quot; /&gt;
+                      &lt;rich:dragSource rendered=&quot;#{'#{'}controller.isUserImage(image)}&quot; render=&quot;mainArea, treePanel&quot;
+                        id=&quot;dragSource&quot; dragIndicator=&quot;iDragIndicator&quot; type=&quot;image&quot; dragValue=&quot;#{'#{'}image}&quot; /&gt;
+                    &lt;/a4j:mediaOutput&gt;
+                  &lt;/a4j:commandLink&gt;
+                  &lt;br /&gt;
                 &lt;/h:panelGroup&gt;
+              &lt;/h:panelGrid&gt;
+                 
+              &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_name&quot;&gt;#{'#{'}image.name}&lt;/h:panelGroup&gt;
+                 
+              &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;photo_data&quot;&gt;
+                &lt;h:outputText value=&quot;#{'#{'}image.created}&quot;&gt;
+                  &lt;f:convertDateTime /&gt;
+                &lt;/h:outputText&gt;
+              &lt;/h:panelGroup&gt;
+            &lt;/h:panelGroup&gt;
                 
                 …
             &lt;/a4j:repeat&gt;
