@@ -81,12 +81,12 @@ public class User implements Serializable {
     @NotNull
     @NotEmpty
     @Column(length = 30)
-    private String fbId;
+    private String fbId = "1";
     
     @NotNull
     @NotEmpty
     @Column(length = 30)
-    private String gPlusId;
+    private String gPlusId = "1";
 
     @NotNull
     private String passwordHash;

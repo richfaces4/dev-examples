@@ -172,7 +172,6 @@ public class Authenticator implements Serializable {
                 User newUser = new User();
 
                 newUser.setFbId(facebookId);
-                newUser.setgPlusId("1");
                 newUser.setFirstName(userInfo.getString("first_name"));
                 newUser.setSecondName(userInfo.getString("last_name"));
                 newUser.setEmail(userInfo.getString("email"));
@@ -206,7 +205,7 @@ public class Authenticator implements Serializable {
 
     public boolean authenticateWithGPlus() {
         JSONObject userInfo = gBean.getUserInfo();
-
+        
         try {
             // String pictureUrl = userInfo.getJSONObject("picture").getJSONObject("data").getString("url");
             // userBean.setFbPhotoUrl(pictureUrl);
@@ -225,7 +224,6 @@ public class Authenticator implements Serializable {
             if (user == null) { // user does not exist
                 User newUser = new User();
 
-                newUser.setFbId("1");
                 newUser.setgPlusId(gPlusId);
                 newUser.setFirstName(userInfo.getJSONObject("name").getString("givenName"));
                 newUser.setSecondName(userInfo.getJSONObject("name").getString("familyName"));
@@ -296,7 +294,6 @@ public class Authenticator implements Serializable {
         // This check is actual only on livedemo server to prevent hacks.
         // Only admins can mark user as pre-defined
         user.setPreDefined(false);
-        user.setFbId("1");
         if (!handleAvatar(user)) {
             return;
         }
