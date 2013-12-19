@@ -313,14 +313,14 @@ var G = {};
 
     var clientId = '1039898720906.apps.googleusercontent.com',
         apiKey = 'AIzaSyCdgeC_TiJqDCOBkdoF51n6s2WUZDg1nIM',
-        scopes = 'https://picasaweb.google.com/data/ https://www.googleapis.com/auth/plus.login';
+        scopes = 'https://picasaweb.google.com/data/ https://www.googleapis.com/auth/plus.me';
 
     logAndGetAlbums = function(callbacks) {
         return function(authResult) {
             if (authResult && !authResult.error) {
                 getUserInfo(authResult.access_token, callbacks.infoCallback, callbacks.albumCallback);
             } else {
-                callback.errorCallback("Error occured" + errorDelimiter + authResult.error);
+                callbacks.errorCallback("Error occured" + errorDelimiter + authResult.error);
             }
         };
     };

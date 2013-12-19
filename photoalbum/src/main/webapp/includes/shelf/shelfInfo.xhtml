@@ -64,10 +64,10 @@
         </h:panelGroup>
         <h:panelGroup>
             <c:if test="#{controller.isUserShelf(shelf)}">
-                <a4j:commandLink value="#{messages['shelf.edit']} "
+                <a4j:commandLink value="#{messages['shelf.edit']}"
                                  actionListener="#{controller.startEditShelf(shelf)}" render="mainArea" />
                 <h:outputText value=" #{messages['delimiter']} " />
-                <a4j:commandLink value="#{messages['shelf.delete']} "
+                <a4j:commandLink value="#{messages['shelf.delete']}"
                                  actionListener="#{confirmationPopupHelper.initShelfData(confirmationPopupHelper.deleteShelf,messages['shelf.delete.confirm'],shelf)}"
                                  oncomplete="#{rich:component('confirmation')}.show()" render="confirmation" execute="@this" />
             </c:if>

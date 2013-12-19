@@ -64,10 +64,10 @@
         </h:panelGroup>
         <h:panelGroup style="position: relative; top: 20px;" >
             <c:if test="#{controller.isUserAlbum(album)}">
-                <a4j:commandLink value="#{messages['album.edit']} "
+                <a4j:commandLink value="#{messages['album.edit']}"
                                  actionListener="#{controller.startEditAlbum(album)}" render="mainArea" execute="@this" />
                 <h:outputText value=" #{messages['delimiter']} " />
-                <a4j:commandLink value="#{messages['album.delete']} "
+                <a4j:commandLink value="#{messages['album.delete']}"
                                  actionListener="#{confirmationPopupHelper.initAlbumData(confirmationPopupHelper.deleteAlbum,messages['album.delete.confirm'],album)}"
                                  oncomplete="#{rich:component('confirmation')}.show()" render="confirmation" execute="@this" />
             </c:if>
