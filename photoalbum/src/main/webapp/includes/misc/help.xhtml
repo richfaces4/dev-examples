@@ -24,7 +24,7 @@
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j">
         <h:outputStylesheet name="help.css" library="stylesheet" />
-    <rich:popupPanel id="helpPanel" width="1100" height="650" onshow="SyntaxHighlighter.highlight(this)">
+    <rich:popupPanel id="helpPanel" width="1100" height="650" onshow="#{rich:component('helpPanel')}.cdiv.css('display','none').fadeIn(800); SyntaxHighlighter.highlight(this);">
         <f:facet name="header">
             <h:graphicImage value="/img/icons/help_sign.png" />
             #{messages['how_it_works']}</f:facet>
@@ -34,9 +34,6 @@
                                 onclick="#{rich:component('helpPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>
-
-        <!-- <rich:effect type="Appear" name="appearFunc" /> -->
-        <!-- not implemented in RF 4 -->
 
         <h:panelGroup>
             <div style="height: 570px; padding-bottom: 10px; overflow-y: auto; overflow-x: hidden">
