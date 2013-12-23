@@ -268,7 +268,7 @@ public class User implements Serializable {
      */
     public void addShelf(Shelf shelf) {
         if (shelf == null) {
-            throw new IllegalArgumentException("Null shelf!");
+            throw new IllegalArgumentException("Null album group!");
         }
         if (!shelves.contains(shelf)) {
             shelf.setOwner(this);
@@ -283,12 +283,12 @@ public class User implements Serializable {
      */
     public void removeShelf(Shelf shelf) {
         if (shelf == null) {
-            throw new IllegalArgumentException("Null shelf");
+            throw new IllegalArgumentException("Null album group");
         }
         if (shelf.getOwner().getLogin().equals(this.getLogin())) {
             shelves.remove(shelf);
         } else {
-            throw new IllegalArgumentException("Shelf not belongs to this user!");
+            throw new IllegalArgumentException("Album Groups does not belong to this user!");
         }
     }
 

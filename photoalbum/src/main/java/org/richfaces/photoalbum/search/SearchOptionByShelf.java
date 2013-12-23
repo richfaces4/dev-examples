@@ -37,8 +37,8 @@ import org.richfaces.photoalbum.service.PhotoAlbumException;
 public class SearchOptionByShelf extends ISearchOption {
 
     private static final String TEMPLATE = "/includes/search/result/shelfResult.xhtml";
-    private static final String SHELF_SEARCH_RESULT = "Shelf search result";
-    private static final String SHELVES = "Shelves";
+    private static final String SHELF_SEARCH_RESULT = "Album Group search result";
+    private static final String SHELVES = "Album Groups";
 
     /*
      * (non-Javadoc)

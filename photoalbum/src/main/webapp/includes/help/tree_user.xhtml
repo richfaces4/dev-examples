@@ -44,9 +44,9 @@
         </p>
         <div xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note">
             <h2>Note:</h2>
-            <p>Due to "Shelves - Albums - Photos" hierarchy we can say that photos could be moved between albums, albums
-                could be moved between shelves. To avoid a mishmash, it's not allowed to place photos directly in shelves as
-                well as nesting shelves inside shelves or albums inside albums.</p>
+            <p>Due to "Album Groups - Albums - Photos" hierarchy we can say that photos could be moved between albums, albums
+                could be moved between album groups. To avoid a mishmash, it's not allowed to place photos directly in album groups as
+                well as nesting album groups inside album groups or albums inside albums.</p>
         </div>
         <p>Let's explore how drag-and-drop works for albums.</p>
         <p>
@@ -68,7 +68,7 @@
             &lt;/rich:treeModelAdaptor&gt;
         </pre>
         <p>
-            To provide drop functionality for the marked albums, we should mark Shelves as drop zones in the application code
+            To provide drop functionality for the marked albums, we should mark Album Groups as drop zones in the application code
             too. For this purpose we add the <em><span class="property">&lt;rich:dropTarget&gt;</span></em> with <em><span
                 class="property">"acceptedTypes"</span></em> attribute to the "Shelf" node and in order to process drop on the server
             side we specify a listener with the <em><span class="property">"dropListener"</span></em> attribute in the same
