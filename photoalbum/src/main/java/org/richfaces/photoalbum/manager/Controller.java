@@ -23,7 +23,7 @@ package org.richfaces.photoalbum.manager;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
@@ -59,7 +59,7 @@ import org.richfaces.photoalbum.util.Preferred;
  */
 
 @Named
-@ConversationScoped
+@SessionScoped
 public class Controller implements Serializable {
 
     private static final long serialVersionUID = 5656562187249324512L;
