@@ -35,7 +35,8 @@
     <h:panelGroup layout="block" style="margin : 30px 0px 0px 0px;">
         <h:panelGroup layout="block" style="float : left; cursor : pointer">
             <a4j:commandLink rendered="#{fn:length(model.images) > 0}" actionListener="#{slideshow.startSlideshow()}"
-                             styleClass="slideshow-link" render="mainArea, slideShowModalPanel" execute="@this, slideShowModalPanel">
+                             styleClass="slideshow-link" render="slideShowModalPanel" execute="@this, slideShowModalPanel"
+                             oncomplete="#{rich:component('slideShowModalPanel')}.show()">
                 <h:graphicImage value="/img/shell/tree_icon_slid.png" width="27" height="16" alt=""
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                 <h:outputText value="#{messages['slideshow.start']}" />
@@ -54,7 +55,8 @@
                                 value="#{imageSizeHelper.currentDimension.imageBg}" />
                 <h:panelGrid cellpadding="0">
                     <h:panelGroup>
-                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select('#{rk}:img');" render="mainArea, treePanel">
+                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select('#{rk}:img');"
+                                         render="mainArea, treePanel">
                             <a4j:mediaOutput id="img" element="img" createContent="#{imageLoader.paintImage}"
                                              style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"
                                              value="#{fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}">
