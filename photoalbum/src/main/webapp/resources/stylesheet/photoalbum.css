@@ -1499,8 +1499,14 @@ input[type='submit'].fb-button {
     font-weight: bold;
 }
 
+.fb-pb {
+    clear: both;
+}
+
 .fb-pb > .rf-pb-rmng {
     max-width: 100px;
+    border-style: none;
+    background: none;
 }
 
 /* small buttons */
