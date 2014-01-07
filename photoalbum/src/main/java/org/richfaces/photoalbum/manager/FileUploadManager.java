@@ -239,7 +239,7 @@ public class FileUploadManager implements Serializable {
 
     private void setupDimensions(Image image, Directory exifDirectory, Directory jpgDirectory) {
         try {
-            if (exifDirectory.containsTag(ExifSubIFDDirectory.TAG_EXIF_IMAGE_WIDTH)
+            if (exifDirectory != null && exifDirectory.containsTag(ExifSubIFDDirectory.TAG_EXIF_IMAGE_WIDTH)
                 && exifDirectory.containsTag(ExifSubIFDDirectory.TAG_EXIF_IMAGE_HEIGHT)) {
                 int width = exifDirectory.getInt(ExifSubIFDDirectory.TAG_EXIF_IMAGE_WIDTH);
                 image.setWidth(width);
