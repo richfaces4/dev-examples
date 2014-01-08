@@ -22,21 +22,13 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx" template="layout/template.xhtml">
-    <ui:define name="searchWidget">
-        <ui:include src="includes/search/searchWidget.xhtml" />
-    </ui:define>
-    <ui:define name="menu">
-        <ui:include src="/includes/index/menu.xhtml" />
-    </ui:define>
-    <ui:define name="tree">
-        <ui:include src="/includes/index/tree.xhtml" />
-    </ui:define>
-    <ui:define name="body">
-        <h:panelGroup id="mainArea" layout="block">
-            <h:panelGroup styleClass="content_box" layout="block">
-                <ui:include src="#{model.mainArea.template}" />
-            </h:panelGroup>
-        </h:panelGroup>
-    </ui:define>
+    xmlns:a4j="http://richfaces.org/a4j">
+    <ui:param name="helpPage" value="/includes/help/#{page}"/>
+    <a4j:outputPanel>
+        [<a4j:commandLink rendered="#{help.isShowHelp()}" style="#{style}"
+            actionListener="#{help.navigateTo(helpPage)}"
+            oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this" value="?">
+            <rich:tooltip>What is this?</rich:tooltip>
+        </a4j:commandLink>]
+    </a4j:outputPanel>
 </ui:composition>

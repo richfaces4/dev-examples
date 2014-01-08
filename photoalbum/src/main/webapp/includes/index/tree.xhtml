@@ -31,15 +31,9 @@
                     <h:outputText value="#{messages['public_shelves']}" />
                 </h2>
             </a4j:commandLink>
-            <a4j:commandLink rendered="#{help.isShowHelp()}"
-                actionListener="#{help.navigateTo('/includes/help/tree_predefined.xhtml')}"
-                oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel">
-                <h:panelGroup
-                    style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                    <h:graphicImage style="border:none;" styleClass="ie6transparency" border="0" height="34" width="34"
-                        value="img/icons/help_sign.png" />
-                </h:panelGroup>
-            </a4j:commandLink>
+            <ui:include src="/includes/help/button.xhtml">
+                <ui:param name="page" value="tree_predefined.xhtml" />
+            </ui:include>
         </h:panelGrid>
 
         <br />
@@ -92,15 +86,9 @@
                     <h:outputText value="#{messages['myAlbumShelves']}" />
                 </h2>
             </a4j:commandLink>
-            <a4j:commandLink rendered="#{help.isShowHelp()}"
-                actionListener="#{help.navigateTo('/includes/help/tree_user.xhtml')}"
-                oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel">
-                <h:panelGroup
-                    style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                    <h:graphicImage style="border:none;" styleClass="ie6transparency" border="0" height="34" width="34"
-                        value="img/icons/help_sign.png" />
-                </h:panelGroup>
-            </a4j:commandLink>
+            <ui:include src="/includes/help/button.xhtml">
+                <ui:param name="page" value="tree_user.xhtml" />
+            </ui:include>
         </h:panelGrid>
         <br />
         <rich:dragIndicator id="dragIndicator">
@@ -186,14 +174,9 @@
                 <h:outputText value="G+ Albums" />
             </h2>
         </a4j:commandLink>
-        <a4j:commandLink actionListener="#{help.navigateTo('/includes/help/googleAlbums.xhtml')}"
-            oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this">
-            <h:panelGroup
-                style="cursor: pointer; border: none; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                <h:graphicImage height="34" width="34" border="0" style="border: none;" styleClass="ie6transparency"
-                    value="img/icons/help_sign.png" />
-            </h:panelGroup>
-        </a4j:commandLink>
+        <ui:include src="/includes/help/button.xhtml">
+            <ui:param name="page" value="googleAlbums.xhtml" />
+        </ui:include>
     </h:panelGrid>
 
     <h:panelGroup>

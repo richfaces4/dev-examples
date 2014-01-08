@@ -41,15 +41,9 @@
                                             style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
                         </a4j:commandLink>
-                        <a4j:commandLink rendered="#{help.isShowHelp()}"
-                                         actionListener="#{help.navigateTo('/includes/help/slideshow.xhtml')}"
-                                         oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel">
-                            <h:panelGroup
-                                style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                                <h:graphicImage style="border:none;" styleClass="ie6transparency" height="34" width="34"
-                                                value="img/icons/help_sign.png" />
-                            </h:panelGroup>
-                        </a4j:commandLink>
+                        <ui:include src="/includes/help/button.xhtml">
+                            <ui:param name="page" value="slideshow.xhtml" />
+                        </ui:include>
                     </h:panelGroup>
                     <a4j:mediaOutput id="img" element="img" styleClass="main-image" createContent="#{imageLoader.paintImage}"
                                      style="border : 3px solid #808080;"

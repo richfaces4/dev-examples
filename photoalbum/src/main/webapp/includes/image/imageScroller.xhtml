@@ -60,15 +60,10 @@
             <rich:dataScroller styleClass="image-scroller" for="repeat" page="#{controller.page}"
                                render="repeat, imagesTable" boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
             </rich:dataScroller>
-            <a4j:commandLink rendered="#{help.isShowHelp()}" style="position: absolute; right: -65px; top: 80px;"
-                             actionListener="#{help.navigateTo('/includes/help/imageScrollerHelp.xhtml')}"
-                             oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel">
-                <h:panelGroup
-                    style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                    <h:graphicImage style="border:none;" height="34" width="34" border="0" styleClass="ie6transparency"
-                                    value="img/icons/help_sign.png"/>
-                </h:panelGroup>
-            </a4j:commandLink>
+            <ui:include src="/includes/help/button.xhtml">
+                <ui:param name="page" value="mageScrollerHelp.xhtml" />
+                <ui:param name="style" value="position: absolute; right: -65px; top: 80px;" />
+            </ui:include>
             <h:panelGroup styleClass="image-scroller-right-arrow"
                           style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');">
                 <h:graphicImage id="scrollToNext" value="img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56" border="0"

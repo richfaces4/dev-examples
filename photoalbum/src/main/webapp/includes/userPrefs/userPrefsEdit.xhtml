@@ -191,15 +191,9 @@
                     </td>
                     <td>
                         <rich:messages for="userEmail" styleClass="required" />
-                        <a4j:commandLink rendered="#{help.isShowHelp()}"
-                            actionListener="#{help.navigateTo('/includes/help/validationHelp.xhtml')}"
-                            oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" immediate="true">
-                            <h:panelGroup
-                                style="cursor: pointer; width: 34px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                                <h:graphicImage style="border:none;" border="0" height="34" width="34"
-                                    styleClass="ie6transparency" value="/img/icons/help_sign.png" />
-                            </h:panelGroup>
-                        </a4j:commandLink>
+                        <ui:include src="/includes/help/button.xhtml">
+                            <ui:param name="page" value="validationHelp.xhtml" />
+                        </ui:include>
                     </td>
                 </tr>
                 <tr>

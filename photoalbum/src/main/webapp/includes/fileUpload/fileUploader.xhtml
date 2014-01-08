@@ -39,20 +39,14 @@
                         </rich:select>
                     </a4j:region>
                 </h:panelGroup>
-                <h:panelGrid columns="3">
+                <h:panelGrid columns="2">
                     <richx:commandButton value="#{messages['create']}" data="#{albumManager.errorInCreate}"
                                          actionListener="#{albumManager.createAlbum(model.selectedShelf, false)}"
                                          oncomplete="if(!event.data)#{rich:component('albumModalPanel')}.show()" render="albumModalPanel"
                                          execute="@this" />
-                    <a4j:commandLink rendered="#{help.isShowHelp()}"
-                                     actionListener="#{help.navigateTo('/includes/help/buttonHelp.xhtml')}"
-                                     oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this">
-                        <h:panelGroup
-                            style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                            <h:graphicImage style="border:none;" styleClass="ie6transparency" border="0" height="34" width="34"
-                                            value="img/icons/help_sign.png" />
-                        </h:panelGroup>
-                    </a4j:commandLink>
+                    <ui:include src="/includes/help/button.xhtml">
+                        <ui:param name="page" value="buttonHelp.xhtml" />
+                    </ui:include>
                 </h:panelGrid>
             </h:panelGroup>
         </h:panelGroup>
@@ -65,15 +59,9 @@
                 </rich:fileUpload>
             </h:panelGroup>
             <h:panelGroup layout="block" style="padding-top:10px;">
-                <a4j:commandLink rendered="#{help.isShowHelp()}"
-                                 actionListener="#{help.navigateTo('/includes/help/fileUploadHelp.xhtml')}"
-                                 oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this">
-                    <h:panelGroup
-                        style="cursor: pointer; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                        <h:graphicImage style="border:none;" styleClass="ie6transparency" border="0" height="34" width="34"
-                                        value="img/icons/help_sign.png" />
-                    </h:panelGroup>
-                </a4j:commandLink>
+                <ui:include src="/includes/help/button.xhtml">
+                    <ui:param name="page" value="tfileUploadHelp.xhtml" />
+                </ui:include>
             </h:panelGroup>
         </h:panelGrid>
     </a4j:region>
