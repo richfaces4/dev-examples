@@ -370,6 +370,16 @@ a {
     color: #DF6400 !important;
 }
 
+a h2, h2 {
+    color: black;
+    text-decoration: underline;
+    margin-bottom: 2px;
+}
+
+h2 {
+    text-decoration: none;
+}
+
 h1 {
     font-size: 175% !important;
     font-weight: normal;
@@ -1510,7 +1520,7 @@ input[type='submit'].fb-button {
 }
 
 /* small buttons */
-.FB-btn-small, .G-btn-small {
+.FB-btn-medium, .G-btn-medium {
     display: block;
     height: 32px;
     width: 32px;
@@ -1518,17 +1528,34 @@ input[type='submit'].fb-button {
     margin: 0px 4px;
 }
 
-.FB-btn-small {
+.FB-btn-small, .G-btn-small {
+    display: block;
+    height: 16px;
+    width: 16px;
+    float: left;
+    margin: 0px 4px;
+}
+
+.FB-btn-medium {
     background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/j_i0CTUUUEe.png);
     background-position: -6px -4px;
 }
 
-.G-btn-small {
+.G-btn-medium {
     background-image: url(http://ssl.gstatic.com/images/icons/gplus-32.png);
 }
 
+.FB-btn-small {
+    background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yx/r/j_i0CTUUUEe.png);
+    background-position: -20px -180px;
+}
+
+.G-btn-small {
+    background-image: url(http://ssl.gstatic.com/images/icons/gplus-16.png);
+}
+
 /* disabled buttons */
-span.FB-btn-small, span.G-btn-small {
+span.FB-btn-small, span.G-btn-small, span.G-btn-medium, span.FB-btn-medium {
     -moz-filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
@@ -1543,4 +1570,8 @@ span.FB-btn-small, span.G-btn-small {
 
 a.rf-ds-btn {
     color: darkslategray !important;
+}
+
+.tree {
+    margin-left: 10px;
 }

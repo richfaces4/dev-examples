@@ -51,7 +51,7 @@
                                 <h:graphicImage value="/img/shell/informer_shelf.png" width="31" height="23" alt="" border="0" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
-                                <h:outputText value="#{fn:length(userBean.user.shelves)}" />
+                                <h:outputText value="#{fn:length(userBean.user.shelves) > 0 ? fn:length(userBean.user.shelves) : ''}" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
@@ -70,7 +70,7 @@
                                 <h:graphicImage value="/img/shell/informer_album.png" width="31" height="23" alt="" border="0" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
-                                <h:outputText value="#{fn:length(userBean.user.albums)}" />
+                                <h:outputText value="#{fn:length(userBean.user.albums) > 0 ? fn:length(userBean.user.albums) : ''}" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
@@ -89,7 +89,7 @@
                                 <h:graphicImage value="/img/shell/informer_photo.png" width="31" height="23" alt="" border="0" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-middle-div">
-                                <h:outputText value="#{fn:length(userBean.user.images)}" />
+                                <h:outputText value="#{fn:length(userBean.user.images) > 0 ? fn:length(userBean.user.images) : ''}" />
                             </h:panelGroup>
                             <h:panelGroup layout="block" styleClass="main-menu-icons-right-div">
                                 <h:graphicImage value="/img/shell/informer_bg.png" width="163" height="23" alt=""
@@ -149,49 +149,6 @@
                         </h:panelGroup>
                         <h:graphicImage value="/img/shell/general_panelbar_bullet.gif" width="11" height="15" alt=""
                             styleClass="main-menu-separator-img" />
-                    </h:panelGroup>
-
-                    <h:panelGroup layout="block" style="float: left;">
-                        <a4j:commandLink disabled="#{userBean.loggedInFB}" styleClass="FB-btn-small"
-                            onclick="F.login(fetchUserInfo, fetchFBAlbumIds, showError);" execute="@this">
-                            <rich:tooltip>#{not userBean.loggedInFB ? 'Sign in Facebook' : 'Already signed in Facebook'}</rich:tooltip>
-                        </a4j:commandLink>
-                        <a4j:commandLink disabled="#{userBean.loggedInGPlus}" styleClass="G-btn-small"
-                            onclick="G.login({infoCallback: gGetUserInfo, albumCallback: gGetUserAlbums, errorCallback: showError})">
-                            <rich:tooltip>#{not userBean.loggedInGPlus ? 'Sign in Google+' : 'Already signed in Google+'}</rich:tooltip>
-                        </a4j:commandLink>
-
-                        <a4j:jsFunction name="fetchUserInfo" oncomplete="simpleFBLogin();">
-                            <a4j:param assignTo="#{facebookBean.userInfo}" converter="#{fbJsonConverter}" name="response" />
-                        </a4j:jsFunction>
-
-                        <a4j:jsFunction name="fetchFBAlbumIds">
-                            <a4j:param assignTo="#{facebookBean.albumIds}" name="albumIds" />
-                        </a4j:jsFunction>
-
-                        <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}"
-                            render="@form" />
-
-                        <a4j:jsFunction name="gGetUserInfo">
-                            <a4j:param assignTo="#{googlePlusBean.userInfoJSON}" name="response" />
-                        </a4j:jsFunction>
-
-                        <a4j:jsFunction name="gGetUserAlbums" oncomplete="simpleGLogin();">
-                            <a4j:param assignTo="#{googlePlusBean.userAlbumsJSON}" name="albums" />
-                        </a4j:jsFunction>
-
-                        <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}"
-                            render="@form" />
-
-                        <a4j:commandLink rendered="#{userBean.loggedIn}"
-                            actionListener="#{help.navigateTo('/includes/help/socialLogin.xhtml')}"
-                            oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this">
-                            <h:panelGroup
-                                style="cursor: pointer; border: none; width: 34px; height: 34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/icons/help_sign.png',sizingMethod='scale');">
-                                <h:graphicImage height="34" width="34" border="0" style="border: none;"
-                                    styleClass="ie6transparency" value="img/icons/help_sign.png" />
-                            </h:panelGroup>
-                        </a4j:commandLink>
                     </h:panelGroup>
                 </a4j:outputPanel>
             </rich:toolbarGroup>

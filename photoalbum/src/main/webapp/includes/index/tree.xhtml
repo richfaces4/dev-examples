@@ -36,8 +36,7 @@
             </ui:include>
         </h:panelGrid>
 
-        <br />
-        <rich:tree id="PreDefinedTree" var="treeNode" toggleType="client">
+        <rich:tree id="PreDefinedTree" var="treeNode" toggleType="client" styleClass="tree">
             <rich:treeModelAdaptor nodes="#{shelfManager.predefinedShelves}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
                     iconCollapsed="img/shell/tree_icon_shelf.png" iconExpanded="img/shell/tree_icon_shelf.png">
@@ -90,7 +89,7 @@
                 <ui:param name="page" value="tree_user.xhtml" />
             </ui:include>
         </h:panelGrid>
-        <br />
+
         <rich:dragIndicator id="dragIndicator">
             <rich:panel>
                 [Album]
@@ -101,7 +100,7 @@
                 [Image]
             </rich:panel>
         </rich:dragIndicator>
-        <rich:tree id="userTree" var="treeNode" toggleType="client">
+        <rich:tree id="userTree" var="treeNode" toggleType="client" styleClass="tree">
             <rich:treeModelAdaptor nodes="#{userBean.user.shelves}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
                     iconExpanded="/img/shell/tree_icon_shelf.png" iconCollapsed="/img/shell/tree_icon_shelf.png" id="shelf">
@@ -160,16 +159,16 @@
         </rich:tree>
     </h:panelGroup>
 
-    <a4j:commandLink execute="@this" rendered="#{userBean.loggedInFB}" actionListener="#{controller.showFbShelf()}"
-        render="mainArea">
-        <h2>
-            <h:outputText value="Facebook Albums" />
-        </h2>
-    </a4j:commandLink>
+    <h:panelGrid rendered="#{userBean.loggedInFB}">
+        <a4j:commandLink execute="@this" actionListener="#{controller.showFbShelf()}" render="mainArea">
+            <h2>
+                <h:outputText value="Facebook Albums" />
+            </h2>
+        </a4j:commandLink>
+    </h:panelGrid>
 
     <h:panelGrid columns="2" rendered="#{userBean.loggedInGPlus}">
-        <a4j:commandLink execute="@this" actionListener="#{controller.showGPlusShelf()}"
-            render="mainArea">
+        <a4j:commandLink execute="@this" actionListener="#{controller.showGPlusShelf()}" render="mainArea">
             <h2>
                 <h:outputText value="G+ Albums" />
             </h2>
@@ -180,14 +179,13 @@
     </h:panelGrid>
 
     <h:panelGroup>
-
-        <a4j:commandLink disabled="true">
-            <h2>
-                <h:outputText value="Events" />
-            </h2>
-        </a4j:commandLink>
-
+        <h:panelGrid>
+            <a4j:commandLink disabled="true">
+                <h2>
+                    <h:outputText value="Events" />
+                </h2>
+            </a4j:commandLink>
+        </h:panelGrid>
         <ui:include src="/includes/event/eventtree.xhtml" />
-
     </h:panelGroup>
 </ui:composition>

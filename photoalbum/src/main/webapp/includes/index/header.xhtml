@@ -32,7 +32,7 @@
 
             <h:panelGroup id="logInOutMenu" layout="block" rendered="#{authenticator.conversationStarted}"
                           styleClass="user-info-div">
-                <h:panelGrid columns="5"
+                <h:panelGrid columns="6"
                              columnClasses="top-right-bottom-menu-item,xxx,top-right-bottom-menu-item,xxx,top-right-bottom-menu-item">
                     <h:panelGroup layout="block">
                         <a4j:region>
@@ -67,6 +67,46 @@
                         <a4j:commandLink value="#{messages['login.register']}" actionListener="#{authenticator.goToRegister}"
                                          render="mainArea" execute="@this" />
                     </h:panelGroup>
+                    
+                    <h:graphicImage rendered="#{userBean.loggedIn}" width="3" height="15" alt="" border="0"
+                                    style="padding: 0 0 0 8px;" value="/img/shell/bullet.gif" />
+                    
+                    <h:panelGroup rendered="#{userBean.loggedIn}" layout="block" style="float: left;">
+                        <a4j:commandLink disabled="#{userBean.loggedInFB}" styleClass="FB-btn-small"
+                            onclick="F.login(fetchUserInfo, fetchFBAlbumIds, showError);" execute="@this">
+                            <rich:tooltip>#{not userBean.loggedInFB ? 'Sign in Facebook' : 'Already signed in Facebook'}</rich:tooltip>
+                        </a4j:commandLink>
+                        <a4j:commandLink disabled="#{userBean.loggedInGPlus}" styleClass="G-btn-small"
+                            onclick="G.login({infoCallback: gGetUserInfo, albumCallback: gGetUserAlbums, errorCallback: showError})">
+                            <rich:tooltip>#{not userBean.loggedInGPlus ? 'Sign in Google+' : 'Already signed in Google+'}</rich:tooltip>
+                        </a4j:commandLink>
+
+                        <a4j:jsFunction name="fetchUserInfo" oncomplete="simpleFBLogin();">
+                            <a4j:param assignTo="#{facebookBean.userInfo}" converter="#{fbJsonConverter}" name="response" />
+                        </a4j:jsFunction>
+
+                        <a4j:jsFunction name="fetchFBAlbumIds">
+                            <a4j:param assignTo="#{facebookBean.albumIds}" name="albumIds" />
+                        </a4j:jsFunction>
+
+                        <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}"
+                            render="@form" />
+
+                        <a4j:jsFunction name="gGetUserInfo">
+                            <a4j:param assignTo="#{googlePlusBean.userInfoJSON}" name="response" />
+                        </a4j:jsFunction>
+
+                        <a4j:jsFunction name="gGetUserAlbums" oncomplete="simpleGLogin();">
+                            <a4j:param assignTo="#{googlePlusBean.userAlbumsJSON}" name="albums" />
+                        </a4j:jsFunction>
+
+                        <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}"
+                            render="@form" />
+
+                        <ui:include src="/includes/help/button.xhtml">
+                            <ui:param name="page" value="socialLogin.xhtml" />
+                        </ui:include>
+                    </h:panelGroup>
                 </h:panelGrid>
             </h:panelGroup>
 
@@ -74,11 +114,12 @@
                 <rich:toolbar id="topmenu" styleClass="top-right-menu-toolbar top-right-menu-item">
 
                     <rich:toolbarGroup styleClass="top-right-menu-item" location="right">
+                    <!-- 
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
                             <a href="http://docs.jboss.org/richfaces/latest_3_3_X/en/realworld/html/index.html"
                                 class="top-right-menu-item">GuideLine</a>
                         </h:panelGroup>
-                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
+                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" /> -->
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
                             <a href="https://www.jboss.org/community/wiki/RichFacesPhotositedemoapplication"
                                 class="top-right-menu-item">Wiki page</a>
@@ -89,7 +130,7 @@
                         </h:panelGroup>
                         <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
-                            <a href="http://www.jboss.org/index.html?module=bb&amp;op=viewforum&amp;f=261"
+                            <a href="https://community.jboss.org/en/richfaces/"
                                 class="top-right-menu-item">Community</a>
                         </h:panelGroup>
                         <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />

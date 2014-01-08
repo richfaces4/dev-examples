@@ -37,12 +37,12 @@
         <h:panelGrid columns="2" columnClasses="login-table-col" style="width: 100%; text-align:center;">
             <!-- social login button -->
             <h:panelGroup layout="block" rendered="#{not userBean.loggedInFB or not userBean.loggedInGPlus}">
-                <a4j:commandLink styleClass="FB-btn-small" execute="@none" style="margin: 2px 8px"
+                <a4j:commandLink styleClass="FB-btn-medium" execute="@none" style="margin: 2px 8px"
                     oncomplete="#{rich:component('fbProgress')}.setValue( #{rich:component('fbProgress')}.getValue() + 33 ); F.login(fetchUserInfo, fetchFBAlbumIds, showError); return false;">
                     <rich:tooltip>Sign in Facebook</rich:tooltip>
                 </a4j:commandLink>
 
-                <a4j:commandLink styleClass="G-btn-small" execute="@none" style="margin: 2px 8px"
+                <a4j:commandLink styleClass="G-btn-medium" execute="@none" style="margin: 2px 8px"
                     oncomplete="#{rich:component('fbProgress')}.setValue( #{rich:component('fbProgress')}.getValue() + 33 ); G.login({infoCallback: gGetUserInfo, albumCallback: gGetUserAlbums, errorCallback: showError});">
                     <rich:tooltip>Sign in Google+</rich:tooltip>
                 </a4j:commandLink>
