@@ -27,9 +27,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 
 import org.richfaces.model.UploadedFile;
+import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.service.PhotoAlbumException;
 
 /**
  * A wrapper class for handling two different classes: RichFaces' UploadedFile and java.io.File
@@ -73,9 +74,11 @@ public class FileHandler {
         return isStandardFile ? file.length() : uFile.getSize();
     }
     
-    public void delete() throws IOException {
+    public void delete() throws Exception {
         if (isStandardFile) {
-            Files.delete(file.toPath());
+            if (!file.delete()) {
+                throw new PhotoAlbumException(Constants.FILE_DELETE_ERROR);
+            }
             return;
         }
         

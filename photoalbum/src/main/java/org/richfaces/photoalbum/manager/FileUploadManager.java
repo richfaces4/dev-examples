@@ -158,7 +158,7 @@ public class FileUploadManager implements Serializable {
         // Delete temporary file
         try {
             fileHandler.delete();
-        } catch (IOException ioe) {
+        } catch (Exception ioe) {
             log.log(Level.INFO, "error", ioe);
             addError(image, "Error deleting file - " + ioe.getMessage());
         }
@@ -175,7 +175,7 @@ public class FileUploadManager implements Serializable {
         addError(image, error);
         try {
             fileHandler.delete();
-        } catch (IOException e) {
+        } catch (Exception e) {
             addError(image, e.getMessage());
         }
     }
@@ -207,6 +207,7 @@ public class FileUploadManager implements Serializable {
         try {
             in = fileHandler.getInputStream();
             Metadata metadata = JpegMetadataReader.readMetadata(in);
+            in.close();
             Directory exifIFD0Directory = metadata.getDirectory(ExifIFD0Directory.class);
             Directory exifSubIFDDirectory = metadata.getDirectory(ExifSubIFDDirectory.class);
             Directory jpgDirectory = metadata.getDirectory(JpegDirectory.class);
