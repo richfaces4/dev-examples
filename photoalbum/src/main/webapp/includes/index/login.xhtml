@@ -101,7 +101,7 @@
                         <richx:commandButton styleClass="login" data="#{authenticator.loginFailed}"
                             actionListener="#{authenticator.authenticate()}" value="#{messages['login.login']}"
                             oncomplete="if(!event.data)#{rich:component('loginPanel')}.hide();"
-                            render="mainArea,treePanel,searchForm, headerPanel, loginPanel" execute="loginPanelForm"
+                            render="mainArea,treePanel,searchWidget, headerPanel, loginPanel" execute="loginPanelForm"
                             limitRender="true" />
                     </h:panelGroup>
                     <h:panelGroup layout="block">
