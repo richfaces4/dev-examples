@@ -63,4 +63,8 @@ public class FacebookBean implements Serializable {
     public void setUserInfo(JSONObject userInfo) {
         this.userInfo = userInfo;
     }
+    
+    public String getUserId() {
+        return userInfo != null ? userInfo.optString("id", "1") : "1";
+    }
 }

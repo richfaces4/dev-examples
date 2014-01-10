@@ -149,23 +149,6 @@ var F = {};
         });
     };
     
-    F.bind = function(exec, bind, errorCb) {
-        FB.login(function(response) {
-            if (response.authResponse) {
-                FB.api('/me?fields=id', 'get', function(response) {
-                    if (!response || response.error) {
-                        errorCb('Error occured' + errorDelimiter + (response.error.message || 'Response not received'));
-                    } else {
-                        bind.value = response.id;
-                        exec();
-                    }
-                });
-            } else {
-                errorCb('Error' + errorDelimiter + 'User cancelled login or did not fully authorize.');
-            }
-        });
-    };
-    
     // get info about all user albums on Facebook (without images)
     F.getShelfAlbums = function(userId, callback, errorCb) {
         FB.getLoginStatus(function(response) {

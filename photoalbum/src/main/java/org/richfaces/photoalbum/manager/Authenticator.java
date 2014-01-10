@@ -139,6 +139,7 @@ public class Authenticator implements Serializable {
             }
         } catch (Exception nre) {
             loginFailed();
+            error.fire(new ErrorEvent("Error:" + nre.getMessage()));
             return false;
         }
         return false;
@@ -160,16 +161,15 @@ public class Authenticator implements Serializable {
 
             String facebookId = userInfo.getString("id");
 
-            if (!userBean.isLoggedIn()) {
-                user = userBean.logIn(facebookId);
-            } else {
-                user = userBean.getUser();
-                user.setFbId(facebookId);
-                userAction.updateUser();
-                userBean.logIn(facebookId);
-            }
+            if (!userBean.isLoggedIn()) { // user is not logged in
+                user = userBean.facebookLogIn(facebookId); // try logging with Facebook
 
-            if (user == null) { // user does not exist
+                if (user != null) {
+                    addToTracker(user.getId());
+                    return true;
+                }
+
+                // Facebook id was not found, creating new account
                 User newUser = new User();
 
                 newUser.setFbId(facebookId);
@@ -191,15 +191,16 @@ public class Authenticator implements Serializable {
 
                 userAction.register(newUser);
 
-                userBean.logIn(facebookId);
+                userBean.facebookLogIn(facebookId);
             } else {
-                addToTracker(user.getId());
+                userBean.facebookLogIn(facebookId);
+                addToTracker(userBean.getUser().getId());
             }
 
             return true;
         } catch (Exception nre) {
             loginFailed();
-            error.fire(new ErrorEvent(nre.getMessage()));
+            error.fire(new ErrorEvent("Error:" + nre.getMessage()));
             return false;
         }
     }
@@ -215,14 +216,12 @@ public class Authenticator implements Serializable {
 
             if (!userBean.isLoggedIn()) {
                 user = userBean.gPlusLogIn(gPlusId);
-            } else {
-                user = userBean.getUser();
-                user.setgPlusId(gPlusId);
-                userAction.updateUser();
-                userBean.gPlusLogIn(gPlusId);
-            }
 
-            if (user == null) { // user does not exist
+                if (user != null) {
+                    addToTracker(user.getId());
+                    return true;
+                }
+
                 User newUser = new User();
 
                 newUser.setgPlusId(gPlusId);
@@ -238,10 +237,6 @@ public class Authenticator implements Serializable {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String birthday = userInfo.optString("birthday", "1900-01-01");
-                // if (birthday.substring(0, 3).equals("0000")) {
-                // // G+ allows hiding of the year of birth, change to 1900
-                // birthday = "19" + birthday.substring(2);
-                // }
                 newUser.setBirthDate(sdf.parse(birthday));
 
                 // random password, the user will not be using this to log in
@@ -251,13 +246,14 @@ public class Authenticator implements Serializable {
 
                 userBean.gPlusLogIn(gPlusId);
             } else {
-                addToTracker(user.getId());
+                userBean.gPlusLogIn(gPlusId);
+                addToTracker(userBean.getUser().getId());
             }
 
             return true;
         } catch (Exception nre) {
-            error.fire(new ErrorEvent("Error", nre.getMessage()));
             loginFailed();
+            error.fire(new ErrorEvent("Error:" + nre.getMessage()));
             return false;
         }
     }

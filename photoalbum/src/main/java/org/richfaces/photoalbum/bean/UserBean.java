@@ -39,6 +39,8 @@ import org.richfaces.photoalbum.event.ErrorEvent;
 import org.richfaces.photoalbum.event.EventType;
 import org.richfaces.photoalbum.manager.UserManager;
 import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.social.facebook.FacebookBean;
+import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
 import org.richfaces.photoalbum.util.Preferred;
 
 /**
@@ -64,6 +66,12 @@ public class UserBean implements Serializable {
     private String username;
 
     private String fbPhotoUrl;
+
+    @Inject
+    FacebookBean fbBean;
+
+    @Inject
+    GooglePlusBean gPlusBean;
 
     @Inject
     @EventType(ADD_ERROR_EVENT)
@@ -100,16 +108,18 @@ public class UserBean implements Serializable {
         return user;
     }
 
-    public User logIn(String facebookId) {
-        List<?> users = em.createNamedQuery(Constants.USER_FB_LOGIN_QUERY).setParameter("fbId", facebookId).getResultList();
+    public User facebookLogIn(String facebookId) {
+        if (!logged) { // user is not logged, trying to log in with Facebook credentials
+            List<?> users = em.createNamedQuery(Constants.USER_FB_LOGIN_QUERY).setParameter("fbId", facebookId).getResultList();
 
-        if (users.isEmpty()) {
-            logged = false;
-            loggedInFB = false;
-            return null;
+            if (users.isEmpty()) {
+                logged = false;
+                loggedInFB = false;
+                return null;
+            }
+
+            user = (User) users.get(0);
         }
-
-        user = (User) users.get(0);
 
         logged = true;
         loggedInFB = true;
@@ -118,15 +128,18 @@ public class UserBean implements Serializable {
     }
 
     public User gPlusLogIn(String gPlusId) {
-        List<?> users = em.createNamedQuery(Constants.USER_GPLUS_LOGIN_QUERY).setParameter("gPlusId", gPlusId).getResultList();
+        if (!logged) {
+            List<?> users = em.createNamedQuery(Constants.USER_GPLUS_LOGIN_QUERY).setParameter("gPlusId", gPlusId)
+                .getResultList();
 
-        if (users.isEmpty()) {
-            logged = false;
-            loggedInGPlus = false;
-            return null;
+            if (users.isEmpty()) {
+                logged = false;
+                loggedInGPlus = false;
+                return null;
+            }
+
+            user = (User) users.get(0);
         }
-
-        user = (User) users.get(0);
 
         logged = true;
         loggedInGPlus = true;
@@ -186,5 +199,13 @@ public class UserBean implements Serializable {
     @Override
     public String toString() {
         return "UserBean{" + "user=" + user + ", logged=" + logged + '}';
+    }
+
+    public String getFbId() {
+        return user.getFbId().equals("1") ? fbBean.getUserId() : "1";
+    }
+
+    public String getGplusId() {
+        return user.getgPlusId().equals("1") ? gPlusBean.getUserId() : "1";
     }
 }

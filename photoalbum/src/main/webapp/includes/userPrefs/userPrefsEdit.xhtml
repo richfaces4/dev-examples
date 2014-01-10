@@ -27,13 +27,21 @@
         <ui:insert name="header" />
     </h:panelGrid>
     <h:panelGroup id="userPrefEdit">
-        <a4j:region rendered="#{userBean.loggedIn and user.fbId == '1'}">
-            <h:inputHidden value="#{user.fbId}" id="userFbId" />
-            <richx:commandButton styleClass="fb-comm-button" execute="@this"
-                oncomplete="F.bind(bindWithFB, #{rich:element('userFbId')}, showError)" value="Bind with Facebook" />
-            <a4j:jsFunction name="bindWithFB" actionListener="#{controller.editUser}" render="mainArea" />
-        </a4j:region>
-        <h:outputText value="This account is bound to Facebook" rendered="#{not empty user.fbId and user.fbId != '1'}" />
+
+        <a4j:commandButton styleClass="FB-text-button" execute="@this" oncomplete="bindAccount()"
+            value="#{userBean.user.fbId == '1' ? 'Bind' : 'Bound'} with Facebook" rendered="#{userBean.loggedInFB}"
+            disabled="#{userBean.user.fbId != '1'}">
+            <a4j:param assignTo="#{userBean.user.fbId}" value="#{userBean.fbId}" />
+        </a4j:commandButton>
+
+        <br />
+        <a4j:commandButton styleClass="G-text-button" execute="@this" oncomplete="bindAccount()"
+            value="#{userBean.user.gPlusId == '1' ? 'Bind' : 'Bound'} with Google+" rendered="#{userBean.loggedInGPlus}"
+            disabled="#{userBean.user.gPlusId != '1'}">
+            <a4j:param assignTo="#{userBean.user.gPlusId}" value="#{userBean.gplusId}" />
+        </a4j:commandButton>
+        
+        <a4j:jsFunction name="bindAccount" render="mainArea" actionListener="#{controller.editUser()}" execute="@this"/>
 
         <table style="padding: 0; border-spacing: 0; border: 0">
             <tr>

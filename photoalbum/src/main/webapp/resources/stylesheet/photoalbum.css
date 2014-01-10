@@ -1548,6 +1548,20 @@ input[type='submit'].fb-button {
     background-image: url(http://ssl.gstatic.com/images/icons/gplus-16.png);
 }
 
+input.FB-text-button {
+    color: white;
+    background-color: #3B5998 !important;
+    border-width: 0px;
+    cursor: pointer;
+}
+
+input.G-text-button {
+    color: white;
+    background-color: #dd4b39 !important;
+    border-width: 0px;
+    cursor: pointer;
+}
+
 /* disabled buttons */
 span.FB-btn-small, span.G-btn-small, span.G-btn-medium, span.FB-btn-medium {
     -moz-filter: grayscale(100%);
@@ -1556,6 +1570,10 @@ span.FB-btn-small, span.G-btn-small, span.G-btn-medium, span.FB-btn-medium {
     -ms-filter: grayscale(100%);
     -o-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+
+.G-text-button[disabled], .FB-text-button[disabled] {
+    cursor: default;
 }
 
 *.rf-ds-dis {

@@ -86,7 +86,7 @@ public class UserManager implements Serializable {
         try {
             // This check is actual only on livedemo server to prevent hacks.
             // Prevent hackers to mark user as pre-defined
-            user.setPreDefined(false);
+            //user.setPreDefined(false);
             user = userAction.updateUser();
         } catch (Exception e) {
             error.fire(new ErrorEvent("Error", Constants.UPDATE_USER_ERROR + " <br/>" + e.getMessage()));

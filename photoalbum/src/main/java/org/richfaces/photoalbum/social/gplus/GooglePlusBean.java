@@ -71,7 +71,7 @@ public class GooglePlusBean implements Serializable {
     }
 
     public String getUserId() {
-        return userInfo.optString("id");
+        return userInfo != null ? userInfo.optString("id", "1") : "1";
     }
 
     public String getName() {
