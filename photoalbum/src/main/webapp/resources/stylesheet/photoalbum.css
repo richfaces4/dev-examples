@@ -130,14 +130,8 @@ html, body {
     border: none !important;
 }
 
-.avatarUpload .file-upload-stop-button {
-    display: none;
-}
-
-.file-upload-button {
-    background: #B34801 !important;
-    color: #FFFFFF !important;
-    border: 1px solid #888888 !important;
+.avatarUpload .file-upload-stop-button, .avatarUpload .rf-fu-btn-clr {
+    display: none !important;
 }
 
 .avatarUpload .rich-fileupload-ico {/* no direct alternative in RF 4 */

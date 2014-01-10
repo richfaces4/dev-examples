@@ -25,31 +25,37 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 import org.richfaces.photoalbum.domain.Sex;
 import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IUserAction;
 
 /**
  * Convenience UI class for userPrefs page
- * 
+ *
  * @author Andrey Markhel
  */
 
-@Named
-@RequestScoped
+@ManagedBean
+@ViewScoped
 public class UserPrefsHelper implements Serializable {
     private static final long serialVersionUID = -1767281809514660171L;
-    @Inject
-    IUserAction userAction;
 
     private File avatarData;
+
+    private boolean edit = false;
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
 
     static final SelectItem[] sexs = new SelectItem[] { new SelectItem(Sex.MALE, Constants.MALE),
             new SelectItem(Sex.FEMALE, Constants.FEMALE) };
@@ -60,7 +66,7 @@ public class UserPrefsHelper implements Serializable {
 
     /**
      * Convenience method invoked after user add avatar and outject avatar to conversation
-     * 
+     *
      * param event - upload event
      */
     public void uploadAvatar(FileUploadEvent event) {

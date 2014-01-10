@@ -25,6 +25,7 @@
     xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <h:panelGrid styleClass="album-header-table" cellpadding="0">
         <ui:insert name="header" />
+        <a4j:commandButton execute="@this" onclick="setEdit(true)" value="Edit"/>
     </h:panelGrid>
     <h:panelGroup id="userPref">
         <table style="padding: 0; border-spacing: 0; border: 0" class="reg-table">
@@ -50,7 +51,7 @@
                     <h:outputLabel for="userLoginName">#{messages['user.login']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText value="#{userBean.user.login}" styleClass="reg-table-output" />
+                    <h:outputText id="userLoginName" value="#{userBean.user.login}" styleClass="reg-table-output" />
                 </td>
                 <td />
             </tr>
@@ -64,7 +65,7 @@
                     <h:outputLabel for="userFirstname">#{messages['user.firstname']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText value="#{userBean.user.firstName}" styleClass="reg-table-output" />
+                    <h:outputText id="userFirstname" value="#{userBean.user.firstName}" styleClass="reg-table-output" />
                 </td>
                 <td />
             </tr>
@@ -73,7 +74,7 @@
                     <h:outputLabel for="userSecondname">#{messages['user.secondname']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText value="#{userBean.user.secondName}" styleClass="reg-table-output" />
+                    <h:outputText id="userSecondname" value="#{userBean.user.secondName}" styleClass="reg-table-output" />
                 </td>
                 <td />
             </tr>
@@ -82,9 +83,7 @@
                     <h:outputLabel for="userSex">#{messages['user.sex']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText rendered="#{userBean.user.sex.key =='1'}" value="#{messages['male']}"
-                        styleClass="reg-table-output" />
-                    <h:outputText rendered="#{userBean.user.sex.key =='0'}" value="#{messages['female']}"
+                    <h:outputText id="userSex" value="#{userBean.user.sex.key =='1' ? messages['male'] : messages['female']}"
                         styleClass="reg-table-output" />
                 </td>
                 <td />
@@ -94,7 +93,7 @@
                     <h:outputLabel for="calendar">#{messages['user.birthdate']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText value="#{userBean.user.birthDate}" styleClass="reg-table-output">
+                    <h:outputText id="calendar" value="#{userBean.user.birthDate}" styleClass="reg-table-output">
                         <f:convertDateTime />
                     </h:outputText>
                 </td>
@@ -105,7 +104,7 @@
                     <h:outputLabel for="email">#{messages['user.email']}</h:outputLabel>
                 </td>
                 <td>
-                    <h:outputText value="#{userBean.user.email}" styleClass="reg-table-output" />
+                    <h:outputText id="email" value="#{userBean.user.email}" styleClass="reg-table-output" />
                 </td>
                 <td />
             </tr>

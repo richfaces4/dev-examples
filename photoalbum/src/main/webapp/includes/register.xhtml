@@ -33,13 +33,14 @@
         <ui:define name="controls">
             <h:panelGrid columns="2" styleClass="user-prefs-button">
                 <h:panelGroup layout="block">
-                    <richx:commandButton actionListener="#{authenticator.register(authenticator.user)}"
+                    <richx:commandButton actionListener="#{authenticator.register(authenticator.user)}" onclick="saveAvatar()"
                         render="mainArea,treePanel,searchPanel, headerPanel" value="#{messages['user.register']}" />
                 </h:panelGroup>
                 <h:panelGroup layout="block">
                     <richx:commandButton actionListener="#{controller.cancelRegistration()}" render="mainArea" immediate="true"
                         value="#{messages['user.cancel']}" />
                 </h:panelGroup>
+                <a4j:jsFunction name="saveAvatar" actionListener="#{authenticator.setAvatarData(userPrefsHelper.avatarData)}"/>
             </h:panelGrid>
         </ui:define>
     </ui:decorate>

@@ -53,7 +53,8 @@
         <h:panelGrid columns="2" columnClasses="top">
             <h:panelGroup layout="block" style="margin: 10px 0px 5px 0px;">
                 <rich:fileUpload maxFilesQuantity="100" fileUploadListener="#{fileUploadManager.listener}" id="fileUpload"
-                                 disabled="#{model.selectedAlbum == null}" acceptedTypes="jpg,jpeg" execute="uploadAlbum">
+                                 disabled="#{model.selectedAlbum == null}" acceptedTypes="jpg,jpeg" execute="uploadAlbum"
+                                 ontyperejected="showError('Error$#$Invalid file type. Only JPG is allowed.')">
                     <a4j:ajax event="uploadcomplete" render="treePanel, filesPanel" listener="#{fileWrapper.setComplete(true)}"
                         limitRender="true" />
                 </rich:fileUpload>

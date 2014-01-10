@@ -34,6 +34,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,7 +54,6 @@ import org.richfaces.photoalbum.service.Constants;
 import org.richfaces.photoalbum.service.IUserAction;
 import org.richfaces.photoalbum.social.facebook.FacebookBean;
 import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
-import org.richfaces.photoalbum.ui.UserPrefsHelper;
 import org.richfaces.photoalbum.util.Environment;
 import org.richfaces.photoalbum.util.HashUtils;
 import org.richfaces.photoalbum.util.Utils;
@@ -107,8 +108,8 @@ public class Authenticator implements Serializable {
     @Inject
     GooglePlusBean gBean;
 
-    @Inject
-    UserPrefsHelper uph;
+    private File avatarData;
+
 
     /**
      * Method, that invoked when user try to login to the application.
@@ -205,7 +206,7 @@ public class Authenticator implements Serializable {
 
     public boolean authenticateWithGPlus() {
         JSONObject userInfo = gBean.getUserInfo();
-        
+
         try {
             // String pictureUrl = userInfo.getJSONObject("picture").getJSONObject("data").getString("url");
             // userBean.setFbPhotoUrl(pictureUrl);
@@ -300,7 +301,7 @@ public class Authenticator implements Serializable {
         try {
             userAction.register(user);
         } catch (Exception e) {
-            error.fire(new ErrorEvent(Constants.REGISTRATION_ERROR));
+            error.fire(new ErrorEvent(Constants.REGISTRATION_ERROR + ": " + e.getMessage()));
             return;
         }
         // Registration was successful, so we can login this user.
@@ -313,6 +314,12 @@ public class Authenticator implements Serializable {
         if (this.user == null) {
             error.fire(new ErrorEvent(Constants.LOGIN_ERROR));
         }
+        navEvent.fire(new NavEvent(NavigationEnum.USER_PREFS));
+
+        UIComponent root = FacesContext.getCurrentInstance().getViewRoot();
+        UIComponent component = root.findComponent("overForm");
+        FacesContext.getCurrentInstance().addMessage(component.getClientId(FacesContext.getCurrentInstance()),
+            new FacesMessage(FacesMessage.SEVERITY_INFO, "Success!", "Registration was successful."));
     }
 
     /**
@@ -341,7 +348,6 @@ public class Authenticator implements Serializable {
     }
 
     private boolean handleAvatar(User user) {
-        File avatarData = uph.getAvatarData();
         if (avatarData != null) {
             user.setHasAvatar(true);
             if (fileManager == null || !fileManager.saveAvatar(avatarData, user)) {
@@ -396,5 +402,9 @@ public class Authenticator implements Serializable {
 
     public void setConversationStarted(boolean conversationStarted) {
         this.conversationStarted = conversationStarted;
+    }
+
+    public void setAvatarData(File avatarData) {
+        this.avatarData = avatarData;
     }
 }

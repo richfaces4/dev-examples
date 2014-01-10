@@ -258,8 +258,6 @@ public class Controller implements Serializable {
             return;
         }
         pushEvent(Events.EDIT_USER_EVENT);
-        model.resetModel(NavigationEnum.ALL_SHELFS, getLoggedUser(), model.getSelectedShelf(), model.getSelectedAlbum(),
-            model.getSelectedImage(), model.getImages());
     }
 
     /**
@@ -268,7 +266,6 @@ public class Controller implements Serializable {
      */
     public void cancelEditUser() {
         pushEvent(Events.CANCEL_EDIT_USER_EVENT);
-        model.resetModel(NavigationEnum.ANONYM, getLoggedUser(), null, null, null, null);
     }
 
     /**
