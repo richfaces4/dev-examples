@@ -24,8 +24,8 @@
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
     xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="helpPage" value="/includes/help/#{page}"/>
-    <a4j:outputPanel>
-        [<a4j:commandLink rendered="#{help.isShowHelp()}" style="#{style}"
+    <a4j:outputPanel style="#{style}">
+        [<a4j:commandLink rendered="#{help.isShowHelp()}" 
             actionListener="#{help.navigateTo(helpPage)}"
             oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this" value="?">
             <rich:tooltip>What is this?</rich:tooltip>
