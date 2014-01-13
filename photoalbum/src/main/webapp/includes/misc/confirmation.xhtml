@@ -32,7 +32,7 @@
                                 onclick="#{rich:component('confirmation')}.hide()" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('confirmation')}.hide()"/>
         <a4j:region>
             <h:panelGroup id="confirmPanel" layout="block" style="width: 100%">
 

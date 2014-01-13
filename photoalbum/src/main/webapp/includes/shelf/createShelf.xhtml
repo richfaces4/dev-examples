@@ -24,7 +24,6 @@
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
                 xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <rich:popupPanel id="shelfModalPanel" width="400" height="150" autosized="true" modal="true" domElementAttachment="form">
-        <!--  onshow="applyModalPanelEffect('shelfModalPanel', {delay: 0.5, afterFinish: function(){$('form5:name').focus();}})"> -->
         <f:facet name="header">#{messages['add_shelf']}</f:facet>
 
         <f:facet name="controls">
@@ -33,6 +32,7 @@
                                 onclick="#{rich:component('shelfModalPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>
+        <rich:hotKey key="esc" onkeyup="#{rich:component('shelfModalPanel')}.hide()"/>
         <a4j:region id="form5">
             <h:panelGroup id="shelfPanel" width="100%" layout="block">
                 <a4j:region>

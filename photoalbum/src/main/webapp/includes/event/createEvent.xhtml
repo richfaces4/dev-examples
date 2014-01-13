@@ -32,7 +32,7 @@
                     onclick="#{rich:component('eventModalPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('eventModalPanel')}.hide()" enabledInInput="true"/>
         <a4j:region id="eventform">
             <h:panelGroup id="eventPanel" width="100%" layout="block">
                 <a4j:region>

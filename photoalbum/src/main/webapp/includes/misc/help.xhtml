@@ -34,7 +34,7 @@
                                 onclick="#{rich:component('helpPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('helpPanel')}.hide()"/>
         <h:panelGroup>
             <div style="height: 570px; padding-bottom: 10px; overflow-y: auto; overflow-x: hidden">
                 <ui:include src="#{help.getPage()}" />

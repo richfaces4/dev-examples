@@ -9,7 +9,7 @@
                     onclick="#{rich:component('fbAlbumModalPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('fbAlbumModalPanel')}.hide()"/>
         <h:outputText value="Do you want to import the album?" style="display: inline-block; margin-bottom: 20px" />
         <br />
         <h:panelGroup layout="block" styleClass="preview_box_album_120" style="height: 160px">

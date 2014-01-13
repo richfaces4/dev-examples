@@ -33,7 +33,7 @@
                     onclick="#{rich:component('loginPanel')}.hide();" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('loginPanel')}.hide()" enabledInInput="true"/>
         <h:panelGrid columns="2" columnClasses="login-table-col" style="width: 100%; text-align:center;">
             <!-- social login button -->
             <h:panelGroup layout="block" rendered="#{not userBean.loggedInFB or not userBean.loggedInGPlus}">

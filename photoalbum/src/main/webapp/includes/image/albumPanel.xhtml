@@ -36,6 +36,7 @@
                 </h:graphicImage>
             </h:panelGroup>
         </f:facet>
+        <rich:hotKey key="esc" onkeyup="#{rich:component('albumsPopupPanel')}.hide()"/>
         <a4j:mediaOutput id="imgUri" style="display:none" element="a" createContent="#{directLinkHelper.paintImage}"
             value="#{model.selectedImage.id}" mimeType="image/jpeg" />
 
