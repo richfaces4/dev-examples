@@ -43,10 +43,11 @@
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup style="margin-bottom:7px;" layout="block">
                             <a4j:commandLink execute="@this"
-                                onclick="select('#{rk}:img'); #{googlePlusAlbumCache.isAlbumLoaded(albumId)} ? loadAlbum('#{albumId}') : G.getImages('#{albumId}', loadPhotos)">
+                                onclick="select('#{rk}:img'); #{rich:component('albumListTooltip')}.hide(); #{googlePlusAlbumCache.isAlbumLoaded(albumId)} ? loadAlbum('#{albumId}') : G.getImages('#{albumId}', loadPhotos)">
                                 <h:graphicImage id="img" url="#{googlePlusAlbumCache.getAlbum(albumId).getString('coverUrl')}"
                                     style="max-width: 120px; max-height: 120px" styleClass="album-cover-image" />
-                                <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                <rich:tooltip id="albumListTooltip" followMouse="true" direction="topRight" showDelay="500"
+                                    styleClass="tooltip">
                                     <span style="white-space: nowrap">
                                         #{googlePlusAlbumCache.getAlbum(albumId).getString("name")} </span>
                                 </rich:tooltip>

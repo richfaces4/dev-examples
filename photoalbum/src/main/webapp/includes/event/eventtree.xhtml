@@ -39,18 +39,21 @@
             <rich:treeModelAdaptor nodes="#{eventManager.getEventsByCategory(treeNode)}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
                     iconLeaf="img/shell/tree_icon_album.png">
-                    <a4j:outputPanel layout="block" style="cursor:pointer;width:150px; overflow-x:hidden; text-overflow: ellipsis;">
+                    <a4j:outputPanel layout="block"
+                        style="cursor:pointer;width:150px; overflow-x:hidden; text-overflow: ellipsis;"
+                        onclick="#{rich:component('eventTooltip')}.hide()">
                         <h:outputText value="#{treeNode.name}" />
                         <a4j:ajax event="click" listener="#{controller.showEvent(treeNode)}" render="mainArea" />
                         <rich:dropTarget acceptedTypes="album" dropValue="#{treeNode}"
                             dropListener="#{dndManager.addAlbumToEvent}" render="treePanel, mainArea" />
                         <rich:dropTarget acceptedTypes="fbAlbum" data="#{fbDndManager.albumAlreadyShared}"
                             dropValue="#{treeNode}" dropListener="#{fbDndManager.processDrop}"
-                            oncomplete="if(!event.data)#{rich:component('fbAlbumModalPanel')}.show();" render="fbAlbumModalPanel" />
+                            oncomplete="if(!event.data)#{rich:component('fbAlbumModalPanel')}.show();"
+                            render="fbAlbumModalPanel" />
                         <rich:dropTarget acceptedTypes="gAlbum" data="#{gplusDndManager.albumAlreadyShared}"
                             dropValue="#{treeNode}" dropListener="#{gDndManager.processDrop}"
                             oncomplete="if(!event.data)#{rich:component('gAlbumModalPanel')}.show();" render="gAlbumModalPanel" />
-                        <rich:tooltip direction="topRight" showDelay="1000">
+                        <rich:tooltip id="eventTooltip" direction="topRight" showDelay="1000">
                             <span style="white-space: nowrap">#{treeNode.name}</span>
                         </rich:tooltip>
                     </a4j:outputPanel>
