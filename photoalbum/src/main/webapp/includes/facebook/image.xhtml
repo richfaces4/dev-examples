@@ -23,7 +23,8 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <ui:param name="image" value="#{facebookAlbumCache.currentImage}" />
     <ui:param name="album" value="#{facebookAlbumCache.currentAlbum}" />
     <!-- imageHeaderInfo -->
@@ -35,9 +36,8 @@
             <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showEvent(model.selectedEvent)}"
                 render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}" />
             <h:outputText value=" #{messages['delimiter']} " />
-            <a4j:commandLink styleClass="additional-info-text"
-                actionListener="#{controller.showFBAlbum(album.getString('id'))}" render="mainArea, treePanel"
-                value="#{messages['album']} #{album.getString('name')}" />
+            <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showFBAlbum(album.getString('id'))}"
+                render="mainArea, treePanel" value="#{messages['album']} #{album.getString('name')}" />
 
         </h:panelGroup>
     </h:panelGrid>
@@ -54,7 +54,8 @@
                         <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
                             <h:panelGroup layout="block">
-                                <h:graphicImage id="img" url="#{img.getString('thumbUrl')}" style="max-width: 80px; max-height: 80px" />
+                                <h:graphicImage id="img" url="#{img.getString('thumbUrl')}"
+                                    style="max-width: 80px; max-height: 80px" />
                                 <br />
                             </h:panelGroup>
                         </h:panelGrid>
@@ -93,27 +94,19 @@
         <table style="padding: 0px;" class="mainImage-table">
             <tr>
                 <td class="mainImage-table-col1" rowspan="2"><h:panelGroup layout="block" styleClass="slideshow-outerdiv">
-                        <h:outputText value="Slideshow" />
-                        <!-- rendered="#{album.getInt('size') > 0}" -->
-                        <a4j:commandLink disabled="true" actionListener="#{slideshow.startSlideshow(model.selectedImage)}"
+                        <a4j:commandLink actionListener="#{slideshow.startSlideshow(facebookAlbumCache.currentImage)}"
                             styleClass="slideshow-link" render="mainArea, slideShowModalPanel"
-                            execute="@this, slideShowModalPanel">
+                            execute="@this, slideShowModalPanel" rendered="#{album.getInt('size') > 1}">
                             <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
                         </a4j:commandLink>
-                    </h:panelGroup> <h:graphicImage styleClass="main-image" rendered="#{image.getString('url') != null}"
+                    </h:panelGroup> <h:graphicImage styleClass="main-image"
                         style="border : 3px solid #808080; max-width: 600px; max-height: 600px" url="#{image.getString('url')}">
-                    </h:graphicImage> <h:graphicImage styleClass="main-image" rendered="#{image.getString('url') == null}"
-                        style="border : 3px solid #808080; max-width: 600px; max-height: 600px"
-                        url="#{image.getString('thumbUrl')}">
                     </h:graphicImage></td>
-                <td style="vertical-align: top;"><h:panelGroup layout="block" styleClass="buttons-body"
+                <td style="vertical-align: top;"><h:panelGroup layout="block" styleClass="buttons-bodyy"
                         style="margin : 26px 0px 0px 0px;" rendered="#{image.getString('url') != null}">
-                        <a href="#{image.getString('url')}" target="_blank" class="buttons-body-text-div">#{messages['original_size']}</a>
-                    </h:panelGroup> <h:panelGroup layout="block" styleClass="buttons-body" style="margin : 26px 0px 0px 0px;"
-                        rendered="#{image.getString('url') == null}">
-                        <a href="#{image.getString('thumbUrl')}" target="_blank" class="buttons-body-text-div">#{messages['original_size']}</a>
+                        <a href="#{image.getString('url')}" target="_blank" class="buttons-body">#{messages['original_size']}</a>
                     </h:panelGroup></td>
             </tr>
         </table>

@@ -23,7 +23,8 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:rich="http://richfaces.org/rich"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     <ui:param name="image" value="#{googlePlusAlbumCache.currentImage}" />
     <ui:param name="album" value="#{googlePlusAlbumCache.currentAlbum}" />
     <!-- imageHeaderInfo -->
@@ -53,7 +54,8 @@
                         <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
                             <h:panelGroup layout="block">
-                                <h:graphicImage id="img" url="#{img.getString('thumbUrl')}" style="max-width: 80px; max-height: 80px" />
+                                <h:graphicImage id="img" url="#{img.getString('thumbUrl')}"
+                                    style="max-width: 80px; max-height: 80px" />
                                 <br />
                             </h:panelGroup>
                         </h:panelGrid>
@@ -92,11 +94,9 @@
         <table style="padding: 0px;" class="mainImage-table">
             <tr>
                 <td class="mainImage-table-col1" rowspan="2"><h:panelGroup layout="block" styleClass="slideshow-outerdiv">
-                        <h:outputText value="Slideshow" />
-                        <!-- rendered="#{album.getInt('size') > 0}" -->
-                        <a4j:commandLink disabled="true" actionListener="#{slideshow.startSlideshow(model.selectedImage)}"
+                        <a4j:commandLink actionListener="#{slideshow.startSlideshow(googlePlusAlbumCache.currentImage)}"
                             styleClass="slideshow-link" render="mainArea, slideShowModalPanel"
-                            execute="@this, slideShowModalPanel">
+                            execute="@this, slideShowModalPanel" rendered="#{album.getInt('size') > 1}">
                             <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
