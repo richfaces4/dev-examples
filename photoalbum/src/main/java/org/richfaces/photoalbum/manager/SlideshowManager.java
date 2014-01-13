@@ -110,7 +110,7 @@ public class SlideshowManager implements Serializable {
             return;
         }
         if (this.selectedImage == null) {
-            this.selectedImage.setImage(model.getImages().get(this.slideshowIndex));
+            this.selectedImage = new ImageHandler(model.getImages().get(this.slideshowIndex));
         }
         // mark image as 'visited'
         if (this.selectedImage.getType() == ImageHandler.LOCAL) {
