@@ -90,7 +90,7 @@
                         </a4j:jsFunction>
 
                         <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}"
-                            render="@form" />
+                            render="mainArea, headerPanel, treePanel" />
 
                         <a4j:jsFunction name="gGetUserInfo">
                             <a4j:param assignTo="#{googlePlusBean.userInfoJSON}" name="response" />
@@ -101,7 +101,7 @@
                         </a4j:jsFunction>
 
                         <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}"
-                            render="@form" />
+                            render="mainArea, headerPanel, treePanel" />
 
                         <ui:include src="/includes/help/button.xhtml">
                             <ui:param name="page" value="socialLogin.xhtml" />
