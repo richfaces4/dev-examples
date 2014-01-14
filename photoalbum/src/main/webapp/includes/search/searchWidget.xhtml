@@ -30,7 +30,7 @@
                 <span
                     style="width: 339px; height: 65px; display: inline-block; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/search/search_bg.png', sizingMethod='scale' );">
                     <img style="filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0 ); width: 339px; height: 65px; border: 0"
-                         src="img/search/search_bg.png" class="search-img-bg" />
+                         src="resources/img/search/search_bg.png" class="search-img-bg" />
                 </span>
                 <div class="search-label">#{messages['search']}</div>
                 <a4j:commandLink id="findLink"
@@ -57,12 +57,12 @@
                                $('[id$=searchQuery].search-input').focus();
                                hide('openSeach');">
                         #{messages['options']}
-                        <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_down.gif" />
+                        <img height="7" border="0" width="7" alt="" src="resources/img/search/bull_arr_down.gif" />
                     </a>
                 </div>
             </div>
             <div id="searchOptions" class="search-options" style="display: none;">
-                <img height="153" border="0" width="327" class="search-option-img" src="img/search/search_option_bg.png" />
+                <img height="153" border="0" width="327" class="search-option-img" src="resources/img/search/search_option_bg.png" />
                 <div class="search-options-div1">
                     #{messages['in']}
                     <c:if test="#{userBean.loggedIn}">
@@ -92,7 +92,7 @@
                               $('.search-input').focus();
                               show('openSeach');">
                         #{messages['hide_options']}
-                       <img height="7" border="0" width="7" alt="" src="img/search/bull_arr_up.gif" />
+                       <img height="7" border="0" width="7" alt="" src="resources/img/search/bull_arr_up.gif" />
                      </a>
                 </div>
             </div>

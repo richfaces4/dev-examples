@@ -40,7 +40,7 @@
         <a4j:repeat value="#{model.selectedImage.comments}" var="comment">
             <h:panelGroup layout="block" style="clear:both; padding-bottom:10px;padding-top:10px;" class="comment">
                 <h:panelGroup layout="block" styleClass="preview_box_photo_nav" style="margin-right : 5px; float:left;">
-                    <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_200.png" />
+                    <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_200.png" />
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup>
                             <a4j:commandLink render="mainArea" actionListener="#{controller.showUser(comment.author)}">
@@ -48,9 +48,9 @@
                                                  createContent="#{imageLoader.paintImage}" styleClass="additional-info-avatar"
                                                  value="/#{comment.author.login}/avatar.jpg" mimeType="image/jpeg" />
                                 <h:graphicImage rendered="#{!comment.author.hasAvatar and comment.author.sex.key =='1' }"
-                                                value="/img/shell/avatar_default.png" width="80" height="80" alt="" style="border:none" />
+                                                value="resources/img/shell/avatar_default.png" width="80" height="80" alt="" style="border:none" />
                                 <h:graphicImage rendered="#{!comment.author.hasAvatar and comment.author.sex.key =='0' }"
-                                                value="/img/shell/avatar_w_default.png" width="80" height="80" alt="" style="border:none" />
+                                                value="resources/img/shell/avatar_w_default.png" width="80" height="80" alt="" style="border:none" />
                             </a4j:commandLink>
                             <br />
                         </h:panelGroup>

@@ -51,7 +51,7 @@
                 <a4j:outputPanel layout="block"
                     styleClass="preview_box_photo_nav #{image.getString('id') == img.getString('id') ? 'preview_box_photo_current' : 'preview_box_photo_default'}">
                     <h:panelGroup layout="block" styleClass="preview_box_photo_80">
-                        <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_80.png" />
+                        <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
                             <h:panelGroup layout="block">
                                 <h:graphicImage id="img" url="#{img.getString('thumbUrl')}"
@@ -75,7 +75,7 @@
         <h:panelGrid columns="3" rendered="#{fn:length(facebookAlbumCache.currentImages) > 5}">
             <h:panelGroup styleClass="image-scroller-left-arrow"
                 style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');">
-                <h:graphicImage styleClass="ie6transparency" value="img/shell/arr_left.png"
+                <h:graphicImage styleClass="ie6transparency" value="resources/img/shell/arr_left.png"
                     onclick="#{rich:component('scroller')}.fastRewind()" />
             </h:panelGroup>
             <rich:dataScroller styleClass="image-scroller" lastPageMode="full" for="repeat" render="imagesTable"
@@ -83,7 +83,7 @@
             </rich:dataScroller>
             <h:panelGroup styleClass="image-scroller-right-arrow"
                 style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');">
-                <h:graphicImage value="img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56" border="0"
+                <h:graphicImage value="resources/img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56" border="0"
                     onclick="#{rich:component('scroller')}.fastForward()" />
             </h:panelGroup>
         </h:panelGrid>
@@ -97,7 +97,7 @@
                         <a4j:commandLink actionListener="#{slideshow.startSlideshow(facebookAlbumCache.currentImage)}"
                             styleClass="slideshow-link" render="mainArea, slideShowModalPanel"
                             execute="@this, slideShowModalPanel" rendered="#{album.getInt('size') > 1}">
-                            <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
+                            <h:graphicImage value="resources/img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
                         </a4j:commandLink>

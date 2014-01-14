@@ -95,7 +95,7 @@
             &lt;rich:tree ajaxSubmitSelection=&quot;false&quot; id=&quot;PreDefinedTree&quot; var=&quot;treeNode&quot; toggleType=&quot;client&quot;&gt;
               &lt;rich:treeModelAdaptor nodes=&quot;#{'#{'}shelfManager.predefinedShelves}&quot;&gt;
                 &lt;rich:treeNode style=&quot;cursor:pointer&quot; selectedClass=&quot;tree-selected-node&quot;
-                    iconCollapsed=&quot;img/shell/tree_icon_shelf.png&quot; iconExpanded=&quot;img/shell/tree_icon_shelf.png&quot;&gt;
+                    iconCollapsed=&quot;resources/img/shell/tree_icon_shelf.png&quot; iconExpanded=&quot;resources/img/shell/tree_icon_shelf.png&quot;&gt;
                   &lt;a4j:outputPanel layout=&quot;block&quot; style=&quot;cursor:pointer;width:200px; overflow-x:hidden;&quot;&gt;
                     &lt;h:outputText value=&quot;#{'#{'}treeNode.name}&quot; /&gt;
                     &lt;h:outputText rendered=&quot;#{'#{'}fn:length(treeNode.unvisitedImages) &gt; 0}&quot; value=&quot; #{'#{'}messages['delimiter']} &quot; /&gt;
@@ -113,7 +113,7 @@
     
                 &lt;rich:treeModelAdaptor var=&quot;album&quot; nodes=&quot;#{'#{'}treeNode.albums}&quot;&gt;
                   &lt;rich:treeNode style=&quot;cursor:pointer&quot; selectedClass=&quot;tree-selected-node&quot;
-                      iconLeaf=&quot;img/shell/tree_icon_album.png&quot;&gt;
+                      iconLeaf=&quot;resources/img/shell/tree_icon_album.png&quot;&gt;
                     &lt;a4j:outputPanel layout=&quot;block&quot; style=&quot;cursor:pointer;width:200px; overflow-x:hidden;&quot;&gt;
                       &lt;h:outputText value=&quot;#{'#{'}treeNode.name}&quot; /&gt;
                         &lt;h:outputText rendered=&quot;#{'#{'}fn:length(treeNode.unvisitedImages) &gt; 0}&quot; value=&quot; #{'#{'}messages['delimiter']} &quot; /&gt;
@@ -138,7 +138,7 @@
             <div class="figure">
                 <div class="figure-contents">
                     <div class="mediaobject">
-                        <img src="img/help/tree.png"
+                        <img src="resources/img/help/tree.png"
                             alt="Album Groups and albums nodes rendered with the help of the &lt;rich:treeNodesAdaptor&gt;" />
                     </div>
                 </div>

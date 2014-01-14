@@ -61,7 +61,7 @@
             </h:panelGroup>
             <a4j:repeat id="files" columns="1" value="#{fileWrapper.files}" var="image" rowKeyVar="row">
                 <h:panelGroup layout="block" styleClass="preview_box_photo_120">
-                    <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_200.png" style="border:0" />
+                    <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_200.png" style="border:0" />
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup>
                             <a4j:commandLink actionListener="#{controller.showImage(image)}" render="mainArea, treePanel"

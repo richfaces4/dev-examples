@@ -40,7 +40,7 @@ public enum ImageDimension {
 
     final static String CSS_CLASS = "preview_box_photo_";
     final static String FILE_POSTFIX = "_small";
-    final static String IMAGE_BG = "/img/shell/frame_photo_%1$d.png";
+    final static String IMAGE_BG = "/resources/img/shell/frame_photo_%1$d.png";
     final static String IMAGE_BG_STYLE = "width: %1$dpx; height: %1$dpx";
 
     int x;

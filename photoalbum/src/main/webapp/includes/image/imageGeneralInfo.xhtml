@@ -37,7 +37,7 @@
                                          actionListener="#{slideshow.startSlideshow(model.selectedImage)}" styleClass="slideshow-link"
                                          render="mainArea, slideShowModalPanel" execute="@this, slideShowModalPanel" 
                                          oncomplete="#{rich:component('slideShowModalPanel')}.show()">
-                            <h:graphicImage value="img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
+                            <h:graphicImage value="resources/img/shell/tree_icon_slid.png" width="27" height="16" alt="" border="0"
                                             style="vertical-align : bottom; margin-right : 5px; border:0;" />
                             <h:outputText value="#{messages['slideshow.start']}" />
                         </a4j:commandLink>

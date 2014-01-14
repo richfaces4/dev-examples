@@ -26,11 +26,11 @@
         <h:outputStylesheet name="help.css" library="stylesheet" />
     <rich:popupPanel id="helpPanel" width="1100" height="650" onshow="#{rich:component('helpPanel')}.cdiv.css('display','none').fadeIn(800); SyntaxHighlighter.highlight(this);">
         <f:facet name="header">
-            <h:graphicImage value="/img/icons/help_sign.png" />
+            <h:graphicImage value="resources/img/icons/help_sign.png" />
             #{messages['how_it_works']}</f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <h:graphicImage value="/img/modal/close.png" style="cursor:pointer" id="hidelink8"
+                <h:graphicImage value="resources/img/modal/close.png" style="cursor:pointer" id="hidelink8"
                                 onclick="#{rich:component('helpPanel')}.hide()" />
             </h:panelGroup>
         </f:facet>

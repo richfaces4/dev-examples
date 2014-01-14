@@ -33,7 +33,7 @@
                 value="#{userPrefsHelper.avatarData.path}" mimeType="image/jpeg" />
         </h:panelGroup>
         <h:panelGroup rendered="#{!user.hasAvatar and userPrefsHelper.avatarData == null}">
-            <h:graphicImage value="/img/shell/avatar_#{user.sex.key =='0' ? 'w_' : ''}default.png"
+            <h:graphicImage value="resources/img/shell/avatar_#{user.sex.key =='0' ? 'w_' : ''}default.png"
                 width="80" height="80" alt="" style="border:none" />
         </h:panelGroup>
     </a4j:outputPanel>
