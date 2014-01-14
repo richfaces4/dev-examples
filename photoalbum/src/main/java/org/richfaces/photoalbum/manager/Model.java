@@ -89,6 +89,9 @@ public class Model implements Serializable {
      */
     public void resetModel(NavigationEnum mainArea, User selectedUser, Shelf selectedShelf, Album selectedAlbum,
         Image selectedImage, List<Image> images) {
+        if (this.mainArea != null && this.mainArea.equals(NavigationEnum.FILE_UPLOAD)) {
+            event.select(new EventTypeQualifier(Events.CLEAR_FILE_UPLOAD_EVENT)).fire(new SimpleEvent());
+        }
         this.setSelectedAlbum(selectedAlbum);
         this.setSelectedImage(selectedImage);
         this.setSelectedShelf(selectedShelf);
