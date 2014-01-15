@@ -149,6 +149,19 @@ public class SlideshowManager implements Serializable {
 
         startSlideshow();
     }
+    
+    public void startSlideshowRemote(int kind) {
+        this.slideshowIndex = this.startSlideshowIndex = 0;
+        switch(kind) {
+            case ImageHandler.FACEBOOK:
+                this.selectedImage = new ImageHandler(fac.getCurrentImages().get(0));
+                break;
+            case ImageHandler.GOOGLE:
+                this.selectedImage = new ImageHandler(gpac.getCurrentImages().get(0));
+        }
+        
+        startSlideshow();
+    }
 
     /**
      * This method invoked after user click on 'Stop slideshow' button. After execution of this method slideshow will be
