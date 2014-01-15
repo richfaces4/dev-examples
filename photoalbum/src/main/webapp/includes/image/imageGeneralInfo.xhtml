@@ -26,7 +26,10 @@
                 xmlns:rich="http://richfaces.org/rich" xmlns:richx="http://richfaces.org/richx">
 
     <ui:include src="/includes/image/imageScroller.xhtml" />
-
+    <rich:hotKey key="right" onkeyup="showNext()"/>
+    <rich:hotKey key="left" onkeyup="showPrev()" />
+    <a4j:jsFunction name="showNext" actionListener="#{controller.showNextImage()}" render="mainArea"/>
+    <a4j:jsFunction name="showPrev" actionListener="#{controller.showPrevImage()}" render="mainArea"/>
     <br clear="all" />
     <h:panelGroup id="mainImage" layout="block" styleClass="mainImage-div">
         <table style="padding: 0px;" class="mainImage-table">

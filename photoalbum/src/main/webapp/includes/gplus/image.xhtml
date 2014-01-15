@@ -79,7 +79,7 @@
                     onclick="#{rich:component('scroller')}.fastRewind()" />
             </h:panelGroup>
             <rich:dataScroller styleClass="image-scroller" lastPageMode="full" for="repeat" render="imagesTable"
-                boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
+                boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide" page="#{controller.gplusPage}">
             </rich:dataScroller>
             <h:panelGroup styleClass="image-scroller-right-arrow"
                 style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');">
@@ -89,6 +89,10 @@
         </h:panelGrid>
     </h:panelGroup>
 
+    <rich:hotKey key="right" onkeyup="showGNext()"/>
+    <rich:hotKey key="left" onkeyup="showGPrev()" />
+    <a4j:jsFunction name="showGNext" actionListener="#{controller.showNextGPlusImage()}" render="mainArea"/>
+    <a4j:jsFunction name="showGPrev" actionListener="#{controller.showPrevGPlusImage()}" render="mainArea"/>
     <br clear="all" />
     <h:panelGroup id="mainImage" layout="block" styleClass="mainImage-div">
         <table style="padding: 0px;" class="mainImage-table">

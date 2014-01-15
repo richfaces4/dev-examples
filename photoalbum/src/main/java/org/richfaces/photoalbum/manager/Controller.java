@@ -231,6 +231,78 @@ public class Controller implements Serializable {
         image.setVisited(true);
     }
 
+    public void showNextImage() {
+        int id = model.getSelectedAlbum().getImages().indexOf(model.getSelectedImage());
+        int max = model.getSelectedAlbum().getImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showImage(model.getSelectedAlbum().getImages().get(id + 1));
+    }
+
+    public void showPrevImage() {
+        int id = model.getSelectedAlbum().getImages().indexOf(model.getSelectedImage());
+        int max = model.getSelectedAlbum().getImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showImage(model.getSelectedAlbum().getImages().get(id - 1));
+    }
+
+    public void showNextFbImage() {
+        int id = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+        int max = fac.getCurrentImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showFbImage(fac.getCurrentImages().get(id + 1).optString("id"));
+    }
+
+    public void showPrevFbImage() {
+        int id = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+        int max = fac.getCurrentImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showFbImage(fac.getCurrentImages().get(id - 1).optString("id"));
+    }
+
+    public void showNextGPlusImage() {
+        int id = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+        int max = gpac.getCurrentImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showGPlusImage(gpac.getCurrentImages().get(id + 1).optString("id"));
+    }
+
+    public void showPrevGPlusImage() {
+        int id = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+        int max = gpac.getCurrentImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showGPlusImage(gpac.getCurrentImages().get(id - 1).optString("id"));
+    }
+
     /**
      * This method invoked after the user want to edit specified image.
      *
@@ -409,8 +481,7 @@ public class Controller implements Serializable {
     public void onImageDeleted(@Observes @EventType(Events.IMAGE_DELETED_EVENT) ImageEvent ie) {
         loggedUserBean.refreshUser();
         Album album = ie.getImage().getAlbum();
-        model.resetModel(NavigationEnum.ALBUM_PREVIEW, getLoggedUser(), album.getShelf(),
-            album, null, album.getImages());
+        model.resetModel(NavigationEnum.ALBUM_PREVIEW, getLoggedUser(), album.getShelf(), album, null, album.getImages());
     }
 
     /**
@@ -559,6 +630,30 @@ public class Controller implements Serializable {
     }
 
     public void setPage(Integer page) {
+        currentPage = page;
+    }
+    
+    public Integer getFPage() {
+        if (currentPage == 0) {
+            Integer index = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+            currentPage = index / 5 + 1;
+        }
+        return currentPage;
+    }
+
+    public void setFPage(Integer page) {
+        currentPage = page;
+    }
+    
+    public Integer getGplusPage() {
+        if (currentPage == 0) {
+            Integer index = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+            currentPage = index / 5 + 1;
+        }
+        return currentPage;
+    }
+
+    public void setGplusPage(Integer page) {
         currentPage = page;
     }
 
