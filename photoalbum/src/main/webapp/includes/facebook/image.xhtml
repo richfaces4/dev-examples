@@ -34,7 +34,11 @@
                 <h:outputText value="#{image.getString('name')}" />
             </h1>
             <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showEvent(model.selectedEvent)}"
-                render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}" />
+            render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}"
+            rendered="#{controller.isEventFacebookAlbum(album.getString('id'))}" />
+        <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showFbShelf()}"
+            render="mainArea, treePanel" value="Facebook"
+            rendered="#{not controller.isEventGoogleAlbum(album.getString('fullId'))}" />
             <h:outputText value=" #{messages['delimiter']} " />
             <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showFBAlbum(album.getString('id'))}"
                 render="mainArea, treePanel" value="#{messages['album']} #{album.getString('name')}" />

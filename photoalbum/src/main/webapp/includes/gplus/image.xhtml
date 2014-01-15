@@ -34,7 +34,11 @@
                 <!-- <h:outputText value="#{image.getString('caption')}" /> -->
             </h1>
             <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showEvent(model.selectedEvent)}"
-                render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}" />
+            render="mainArea, treePanel" value="Event: #{model.selectedEvent.name}"
+            rendered="#{controller.isEventGoogleAlbum(album.getString('fullId'))}" />
+        <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showGPlusShelf()}"
+            render="mainArea, treePanel" value="Google+" 
+            rendered="#{not controller.isEventGoogleAlbum(album.getString('fullId'))}" />
             <h:outputText value=" #{messages['delimiter']} " />
             <a4j:commandLink styleClass="additional-info-text" actionListener="#{controller.showGPlusAlbum()}"
                 render="mainArea, treePanel" value="#{messages['album']} #{album.getString('name')}" />
