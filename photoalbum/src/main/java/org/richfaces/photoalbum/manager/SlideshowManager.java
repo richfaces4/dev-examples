@@ -35,16 +35,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.json.JSONObject;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.social.facebook.FacebookAlbumCache;
 import org.richfaces.photoalbum.social.gplus.GooglePlusAlbumCache;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.ImageHandler;
-import org.richfaces.photoalbum.util.Utils;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 
 @ApplicationScoped
 @Named("slideshow")
@@ -261,7 +261,7 @@ public class SlideshowManager implements Serializable {
     private void onError(boolean isShowOnUI) {
         stopSlideshow();
         errorDetected = true;
-        Utils.addToRerender(Constants.MAINAREA_ID);
+        ApplicationUtils.addToRerender(Constants.MAINAREA_ID);
         if (isShowOnUI) {
             error.fire(new ErrorEvent(Constants.NO_IMAGES_FOR_SLIDESHOW_ERROR));
         }
@@ -279,7 +279,7 @@ public class SlideshowManager implements Serializable {
             error.fire(new ErrorEvent(Constants.IMAGE_RECENTLY_DELETED_ERROR));
             active = false;
             errorDetected = true;
-            Utils.addToRerender(Constants.MAINAREA_ID);
+            ApplicationUtils.addToRerender(Constants.MAINAREA_ID);
             model.resetModel(NavigationEnum.ALBUM_IMAGE_PREVIEW, image.getAlbum().getOwner(), image.getAlbum().getShelf(),
                 image.getAlbum(), null, image.getAlbum().getImages());
             return;

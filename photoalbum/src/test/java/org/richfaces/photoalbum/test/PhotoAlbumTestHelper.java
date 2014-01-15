@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Comment;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.domain.User;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Comment;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.User;
 
 public class PhotoAlbumTestHelper {
 

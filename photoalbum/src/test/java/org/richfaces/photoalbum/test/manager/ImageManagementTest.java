@@ -18,16 +18,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Comment;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.service.IImageAction;
-import org.richfaces.photoalbum.service.ImageAction;
-import org.richfaces.photoalbum.service.PhotoAlbumException;
+import org.richfaces.photoalbum.manager.UserBean;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Comment;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IImageAction;
+import org.richfaces.photoalbum.model.actions.ImageAction;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 @RunWith(Arquillian.class)
 public class ImageManagementTest {

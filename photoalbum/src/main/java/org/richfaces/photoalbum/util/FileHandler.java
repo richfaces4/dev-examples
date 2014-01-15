@@ -29,8 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.richfaces.model.UploadedFile;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.PhotoAlbumException;
 
 /**
  * A wrapper class for handling two different classes: RichFaces' UploadedFile and java.io.File

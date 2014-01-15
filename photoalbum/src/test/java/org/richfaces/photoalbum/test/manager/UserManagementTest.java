@@ -18,13 +18,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Sex;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IUserAction;
-import org.richfaces.photoalbum.service.UserAction;
+import org.richfaces.photoalbum.manager.UserBean;
+import org.richfaces.photoalbum.model.Sex;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IUserAction;
+import org.richfaces.photoalbum.model.actions.UserAction;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.Constants;
 
 /**
  * Test for user management (creating, searching) performed by UserAction class

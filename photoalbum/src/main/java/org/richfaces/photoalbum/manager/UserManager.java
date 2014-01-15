@@ -34,15 +34,15 @@ import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.AlbumEvent;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IUserAction;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IUserAction;
+import org.richfaces.photoalbum.model.event.AlbumEvent;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.ui.UserPrefsHelper;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Preferred;
 
 @RequestScoped

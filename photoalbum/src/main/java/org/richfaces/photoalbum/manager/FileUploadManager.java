@@ -37,18 +37,18 @@ import javax.inject.Named;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.ImageEvent;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IImageAction;
-import org.richfaces.photoalbum.service.PhotoAlbumException;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IImageAction;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.ImageEvent;
 import org.richfaces.photoalbum.ui.FileWrapper;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.FileHandler;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 import org.richfaces.photoalbum.util.Preferred;
 
 import com.drew.imaging.jpeg.JpegMetadataReader;

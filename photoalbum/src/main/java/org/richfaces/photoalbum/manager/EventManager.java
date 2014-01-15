@@ -31,18 +31,18 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.solder.logging.Logger;
-import org.richfaces.photoalbum.domain.Event;
-import org.richfaces.photoalbum.domain.EventCategory;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.EventTypeQualifier;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.ShelfEvent;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IEventAction;
-import org.richfaces.photoalbum.service.IShelfAction;
+import org.richfaces.photoalbum.model.Event;
+import org.richfaces.photoalbum.model.EventCategory;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IEventAction;
+import org.richfaces.photoalbum.model.actions.IShelfAction;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.EventTypeQualifier;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.ShelfEvent;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Preferred;
 
 @Named

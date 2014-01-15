@@ -30,17 +30,17 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Event;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.EventTypeQualifier;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.NavEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Event;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.EventTypeQualifier;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.NavEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 
 /**
  * This class represent 'M' in MVC pattern. It is storage to application flow related data such as selectedAlbum, image,

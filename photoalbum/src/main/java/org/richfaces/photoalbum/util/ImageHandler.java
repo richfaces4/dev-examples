@@ -1,7 +1,7 @@
 package org.richfaces.photoalbum.util;
 
 import org.richfaces.json.JSONObject;
-import org.richfaces.photoalbum.domain.Image;
+import org.richfaces.photoalbum.model.Image;
 
 /**
  * Class to handle local (photoalbum.domain.Image) and remote images (JSONobject)
