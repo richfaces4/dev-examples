@@ -57,7 +57,7 @@
                 <h:graphicImage id="scrollToPrevious" styleClass="ie6transparency" value="resources/img/shell/arr_left.png"
                                 onclick="select('scrollToPrevious');#{rich:component('scroller')}.previous()" />
             </h:panelGroup>
-            <rich:dataScroller styleClass="image-scroller" for="repeat" page="#{controller.page}" execute="imagesTable"
+            <rich:dataScroller styleClass="image-scroller" for="repeat" page="#{controller.page}" execute="imagesTable" render="mainArea"
                                boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
             </rich:dataScroller>
             <ui:include src="/includes/help/button.xhtml">
