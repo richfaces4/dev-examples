@@ -26,7 +26,9 @@
     xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <h:panelGroup layout="block">
         <h:panelGrid columns="2">
-            <a4j:commandLink actionListener="#{controller.selectPublicShelves()}" render="mainArea, treePanel">
+            <a4j:commandLink execute="@this" actionListener="#{treeSelectionHelper.unselectOtherTrees('R')}" render="treePanel"
+                oncomplete="showPTree()">
+                <a4j:jsFunction name="showPTree" actionListener="#{controller.selectPublicShelves()}" render="mainArea" />
                 <h2>
                     <h:outputText value="#{messages['public_shelves']}" />
                 </h2>
@@ -35,11 +37,14 @@
                 <ui:param name="page" value="tree_predefined.xhtml" />
             </ui:include>
         </h:panelGrid>
-
-        <rich:tree id="PreDefinedTree" var="treeNode" toggleType="client" styleClass="tree">
+        <rich:tree id="PreDefinedTree" var="treeNode" toggleType="client" styleClass="tree"
+            binding="#{treeSelectionHelper.predefinedTree}">
+            <a4j:ajax event="selectionchange" listener="#{treeSelectionHelper.unselectOtherTrees('PreDefinedTree')}"
+                render="userTree, eventTree" />
             <rich:treeModelAdaptor nodes="#{shelfManager.predefinedShelves}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
-                    iconCollapsed="resources/img/shell/tree_icon_shelf.png" iconExpanded="resources/img/shell/tree_icon_shelf.png">
+                    iconCollapsed="resources/img/shell/tree_icon_shelf.png"
+                    iconExpanded="resources/img/shell/tree_icon_shelf.png">
                     <a4j:outputPanel layout="block" onclick="#{rich:component('shelfTooltip')}.hide()"
                         style="cursor:pointer;width:150px; overflow-x:hidden;text-overflow: ellipsis;">
                         <h:outputText value="#{treeNode.name}" />
@@ -80,7 +85,9 @@
     <br />
     <h:panelGroup id="tree" rendered="#{userBean.loggedIn}" layout="block">
         <h:panelGrid columns="2">
-            <a4j:commandLink actionListener="#{controller.selectShelves()}" render="mainArea, treePanel">
+            <a4j:commandLink execute="@this" actionListener="#{treeSelectionHelper.unselectOtherTrees('R')}" render="treePanel"
+                oncomplete="showUTree()">
+                <a4j:jsFunction name="showUTree" actionListener="#{controller.selectShelves()}" render="mainArea" />
                 <h2>
                     <h:outputText value="#{messages['myAlbumShelves']}" />
                 </h2>
@@ -100,10 +107,13 @@
                 [Image]
             </rich:panel>
         </rich:dragIndicator>
-        <rich:tree id="userTree" var="treeNode" toggleType="client" styleClass="tree">
+        <rich:tree id="userTree" var="treeNode" toggleType="client" styleClass="tree" binding="#{treeSelectionHelper.userTree}">
+            <a4j:ajax event="selectionchange" listener="#{treeSelectionHelper.unselectOtherTrees('userTree')}"
+                render="PreDefinedTree, eventTree" />
             <rich:treeModelAdaptor nodes="#{userBean.user.shelves}">
                 <rich:treeNode style="cursor:pointer" selectedClass="tree-selected-node"
-                    iconExpanded="resources/img/shell/tree_icon_shelf.png" iconCollapsed="resources/img/shell/tree_icon_shelf.png" id="shelf">
+                    iconExpanded="resources/img/shell/tree_icon_shelf.png"
+                    iconCollapsed="resources/img/shell/tree_icon_shelf.png" id="shelf">
                     <ui:include src="/includes/contextMenu/CMForShelf.xhtml">
                         <ui:param name="shelf" value="#{treeNode}" />
                         <ui:param name="target" value="shelf" />
@@ -160,7 +170,9 @@
     </h:panelGroup>
 
     <h:panelGrid rendered="#{userBean.loggedInFB}">
-        <a4j:commandLink execute="@this" actionListener="#{controller.showFbShelf()}" render="mainArea">
+        <a4j:commandLink execute="@this" actionListener="#{treeSelectionHelper.unselectOtherTrees('R')}" render="treePanel"
+            oncomplete="showFShelf()">
+            <a4j:jsFunction name="showFShelf" actionListener="#{controller.showFbShelf()}" render="mainArea" />
             <h2>
                 <h:outputText value="Facebook Albums" />
             </h2>
@@ -168,7 +180,9 @@
     </h:panelGrid>
 
     <h:panelGrid columns="2" rendered="#{userBean.loggedInGPlus}">
-        <a4j:commandLink execute="@this" actionListener="#{controller.showGPlusShelf()}" render="mainArea">
+        <a4j:commandLink execute="@this" actionListener="#{treeSelectionHelper.unselectOtherTrees('R')}" render="treePanel"
+            oncomplete="showGShelf()">
+            <a4j:jsFunction name="showGShelf" actionListener="#{controller.showGPlusShelf()}" render="mainArea" />
             <h2>
                 <h:outputText value="G+ Albums" />
             </h2>
