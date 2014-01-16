@@ -178,6 +178,7 @@ public class Controller implements Serializable {
     }
 
     public void showFbImage(String imageId) {
+        setFPage(0);
         fac.setCurrentImageId(imageId);
         model.resetModel(NavigationEnum.FB_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
@@ -195,6 +196,7 @@ public class Controller implements Serializable {
     }
 
     public void showGPlusImage(String imageId) {
+        setGplusPage(0);
         gpac.setCurrentImageId(imageId);
         model.resetModel(NavigationEnum.GPLUS_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
