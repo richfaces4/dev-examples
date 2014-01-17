@@ -107,7 +107,10 @@
                 <ui:include src="/includes/index/footer.xhtml" />
             </div>
             <ui:insert name="searchWidget" />
-
+            <ui:include src="/includes/help/button.xhtml">
+                <ui:param name="style" value="position: absolute; top: 26px; left: 320px;" />
+                <ui:param name="page" value="statusHelp.xhtml" />
+            </ui:include>
         </h:form>
         <ui:include src="/includes/index/status.xhtml" />
         <!-- do not move, will not work inside the form -->
