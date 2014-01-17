@@ -35,24 +35,33 @@
         content="richfaces, richfaces demo, richfaces live demo, richfaces examples, datatable, upload, suggestion box, tree, calendar, AJAX, JSF, Seam, JBoss, RIA, Ajax4JSF, java server faces, rich components"
         name="Keywords" />
     <title>RichFaces PhotoAlbum demo</title>
-    <h:outputStylesheet library = "stylesheet" name = "photoalbum.css" />
-    <h:outputStylesheet library = "stylesheet" name = "shCore.css" />
-    <h:outputStylesheet library = "stylesheet" name = "shThemeDefault.css" />
-    <h:outputScript library = "scripts" name = "photoalbum.js" />
-    <h:outputScript library = "scripts" name = "shCore.js" />
-    <h:outputScript library = "scripts" name = "shLegacy.js" />
-    <h:outputScript library = "scripts" name = "shBrushJava.js" />
-    <h:outputScript library = "scripts" name = "shBrushXml.js" />
-    <h:outputScript library = "scripts" name = "shBrushJScript.js" />
+    <h:outputStylesheet library="stylesheet" name="photoalbum.css" />
+    <h:outputStylesheet library="stylesheet" name="shCore.css" />
+    <h:outputStylesheet library="stylesheet" name="shThemeDefault.css" />
+    <h:outputScript library="scripts" name="photoalbum.js" />
+    <h:outputScript library="scripts" name="shCore.js" />
+    <h:outputScript library="scripts" name="shLegacy.js" />
+    <h:outputScript library="scripts" name="shBrushJava.js" />
+    <h:outputScript library="scripts" name="shBrushXml.js" />
+    <h:outputScript library="scripts" name="shBrushJScript.js" />
 </h:head>
 
 <h:body class="main-body" style="position: relative;">
     <div style="position: relative; height: auto; overflow: hidden; min-height: 100%; zoom: 1;" class="main-panel">
         <h:form id="overForm">
             <rich:notifyStack direction="vertical" position="topLeft" id="stack">
-                <rich:notifyMessages for="overForm" styleClass="photoalbum-message" sticky="true" stack="stack" showDetail="true" showSummary="true" />
+                <rich:notifyMessages for="overForm" styleClass="photoalbum-message" sticky="true" stack="stack"
+                    showDetail="true" showSummary="true" />
             </rich:notifyStack>
-            
+
+            <ui:include src="/includes/help/button.xhtml">
+                    <ui:param name="style" value="position: absolute; top: 26px; left: 320px; z-index: 3" />
+                    <ui:param name="page" value="statusHelp.xhtml" />
+                </ui:include>
+                <div style="position: absolute; top: 0px; width: 100%; height: 116px; left: 0px;">
+                    <ui:include src="/includes/index/header.xhtml" />
+                </div>
+
             <div style="padding-bottom: 82px; padding-top: 116px; left: 0px; zoom: 1;">
                 <h:panelGroup id="modalPanels" layout="block" style="display: none;">
                     <ui:include src="/includes/misc/confirmation.xhtml" />
@@ -63,6 +72,7 @@
                     <ui:include src="/includes/index/login.xhtml" />
                 </h:panelGroup>
                 <ui:include src="/includes/image/slideshow.xhtml" />
+                
                 <table cellpadding="0" cellspacing="0" width="100%">
                     <tbody>
                         <tr>
@@ -84,6 +94,7 @@
                                 <div style="position: relative; zoom: 1;">
                                     <a4j:region>
                                         <a4j:log level="debug" mode="popup" />
+                                        <ui:debug hotkey="0"/>
                                         <rich:panel id="bodyPanel" styleClass="body-main-panel"
                                             headerClass="body-main-panel-header" bodyClass="body-main-panel-body">
                                             <ui:insert name="body" />
@@ -96,28 +107,21 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
 
-
-            <div style="position: absolute; top: 0px; width: 100%; height: 116px; left: 0px;">
-                <ui:include src="/includes/index/header.xhtml" />
             </div>
 
             <div style="position: absolute; bottom: 0px; width: 100%; height: 82px; left: 0px; zoom: 1;">
                 <ui:include src="/includes/index/footer.xhtml" />
             </div>
             <ui:insert name="searchWidget" />
-            <ui:include src="/includes/help/button.xhtml">
-                <ui:param name="style" value="position: absolute; top: 26px; left: 320px;" />
-                <ui:param name="page" value="statusHelp.xhtml" />
-            </ui:include>
+
         </h:form>
         <ui:include src="/includes/index/status.xhtml" />
         <!-- do not move, will not work inside the form -->
     </div>
-    
+
     <ui:include src="/includes/index/sdks.xhtml" />
-    
+
     <!-- enforce loading of CKEDITOR resources -->
     <rich:editor style="display: none" />
 </h:body>
