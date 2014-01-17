@@ -44,7 +44,7 @@
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup style="margin-bottom:7px;" layout="block">
                             <a4j:commandLink execute="@this" actionListener="#{controller.showFBAlbum(albumId)}"
-                                onclick="select('#{rk}:img'); #{rich:component('albumListTooltip')}.hide()" render="mainArea">
+                                onclick="select(':#{rk}:img'); #{rich:component('albumListTooltip')}.hide()" render="mainArea">
                                 <a4j:param assignTo="#{facebookAlbumCache.currentAlbumId}" value="#{albumId}" />
                                 <h:graphicImage id="img" url="#{facebookAlbumCache.getAlbum(albumId).getString('coverUrl')}"
                                     style="max-width: 120px; max-height: 120px" styleClass="album-cover-image" />

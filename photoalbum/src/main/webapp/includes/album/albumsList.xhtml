@@ -28,7 +28,7 @@
             <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
             <h:panelGrid cellpadding="0">
                 <h:panelGroup style="margin-bottom:7px;" layout="block">
-                    <a4j:commandLink actionListener="#{controller.showAlbum(album)}" onclick="select('#{rk}:img'); #{rich:component('albumListTooltip')}.hide()" render="mainArea, treePanel">
+                    <a4j:commandLink actionListener="#{controller.showAlbum(album)}" onclick="select($(this).find('>img')); #{rich:component('albumListTooltip')}.hide()" render="mainArea, treePanel">
                         <a4j:mediaOutput rendered="#{!album.isEmpty()}" id="img" element="img"
                                          createContent="#{imageLoader.paintImage}" styleClass="album-cover-image"
                                          value="#{fileManager.transformPath(album.coveringImage.fullPath, '_small120')}" mimeType="image/jpeg">

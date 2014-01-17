@@ -55,7 +55,7 @@
                                 value="#{imageSizeHelper.currentDimension.imageBg}" />
                 <h:panelGrid cellpadding="0">
                     <h:panelGroup>
-                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select('#{rk}:img');"
+                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select(':#{rk}:img');"
                                          render="mainArea, treePanel">
                             <a4j:mediaOutput id="img" element="img" createContent="#{imageLoader.paintImage}"
                                              style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"
