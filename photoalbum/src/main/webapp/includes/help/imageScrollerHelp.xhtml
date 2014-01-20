@@ -49,7 +49,7 @@
               &lt;a4j:outputPanel layout=&quot;block&quot;
                   styleClass=&quot;preview_box_photo_nav #{'#{'}model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}&quot;&gt;
                 &lt;h:panelGroup layout=&quot;block&quot; styleClass=&quot;preview_box_photo_80&quot;&gt;
-                  &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; value=&quot;/img/shell/frame_photo_80.png&quot; /&gt;
+                  &lt;h:graphicImage styleClass=&quot;pr_photo_bg&quot; value=&quot;/resources/img/shell/frame_photo_80.png&quot; /&gt;
                   &lt;h:panelGrid cellpadding=&quot;0&quot; cellspacing=&quot;2&quot;&gt;
                     &lt;h:panelGroup layout=&quot;block&quot;&gt;
                       &lt;a4j:mediaOutput element=&quot;img&quot; createContent=&quot;#{'#{'}imageLoader.paintImage}&quot;
@@ -110,8 +110,8 @@
         &lt;h:panelGrid columns=&quot;3&quot;&gt;
           &lt;h:panelGroup styleClass=&quot;image-scroller-left-arrow&quot;
               style=&quot;width: 56px; height:34px; display: inline-block; 
-              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');&quot;&gt;
-            &lt;h:graphicImage styleClass=&quot;ie6transparency&quot; value=&quot;img/shell/arr_left.png&quot;
+              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='resources/img/shell/arr_left.png',sizingMethod='scale');&quot;&gt;
+            &lt;h:graphicImage styleClass=&quot;ie6transparency&quot; value=&quot;resources/img/shell/arr_left.png&quot;
                 onclick=&quot;#{'#{'}rich:component('scroller')}.fastRewind()&quot; /&gt;
           &lt;/h:panelGroup&gt;
             
@@ -121,8 +121,8 @@
             
           &lt;h:panelGroup styleClass=&quot;image-scroller-right-arrow&quot;
               style=&quot;width: 56px; height:34px; display: inline-block; 
-              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');&quot;&gt;
-            &lt;h:graphicImage value=&quot;img/shell/arr_right.png&quot; styleClass=&quot;ie6transparency&quot; height=&quot;34&quot; width=&quot;56&quot; border=&quot;0&quot;
+              filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='resources/img/shell/arr_right.png',sizingMethod='scale');&quot;&gt;
+            &lt;h:graphicImage value=&quot;resources/img/shell/arr_right.png&quot; styleClass=&quot;ie6transparency&quot; height=&quot;34&quot; width=&quot;56&quot; border=&quot;0&quot;
                 onclick=&quot;#{'#{'}rich:component('scroller')}.fastForward()&quot; /&gt;
           &lt;/h:panelGroup&gt;
         &lt;/h:panelGrid&gt;

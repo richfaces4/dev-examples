@@ -40,7 +40,7 @@ html, body {
     height: 116px !important;
     border: none !important;
     padding: 0px !important;
-    background: url(../img/shell/page_bg.gif) repeat-x #D7D7D7 !important;
+    background: url(../resources/img/shell/page_bg.gif) repeat-x #D7D7D7 !important;
 }
 
 .header-panel-body {
@@ -96,7 +96,7 @@ html, body {
     position: relative;
     border: none !important;
     padding: 0px !important;
-    background: url(../img/shell/general_panelbar_bg.gif) repeat-x #A84807 !important;
+    background: url(../resources/img/shell/general_panelbar_bg.gif) repeat-x #A84807 !important;
 }
 
 .main-menu-panel-body {
@@ -105,11 +105,11 @@ html, body {
 }
 
 .body-main-bg {
-    background: url(../img/shell/general_panel_bg.gif) right top repeat-y !important;
+    background: url(../resources/img/shell/general_panel_bg.gif) right top repeat-y !important;
 }
 
 .main-panel {
-    background: url(../img/shell/panel_bg.gif) right top !important;
+    background: url(../resources/img/shell/panel_bg.gif) right top !important;
 }
 
 .body-main-panel {
@@ -120,7 +120,7 @@ html, body {
 }
 
 .panel-header-bg {
-    background: url(../img/shell/general_panel_header_bg.gif) repeat-x right top !important;
+    background: url(../resources/img/shell/general_panel_header_bg.gif) repeat-x right top !important;
 }
 
 .body-main-panel-header {
@@ -182,7 +182,7 @@ html, body {
 .footer-panel {
     height: 82px !important;
     position: relative;
-    background: url(../img/shell/footer_bg.gif) repeat-x #000000 !important;
+    background: url(../resources/img/shell/footer_bg.gif) repeat-x #000000 !important;
     border: none !important;
     padding: 0px !important;
 }
@@ -831,7 +831,7 @@ span.image-scroller {
 
 .search-input {
     border: 0px none !important;
-    background: transparent url('../img/spacer.gif') repeat scroll 0% 0% !important;
+    background: transparent url('../resources/img/spacer.gif') repeat scroll 0% 0% !important;
     width: 176px !important;
     height: 17px !important;
     position: absolute;
@@ -1040,7 +1040,7 @@ span.image-scroller {
     position: relative;
     width: 103px !important;
     height: 28px !important;
-    background-image: url('../img/shell/button.png');
+    background-image: url('../resources/img/shell/button.png');
 }
 
 .buttons-body-image {
@@ -1141,7 +1141,7 @@ span.image-scroller {
 .main-menu-icons-middle-div {
     height: 23px !important;
     float: left;
-    background: url(../img/shell/informer_bg.png) top left no-repeat !important;
+    background: url(../resources/img/shell/informer_bg.png) top left no-repeat !important;
     color: #FFFFFF !important;
     padding: 4px 0px 0px 0px !important;
 }
@@ -1250,7 +1250,7 @@ span.image-scroller {
     width: 103px !important;
     height: 28px !important;
     cursor: pointer;
-    background-image: url('../img/shell/button.png');
+    background-image: url('../resources/img/shell/button.png');
     background-position: 0 0;
 }
 
@@ -1438,11 +1438,11 @@ span.image-scroller {
 }
 
 .rf-trn-hnd-colps {
-    background: url(../img/shell/tree_icon_plus.png) no-repeat center !important;
+    background: url(../resources/img/shell/tree_icon_plus.png) no-repeat center !important;
 }
 
 .rf-trn-hnd-exp {
-    background: url(../img/shell/tree_icon_minus.png) no-repeat center !important;
+    background: url(../resources/img/shell/tree_icon_minus.png) no-repeat center !important;
 }
 
 .rf-trn-lbl:hover {
@@ -1476,7 +1476,7 @@ span.image-scroller {
 }
 
 .photoalbum-message.rf-ntf-err .rf-ntf-ico {
-    background-image: url(../img/modal/ico_warning.png) !important;
+    background-image: url(../resources/img/modal/ico_warning.png) !important;
     background-size: 18px 29px;
 }
 
@@ -1499,7 +1499,7 @@ input[type='submit'].fb-button {
 }
 
 .fb-comm-button {
-    background-image: url(../img/shell/buttonfb.png);
+    background-image: url(../resources/img/shell/buttonfb.png);
     font-weight: bold;
 }
 

@@ -17,17 +17,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Comment;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.service.AlbumAction;
-import org.richfaces.photoalbum.service.IAlbumAction;
-import org.richfaces.photoalbum.service.IImageAction;
-import org.richfaces.photoalbum.service.IShelfAction;
-import org.richfaces.photoalbum.service.IUserAction;
+import org.richfaces.photoalbum.manager.UserBean;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Comment;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.actions.AlbumAction;
+import org.richfaces.photoalbum.model.actions.IAlbumAction;
+import org.richfaces.photoalbum.model.actions.IImageAction;
+import org.richfaces.photoalbum.model.actions.IShelfAction;
+import org.richfaces.photoalbum.model.actions.IUserAction;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
 
 /**

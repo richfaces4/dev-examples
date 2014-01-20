@@ -29,9 +29,9 @@
         </h:panelGrid>
     </ui:insert>
     <a4j:commandLink rendered="#{userBean.loggedIn}" actionListener="#{eventManager.createEvent()}" render="eventModalPanel"
-        oncomplete="#{rich:component('eventModalPanel')}.show()" execute="@this">
-        <h:graphicImage value="/img/shell/icon_add_shelf.png" width="37" height="23" alt="" styleClass="main-menu-add-icons-img" />
-        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+        oncomplete="#{rich:component('eventModalPanel')}.show()" execute="@this" onclick="#{rich:component('eventListTooltip')}.hide()">
+        <h:graphicImage value="resources/img/shell/icon_add_shelf.png" width="37" height="23" alt="" styleClass="main-menu-add-icons-img" />
+        <rich:tooltip id="eventListTooltip" followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
             <h:outputText value="#{messages['add_shelf']}"
                 style="white-space: nowrap; display: block; text-align: left; color: #DF6400" />
         </rich:tooltip>

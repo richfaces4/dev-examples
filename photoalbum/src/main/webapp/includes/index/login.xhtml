@@ -29,22 +29,22 @@
         <f:facet name="header">#{messages['login.login']}</f:facet>
         <f:facet name="controls">
             <h:panelGroup id="loginPanelHideControl">
-                <h:graphicImage value="/img/modal/close.png" style="cursor:pointer" id="loginPanelhidelink"
+                <h:graphicImage value="resources/img/modal/close.png" style="cursor:pointer" id="loginPanelhidelink"
                     onclick="#{rich:component('loginPanel')}.hide();" />
             </h:panelGroup>
         </f:facet>
-
+        <rich:hotKey key="esc" onkeyup="#{rich:component('loginPanel')}.hide()" enabledInInput="true"/>
         <h:panelGrid columns="2" columnClasses="login-table-col" style="width: 100%; text-align:center;">
             <!-- social login button -->
             <h:panelGroup layout="block" rendered="#{not userBean.loggedInFB or not userBean.loggedInGPlus}">
-                <a4j:commandLink styleClass="FB-btn-medium" execute="@none" style="margin: 2px 8px"
+                <a4j:commandLink styleClass="FB-btn-medium" execute="@none" style="margin: 2px 8px" onclick="#{rich:component('FLoginTooltip')}.hide()"
                     oncomplete="#{rich:component('fbProgress')}.setValue( #{rich:component('fbProgress')}.getValue() + 33 ); F.login(fetchUserInfo, fetchFBAlbumIds, showError); return false;">
-                    <rich:tooltip>Sign in Facebook</rich:tooltip>
+                    <rich:tooltip id="FLoginTooltip">Sign in Facebook</rich:tooltip>
                 </a4j:commandLink>
 
-                <a4j:commandLink styleClass="G-btn-medium" execute="@none" style="margin: 2px 8px"
+                <a4j:commandLink styleClass="G-btn-medium" execute="@none" style="margin: 2px 8px" onclick="#{rich:component('GLoginTooltip')}.hide()"
                     oncomplete="#{rich:component('fbProgress')}.setValue( #{rich:component('fbProgress')}.getValue() + 33 ); G.login({infoCallback: gGetUserInfo, albumCallback: gGetUserAlbums, errorCallback: showError});">
-                    <rich:tooltip>Sign in Google+</rich:tooltip>
+                    <rich:tooltip id="GLoginTooltip">Sign in Google+</rich:tooltip>
                 </a4j:commandLink>
 
                 <rich:progressBar mode="client" value="0" id="fbProgress" styleClass="fb-pb" />

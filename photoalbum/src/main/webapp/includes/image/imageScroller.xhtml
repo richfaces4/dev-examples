@@ -30,7 +30,7 @@
                 <a4j:outputPanel layout="block"
                                  styleClass="preview_box_photo_nav #{model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}">
                     <h:panelGroup layout="block" styleClass="preview_box_photo_80">
-                        <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_80.png" />
+                        <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
                             <h:panelGroup layout="block">
                                 <a4j:mediaOutput id="scrollerImage" element="img" createContent="#{imageLoader.paintImage}"
@@ -53,20 +53,20 @@
         <!-- render image scroller and buttons for scrolling only when there are more than 5 (the number of rows in a4j:repeat) images -->
         <h:panelGrid columns="3" id="imagesScrolling" rendered="#{fn:length(model.selectedAlbum.images) > 5}">
             <h:panelGroup styleClass="image-scroller-left-arrow"
-                          style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_left.png',sizingMethod='scale');">
-                <h:graphicImage id="scrollToPrevious" styleClass="ie6transparency" value="img/shell/arr_left.png"
+                          style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='resources/img/shell/arr_left.png',sizingMethod='scale');">
+                <h:graphicImage id="scrollToPrevious" styleClass="ie6transparency" value="resources/img/shell/arr_left.png"
                                 onclick="select('scrollToPrevious');#{rich:component('scroller')}.previous()" />
             </h:panelGroup>
-            <rich:dataScroller styleClass="image-scroller" for="repeat" page="#{controller.page}"
-                               render="repeat, imagesTable" boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
+            <rich:dataScroller styleClass="image-scroller" for="repeat" page="#{controller.page}" execute="imagesTable" render="mainArea"
+                               boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide">
             </rich:dataScroller>
             <ui:include src="/includes/help/button.xhtml">
                 <ui:param name="page" value="imageScrollerHelp.xhtml" />
                 <ui:param name="style" value="position: absolute; right: -65px; top: 80px;" />
             </ui:include>
             <h:panelGroup styleClass="image-scroller-right-arrow"
-                          style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/shell/arr_right.png',sizingMethod='scale');">
-                <h:graphicImage id="scrollToNext" value="img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56" border="0"
+                          style="width: 56px; height:34px; display: inline-block; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='resources/img/shell/arr_right.png',sizingMethod='scale');">
+                <h:graphicImage id="scrollToNext" value="resources/img/shell/arr_right.png" styleClass="ie6transparency" height="34" width="56" border="0"
                                 onclick="select('scrollToNext');#{rich:component('scroller')}.next()" />
             </h:panelGroup>
         </h:panelGrid>

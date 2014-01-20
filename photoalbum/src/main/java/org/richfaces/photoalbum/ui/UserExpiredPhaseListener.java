@@ -30,7 +30,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
 import org.jboss.solder.beanManager.BeanManagerLocator;
-import org.richfaces.photoalbum.util.Utils;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 
 /**
  * Special <code>PhaseListener</code> for check is the user session was expired or user were login in another browser. By
@@ -45,7 +45,7 @@ public class UserExpiredPhaseListener implements PhaseListener {
     private PhaseId phase = PhaseId.RESTORE_VIEW;
 
     public void beforePhase(PhaseEvent e) {
-        Utils utils = getUtils();
+        ApplicationUtils utils = getUtils();
         utils.fireCheckUserExpiredEvent();
     }
 
@@ -64,11 +64,11 @@ public class UserExpiredPhaseListener implements PhaseListener {
         return new BeanManagerLocator().getBeanManager();
     }
 
-    private Utils getUtils() {
+    private ApplicationUtils getUtils() {
         BeanManager bm = getBeanManager();
-        Bean<Utils> bean = (Bean<Utils>) bm.getBeans(Utils.class).iterator().next();
-        CreationalContext<Utils> ctx = bm.createCreationalContext(bean);
-        Utils utils = (Utils) bm.getReference(bean, Utils.class, ctx); // this could be inlined, but intentionally left this way
+        Bean<ApplicationUtils> bean = (Bean<ApplicationUtils>) bm.getBeans(ApplicationUtils.class).iterator().next();
+        CreationalContext<ApplicationUtils> ctx = bm.createCreationalContext(bean);
+        ApplicationUtils utils = (ApplicationUtils) bm.getReference(bean, ApplicationUtils.class, ctx); // this could be inlined, but intentionally left this way
         return utils;
     }
 }

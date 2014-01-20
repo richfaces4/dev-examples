@@ -40,19 +40,19 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.AlbumEvent;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.ImageEvent;
-import org.richfaces.photoalbum.event.ShelfEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.event.AlbumEvent;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.ImageEvent;
+import org.richfaces.photoalbum.model.event.ShelfEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.FileHandler;
-import org.richfaces.photoalbum.util.FileUtils;
+import org.richfaces.photoalbum.util.FileManipulation;
 import org.richfaces.photoalbum.util.ImageDimension;
 
 import com.google.common.io.Files;
@@ -154,7 +154,7 @@ public class FileManager {
      */
     public void onShelfAdded(@Observes @EventType(Events.SHELF_ADDED_EVENT) ShelfEvent se) {
         File directory = getFileByPath(se.getShelf().getPath());
-        FileUtils.addDirectory(directory);
+        FileManipulation.addDirectory(directory);
     }
 
     /**
@@ -165,7 +165,7 @@ public class FileManager {
      */
     public void onAlbumAdded(@Observes @EventType(Events.ALBUM_ADDED_EVENT) AlbumEvent ae) {
         File directory = getFileByPath(ae.getAlbum().getPath());
-        FileUtils.addDirectory(directory);
+        FileManipulation.addDirectory(directory);
     }
 
     /**
@@ -198,7 +198,7 @@ public class FileManager {
             return;
         }
         for (ImageDimension d : ImageDimension.values()) {
-            FileUtils.deleteFile(getFileByPath(transformPath(ie.getPath(), d.getFilePostfix())));
+            FileManipulation.deleteFile(getFileByPath(transformPath(ie.getPath(), d.getFilePostfix())));
         }
     }
 
@@ -292,9 +292,9 @@ public class FileManager {
         File file2 = getFileByPath(album.getPath());
         if (file2.exists()) {
             if (file2.isDirectory()) {
-                FileUtils.deleteDirectory(file2, false);
+                FileManipulation.deleteDirectory(file2, false);
             } else {
-                FileUtils.deleteFile(file2);
+                FileManipulation.deleteFile(file2);
             }
         }
 
@@ -325,9 +325,9 @@ public class FileManager {
             file2 = getFileByPath(transformPath(image.getFullPath(), dimension.getFilePostfix()));
             if (file2.exists()) {
                 if (file2.isDirectory()) {
-                    FileUtils.deleteDirectory(file2, false);
+                    FileManipulation.deleteDirectory(file2, false);
                 } else {
-                    FileUtils.deleteFile(file2);
+                    FileManipulation.deleteFile(file2);
                 }
             }
             file.renameTo(file2);
@@ -339,7 +339,7 @@ public class FileManager {
         String format = MimetypesFileTypeMap.getDefaultFileTypeMap().getContentType(newFileName).split("/")[1];
         try {
             // Read file form disk
-            bsrc = FileUtils.bitmapToImage(inputStream, format);
+            bsrc = FileManipulation.bitmapToImage(inputStream, format);
         } catch (IOException e1) {
             error.fire(new ErrorEvent("Error", "error reading file<br/>" + e1.getMessage()));
             return false;
@@ -356,14 +356,14 @@ public class FileManager {
             height = bsrc.getHeight();
         }
         // scale image if need
-        BufferedImage bdest = FileUtils
+        BufferedImage bdest = FileManipulation
             .getScaledInstance(bsrc, width, height, RenderingHints.VALUE_INTERPOLATION_BICUBIC, true);
         // Determine new path of image file
         String dest = includeUploadRoot ? this.uploadRootPath + transformPath(newFileName, pattern) : transformPath(
             newFileName, pattern);
         try {
             // save to disk
-            FileUtils.imageToBitmap(bdest, dest, format);
+            FileManipulation.imageToBitmap(bdest, dest, format);
         } catch (IOException ex) {
             error.fire(new ErrorEvent("Error", "error saving image to disc: " + ex.getMessage()));
             return false;
@@ -373,7 +373,7 @@ public class FileManager {
 
     private void deleteDirectory(String directory) {
         final File file = getFileByPath(directory);
-        FileUtils.deleteDirectory(file, false);
+        FileManipulation.deleteDirectory(file, false);
     }
 
     private void createDirectoryIfNotExist(String fileNameNew) {

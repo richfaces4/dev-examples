@@ -35,7 +35,7 @@
                         <rich:select value="#{model.selectedAlbum}" converter="albumConverter" immediate="true">
                             <f:selectItems value="#{userBean.user.albums}" var="album" itemLabel="#{album.name}"
                                            itemValue="#{album}" itemDescription="#{album.description}" />
-                            <a4j:ajax listener="#{controller.resetFileUpload()}" event="change" execute="@this" />
+                            <a4j:ajax listener="#{controller.resetFileUpload()}" event="selectitem" execute="@this" />
                         </rich:select>
                     </a4j:region>
                 </h:panelGroup>
@@ -55,7 +55,7 @@
                 <rich:fileUpload maxFilesQuantity="100" fileUploadListener="#{fileUploadManager.listener}" id="fileUpload"
                                  disabled="#{model.selectedAlbum == null}" acceptedTypes="jpg,jpeg" execute="uploadAlbum"
                                  ontyperejected="showError('Error$#$Invalid file type. Only JPG is allowed.')">
-                    <a4j:ajax event="uploadcomplete" render="treePanel, filesPanel" listener="#{fileWrapper.setComplete(true)}"
+                    <a4j:ajax event="uploadcomplete" render="treePanel, filesPanel, menu" listener="#{fileWrapper.setComplete(true)}"
                         limitRender="true" />
                 </rich:fileUpload>
             </h:panelGroup>

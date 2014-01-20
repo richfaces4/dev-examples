@@ -42,18 +42,18 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import org.richfaces.photoalbum.domain.Comment;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.ImageEvent;
-import org.richfaces.photoalbum.event.NavEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IImageAction;
+import org.richfaces.photoalbum.model.Comment;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IImageAction;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.ImageEvent;
+import org.richfaces.photoalbum.model.event.NavEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Preferred;
 
 @Named

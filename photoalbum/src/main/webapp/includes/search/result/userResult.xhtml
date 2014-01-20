@@ -30,7 +30,7 @@
         <c:when test="#{fn:length(result) > 0}">
             <a4j:repeat id="userList" value="#{result}" var="searchedUser">
                 <h:panelGroup layout="block" styleClass="preview_box_photo_120">
-                    <h:graphicImage styleClass="pr_photo_bg" value="/img/shell/frame_photo_200.png" style="border:none" />
+                    <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_200.png" style="border:none" />
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup>
                             <a4j:commandLink render="mainArea" actionListener="#{controller.showUser(searchedUser)}">
@@ -38,9 +38,9 @@
                                                  createContent="#{imageLoader.paintAvatarImage}" styleClass="avatar"
                                                  value="/#{searchedUser.login}/avatar.jpg" mimeType="image/jpeg" />
                                 <h:graphicImage rendered="#{!searchedUser.hasAvatar and searchedUser.sex.key =='1' }"
-                                                value="/img/shell/avatar_default.png" width="80" height="80" alt="" style="border:none" />
+                                                value="resources/img/shell/avatar_default.png" width="80" height="80" alt="" style="border:none" />
                                 <h:graphicImage rendered="#{!searchedUser.hasAvatar and searchedUser.sex.key =='0' }"
-                                                value="/img/shell/avatar_w_default.png" width="80" height="80" alt="" style="border:none" />
+                                                value="resources/img/shell/avatar_w_default.png" width="80" height="80" alt="" style="border:none" />
                             </a4j:commandLink>
                             <br />
                         </h:panelGroup>

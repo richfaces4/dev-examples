@@ -22,7 +22,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.domain.MetaTag;
+import org.richfaces.photoalbum.model.MetaTag;
 
 @RunWith(Arquillian.class)
 public class MetaTagTest {

@@ -29,17 +29,17 @@
         <c:when test="#{fn:length(result) > 0}">
             <a4j:repeat id="albumsList" value="#{result}" var="album">
                 <h:panelGroup layout="block" styleClass="preview_box_album_120">
-                    <h:graphicImage styleClass="pr_album_bg" value="/img/shell/frame_album_200.png" />
+                    <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup>
-                            <a4j:commandLink actionListener="#{controller.showAlbum(album)}" render="mainArea, treePanel">
+                            <a4j:commandLink actionListener="#{controller.showAlbum(album)}" render="mainArea, treePanel" onclick="#{rich:component('albumResultTooltip')}.hide()">
                                 <a4j:mediaOutput rendered="#{!album.isEmpty()}" id="img" element="img"
                                                  createContent="#{imageLoader.paintImage}" styleClass="album-cover-image"
                                                  value="#{fileManager.transformPath(album.coveringImage.fullPath, '_small120')}"
                                                  mimeType="image/jpeg" />
                                 <h:graphicImage rendered="#{album.isEmpty()}" style="width:80px; height:80px;"
-                                                value="img/shell/frame_album_200.png" styleClass="album-cover-image" />
-                                <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                                value="resources/img/shell/frame_album_200.png" styleClass="album-cover-image" />
+                                <rich:tooltip id="albumResultTooltip" followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
                                     <span style="white-space: nowrap"> #{album.name} </span>
                                 </rich:tooltip>
                             </a4j:commandLink>

@@ -41,22 +41,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.json.JSONObject;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Sex;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.EventTypeQualifier;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.NavEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
-import org.richfaces.photoalbum.service.IUserAction;
+import org.richfaces.photoalbum.model.Sex;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IUserAction;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.EventTypeQualifier;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.NavEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.social.facebook.FacebookBean;
 import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Environment;
 import org.richfaces.photoalbum.util.HashUtils;
-import org.richfaces.photoalbum.util.Utils;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 
 @Named
 @ApplicationScoped
@@ -149,7 +148,7 @@ public class Authenticator implements Serializable {
         // Remove previous session id from users store
         userTracker.removeUserId(userId);
         // Mark current user as actual
-        userTracker.addUserId(userId, Utils.getSession().getId());
+        userTracker.addUserId(userId, ApplicationUtils.getSession().getId());
     }
 
     public boolean authenticateWithFacebook() {
@@ -356,7 +355,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkUserExist(User user) {
         if (userAction.isUserExist(user.getLogin())) {
-            Utils.addFacesMessage(Constants.REGISTER_LOGIN_NAME_ID, Constants.USER_WITH_THIS_LOGIN_ALREADY_EXIST, "");
+            ApplicationUtils.addFacesMessage(Constants.REGISTER_LOGIN_NAME_ID, Constants.USER_WITH_THIS_LOGIN_ALREADY_EXIST, "");
             return true;
         }
         return false;
@@ -364,7 +363,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkEmailExist(String email) {
         if (userAction.isEmailExist(email)) {
-            Utils.addFacesMessage(Constants.REGISTER_EMAIL_ID, Constants.USER_WITH_THIS_EMAIL_ALREADY_EXIST, "");
+            ApplicationUtils.addFacesMessage(Constants.REGISTER_EMAIL_ID, Constants.USER_WITH_THIS_EMAIL_ALREADY_EXIST, "");
             return true;
         }
         return false;
@@ -372,7 +371,7 @@ public class Authenticator implements Serializable {
 
     private boolean checkPassword(User user) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            Utils.addFacesMessage(Constants.REGISTER_CONFIRM_PASSWORD_ID, Constants.CONFIRM_PASSWORD_NOT_EQUALS_PASSWORD, "");
+            ApplicationUtils.addFacesMessage(Constants.REGISTER_CONFIRM_PASSWORD_ID, Constants.CONFIRM_PASSWORD_NOT_EQUALS_PASSWORD, "");
             return true;
         }
         return false;
@@ -380,7 +379,7 @@ public class Authenticator implements Serializable {
 
     private void loginFailed() {
         setLoginFailed(true);
-        Utils.addFacesMessage("overForm:loginPanel", Constants.INVALID_LOGIN_OR_PASSWORD, "");
+        ApplicationUtils.addFacesMessage("overForm:loginPanel", Constants.INVALID_LOGIN_OR_PASSWORD, "");
         FacesContext.getCurrentInstance().renderResponse();
     }
 

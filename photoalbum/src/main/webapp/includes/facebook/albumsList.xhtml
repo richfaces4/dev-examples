@@ -39,16 +39,17 @@
             <h:panelGroup layout="block" styleClass="preview_box_album_120">
 
                 <a4j:outputPanel rendered="#{facebookAlbumCache.getImageMap(albumId) != null}">
-                    <h:graphicImage styleClass="pr_album_bg" value="/img/shell/frame_album_200.png" />
+                    <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
 
                     <h:panelGrid cellpadding="0">
                         <h:panelGroup style="margin-bottom:7px;" layout="block">
                             <a4j:commandLink execute="@this" actionListener="#{controller.showFBAlbum(albumId)}"
-                                onclick="select('#{rk}:img')" render="mainArea">
+                                onclick="select(':#{rk}:img'); #{rich:component('albumListTooltip')}.hide()" render="mainArea">
                                 <a4j:param assignTo="#{facebookAlbumCache.currentAlbumId}" value="#{albumId}" />
                                 <h:graphicImage id="img" url="#{facebookAlbumCache.getAlbum(albumId).getString('coverUrl')}"
                                     style="max-width: 120px; max-height: 120px" styleClass="album-cover-image" />
-                                <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                <rich:tooltip id="albumListTooltip" followMouse="true" direction="topRight" showDelay="500"
+                                    styleClass="tooltip">
                                     <span style="white-space: nowrap">
                                         #{facebookAlbumCache.getAlbum(albumId).getString('name')} </span>
                                 </rich:tooltip>
@@ -69,10 +70,10 @@
                 </a4j:outputPanel>
 
                 <a4j:outputPanel rendered="#{facebookAlbumCache.getImageMap(albumId) == null}">
-                    <h:graphicImage styleClass="pr_album_bg" value="/img/shell/frame_album_200.png" />
+                    <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
                     <h:panelGrid cellpadding="0" style="opacity: 0.6">
                         <h:outputText value="#{albumId}" style="display: inline-block; margin: 10px 0 0 10px" />
-                        <h:graphicImage value="/img/shell/ai.gif" styleClass="album-cover-image" />
+                        <h:graphicImage value="resources/img/shell/ai.gif" styleClass="album-cover-image" />
                     </h:panelGrid>
                 </a4j:outputPanel>
             </h:panelGroup>

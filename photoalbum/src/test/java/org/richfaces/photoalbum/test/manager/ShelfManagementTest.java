@@ -18,11 +18,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.service.IShelfAction;
-import org.richfaces.photoalbum.service.ShelfAction;
+import org.richfaces.photoalbum.manager.UserBean;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.actions.IShelfAction;
+import org.richfaces.photoalbum.model.actions.ShelfAction;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
 
 @RunWith(Arquillian.class)

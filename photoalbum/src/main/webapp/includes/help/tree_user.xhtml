@@ -146,7 +146,7 @@
             &lt;rich:tree id=&quot;userTree&quot; var=&quot;treeNode&quot; toggleType=&quot;client&quot;&gt;
               &lt;rich:treeModelAdaptor nodes=&quot;#{'#{'}userBean.user.shelves}&quot;&gt;
                 &lt;rich:treeNode style=&quot;cursor:pointer&quot; selectedClass=&quot;tree-selected-node&quot;
-                    iconExpanded=&quot;/img/shell/tree_icon_shelf.png&quot; iconCollapsed=&quot;/img/shell/tree_icon_shelf.png&quot; id=&quot;shelf&quot;&gt;
+                    iconExpanded=&quot;/resources/img/shell/tree_icon_shelf.png&quot; iconCollapsed=&quot;/resources/img/shell/tree_icon_shelf.png&quot; id=&quot;shelf&quot;&gt;
                   &lt;ui:include src=&quot;/includes/contextMenu/CMForShelf.xhtml&quot;&gt;
                     &lt;ui:param name=&quot;shelf&quot; value=&quot;#{'#{'}treeNode}&quot; /&gt;
                     &lt;ui:param name=&quot;target&quot; value=&quot;shelf&quot; /&gt;
@@ -170,7 +170,7 @@
     
                 &lt;rich:treeModelAdaptor nodes=&quot;#{'#{'}treeNode.albums}&quot;&gt;
                   &lt;rich:treeNode style=&quot;cursor:pointer&quot; render=&quot;mainArea, treePanel&quot; selectedClass=&quot;tree-selected-node&quot;
-                      iconLeaf=&quot;img/shell/tree_icon_album.png&quot; id=&quot;album&quot;&gt;
+                      iconLeaf=&quot;resources/img/shell/tree_icon_album.png&quot; id=&quot;album&quot;&gt;
                     &lt;ui:include src=&quot;/includes/contextMenu/CMForAlbum.xhtml&quot;&gt;
                       &lt;ui:param name=&quot;album&quot; value=&quot;#{'#{'}treeNode}&quot; /&gt;
                       &lt;ui:param name=&quot;target&quot; value=&quot;album&quot; /&gt;
@@ -202,7 +202,7 @@
         <div class="figure">
             <div class="figure-contents">
                 <div class="mediaobject">
-                    <img src="img/help/dnd.png" alt="" />
+                    <img src="resources/img/help/dnd.png" alt="" />
                 </div>
             </div>
 

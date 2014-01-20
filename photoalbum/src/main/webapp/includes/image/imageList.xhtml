@@ -37,7 +37,7 @@
             <a4j:commandLink rendered="#{fn:length(model.images) > 0}" actionListener="#{slideshow.startSlideshow()}"
                              styleClass="slideshow-link" render="slideShowModalPanel" execute="@this, slideShowModalPanel"
                              oncomplete="#{rich:component('slideShowModalPanel')}.show()">
-                <h:graphicImage value="/img/shell/tree_icon_slid.png" width="27" height="16" alt=""
+                <h:graphicImage value="resources/img/shell/tree_icon_slid.png" width="27" height="16" alt=""
                                 style="vertical-align : bottom; margin-right : 5px; border:0;" />
                 <h:outputText value="#{messages['slideshow.start']}" />
             </a4j:commandLink>
@@ -55,7 +55,7 @@
                                 value="#{imageSizeHelper.currentDimension.imageBg}" />
                 <h:panelGrid cellpadding="0">
                     <h:panelGroup>
-                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select('#{rk}:img');"
+                        <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select(':#{rk}:img');"
                                          render="mainArea, treePanel">
                             <a4j:mediaOutput id="img" element="img" createContent="#{imageLoader.paintImage}"
                                              style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"

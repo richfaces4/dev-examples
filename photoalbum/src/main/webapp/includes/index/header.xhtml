@@ -25,9 +25,9 @@
                 xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <rich:panel id="headerPanel" styleClass="header-panel" bodyClass="header-panel-body">
         <h:panelGroup layout="block" styleClass="header-content-div">
-            <a href="index.html"><h:graphicImage value="/img/shell/logo_top.gif" width="290" height="79" alt=""
+            <a href="index.html"><h:graphicImage value="resources/img/shell/logo_top.gif" width="290" height="79" alt=""
                                                  style="position : absolute; border: 0px;" /></a>
-            <h:graphicImage rendered="#{authenticator.conversationStarted}" value="/img/shell/top_tight_bullet.gif" width="20"
+            <h:graphicImage rendered="#{authenticator.conversationStarted}" value="resources/img/shell/top_tight_bullet.gif" width="20"
                             height="79" alt="" style="position : absolute; right : 0px" />
 
             <h:panelGroup id="logInOutMenu" layout="block" rendered="#{authenticator.conversationStarted}"
@@ -47,7 +47,7 @@
                         <h:outputText styleClass="logged-user" style="color:#FFFFFF" rendered="#{!userBean.loggedIn}"
                             value="#{messages['menu.welcome.guest']}" />
                     </h:panelGroup>
-                    <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
+                    <h:graphicImage width="3" height="15" alt="" border="0" value="resources/img/shell/bullet.gif" />
 
                     <h:panelGroup styleClass="top-right-bottom-menu-item-link" layout="block">
                         <a4j:region id="login-form">
@@ -61,7 +61,7 @@
                     </h:panelGroup>
 
                     <h:graphicImage rendered="#{!userBean.loggedIn}" width="3" height="15" alt="" border="0"
-                                    style="padding: 0 0 0 8px;" value="/img/shell/bullet.gif" />
+                                    style="padding: 0 0 0 8px;" value="resources/img/shell/bullet.gif" />
 
                     <h:panelGroup rendered="#{!userBean.loggedIn}" styleClass="top-right-bottom-menu-item-link" layout="block">
                         <a4j:commandLink value="#{messages['login.register']}" actionListener="#{authenticator.goToRegister}"
@@ -69,7 +69,7 @@
                     </h:panelGroup>
                     
                     <h:graphicImage rendered="#{userBean.loggedIn}" width="3" height="15" alt="" border="0"
-                                    style="padding: 0 0 0 8px;" value="/img/shell/bullet.gif" />
+                                    style="padding: 0 0 0 8px;" value="resources/img/shell/bullet.gif" />
                     
                     <h:panelGroup rendered="#{userBean.loggedIn}" layout="block" style="float: left;">
                         <a4j:commandLink disabled="#{userBean.loggedInFB}" styleClass="FB-btn-small"
@@ -90,7 +90,7 @@
                         </a4j:jsFunction>
 
                         <a4j:jsFunction name="simpleFBLogin" actionListener="#{authenticator.authenticateWithFacebook()}"
-                            render="@form" />
+                            render="mainArea, headerPanel, treePanel" />
 
                         <a4j:jsFunction name="gGetUserInfo">
                             <a4j:param assignTo="#{googlePlusBean.userInfoJSON}" name="response" />
@@ -101,7 +101,7 @@
                         </a4j:jsFunction>
 
                         <a4j:jsFunction name="simpleGLogin" actionListener="#{authenticator.authenticateWithGPlus()}"
-                            render="@form" />
+                            render="mainArea, headerPanel, treePanel" />
 
                         <ui:include src="/includes/help/button.xhtml">
                             <ui:param name="page" value="socialLogin.xhtml" />
@@ -119,21 +119,21 @@
                             <a href="http://docs.jboss.org/richfaces/latest_3_3_X/en/realworld/html/index.html"
                                 class="top-right-menu-item">GuideLine</a>
                         </h:panelGroup>
-                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" /> -->
+                        <h:graphicImage width="3" height="15" alt="" border="0" value="resources/img/shell/bullet.gif" /> -->
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
                             <a href="https://www.jboss.org/community/wiki/RichFacesPhotositedemoapplication"
                                 class="top-right-menu-item">Wiki page</a>
                         </h:panelGroup>
-                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
+                        <h:graphicImage width="3" height="15" alt="" border="0" value="resources/img/shell/bullet.gif" />
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
                             <a href="https://www.jboss.org/richfaces/download/stable.html" class="top-right-menu-item">Downloads</a>
                         </h:panelGroup>
-                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
+                        <h:graphicImage width="3" height="15" alt="" border="0" value="resources/img/shell/bullet.gif" />
                         <h:panelGroup styleClass="top-right-menu-item-padding " layout="block">
                             <a href="https://community.jboss.org/en/richfaces/"
                                 class="top-right-menu-item">Community</a>
                         </h:panelGroup>
-                        <h:graphicImage width="3" height="15" alt="" border="0" value="/img/shell/bullet.gif" />
+                        <h:graphicImage width="3" height="15" alt="" border="0" value="resources/img/shell/bullet.gif" />
                     </rich:toolbarGroup>
                 </rich:toolbar>
             </h:panelGroup>

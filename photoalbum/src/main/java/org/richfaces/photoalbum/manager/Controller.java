@@ -30,24 +30,23 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.richfaces.component.UITree;
-import org.richfaces.photoalbum.bean.UserBean;
-import org.richfaces.photoalbum.domain.Album;
-import org.richfaces.photoalbum.domain.Event;
-import org.richfaces.photoalbum.domain.Image;
-import org.richfaces.photoalbum.domain.MetaTag;
-import org.richfaces.photoalbum.domain.Shelf;
-import org.richfaces.photoalbum.domain.User;
-import org.richfaces.photoalbum.event.AlbumEvent;
-import org.richfaces.photoalbum.event.ErrorEvent;
-import org.richfaces.photoalbum.event.EventType;
-import org.richfaces.photoalbum.event.EventTypeQualifier;
-import org.richfaces.photoalbum.event.Events;
-import org.richfaces.photoalbum.event.ImageEvent;
-import org.richfaces.photoalbum.event.ShelfEvent;
-import org.richfaces.photoalbum.event.SimpleEvent;
-import org.richfaces.photoalbum.service.Constants;
+import org.richfaces.photoalbum.model.Album;
+import org.richfaces.photoalbum.model.Event;
+import org.richfaces.photoalbum.model.Image;
+import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.Shelf;
+import org.richfaces.photoalbum.model.User;
+import org.richfaces.photoalbum.model.event.AlbumEvent;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.model.event.EventType;
+import org.richfaces.photoalbum.model.event.EventTypeQualifier;
+import org.richfaces.photoalbum.model.event.Events;
+import org.richfaces.photoalbum.model.event.ImageEvent;
+import org.richfaces.photoalbum.model.event.ShelfEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.social.facebook.FacebookAlbumCache;
 import org.richfaces.photoalbum.social.gplus.GooglePlusAlbumCache;
+import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Preferred;
 
 /**
@@ -179,6 +178,7 @@ public class Controller implements Serializable {
     }
 
     public void showFbImage(String imageId) {
+        setFPage(0);
         fac.setCurrentImageId(imageId);
         model.resetModel(NavigationEnum.FB_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
@@ -196,6 +196,7 @@ public class Controller implements Serializable {
     }
 
     public void showGPlusImage(String imageId) {
+        setGplusPage(0);
         gpac.setCurrentImageId(imageId);
         model.resetModel(NavigationEnum.GPLUS_IMAGE_PREVIEW, getLoggedUser(), null, null, null, null);
     }
@@ -230,6 +231,78 @@ public class Controller implements Serializable {
         model.resetModel(NavigationEnum.ALBUM_IMAGE_PREVIEW, image.getAlbum().getOwner(), image.getAlbum().getShelf(),
             image.getAlbum(), image, image.getAlbum().getImages());
         image.setVisited(true);
+    }
+
+    public void showNextImage() {
+        int id = model.getSelectedAlbum().getImages().indexOf(model.getSelectedImage());
+        int max = model.getSelectedAlbum().getImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showImage(model.getSelectedAlbum().getImages().get(id + 1));
+    }
+
+    public void showPrevImage() {
+        int id = model.getSelectedAlbum().getImages().indexOf(model.getSelectedImage());
+        int max = model.getSelectedAlbum().getImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showImage(model.getSelectedAlbum().getImages().get(id - 1));
+    }
+
+    public void showNextFbImage() {
+        int id = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+        int max = fac.getCurrentImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showFbImage(fac.getCurrentImages().get(id + 1).optString("id"));
+    }
+
+    public void showPrevFbImage() {
+        int id = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+        int max = fac.getCurrentImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showFbImage(fac.getCurrentImages().get(id - 1).optString("id"));
+    }
+
+    public void showNextGPlusImage() {
+        int id = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+        int max = gpac.getCurrentImages().size() - 1;
+
+        if (id == max) {
+            id = -1;
+        }
+
+        setPage((id + 1) / 5 + 1);
+        showGPlusImage(gpac.getCurrentImages().get(id + 1).optString("id"));
+    }
+
+    public void showPrevGPlusImage() {
+        int id = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+        int max = gpac.getCurrentImages().size() - 1;
+
+        if (id == 0) {
+            id = max + 1;
+        }
+
+        setPage((id - 1) / 5 + 1);
+        showGPlusImage(gpac.getCurrentImages().get(id - 1).optString("id"));
     }
 
     /**
@@ -410,8 +483,7 @@ public class Controller implements Serializable {
     public void onImageDeleted(@Observes @EventType(Events.IMAGE_DELETED_EVENT) ImageEvent ie) {
         loggedUserBean.refreshUser();
         Album album = ie.getImage().getAlbum();
-        model.resetModel(NavigationEnum.ALBUM_PREVIEW, getLoggedUser(), album.getShelf(),
-            album, null, album.getImages());
+        model.resetModel(NavigationEnum.ALBUM_PREVIEW, getLoggedUser(), album.getShelf(), album, null, album.getImages());
     }
 
     /**
@@ -560,6 +632,30 @@ public class Controller implements Serializable {
     }
 
     public void setPage(Integer page) {
+        currentPage = page;
+    }
+    
+    public Integer getFPage() {
+        if (currentPage == 0) {
+            Integer index = fac.getCurrentImages().indexOf(fac.getCurrentImage());
+            currentPage = index / 5 + 1;
+        }
+        return currentPage;
+    }
+
+    public void setFPage(Integer page) {
+        currentPage = page;
+    }
+    
+    public Integer getGplusPage() {
+        if (currentPage == 0) {
+            Integer index = gpac.getCurrentImages().indexOf(gpac.getCurrentImage());
+            currentPage = index / 5 + 1;
+        }
+        return currentPage;
+    }
+
+    public void setGplusPage(Integer page) {
         currentPage = page;
     }
 

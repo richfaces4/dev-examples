@@ -25,8 +25,8 @@
     xmlns:a4j="http://richfaces.org/a4j">
     <ui:param name="helpPage" value="/includes/help/#{page}"/>
     <a4j:outputPanel style="#{style}">
-        [<a4j:commandLink rendered="#{help.isShowHelp()}" 
-            actionListener="#{help.navigateTo(helpPage)}"
+        [<a4j:commandLink rendered="#{help.isShowHelp()}"  
+            actionListener="#{help.navigateTo(helpPage)}" immediate="true"
             oncomplete="#{rich:component('helpPanel')}.show()" render="helpPanel" execute="@this" value="?">
             <rich:tooltip>What is this?</rich:tooltip>
         </a4j:commandLink>]
