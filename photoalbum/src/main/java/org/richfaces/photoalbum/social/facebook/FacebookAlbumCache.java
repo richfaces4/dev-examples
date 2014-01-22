@@ -72,6 +72,19 @@ public class FacebookAlbumCache {
         }
     }
 
+    public void setAlbums(String json) {
+        try {
+            JSONObject jo = new JSONObject(json);
+            if (!jo.has("albums")) {
+                return;
+            }
+
+            storeAlbums(jo.getJSONArray("albums"), jo.getJSONArray("covers"));
+        } catch (JSONException e) {
+            error.fire(new ErrorEvent("Error: ", e.getMessage()));
+        }
+    }
+
     public void storeAlbums(JSONArray jAlbums, JSONArray jCovers) {
         storeAlbums(jAlbums, jCovers, false);
     }
@@ -167,7 +180,7 @@ public class FacebookAlbumCache {
     }
 
     public boolean isAlbumLoaded(String albumId) {
-        return albums.get(albumId) != null && (albums.get(albumId).optBoolean("empty", false) || images.get(albumId) != null);
+        return albums.get(albumId) != null && (albums.get(albumId).optBoolean("empty", false) || !images.get(albumId).isEmpty());
     }
 
     // takes a list of id's from an event

@@ -150,30 +150,28 @@ var F = {};
     };
     
     // get info about all user albums on Facebook (without images)
-//    F.getShelfAlbums = function(userId, callback, errorCb) {
-//        FB.getLoginStatus(function(response) {
-//    
-//            if (response.status === "connected") {
-//                var query1 = "SELECT aid, cover_pid, name, created, size FROM album WHERE owner = " + userId,
-//                    query2 = "SELECT src, pid FROM photo WHERE pid IN (SELECT cover_pid FROM #q1)";
-//    
-//                FB.api('fql', {
-//                    q : {
-//                        "q1" : query1,
-//                        "q2" : query2
-//                    }
-//                }, function(response) {
-//                    if (!response || response.error) {
-//                        errorCb('Error occured' + errorDelimiter + (response.error.message || 'Response not received'));
-//                    } else {
-//                        //result = translateFBAlbums(mergeResults(response.data[0].fql_result_set, response.data[1].fql_result_set));
-//                    	result = {albums: translateFBAlbums(response.data[0].fql_result_set), covers: translateFBAlbums(response.data[1].fql_result_set) };
-//                        callback(JSON.stringify(result));
-//                    }
-//                });
-//            }
-//        });
-//    };
+    F.getShelfAlbums = function(userId, callback, errorCb) {
+        FB.getLoginStatus(function(response) {
+            if (response.status === "connected") {
+                var query1 = "SELECT aid, cover_pid, name, created, size FROM album WHERE owner = " + userId,
+                    query2 = "SELECT src, pid FROM photo WHERE pid IN (SELECT cover_pid FROM #q1)";
+    
+                FB.api('fql', {
+                    q : {
+                        "q1" : query1,
+                        "q2" : query2
+                    }
+                }, function(response) {
+                    if (!response || response.error) {
+                        errorCb('Error occured' + errorDelimiter + (response.error.message || 'Response not received'));
+                    } else {
+                    	result = {albums: translateFBAlbums(response.data[0].fql_result_set), covers: translateFBCovers(response.data[1].fql_result_set) };
+                        callback(JSON.stringify(result));
+                    }
+                });
+            }
+        });
+    };
     
     translateFBJson = function(dictionary) {
         return function(json) {
