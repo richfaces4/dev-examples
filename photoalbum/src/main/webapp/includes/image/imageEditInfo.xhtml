@@ -77,9 +77,9 @@
                     <tr>
                         <td style="vertical-align: top; white-space: nowrap;" class="image-edit-label">#{messages['popular_tags']}</td>
                         <td style="vertical-align: top;" colspan="2">
-                            <rich:autocomplete id="suggestionBoxId" autocompleteMethod="#{imageManager.autoComplete}"
+                            <rich:autocomplete id="suggestionBoxId" autocompleteMethod="#{imageManager.autoComplete}" 
                                                value="#{model.selectedImage.meta}" minChars="1" var="result" fetchValue="#{result.tag}"
-                                               tokens=", " autofill="false" selectFirst="false" mode="client">
+                                               tokens=", " autofill="false" selectFirst="false">
                                 <h:outputText value="#{result.tag}" />
                             </rich:autocomplete>
                             <br />
