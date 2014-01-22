@@ -38,7 +38,7 @@
         <a4j:repeat value="#{albumIds}" var="albumId" rowKeyVar="rk">
             <h:panelGroup layout="block" styleClass="preview_box_album_120">
 
-                <a4j:outputPanel rendered="#{facebookAlbumCache.getImageMap(albumId) != null}">
+                <a4j:outputPanel rendered="#{facebookAlbumCache.isAlbumLoaded(albumId)}">
                     <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
 
                     <h:panelGrid cellpadding="0">
@@ -69,7 +69,7 @@
                     </h:panelGroup>
                 </a4j:outputPanel>
 
-                <a4j:outputPanel rendered="#{facebookAlbumCache.getImageMap(albumId) == null}">
+                <a4j:outputPanel rendered="#{!facebookAlbumCache.isAlbumLoaded(albumId)}">
                     <h:graphicImage styleClass="pr_album_bg" value="resources/img/shell/frame_album_200.png" />
                     <h:panelGrid cellpadding="0" style="opacity: 0.6">
                         <h:outputText value="#{albumId}" style="display: inline-block; margin: 10px 0 0 10px" />
