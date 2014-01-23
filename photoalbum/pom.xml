@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>org.richfaces</groupId>
 		<artifactId>richfaces-root-parent</artifactId>
-		<version>4.3.5-SNAPSHOT</version>
+		<version>4.3.5.Final</version>
 		<relativePath>../../build/parent/pom.xml</relativePath>
 	</parent>
 
@@ -132,6 +132,44 @@
 			<properties>
 				<javax.faces.PROJECT_STAGE>Production</javax.faces.PROJECT_STAGE>
 			</properties>
+      <build>
+        <plugins>
+          <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>group-sources</id>
+                      <goals>
+                          <goal>single</goal>
+                      </goals>
+                      <phase>package</phase>
+                      <configuration>
+                          <finalName>sources</finalName>
+                          <appendAssemblyId>false</appendAssemblyId>
+                          <descriptor>assembler.xml
+                          </descriptor>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+          <plugin>
+              <artifactId>maven-jar-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>jar</goal>
+                      </goals>
+                      <phase>package</phase>
+                      <configuration>
+                          <classesDirectory>${basedir}/target/sources/sources
+                          </classesDirectory>
+                          <classifier>sources</classifier>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+        </plugins>
+      </build>
 		</profile>
 
 		<profile>
