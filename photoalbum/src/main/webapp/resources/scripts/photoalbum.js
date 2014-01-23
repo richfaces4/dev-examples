@@ -126,17 +126,17 @@ var F = {};
     
                 FB.api('fql', {
                     q : {
-                        "q1" : "SELECT aid from album WHERE owner = me()"
+                        "q1" : "SELECT object_id from album WHERE owner = me()"
                     }
                 }, function(response) {
                     if (!response || response.error) {
                         errorCb('Error occured' + errorDelimiter + (response.error.message || 'Response not received'));
                     } else {
                         var result_set = response.data[0].fql_result_set, 
-                            result = result_set[0]["aid"];
+                            result = result_set[0]["object_id"];
     
                         for (var i = 1; i < result_set.length; i++) {
-                            result += "," + result_set[i]["aid"];
+                            result += "," + result_set[i]["object_id"];
                         }
                         albumIdsCb(result);
                     }
@@ -153,7 +153,7 @@ var F = {};
     F.getShelfAlbums = function(userId, callback, errorCb) {
         FB.getLoginStatus(function(response) {
             if (response.status === "connected") {
-                var query1 = "SELECT aid, cover_pid, name, created, size FROM album WHERE owner = " + userId,
+                var query1 = "SELECT object_id, cover_pid, name, created, size FROM album WHERE owner = " + userId,
                     query2 = "SELECT src, pid FROM photo WHERE pid IN (SELECT cover_pid FROM #q1)";
     
                 FB.api('fql', {
@@ -189,9 +189,9 @@ var F = {};
     
     translateFBImages = function(images) {
         var dict = {
-            "albumId": "aid",
+            "albumId": "album_object_id",
             "created": "created",
-            "fullAlbumId": "aid",
+            "fullAlbumId": "album_object_id",
             "id": "pid",
             "name": "caption",
             "thumbUrl": "src",
@@ -204,8 +204,8 @@ var F = {};
     translateFBAlbums = function(albums) {
         var dict = {
             "created": "created",
-            "fullId": "aid",
-            "id": "aid",
+            "fullId": "object_id",
+            "id": "object_id",
             "cpid": "cover_pid",
             "name": "name",
             "size": "size",
@@ -234,9 +234,9 @@ var F = {};
         FB.getLoginStatus(function(response) {
     
             if (response.status === "connected") {
-                var query1 = "SELECT aid, cover_pid, name, created, size FROM album WHERE aid IN (" + albumIds + ")",
+                var query1 = "SELECT object_id, cover_pid, name, created, size FROM album WHERE object_id IN (" + albumIds + ")",
                     query2 = "SELECT src, pid FROM photo WHERE pid IN (SELECT cover_pid FROM #q1)",
-                    query3 = "SELECT aid, pid, src, src_big, caption, created FROM photo WHERE aid IN (" + albumIds + ")";
+                    query3 = "SELECT album_object_id, pid, src, src_big, caption, created FROM photo WHERE album_object_id IN (" + albumIds + ")";
     
                 FB.api('fql', {
                     q : {
@@ -276,7 +276,7 @@ var F = {};
     F.getAlbumImages = function(albumId, callback, errorCb) {
         FB.getLoginStatus(function(response) {
             if (response.status === "connected") {
-                var query1 = "SELECT aid, pid, src, src_big, caption, created FROM photo WHERE aid = " + albumId;
+                var query1 = "SELECT album_object_id, pid, src, src_big, caption, created FROM photo WHERE album_object_id = " + albumId;
                 
                 FB.api('fql', {
                     q : {

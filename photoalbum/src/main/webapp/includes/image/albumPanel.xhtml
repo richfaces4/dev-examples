@@ -48,7 +48,7 @@
                 value="#{facebookAlbumCache.getAlbums(facebookBean.userAlbumIds)}" var="album" columns="3">
                 <rich:panel header="#{album.getString('name')}">
                     <a4j:commandLink execute="@none"
-                        onclick="F.pushImage('#{album.getString('id')}', #{rich:element('imgUri')}.href, showError); #{rich:component('albumsPopupPanel')}.hide()">
+                        onclick="F.pushImage('#{album.getString('id')}', #{rich:element('imgUri')}.href, '#{model.selectedImage.description}', showError); #{rich:component('albumsPopupPanel')}.hide()">
                         <img src="#{album.getString('coverUrl')}" />
                     </a4j:commandLink>
                 </rich:panel>
