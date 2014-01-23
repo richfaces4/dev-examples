@@ -95,9 +95,9 @@ public class ImageManager {
 
     /**
      * Method, that invoked when user click 'Delete image' button. Only registered users can delete images.
-     * 
+     *
      * @param image - image to delete
-     * 
+     *
      */
     public void deleteImage(Image image) {
         if (user == null) {
@@ -116,7 +116,7 @@ public class ImageManager {
 
     /**
      * Method, that invoked when user click 'Edit image' button. Only registered users can edit images.
-     * 
+     *
      * @param image - image to edit
      * @param editFromInplace - indicate whether edit process was initiated by inplaceInput component
      */
@@ -154,10 +154,10 @@ public class ImageManager {
 
     /**
      * Method, that invoked when user add comment to image. Only registered users can add comments to image.
-     * 
+     *
      * @param image - image
      * @param message - comment text
-     * 
+     *
      */
     public void addComment(Image image) {
         if (user == null) {
@@ -187,9 +187,9 @@ public class ImageManager {
 
     /**
      * Method, that invoked when user delete comment. Only registered users can delete comments.
-     * 
+     *
      * @param comment - comment to delete
-     * 
+     *
      */
     public void deleteComment(Comment comment) {
         if (user == null) {
@@ -205,9 +205,9 @@ public class ImageManager {
 
     /**
      * Method, that invoked to retrieve most popular metatags.
-     * 
+     *
      * @return List of most popular metatags
-     * 
+     *
      */
     public List<MetaTag> popularTags() {
         return imageAction.getPopularTags();
@@ -215,25 +215,25 @@ public class ImageManager {
 
     /**
      * Method, that used to autocomplete 'metatags' field while typing.
-     * 
+     *
      * @param suggest - text to autocomplete
      * @return List of similar metatags
-     * 
+     *
      */
     public List<MetaTag> autoComplete(Object suggest) {
         String temp = (String) suggest;
-        if (temp.trim().equals("")) {
+        if (temp == null || temp.trim().equals("")) {
             return null;
         }
-        return imageAction.getTagsLikeString((String) suggest);
+        return imageAction.getTagsLikeString(temp);
     }
 
     /**
      * Method, that invoked to retrieve direct link to image, to represent in UI.
-     * 
+     *
      * @param image - image to get direct link
      * @return List of similar metatags
-     * 
+     *
      */
     public String getImageDirectLink(Image image) {
         String directLink = null;
