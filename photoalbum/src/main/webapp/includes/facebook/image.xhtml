@@ -82,7 +82,7 @@
                 <h:graphicImage styleClass="ie6transparency" value="resources/img/shell/arr_left.png"
                     onclick="#{rich:component('scroller')}.fastRewind()" />
             </h:panelGroup>
-            <rich:dataScroller styleClass="image-scroller" lastPageMode="full" for="repeat" render="imagesTable"
+            <rich:dataScroller styleClass="image-scroller" for="repeat" render="imagesTable"
                 boundaryControls="hide" stepControls="hide" id="scroller" fastControls="hide" page="#{controller.FPage}">
             </rich:dataScroller>
             <h:panelGroup styleClass="image-scroller-right-arrow"
