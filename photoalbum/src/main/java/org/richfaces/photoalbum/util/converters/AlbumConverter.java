@@ -22,6 +22,9 @@
 
 package org.richfaces.photoalbum.util.converters;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -31,8 +34,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-import org.jboss.solder.beanManager.BeanManagerLocator;
 import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Album;
 
@@ -41,8 +45,15 @@ import org.richfaces.photoalbum.model.Album;
 @FacesConverter("albumConverter")
 public class AlbumConverter implements Converter {
 
-    private BeanManager getBeanManager() {
-        return new BeanManagerLocator().getBeanManager();
+    public BeanManager getBeanManager() {
+        BeanManager beanManager = null;
+        try {
+            InitialContext initialContext = new InitialContext();
+            beanManager = (BeanManager) initialContext.lookup("java:comp/BeanManager");
+        } catch (NamingException e) {
+            Logger.getLogger("AlbumConverter").log(Level.SEVERE, "Couldn't get BeanManager through JNDI", e);
+        }
+        return beanManager;
     }
 
     @Override
