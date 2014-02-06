@@ -42,3 +42,15 @@ To use the features available to registered users either create your own account
  *	 user\_for\_dnd
 
 the password is _12345_ in all cases.
+
+## Known issues
+### Database error during deployment
+There's a number of errors being thrown during deployment
+
+    10:53:27,633 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] (ServerService Thread Pool -- 48) 
+        HHH000389: Unsuccessful: alter table Album drop constraint FK3C68E4FB7F856D
+    10:53:27,634 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] (ServerService Thread Pool -- 48) 
+        Table "ALBUM" not found; SQL statement: alter table Album drop constraint FK3C68E4FB7F856D [42102-168]
+        …
+        
+These errors are not serious, they are caused by the database trying to tear down tables that do not yet exist.  
