@@ -16,9 +16,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Image;
-import org.richfaces.photoalbum.model.actions.ImageAction;
+import org.richfaces.photoalbum.model.event.ImageEvent;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
+import org.richfaces.photoalbum.util.ApplicationUtils;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 /**
  * Simple test to check if everything got imported correctly from importmin.sql
@@ -30,9 +32,11 @@ import org.richfaces.photoalbum.model.actions.ImageAction;
 public class ImportTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(ImageAction.class.getPackage())
-            .addPackage(Image.class.getPackage()).addClass(UserBean.class).addClass(PhotoAlbumTestHelper.class)
-            .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
+        return ShrinkWrap.create(WebArchive.class, "test.war")
+            .addPackage(ImageEvent.class.getPackage())
+            .addPackage(Image.class.getPackage()).addClass(PhotoAlbumTestHelper.class)
+            .addClasses(ApplicationUtils.class, SimpleEvent.class)
+            .addClass(PhotoAlbumException.class).addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml").addAsResource("importmin.sql", "import.sql");
     }
@@ -46,12 +50,12 @@ public class ImportTest {
     @Inject
     PhotoAlbumTestHelper helper;
 
-    private final int numberOfUsers     = 2;
-    private final int numberOfShelves   = 1;
-    private final int numberOfAlbums    = 2;
-    private final int numberOfImages    = 9;
-    private final int numberOfMetaTags  = 2;
-    private final int numberOfComments  = 13;
+    private final int numberOfUsers = 2;
+    private final int numberOfShelves = 1;
+    private final int numberOfAlbums = 2;
+    private final int numberOfImages = 9;
+    private final int numberOfMetaTags = 2;
+    private final int numberOfComments = 13;
 
     @Before
     public void startTransaction() throws Exception {

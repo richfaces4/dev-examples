@@ -17,7 +17,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Album;
 import org.richfaces.photoalbum.model.Comment;
 import org.richfaces.photoalbum.model.Image;
@@ -28,7 +27,11 @@ import org.richfaces.photoalbum.model.actions.IAlbumAction;
 import org.richfaces.photoalbum.model.actions.IImageAction;
 import org.richfaces.photoalbum.model.actions.IShelfAction;
 import org.richfaces.photoalbum.model.actions.IUserAction;
+import org.richfaces.photoalbum.model.actions.UserAction;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 /**
  * Test for cascade deletion - e.g. after an Image gets deleted, all Comments associated with it should get deleted too.
@@ -42,7 +45,9 @@ public class DeletionManagementTest {
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(AlbumAction.class.getPackage())
-            .addPackage(Album.class.getPackage()).addClass(UserBean.class).addClass(PhotoAlbumTestHelper.class)
+            .addPackage(Album.class.getPackage()).addClass(PhotoAlbumTestHelper.class).addClass(PhotoAlbumException.class)
+            .deleteClasses(UserAction.class, IUserAction.class)
+            .addClasses(ApplicationUtils.class, SimpleEvent.class)
             .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml").addAsResource("importmin.sql", "import.sql");
@@ -61,16 +66,10 @@ public class DeletionManagementTest {
     IImageAction ia;
 
     @Inject
-    IUserAction ua;
-
-    @Inject
     IShelfAction sa;
 
     @Inject
     IAlbumAction aa;
-
-    @Inject
-    UserBean userBean;
 
     @Before
     public void startTransaction() throws Exception {

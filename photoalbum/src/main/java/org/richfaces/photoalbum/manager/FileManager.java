@@ -54,6 +54,7 @@ import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.FileHandler;
 import org.richfaces.photoalbum.util.FileManipulation;
 import org.richfaces.photoalbum.util.ImageDimension;
+import org.richfaces.photoalbum.util.Preferred;
 
 import com.google.common.io.Files;
 
@@ -68,6 +69,7 @@ public class FileManager {
     private String uploadRootPath;
 
     @Inject
+    @Preferred
     User user;
 
     @Inject

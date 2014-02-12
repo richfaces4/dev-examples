@@ -8,7 +8,6 @@ import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -23,12 +22,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.richfaces.photoalbum.model.MetaTag;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 
 @RunWith(Arquillian.class)
 public class MetaTagTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(MetaTag.class.getPackage())
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(MetaTag.class.getPackage()).addClass(PhotoAlbumTestHelper.class)
+            .addClasses(ApplicationUtils.class, SimpleEvent.class)
             .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml");
@@ -36,7 +38,7 @@ public class MetaTagTest {
 
     private static final String[] TAG_NAMES = { "Tag 1", "TAG2", "Tag Three" };
 
-    @PersistenceContext
+    @Inject
     EntityManager em;
 
     @Inject

@@ -18,7 +18,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Album;
 import org.richfaces.photoalbum.model.Comment;
 import org.richfaces.photoalbum.model.Image;
@@ -26,15 +25,18 @@ import org.richfaces.photoalbum.model.MetaTag;
 import org.richfaces.photoalbum.model.User;
 import org.richfaces.photoalbum.model.actions.IImageAction;
 import org.richfaces.photoalbum.model.actions.ImageAction;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 @RunWith(Arquillian.class)
 public class ImageManagementTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(ImageAction.class.getPackage())
-            .addPackage(Image.class.getPackage()).addClass(UserBean.class).addClass(PhotoAlbumTestHelper.class)
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Image.class.getPackage())
+            .addClasses(ImageAction.class, IImageAction.class).addClass(PhotoAlbumTestHelper.class)
+            .addClass(PhotoAlbumException.class).addClasses(ApplicationUtils.class, SimpleEvent.class)
             .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml").addAsResource("importmin.sql", "import.sql");
@@ -51,9 +53,6 @@ public class ImageManagementTest {
 
     @Inject
     IImageAction ia;
-
-    @Inject
-    UserBean userBean;
 
     @Before
     public void startTransaction() throws Exception {

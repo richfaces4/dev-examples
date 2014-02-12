@@ -6,8 +6,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
-import junit.framework.Assert;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -15,23 +13,27 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Album;
 import org.richfaces.photoalbum.model.Shelf;
 import org.richfaces.photoalbum.model.actions.AlbumAction;
 import org.richfaces.photoalbum.model.actions.IAlbumAction;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 @RunWith(Arquillian.class)
 public class AlbumManagementTest {
 
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(AlbumAction.class.getPackage())
-            .addPackage(Album.class.getPackage()).addClass(UserBean.class).addClass(PhotoAlbumTestHelper.class)
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Album.class.getPackage()).addClass(AlbumAction.class)
+            .addClass(IAlbumAction.class).addClass(PhotoAlbumTestHelper.class).addClass(PhotoAlbumException.class)
+            .addClass(ApplicationUtils.class).addClass(SimpleEvent.class)
             .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml").addAsResource("importmin.sql", "import.sql");

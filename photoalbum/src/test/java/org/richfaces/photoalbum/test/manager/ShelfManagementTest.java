@@ -18,19 +18,22 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.richfaces.photoalbum.manager.UserBean;
 import org.richfaces.photoalbum.model.Shelf;
 import org.richfaces.photoalbum.model.User;
 import org.richfaces.photoalbum.model.actions.IShelfAction;
 import org.richfaces.photoalbum.model.actions.ShelfAction;
+import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
 
 @RunWith(Arquillian.class)
 public class ShelfManagementTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(ShelfAction.class.getPackage())
-            .addPackage(User.class.getPackage()).addClass(UserBean.class).addClass(PhotoAlbumTestHelper.class)
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(Shelf.class.getPackage())
+            .addClasses(ShelfAction.class, IShelfAction.class).addClass(PhotoAlbumTestHelper.class)
+            .addClass(PhotoAlbumException.class).addClasses(ApplicationUtils.class, SimpleEvent.class)
             .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
             .addAsWebInfResource("test-ds.xml").addAsResource("importmin.sql", "import.sql");

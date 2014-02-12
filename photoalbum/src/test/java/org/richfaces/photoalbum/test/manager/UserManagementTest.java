@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
+import org.ajax4jsf.javascript.JSEncoder;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -18,32 +19,52 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.richfaces.event.FileUploadEvent;
+import org.richfaces.exception.FileUploadException;
+import org.richfaces.json.JSONObject;
+import org.richfaces.model.UploadedFile;
+import org.richfaces.photoalbum.manager.FileManager;
+import org.richfaces.photoalbum.manager.NavigationEnum;
 import org.richfaces.photoalbum.manager.UserBean;
+import org.richfaces.photoalbum.manager.UserManager;
 import org.richfaces.photoalbum.model.Sex;
 import org.richfaces.photoalbum.model.User;
 import org.richfaces.photoalbum.model.actions.IUserAction;
 import org.richfaces.photoalbum.model.actions.UserAction;
+import org.richfaces.photoalbum.model.event.ErrorEvent;
+import org.richfaces.photoalbum.social.facebook.FacebookBean;
+import org.richfaces.photoalbum.social.gplus.GooglePlusAlbumCache;
+import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
 import org.richfaces.photoalbum.test.PhotoAlbumTestHelper;
+import org.richfaces.photoalbum.ui.UserPrefsHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 import org.richfaces.photoalbum.util.Constants;
+import org.richfaces.photoalbum.util.FileHandler;
+import org.richfaces.photoalbum.util.ImageCopier;
+import org.richfaces.photoalbum.util.PhotoAlbumException;
+import org.richfaces.photoalbum.util.Preferred;
 
 /**
  * Test for user management (creating, searching) performed by UserAction class
- *
+ * 
  * @author mpetrov
- *
+ * 
  */
 @RunWith(Arquillian.class)
 public class UserManagementTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(UserAction.class.getPackage())
-            .addPackage(User.class.getPackage()).addClass(UserBean.class)
-            .addClass(PhotoAlbumTestHelper.class)
-            // insert X as Y
-            .addAsResource("importusers.sql", "import.sql")
-            .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
+        return ShrinkWrap.create(WebArchive.class, "test.war").addPackage(User.class.getPackage()).addClass(UserBean.class)
+            .addClass(PhotoAlbumException.class).addClass(ApplicationUtils.class)
+            .addClasses(UserAction.class, IUserAction.class).addClass(PhotoAlbumTestHelper.class)
+            .addClasses(UserManager.class, FileManager.class).addClass(UserPrefsHelper.class).addClass(FileUploadEvent.class)
+            .addClass(UploadedFile.class).addClasses(FacebookBean.class, GooglePlusBean.class)
+            .addPackage(ErrorEvent.class.getPackage()).addPackage(JSONObject.class.getPackage())
+            .addClass(GooglePlusAlbumCache.class).addClass(NavigationEnum.class).addClass(JSEncoder.class)
+            .addClass(FileHandler.class).addClass(FileUploadException.class).addClass(ImageCopier.class)
+            .addClass(Preferred.class).addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml") // important
-            .addAsWebInfResource("test-ds.xml");
+            .addAsWebInfResource("test-ds.xml").addAsResource("importusers.sql", "import.sql");
     }
 
     @Inject
@@ -133,6 +154,8 @@ public class UserManagementTest {
 
     @Test
     public void isUserRefreshed() throws Exception {
+        userBean.logIn("Noname", "8cb2237d0679ca88db6464eac60da96345513964");
+
         String originalMail = userBean.getUser().getEmail();
         userBean.getUser().setEmail("mail@mail.org");
 
