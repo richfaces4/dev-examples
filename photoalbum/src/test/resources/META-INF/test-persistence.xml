@@ -30,7 +30,7 @@
 
     <persistence-unit name="entityManager"><!-- transaction-type="JTA"> -->
        <!--  <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-        <jta-data-source>java:jboss/datasources/photoalbumDatasource</jta-data-source>
+        <jta-data-source>java:jboss/datasources/photoalbumTestDatasource</jta-data-source>
         <properties>
             <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" /> -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
