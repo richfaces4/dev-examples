@@ -54,7 +54,6 @@ import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.FileHandler;
 import org.richfaces.photoalbum.util.FileManipulation;
 import org.richfaces.photoalbum.util.ImageDimension;
-import org.richfaces.photoalbum.util.Preferred;
 
 import com.google.common.io.Files;
 
@@ -69,8 +68,7 @@ public class FileManager {
     private String uploadRootPath;
 
     @Inject
-    @Preferred
-    User user;
+    UserBean userBean;
 
     @Inject
     @EventType(Events.ADD_ERROR_EVENT)
@@ -117,7 +115,7 @@ public class FileManager {
      *
      */
     public void onAlbumDeleted(@Observes @EventType(Events.ALBUM_DELETED_EVENT) AlbumEvent ae) {
-        if (user == null) {
+        if (!userBean.isLoggedIn()) {
             return;
         }
         deleteDirectory(ae.getPath());
@@ -131,7 +129,7 @@ public class FileManager {
      * @param path - relative path of the shelf directory
      */
     public void onShelfDeleted(@Observes @EventType(Events.SHELF_DELETED_EVENT) ShelfEvent se) {
-        if (user == null) {
+        if (!userBean.isLoggedIn()) {
             return;
         }
         deleteDirectory(se.getPath());
@@ -145,7 +143,7 @@ public class FileManager {
      * @param path - relative path of the user directory
      */
     public void onUserDeleted(@Observes @EventType(Events.USER_DELETED_EVENT) SimpleEvent se) {
-        deleteDirectory(user.getPath());
+        deleteDirectory(userBean.getUser().getPath());
     }
 
     /**
@@ -196,7 +194,7 @@ public class FileManager {
      * @param path - relative path of the image file
      */
     public void deleteImage(@Observes @EventType(Events.IMAGE_DELETED_EVENT) ImageEvent ie) {
-        if (user == null) {
+        if (!userBean.isLoggedIn()) {
             return;
         }
         for (ImageDimension d : ImageDimension.values()) {
@@ -212,7 +210,7 @@ public class FileManager {
      * @throws IOException
      */
     public boolean addImage(String fileName, FileHandler fileHandler) throws IOException {
-        if (user == null) {
+        if (!userBean.isLoggedIn()) {
             return false;
         }
         createDirectoryIfNotExist(fileName);
