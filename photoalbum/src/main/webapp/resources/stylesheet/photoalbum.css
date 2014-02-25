@@ -364,6 +364,11 @@ a {
     color: #DF6400 !important;
 }
 
+.description a {
+    color: black !important;
+    text-decoration: underline;
+}
+
 a h2, h2 {
     color: black;
     text-decoration: underline;
@@ -766,6 +771,27 @@ h1 {
 
 .preview_box_photo_default table {
     cursor: pointer;
+}
+
+.imageLink {
+    overflow: hidden;
+    display: inline-block;
+}
+
+.preview_box_photo_80 .imageLink {
+    max-height: 90px !important;
+}
+
+.preview_box_photo_120 .imageLink {
+    max-height: 130px !important;
+}
+
+.preview_box_photo_160 .imageLink {
+    max-height: 170px !important;
+}
+
+.preview_box_photo_200 .imageLink {
+    max-height: 210px !important;
 }
 
 .image-scroller {

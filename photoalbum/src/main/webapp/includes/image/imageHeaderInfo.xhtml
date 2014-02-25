@@ -50,7 +50,7 @@
             </h:panelGroup>
         </h:panelGrid>
         <p>
-            <h:outputText value="#{model.selectedImage.description}" />
+            <h:outputText styleClass="description" value="#{model.selectedImage.description}" escape="#{!model.selectedImage.owner.preDefined}"/>
         </p>
     </a4j:outputPanel>
 </ui:composition>

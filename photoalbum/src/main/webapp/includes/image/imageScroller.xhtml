@@ -32,9 +32,9 @@
                     <h:panelGroup layout="block" styleClass="preview_box_photo_80">
                         <h:graphicImage styleClass="pr_photo_bg" value="resources/img/shell/frame_photo_80.png" />
                         <h:panelGrid cellpadding="0" cellspacing="2">
-                            <h:panelGroup layout="block">
+                            <h:panelGroup layout="block" style="max-height: 90px !important; overflow:hidden">
                                 <a4j:mediaOutput id="scrollerImage" element="img" createContent="#{imageLoader.paintImage}"
-                                                 value="#{fileManager.transformPath(img.fullPath, '_small80')}" mimeType="image/jpeg" />
+                                                 value="#{fileManager.transformPath(img.fullPath, '_small80')}" mimeType="image/jpeg"/>
                                 <br />
                             </h:panelGroup>
                         </h:panelGrid>

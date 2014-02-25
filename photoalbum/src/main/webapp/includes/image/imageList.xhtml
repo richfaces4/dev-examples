@@ -56,7 +56,7 @@
                 <h:panelGrid cellpadding="0">
                     <h:panelGroup>
                         <a4j:commandLink actionListener="#{controller.showImage(image)}" onclick="select(':#{rk}:img');"
-                                         render="mainArea, treePanel">
+                                         render="mainArea, treePanel" styleClass="imageLink">
                             <a4j:mediaOutput id="img" element="img" createContent="#{imageLoader.paintImage}"
                                              style="border : 1px solid #FFFFFF;" mimeType="image/jpeg"
                                              value="#{fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}">
