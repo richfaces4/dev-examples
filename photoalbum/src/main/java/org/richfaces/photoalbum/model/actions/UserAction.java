@@ -88,6 +88,7 @@ public class UserAction implements IUserAction {
         } catch (Exception e) {
             throw new PhotoAlbumException(e.getMessage());
         }
+        userBean.refreshUser();
         return userBean.getUser();
     }
 

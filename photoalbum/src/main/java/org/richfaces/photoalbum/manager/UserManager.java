@@ -81,6 +81,7 @@ public class UserManager implements Serializable {
             }
             avatarData.delete();
             avatarData = null;
+            uph.setAvatarData(null);
             user.setHasAvatar(true);
         }
         try {

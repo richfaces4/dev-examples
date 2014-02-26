@@ -25,9 +25,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
@@ -40,8 +40,8 @@ import org.richfaces.photoalbum.util.Constants;
  * @author Andrey Markhel
  */
 
-@ManagedBean
-@ViewScoped
+@Named
+@SessionScoped
 public class UserPrefsHelper implements Serializable {
     private static final long serialVersionUID = -1767281809514660171L;
 
