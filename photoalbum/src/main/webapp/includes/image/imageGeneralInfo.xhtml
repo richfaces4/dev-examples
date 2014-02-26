@@ -97,7 +97,7 @@
         <h:outputText styleClass="additional-info-text" value="#{messages['uploaded']}: " />
         <h:outputText value="#{model.selectedImage.uploaded}" />
         <br />
-        <h:outputText styleClass="additional-info-text" value="#{messages['image.author']} " />
+        <h:outputText styleClass="additional-info-text" value="#{messages['image.uploadedby']} " />
         <a4j:commandLink actionListener="#{controller.showUser(model.selectedImage.album.owner)}" render="mainArea"
                          value="#{model.selectedImage.album.owner.login}" />
     </a4j:outputPanel>
