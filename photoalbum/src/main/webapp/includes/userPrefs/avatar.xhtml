@@ -24,11 +24,11 @@
     xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:rich="http://richfaces.org/rich"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:richx="http://richfaces.org/richx">
     <a4j:outputPanel id="avatar">
-        <h:panelGroup rendered="#{user.hasAvatar}">
+        <h:panelGroup rendered="#{user.hasAvatar and userPrefsHelper.avatarData == null}">
             <a4j:mediaOutput element="img" createContent="#{imageLoader.paintAvatarImage}" styleClass="additional-info-avatar"
                 value="/#{user.login}/avatar.jpg" mimeType="image/jpeg" />
         </h:panelGroup>
-        <h:panelGroup rendered="#{!user.hasAvatar and userPrefsHelper.avatarData != null}">
+        <h:panelGroup rendered="#{userPrefsHelper.avatarData != null}">
             <a4j:mediaOutput styleClass="additional-info-avatar" element="img" createContent="#{imageLoader.paintAvatarImage}"
                 value="#{userPrefsHelper.avatarData.path}" mimeType="image/jpeg" />
         </h:panelGroup>

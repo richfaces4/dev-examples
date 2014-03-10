@@ -54,6 +54,9 @@ public class UserPrefsHelper implements Serializable {
     }
 
     public void setEdit(boolean edit) {
+        if (!edit) {
+            this.avatarData = null;
+        }
         this.edit = edit;
     }
 
