@@ -39,7 +39,7 @@
                             <h:outputText styleClass="logged-user" style="color:#FFFFFF" rendered="#{userBean.loggedIn}"
                                           value="#{messages['menu.welcome']}" />
                             <a4j:commandLink styleClass="logged-user" value="#{userBean.user.login}" render="mainArea"
-                                actionListener="#{controller.showUser(userBean.user)}" rendered="#{userBean.loggedIn}"
+                                actionListener="#{controller.showCurrentUser()}" rendered="#{userBean.loggedIn}"
                                 execute="@this" />
                             <h:graphicImage rendered="#{userBean.loggedInFB and not empty userBean.fbPhotoUrl}"
                                 url="#{userBean.fbPhotoUrl}" />

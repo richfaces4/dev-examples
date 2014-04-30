@@ -558,6 +558,10 @@ public class Controller implements Serializable {
         model.resetModel(NavigationEnum.USER_PREFS, user, null, null, null, null);
         // Contexts.getConversationContext().set(Constants.AVATAR_DATA_COMPONENT, null);
     }
+    
+    public void showCurrentUser() {
+        showUser(getLoggedUser());
+    }
 
     /**
      * This method invoked after the user want to see all unvisited images, belongs to the of specified shelf

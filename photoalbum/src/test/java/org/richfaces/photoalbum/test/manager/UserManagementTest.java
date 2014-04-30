@@ -142,7 +142,7 @@ public class UserManagementTest {
 
         userBean.getUser().setEmail("mail@mail.net");
 
-        ua.updateUser();
+        ua.updateUser(userBean.getUser());
 
         User updatedUser = (User) em.createNamedQuery(Constants.USER_LOGIN_QUERY)
             .setParameter(Constants.USERNAME_PARAMETER, "Noname")

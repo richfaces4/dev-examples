@@ -40,7 +40,7 @@ public interface IUserAction {
 
     public boolean isUserExist(String login);
 
-    public User updateUser() throws PhotoAlbumException;
+    public User updateUser(User user) throws PhotoAlbumException;
 
     public User refreshUser();
 

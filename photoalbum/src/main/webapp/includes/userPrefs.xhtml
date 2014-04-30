@@ -34,7 +34,8 @@
                 styleClass="user-prefs-button">
                 <h:panelGroup layout="block">
                     <richx:commandButton actionListener="#{controller.editUser()}" value="#{messages['user.save']}"
-                        oncomplete="setEdit(false)" />
+                        oncomplete="refreshUser(); setEdit(false);" />
+                    <a4j:jsFunction name="refreshUser" actionListener="#{controller.showCurrentUser}" render="mainArea"/>
                 </h:panelGroup>
                 <h:panelGroup layout="block">
                     <richx:commandButton immediate="true" actionListener="#{controller.cancelEditUser()}"

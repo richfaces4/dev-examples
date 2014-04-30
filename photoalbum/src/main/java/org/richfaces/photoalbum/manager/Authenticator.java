@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -52,10 +53,11 @@ import org.richfaces.photoalbum.model.event.NavEvent;
 import org.richfaces.photoalbum.model.event.SimpleEvent;
 import org.richfaces.photoalbum.social.facebook.FacebookBean;
 import org.richfaces.photoalbum.social.gplus.GooglePlusBean;
+import org.richfaces.photoalbum.ui.UserPrefsHelper;
+import org.richfaces.photoalbum.util.ApplicationUtils;
 import org.richfaces.photoalbum.util.Constants;
 import org.richfaces.photoalbum.util.Environment;
 import org.richfaces.photoalbum.util.HashUtils;
-import org.richfaces.photoalbum.util.ApplicationUtils;
 
 @Named
 @ApplicationScoped
@@ -106,6 +108,9 @@ public class Authenticator implements Serializable {
 
     @Inject
     GooglePlusBean gBean;
+
+    @Inject
+    UserPrefsHelper uph;
 
     private File avatarData;
 
@@ -318,6 +323,34 @@ public class Authenticator implements Serializable {
     }
 
     /**
+     * Method, that invoked when user want to edit her profile.
+     *
+     */
+    public void editUser(@Observes @EventType(Events.EDIT_USER_EVENT) SimpleEvent se) {
+        avatarData = uph.getAvatarData();
+        // If new avatar was uploaded
+        if (avatarData != null) {
+            if (!fileManager.saveAvatar(avatarData, user)) {
+                error.fire(new ErrorEvent(Constants.FILE_IO_ERROR));
+                return;
+            }
+            avatarData.delete();
+            avatarData = null;
+            uph.setAvatarData(null);
+            user.setHasAvatar(true);
+        }
+        try {
+            // This check is actual only on livedemo server to prevent hacks.
+            // Prevent hackers to mark user as pre-defined
+            //user.setPreDefined(false);
+            userAction.updateUser(user);
+        } catch (Exception e) {
+            error.fire(new ErrorEvent("Error", Constants.UPDATE_USER_ERROR + " <br/>" + e.getMessage()));
+            return;
+        }
+    }
+
+    /**
      * Method, that invoked when user want to go to the registration screen
      *
      */
@@ -343,6 +376,7 @@ public class Authenticator implements Serializable {
     }
 
     private boolean handleAvatar(User user) {
+        avatarData = uph.getAvatarData();
         if (avatarData != null) {
             user.setHasAvatar(true);
             if (fileManager == null || !fileManager.saveAvatar(avatarData, user)) {
@@ -397,9 +431,5 @@ public class Authenticator implements Serializable {
 
     public void setConversationStarted(boolean conversationStarted) {
         this.conversationStarted = conversationStarted;
-    }
-
-    public void setAvatarData(File avatarData) {
-        this.avatarData = avatarData;
     }
 }

@@ -81,9 +81,9 @@ public class UserAction implements IUserAction {
      * @return user if success
      * @throws PhotoAlbumException
      */
-    public User updateUser() throws PhotoAlbumException {
+    public User updateUser(User user) throws PhotoAlbumException {
         try {
-            em.merge(userBean.getUser());
+            em.merge(user);
             em.flush();
         } catch (Exception e) {
             throw new PhotoAlbumException(e.getMessage());
