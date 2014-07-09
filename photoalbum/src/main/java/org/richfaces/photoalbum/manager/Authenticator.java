@@ -307,6 +307,7 @@ public class Authenticator implements Serializable {
         // Registration was successful, so we can login this user.
         try {
             this.user = userBean.logIn(user.getLogin(), HashUtils.hash(user.getPassword()));
+            event.select(new EventTypeQualifier(Events.AUTHENTICATED_EVENT)).fire(new SimpleEvent());
         } catch (Exception e) {
             error.fire(new ErrorEvent(Constants.LOGIN_ERROR + "\n" + e.getMessage()));
             return;
